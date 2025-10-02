@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bg">
+<th:block th:fragment="categories-base-page(title, styles, scripts, name, content_title, menu, top_actions)">
+  <th:block th:replace="${styles}"></th:block>
+  <th:block th:replace="${scripts}"></th:block>
+
+  <th:block
+    th:replace="baseWithTopNav :: base-with-top-nav(~{::title}, ~{::link}, ~{::script}, ~{::#categories-page-content})">
+    <th:block th:replace="${title}"></th:block>
+
+    <link rel="stylesheet" type="text/css" href="/css/pages/categories/menu.css" />
+    <link rel="stylesheet" type="text/css" href="/css/pages/categories/categories.css" />
+    <link rel="stylesheet" href="/css/components/pagination.css">
+    <link rel="stylesheet" href="/css/libs/nice-select2.css">
+
+    <script type="text/javascript" src="/js/components/pagination.js"></script>
+    
+    <script type="text/javascript" src="/js/libs/nice-select2.js"></script>
+    <script type="text/javascript" src="/js/categories/categories_page.js"></script>
+
+    <div id="categories-page-content" th:class="${'categories-page-content ' + name}">
+      <th:block th:replace="${menu}"></th:block>
+
+      <div class="categories-images">
+        <div class="upper_container">
+          <div>
+            <div class="title" th:text="${content_title}"></div>
+            <div class="subtitle" id="categories_subtitle"></div>
+          </div>
+          <th:block th:replace="${top_actions}"></th:block>
+        </div>
+        <div id="images_container" class="images_container"></div>
+        <div id="images_pagination_container" class="pagination"></div>
+      </div>
+    </div>
+  </th:block>
+</th:block>
+
+</html>

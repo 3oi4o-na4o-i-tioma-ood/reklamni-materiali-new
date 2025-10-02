@@ -1,0 +1,110 @@
+.choose-bg-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+.tab-content:not(.active) {
+    display: none;
+}
+
+#bg-tool-current-bg {
+    object-fit: cover;
+    border-radius: 5px;
+    max-width: 250px;
+
+    /* Will be overriden by inline stling */
+    visibility: hidden;
+}
+
+.editor-backgrounds-tool .tabs {
+    display: flex;
+    gap: 0.5em;
+}
+
+.editor-backgrounds-tool .subtitle {
+    margin-top: 0.75em;
+    margin-bottom: 0.25em;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+}
+
+.editor-backgrounds-tool .tabs button {
+    font-size: var(--font-size-xs);
+    /* padding: 5px 10px; */
+    flex-grow: 1;
+}
+
+.editor-backgrounds-tool .bg-options {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1em), 1fr));
+}
+
+.editor-backgrounds-tool .bg-options button {
+    width: 100%;
+    border: 2px solid var(--color-primary);
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.editor-backgrounds-tool .bg-options button img {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    object-fit: cover;
+}
+
+#editor-page-content-lighters #editor-lighters-tool .bg-options {
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 1em), 1fr));
+}
+
+
+#editor-page-content-lighters #editor-lighters-tool .bg-options button {
+    aspect-ratio: 122 / 373;
+    position: relative;
+}
+
+#editor-page-content-lighters #editor-lighters-tool .bg-options button img {
+    position: absolute;
+    top: 0;
+    width: calc(100% * 373 / 122 + 8px);
+    height: calc(100% / 373 * 122 - 3px);
+    transform-origin: top right;
+    transform: translateX(-100%) rotate(-90deg);
+}
+
+.editor-backgrounds-tool .button.secondary {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    /* padding: 4px 9px; */
+}
+
+#upload-bg-container {
+    margin-top: 1em;
+    flex-grow: 1;
+}
+
+#upload-bg-container .upload-image-container {
+    height: 100%;
+}
+
+#crop-background-canvas {
+    max-width: 80vw;
+    max-height: 60vh;;
+}
+
+#accept-crop-background-button {
+    margin: 1em 0 0 auto;
+}
+
+@media screen and (max-width:767px) {
+    /* #bg-tool-current-bg {
+        max-width: 100%;
+    } */
+
+    .editor-backgrounds-tool .tabs button{
+        font-size: 14px;
+    }
+}

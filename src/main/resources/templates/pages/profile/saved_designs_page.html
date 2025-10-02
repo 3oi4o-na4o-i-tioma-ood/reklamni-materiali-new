@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="pages/profile/base_head_content :: head-content"></th:block>
+
+    <link rel="stylesheet" href="/css/pages/profile/saved_designs.css">
+    <script src="/js/profile/saved_designs.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="pages/profile/base_layout :: layout(~{::#designs-page-content}, 'запазени-дизайни')">
+
+        <div id="designs-page-content" class="sub-page">
+            <h1 class="title">Запазени шаблони</h1>
+            <hr class="zelen_hr">
+
+            <div class="designs" id="saved-designs-container"></div>
+
+            <th:block
+                th:replace="components/popup :: popup('delete-design-popup', 'Изтриване на дизайн', ~{::#delete-design-popup-body}, 'delete-design-popup')">
+                <th:block id="delete-design-popup-body">
+                    <p style="margin-top:0">
+                        Сигурни ли сте, че искате да изтриете дизайн "<span id="deleted-design-name"></span>" ?
+                    </p>
+
+                    <div class="popup-actions">
+                        <button class="button" id="close-delete-design-button">
+                            Назад
+                        </button>
+                        <button class="button error" id="confirm-delete-design-button">
+                            Да
+                        </button>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+
+    </th:block>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!-- <th:block th:fragment="product-page-base(titleText, table, categories, scripts)">
+    <th:block th:insert="${scripts}" th:replace="pages/admin/admin_base :: admin-page(~{::title}, ~{::link}, ~{::script}, ~{::#page-content})">
+        <title th:text="${titleText}">Визитки - админ</title>
+
+        <link rel="stylesheet" href="/css/pages/admin/editable_table.css">
+        <link rel="stylesheet" href="/css/pages/admin/text_editing.css">
+        <link rel="stylesheet" href="/css/pages/admin/product.css">
+        <link rel="stylesheet" href="/css/pages/admin/categories.css">
+        <link rel="stylesheet" href="/css/pages/reusable/products/table.css">
+
+        <th:block>
+            <script src="/js/admin/categories.js"></script>
+            <script src="/js/admin/product_page.js"></script>
+            <script src="/js/table.js"></script>
+        </th:block>
+
+        <div id="page-content" class="page-content">
+            <div class="page-content-section prices-table-wrapper">
+                <h1 class="title">
+                    Редактиране на информацията
+                </h1>
+
+                <th:block th:replace="${table}"></th:block>
+            </div>
+
+            <div class="page-content-section categories-settings">
+                <h1 class="title">
+                    Добавяне на категория<span class="category-path" id="category-path-container"></span>
+                </h1>
+
+                <th:block th:replace="${categories}" />
+            </div>
+        </div>
+    </th:block>
+
+</th:block> -->
+
+
+<th:block th:fragment="product-page-layout(table, categories, header)"
+    th:replace="pages/admin/admin_layout :: admin-layout(~{::#page-content}, ${header})">
+    <div id="page-content" class="page-content">
+        <div class="page-content-section prices-table-wrapper">
+            <h1 class="title">
+                Редактиране на информацията
+            </h1>
+
+            <th:block th:replace="${table}"></th:block>
+        </div>
+
+        <div class="page-content-section categories-settings">
+            <h1 class="title">
+                Добавяне на категория<span class="category-path" id="category-path-container"></span>
+            </h1>
+
+            <th:block th:replace="${categories}" />
+        </div>
+
+        <div class="snackbar bottom middle" id="files-added-snackbar">
+            <img src="/images/common/tick.svg" alt="tick">
+
+            Файловете са добавени!
+        </div>
+    </div>
+</th:block>

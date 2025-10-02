@@ -1,0 +1,37 @@
+body {
+  --font-size-xxs: 12px;
+  --font-size-xs: 16px;
+  --font-size-s: 20px;
+  --font-size-m: 24px;
+  --font-size-l: 28px;
+  --font-size-xl: calc(15px + 1.5vw);
+  --font-size-xxl: calc(20px + 2vw);
+  --font-size-xxxl: calc(25px + 2.3vw);
+
+  --z-index-backdrop: 900;
+  --z-index-popup: 1000;
+  --z-index-nav-bar: 100;
+  --z-index-content: 50;
+
+  --color-bg-secondary: #e6ebe9;
+  --color-bg-light-green: #BCD8C2;
+  --color-primary: #598A18;
+  --color-primary-transparent: #598A1880;
+  --color-hr: var(--color-primary);
+  --color-dark-grey: #383C33;
+}
+
+
+@media screen and (min-width: 800px) {
+  body {
+    --font-size-xxs: 12px;
+    --font-size-xs: calc(9px + 0.5vw);
+    --font-size-s: calc(11px + 0.6vw);
+    --font-size-m: calc(10px + 1vw);
+    --font-size-l: calc(12px + 1.2vw);
+    --font-size-xl: calc(15px + 1.5vw);
+    --font-size-xxl: calc(20px + 2vw);
+    --font-size-xxxl: calc(25px + 2.3vw);
+  }
+  
+}

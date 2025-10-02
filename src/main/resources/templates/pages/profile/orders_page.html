@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="pages/profile/base_head_content :: head-content"></th:block>
+
+    <script src="/js/profile/orders.js"></script>
+    <script src="/js/components/order_code.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="pages/profile/base_layout :: layout(~{::#orders-page-content}, 'поръчки')">
+
+        <div id="orders-page-content" class="sub-page">
+            <h1 class="title">Моите поръчки</h1>
+            <hr class="zelen_hr">
+
+            <div id="no-packages-container" class="no-packages-container" style="display: none;">
+                <img src="/images/profile/no_packages.svg" alt="no packages">
+                Нямате поръчки
+            </div>
+
+            <table id="orders-table" class="orders-table" cellspacing="0" cellpadding="0" style="display: none;">
+                <thead>
+                    <th>Номер</th>
+                    <th>Дата</th>
+                </thead>
+                <tbody id="orders-container" class="orders-container"></tbody>
+            </table>
+        </div>
+    </th:block>
+</body>
+
+</html>

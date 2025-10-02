@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bg">
+<th:block
+    th:replace="pages/categories/base_page :: categories-base-page(~{::title}, ~{::link}, ~{::script}, 'fliers', 'Флаери', ~{}, ~{::#top-actions})">
+    <title>Флаери - категории</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/pages/categories/flayers/flayers_categories.css" />
+    <script type="text/javascript" src="/js/categories/flayers.js"></script>
+
+
+    <div id="top-actions">
+
+        <div>
+            <select id="select-orientation">
+                <option value="" disabled selected>Тип дизайн</option>
+                <option value="horizontal">Хоризонтален</option>
+                <option value="vertical">Вертикален</option>
+            </select>
+        </div>
+
+        <div>
+            <select id="flyers-size-select">
+                <option value="10x15">10x15</option>
+                <option value="10x20">10x20</option>
+            </select>
+        </div>
+
+        <a class="button" href="" id="continue-without-bg-button">Собствен фон</a>
+
+    </div>
+</th:block>
+
+</html>

@@ -1,0 +1,145 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  padding: 2vw 0px;
+  margin: 10vw 25vw;
+  gap: 2vw;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+}
+
+.login .title {
+  font-size: var(--font-size-xl);
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 500;
+}
+
+.login .button_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--color-bg-light-green);
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.login .button_container .button {
+  padding: 1em 4em;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: var(--font-size-s);
+}
+
+.login .button_container .button.secondary {
+  background-color: var(--color-bg-light-green);
+  color: rgba(56, 60, 51, 1);
+}
+
+.login .button_container button:hover {
+  background-color: var(--color-primary);
+  color: rgba(255, 255, 255, 1);
+}
+
+.login .inputs_container {
+  margin: auto 6vw;
+}
+
+.login .inputs_container .login_content {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vw;
+  margin: 0;
+}
+
+.login .inputs_container .login_checks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.login .forgotten-password-link {
+  color: black;
+}
+
+.login .inputs_container .login_checks>div {
+  font-size: var(--font-size-xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login .inputs_container .login_checks>a {
+  font-size: var(--font-size-xs);
+}
+
+.login .inputs_container .login_button {
+  display: flex;
+  justify-content: center;
+}
+
+
+.login .inputs_container .sign_up_checks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.login .inputs_container .sign_up_checks>div {
+  font-size: var(--font-size-xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login .inputs_container .sign_up_checks>a {
+  font-size: var(--font-size-xs);
+}
+
+.login .error-container {
+  color: red;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 800px) {
+.login {
+  margin: 7vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.login .inputs_container .sign_up_checks>div {
+  font-size: 12px;
+}
+.login .button_container .button {
+  padding: 10px 15px 10px 15px;
+}
+
+.login .inputs_container .login_content{
+  margin-top: 15px;
+}
+.login .login_content .input {
+  margin-bottom: 10px;
+  padding: 5px 10px 5px 10px
+}
+.login .button_container .button {
+  font-size: 16px!important;
+}
+button#login-submit{
+  padding: 10px 40px 10px 40px;
+  text-align: center;
+}
+.login .login_content .input::placeholder{
+  font-size: 12px
+}
+.login .inputs_container .login_checks>div, .login .inputs_container .login_checks>a {
+  font-size: 12px;
+}
+}

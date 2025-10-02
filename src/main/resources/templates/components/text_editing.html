@@ -1,0 +1,15 @@
+<div class="text-editing" th:fragment="text-editing(textContainer)">
+    <!-- textContainer should be a "p" tag with class "text"  -->
+    <th:block th:replace="${textContainer}"></th:block>
+    
+    <input type="text" class="input">
+    <button class="icon-button save" id="row-save-button">
+        <img src="/images/common/tick.svg" alt="save">
+    </button>
+    <button class="icon-button cancel" id="row-cancel-button">
+        &#215;
+    </button>
+    <button class="icon-button edit" id="row-edit-button">
+        <img src="/images/common/edit_green.svg" alt="edit">
+    </button>
+</div>

@@ -1,0 +1,45 @@
+.how_to_make .title {
+  color: rgba(89, 138, 24, 1);
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: var(--font-size-m);
+}
+
+.how_to_make .text {
+  color: black;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+}
+
+.how_to_make .text span {
+  color: rgba(89, 138, 24, 1);
+  font-weight: 700;
+}
+
+.how_to_make .title span {
+  color: rgba(89, 138, 24, 1);
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: var(--font-size-xxs);
+}
+
+.how_to_make img {
+  width: 40%;
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+
+.how_to_make .button {
+  display: inline-block;
+}
+
+@media screen and (max-width: 767px) {
+  .how_to_make img {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
+}

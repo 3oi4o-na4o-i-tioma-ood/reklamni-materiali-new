@@ -1,0 +1,35 @@
+#designs-page-content .designs {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}
+
+#designs-page-content .designs .design {
+    display: flex;
+    gap: 1em;
+    background-color: white;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+#designs-page-content .design .buttons-row {
+    display: flex;
+    gap: 1em;
+}
+
+#designs-page-content .design .button.secondary {
+    border: 1px solid var(--color-primary);
+    background: none;
+}
+
+#designs-page-content .design img {
+    width: 200px;
+}
+
+#designs-page-content .popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+    margin-left: auto;
+}

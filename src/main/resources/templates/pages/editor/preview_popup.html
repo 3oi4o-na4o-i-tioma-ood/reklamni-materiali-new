@@ -1,0 +1,102 @@
+<th:block th:fragment="preview-popup(id)"
+    th:replace="components/popup :: popup(${id}, 'Преглед', ~{::#popup-body}, 'preview-popup')">
+    <th:block id="popup-body">
+        <div class="editor-card-side-select" th:if="${hasSides}">
+            <button id="preview-button-select-product-face" class="button active">Лице</button>
+            <button id="preview-button-select-product-back" class="button secondary">Гръб</button>
+        </div>
+
+        <img src="" alt="preview" id="preview-image">
+        <div id="preview-image-message" class="preview-image-message">Няма добавен гръб</div>
+
+
+        <div class="cart-settings">
+            <div class="effects" id="effects-container">
+                <h4 class="title">Допълнителни ефекти</h4>
+
+                <div>
+                    <div>
+                        <input type="checkbox" id="preview-effect-checkbox-LAMINATION">
+                        <label for="preview-effect-checkbox-LAMINATION">Ламиниране</label>
+                    </div>
+
+                    <div id="preview-effect-checkbox-ROUNDED_CORNERS-container">
+                        <input type="checkbox" id="preview-effect-checkbox-ROUNDED_CORNERS">
+                        <label for="preview-effect-checkbox-ROUNDED_CORNERS">Заоблени ъгли</label>
+                    </div>
+
+                    <div id="preview-effect-checkbox-PARTIAL_VARNISH-container">
+                        <input type="checkbox" id="preview-effect-checkbox-PARTIAL_VARNISH">
+                        <label for="preview-effect-checkbox-ROUNDED_CORNERS">Частичен лак</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <h4 class="title">Брой</h4>
+
+            <div class="select-wrapper">
+                <select name="amount-options" id="product-amount-select"></select>
+            </div>
+
+            <div id="colors-container">
+                <h4 class="title">Цветове</h4>
+                
+                <div>
+                    <input type="checkbox" id="preview-cart-checkbox-face-bw">
+                    <label for="preview-cart-checkbox-face-bw">Лице - черно-бяло</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" id="preview-cart-checkbox-back-bw">
+                    <label for="preview-cart-checkbox-back-bw">Гръб - черно-бял</label>
+                </div>
+            </div>
+
+            <div id="print-type">
+                <h4 class="title">Тип печат</h4>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="print-type" value="SCREEN" checked>
+                        <span>Сито печат</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="print-type" value="PAD">
+                        <span>Тампонен печат</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="print-type" value="FULL_COLOR">
+                        <span>Пълноцветен дигитален печат</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="colors-count-container">
+                <h4 class="title">Цветове</h4>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="colors-count" value="ONE_COLOR" checked>
+                        <span>1 цвят</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="colors-count" value="TWO_COLORS">
+                        <span>2 цвята</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="colors-count" value="THREE_COLORS">
+                        <span>3 цвята</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bottom-container">
+                <div class="price-cart-container">
+                    <div class="cart-price" id="cart-price"></div>
+                    <div class="cart-price" id="cart-price-after-tax"></div>
+                </div>
+
+                <button id="button-add-to-cart" class="button">Добави</button>
+            </div>
+        </div>
+    </th:block>
+</th:block>

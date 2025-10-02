@@ -1,0 +1,182 @@
+.top_nav {
+  background-color: rgba(89, 138, 24, 1);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-nav-bar);
+  padding: 15px;
+  gap: 1vw;
+  font-family: Montserrat;
+}
+
+.top_nav .sliding-menu-button {
+  font-size: var(--font-size-s);
+  height: 2em;
+  width: 2em;
+  display: flex;
+  padding: 0;
+  border-radius: 50px;
+}
+
+@media screen and (min-width: 800px) {
+  #sliding-menu-button {
+    display: none;
+  }
+}
+
+.top_nav .sliding-menu-button img {
+  display: block;
+  margin: auto;
+}
+
+.top_nav .container_up {
+  display: flex;
+}
+
+.top_nav .container_up .content-left,
+.top_nav .container_up .content-right {
+  gap: 2vw;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.top_nav .container_up .content-left {
+  display: none;
+}
+
+.top_nav .container_up .content-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top_nav .text {
+  font-size: var(--font-size-xs);
+}
+
+.top_nav .container_up .content-left a {
+  color: rgba(253, 252, 255, 1);
+  font-family: Montserrat;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.top_nav .container_up .content_middle {
+  display: flex;
+  justify-content: center;
+  margin-top: 1vw;
+}
+
+.top_nav .container_up .content-right img {
+  width: var(--font-size-l);
+}
+
+.top_nav hr {
+  display: none;
+  border: none;
+  background-color: white;
+  width: 100%;
+  height: 2px;
+  margin: 0;
+}
+
+.top_nav .bottom-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+}
+
+@media screen and (min-width: 800px) {
+  .top_nav .container_up .content-left {
+    display: flex;
+  }
+
+
+  .top_nav .bottom-container {
+    display: flex;
+  }
+
+  .top_nav hr {
+    display: block;
+  }
+
+  .top_nav {
+    padding: 1vw 7vw 0 7vw;
+
+    /* display: none; */
+  }
+}
+
+.top_nav .container_up .image_logo {
+  /* height: calc(20px + 5vw); */
+  height: calc(30px + 2vw);
+  display: block;
+}
+
+/* --- Dropdown START --- */
+/* TO DO: make a separate component? */
+
+.top_nav .bottom-container .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.top_nav .bottom-container .dropdown-button {
+  background: none;
+  border: none;
+  color: white;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding-bottom: 1vw;
+font-family: 'Montserrat';
+  transition: transform 0.5s;
+}
+
+.top_nav .bottom-container .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+
+  background-color: rgba(230, 235, 233, 1);
+  min-width: 12vw;
+  z-index: 1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  border: 1px solid var(--color-primary);
+  border-top: none;
+  overflow: hidden;
+}
+
+.top_nav .dropdown .dropdown-button .image {
+  transition: transform 0.5s;
+}
+
+.top_nav .dropdown:hover .dropdown-button .image {
+  transform: scaleY(-1);
+}
+
+.top_nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.top_nav .dropdown-content a {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 1);
+  font-size: var(--font-size-xxs);
+  font-family: Montserrat;
+  font-weight: 500;
+  padding: 1vw 1.2vw;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.5s;
+}
+
+.top_nav .dropdown-content a:hover {
+  /* font-size: var(--font-size-xs); */
+  background-color: rgba(200, 200, 200, 1);
+}
+
+/* --- Dropdown END --- */

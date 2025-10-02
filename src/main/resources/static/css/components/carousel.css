@@ -1,0 +1,53 @@
+.carousel .content {
+    display: grid;
+    grid-template-columns: repeat(100, 33.333%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel .content>* {
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel .carousel-arrows-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    margin: 2.5vw auto;
+}
+
+.carousel .carousel-arrows-wrapper>.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0!important;
+    border-radius: 30px;
+    margin: auto;
+}
+
+.carousel .carousel-arrows-wrapper>.button img {
+    width: 35px;
+}
+
+
+.carousel .carousel-content-wrapper {
+    overflow: hidden;
+}
+
+.carousel .navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.carousel .dot {
+    height: 1.5vw;
+    width: 1.5vw;
+    margin: 0 5px;
+    background-color: rgb(130, 173, 74);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.carousel .dot.active {
+    background-color: rgba(89, 138, 24, 1);
+}

@@ -1,0 +1,535 @@
+DROP TABLE IF EXISTS Prices;
+CREATE TABLE Prices (
+    product    VARCHAR(250)  NOT NULL,
+    print_type VARCHAR(250)  NOT NULL,
+    amount     INT           NOT NULL,
+    price      DECIMAL(7, 2) NOT NULL
+);
+
+INSERT INTO Prices (product, print_type, amount, price) VALUES
+('BUSINESS_CARD', 'BLACK_NO_BACK',   100, 11.90),
+('BUSINESS_CARD', 'BLACK_BLACK',     100, 15.40),
+('BUSINESS_CARD', 'COLORED_NO_BACK', 100, 14.90),
+('BUSINESS_CARD', 'COLORED_BLACK',   100, 16.90),
+('BUSINESS_CARD', 'COLORED_COLORED', 100, 20.90),
+('BUSINESS_CARD', 'BLACK_NO_BACK',   200, 16.30),
+('BUSINESS_CARD', 'BLACK_BLACK',     200, 22.70),
+('BUSINESS_CARD', 'COLORED_NO_BACK', 200, 22.90),
+('BUSINESS_CARD', 'COLORED_BLACK',   200, 28.20),
+('BUSINESS_CARD', 'COLORED_COLORED', 200, 34.20),
+('BUSINESS_CARD', 'BLACK_NO_BACK',   300, 20.70),
+('BUSINESS_CARD', 'BLACK_BLACK',     300, 28.80),
+('BUSINESS_CARD', 'COLORED_NO_BACK', 300, 34.20),
+('BUSINESS_CARD', 'COLORED_BLACK',   300, 39.00),
+('BUSINESS_CARD', 'COLORED_COLORED', 300, 47.70),
+('BUSINESS_CARD', 'BLACK_NO_BACK',   400, 27.40),
+('BUSINESS_CARD', 'BLACK_BLACK',     400, 38.40),
+('BUSINESS_CARD', 'COLORED_NO_BACK', 400, 43.20),
+('BUSINESS_CARD', 'COLORED_BLACK',   400, 49.80),
+('BUSINESS_CARD', 'COLORED_COLORED', 400, 70.80),
+('BUSINESS_CARD', 'BLACK_NO_BACK',   500, 32.20),
+('BUSINESS_CARD', 'BLACK_BLACK',     500, 46.70),
+('BUSINESS_CARD', 'COLORED_NO_BACK', 500, 53.90),
+('BUSINESS_CARD', 'COLORED_BLACK',   500, 63.00),
+('BUSINESS_CARD', 'COLORED_COLORED', 500, 79.80),
+
+('WORK_CALENDAR', 'SMALL',  1,   10.00),
+('WORK_CALENDAR', 'MEDIUM', 1,   10.00),
+('WORK_CALENDAR', 'NORMAL', 1,   10.00),
+('WORK_CALENDAR', 'BIG',    1,   10.00),
+('WORK_CALENDAR', 'SMALL',  3,   8.00),
+('WORK_CALENDAR', 'MEDIUM', 3,   8.00),
+('WORK_CALENDAR', 'NORMAL', 3,   10.00),
+('WORK_CALENDAR', 'BIG',    3,   8.00),
+('WORK_CALENDAR', 'SMALL',  5,   7.00),
+('WORK_CALENDAR', 'MEDIUM', 5,   7.00),
+('WORK_CALENDAR', 'NORMAL', 5,   10.00),
+('WORK_CALENDAR', 'BIG',    5,   7.00),
+('WORK_CALENDAR', 'SMALL',  10,  6.00),
+('WORK_CALENDAR', 'MEDIUM', 10,  6.00),
+('WORK_CALENDAR', 'NORMAL', 10,  10.00),
+('WORK_CALENDAR', 'BIG',    10,  6.00),
+('WORK_CALENDAR', 'SMALL',  20,  4.50),
+('WORK_CALENDAR', 'MEDIUM', 20,  5.00),
+('WORK_CALENDAR', 'NORMAL', 20,  10.00),
+('WORK_CALENDAR', 'BIG',    20,  5.50),
+('WORK_CALENDAR', 'SMALL',  30,  4.00),
+('WORK_CALENDAR', 'MEDIUM', 30,  4.50),
+('WORK_CALENDAR', 'NORMAL', 30,  10.00),
+('WORK_CALENDAR', 'BIG',    30,  5.00),
+('WORK_CALENDAR', 'SMALL',  50,  3.60),
+('WORK_CALENDAR', 'MEDIUM', 50,  4.10),
+('WORK_CALENDAR', 'NORMAL', 50,  10.00),
+('WORK_CALENDAR', 'BIG',    50,  4.70),
+('WORK_CALENDAR', 'SMALL',  100, 3.30),
+('WORK_CALENDAR', 'MEDIUM', 100, 3.80),
+('WORK_CALENDAR', 'NORMAL', 100, 10.00),
+('WORK_CALENDAR', 'BIG',    100, 4.30),
+('WORK_CALENDAR', 'SMALL',  150, 3.30),
+('WORK_CALENDAR', 'MEDIUM', 150, 3.70),
+('WORK_CALENDAR', 'NORMAL', 150, 10.00),
+('WORK_CALENDAR', 'BIG',    150, 4.20),
+('WORK_CALENDAR', 'SMALL',  200, 3.20),
+('WORK_CALENDAR', 'MEDIUM', 200, 3.60),
+('WORK_CALENDAR', 'NORMAL', 200, 10.00),
+('WORK_CALENDAR', 'BIG',    200, 4.10),
+('WORK_CALENDAR', 'SMALL',  300, 3.10),
+('WORK_CALENDAR', 'MEDIUM', 300, 3.50),
+('WORK_CALENDAR', 'NORMAL', 300, 10.00),
+('WORK_CALENDAR', 'BIG',    300, 4.10),
+('WORK_CALENDAR', 'SMALL',  400, 3.00),
+('WORK_CALENDAR', 'MEDIUM', 400, 3.40),
+('WORK_CALENDAR', 'NORMAL', 400, 10.00),
+('WORK_CALENDAR', 'BIG',    400, 4.00),
+('WORK_CALENDAR', 'SMALL',  500, 3.00),
+('WORK_CALENDAR', 'MEDIUM', 500, 3.40),
+('WORK_CALENDAR', 'NORMAL', 500, 10.00),
+('WORK_CALENDAR', 'BIG',    500, 4.00),
+
+('POCKET_CALENDAR', 'COLORED_BLACK',   50,  15.90),
+('POCKET_CALENDAR', 'COLORED_COLORED', 50,  15.90),
+('POCKET_CALENDAR', 'COLORED_BLACK',   100, 16.90),
+('POCKET_CALENDAR', 'COLORED_COLORED', 100, 20.90),
+('POCKET_CALENDAR', 'COLORED_BLACK',   200, 29.50),
+('POCKET_CALENDAR', 'COLORED_COLORED', 200, 35.90),
+('POCKET_CALENDAR', 'COLORED_BLACK',   300, 41.40),
+('POCKET_CALENDAR', 'COLORED_COLORED', 300, 49.80),
+('POCKET_CALENDAR', 'COLORED_BLACK',   400, 56.40),
+('POCKET_CALENDAR', 'COLORED_COLORED', 400, 72.80),
+('POCKET_CALENDAR', 'COLORED_BLACK',   500, 69.50),
+('POCKET_CALENDAR', 'COLORED_COLORED', 500, 83.80),
+
+('FLIER_10x15', 'COLORED_NO_BACK',   50,  18.00),
+('FLIER_10x15', 'COLORED_BLACK',     50,  19.00),
+('FLIER_10x15', 'COLORED_COLORED',   50,  24.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  100,  23.00),
+('FLIER_10x15', 'COLORED_BLACK',    100,  28.00),
+('FLIER_10x15', 'COLORED_COLORED',  100,  36.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  150,  29.00),
+('FLIER_10x15', 'COLORED_BLACK',    150,  35.00),
+('FLIER_10x15', 'COLORED_COLORED',  150,  46.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  200,  36.00),
+('FLIER_10x15', 'COLORED_BLACK',    200,  45.00),
+('FLIER_10x15', 'COLORED_COLORED',  200,  58.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  250,  43.00),
+('FLIER_10x15', 'COLORED_BLACK',    250,  53.00),
+('FLIER_10x15', 'COLORED_COLORED',  250,  69.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  300,  49.00),
+('FLIER_10x15', 'COLORED_BLACK',    300,  61.00),
+('FLIER_10x15', 'COLORED_COLORED',  300,  79.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  400,  57.00),
+('FLIER_10x15', 'COLORED_BLACK',    400,  70.00),
+('FLIER_10x15', 'COLORED_COLORED',  400,  91.00),
+('FLIER_10x15', 'COLORED_NO_BACK',  500,  62.00),
+('FLIER_10x15', 'COLORED_BLACK',    500,  76.00),
+('FLIER_10x15', 'COLORED_COLORED',  500,  99.00),
+('FLIER_10x15', 'COLORED_NO_BACK', 1000, 104.00),
+('FLIER_10x15', 'COLORED_BLACK',   1000, 128.00),
+('FLIER_10x15', 'COLORED_COLORED', 1000, 166.00),
+('FLIER_10x15', 'COLORED_NO_BACK', 2000, 164.00),
+('FLIER_10x15', 'COLORED_BLACK',   2000, 199.00),
+('FLIER_10x15', 'COLORED_COLORED', 2000, 262.00),
+('FLIER_10x15', 'COLORED_NO_BACK', 3000, 226.00),
+('FLIER_10x15', 'COLORED_BLACK',   3000, 278.00),
+('FLIER_10x15', 'COLORED_COLORED', 3000, 361.00),
+
+('FLIER_10x20', 'COLORED_NO_BACK',   50,  22.00),
+('FLIER_10x20', 'COLORED_BLACK',     50,  27.00),
+('FLIER_10x20', 'COLORED_COLORED',   50,  37.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  100,  29.00),
+('FLIER_10x20', 'COLORED_BLACK',    100,  35.00),
+('FLIER_10x20', 'COLORED_COLORED',  100,  48.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  150,  36.00),
+('FLIER_10x20', 'COLORED_BLACK',    150,  44.00),
+('FLIER_10x20', 'COLORED_COLORED',  150,  61.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  200,  41.00),
+('FLIER_10x20', 'COLORED_BLACK',    200,  50.00),
+('FLIER_10x20', 'COLORED_COLORED',  200,  69.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  250,  47.00),
+('FLIER_10x20', 'COLORED_BLACK',    250,  57.00),
+('FLIER_10x20', 'COLORED_COLORED',  250,  79.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  300,  50.00),
+('FLIER_10x20', 'COLORED_BLACK',    300,  61.00),
+('FLIER_10x20', 'COLORED_COLORED',  300,  84.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  400,  61.00),
+('FLIER_10x20', 'COLORED_BLACK',    400,  74.00),
+('FLIER_10x20', 'COLORED_COLORED',  400, 103.00),
+('FLIER_10x20', 'COLORED_NO_BACK',  500,  71.00),
+('FLIER_10x20', 'COLORED_BLACK',    500,  87.00),
+('FLIER_10x20', 'COLORED_COLORED',  500, 120.00),
+('FLIER_10x20', 'COLORED_NO_BACK', 1000, 113.00),
+('FLIER_10x20', 'COLORED_BLACK',   1000, 139.00),
+('FLIER_10x20', 'COLORED_COLORED', 1000, 192.00),
+('FLIER_10x20', 'COLORED_NO_BACK', 2000, 198.00),
+('FLIER_10x20', 'COLORED_BLACK',   2000, 243.00),
+('FLIER_10x20', 'COLORED_COLORED', 2000, 336.00),
+('FLIER_10x20', 'COLORED_NO_BACK', 3000, 282.00),
+('FLIER_10x20', 'COLORED_BLACK',   3000, 347.00),
+('FLIER_10x20', 'COLORED_COLORED', 3000, 479.00),
+
+('PEN', 'SCREEN_ONE_COLOR',     100,  0.24),
+('PEN', 'SCREEN_TWO_COLORS',    100,  0.47),
+('PEN', 'SCREEN_THREE_COLORS',  100,  0.69),
+('PEN', 'SCREEN_ONE_COLOR',     200,  0.21),
+('PEN', 'SCREEN_TWO_COLORS',    200,  0.41),
+('PEN', 'SCREEN_THREE_COLORS',  200,  0.60),
+('PEN', 'SCREEN_ONE_COLOR',     300,  0.19),
+('PEN', 'SCREEN_TWO_COLORS',    300,  0.37),
+('PEN', 'SCREEN_THREE_COLORS',  300,  0.55),
+('PEN', 'SCREEN_ONE_COLOR',     500,  0.17),
+('PEN', 'SCREEN_TWO_COLORS',    500,  0.33),
+('PEN', 'SCREEN_THREE_COLORS',  500,  0.49),
+('PEN', 'SCREEN_ONE_COLOR',    1000,  0.13),
+('PEN', 'SCREEN_TWO_COLORS',   1000,  0.25),
+('PEN', 'SCREEN_THREE_COLORS', 1000,  0.37),
+('PEN', 'PAD_ONE_COLOR',        100,  0.24),
+('PEN', 'PAD_TWO_COLORS',       100,  0.47),
+('PEN', 'PAD_THREE_COLORS',     100,  0.69),
+('PEN', 'PAD_ONE_COLOR',        200,  0.21),
+('PEN', 'PAD_TWO_COLORS',       200,  0.41),
+('PEN', 'PAD_THREE_COLORS',     200,  0.60),
+('PEN', 'PAD_ONE_COLOR',        300,  0.19),
+('PEN', 'PAD_TWO_COLORS',       300,  0.37),
+('PEN', 'PAD_THREE_COLORS',     300,  0.55),
+('PEN', 'PAD_ONE_COLOR',        500,  0.17),
+('PEN', 'PAD_TWO_COLORS',       500,  0.33),
+('PEN', 'PAD_THREE_COLORS',     500,  0.49),
+('PEN', 'PAD_ONE_COLOR',       1000,  0.13),
+('PEN', 'PAD_TWO_COLORS',      1000,  0.25),
+('PEN', 'PAD_THREE_COLORS',    1000,  0.37),
+('PEN', 'FULL_COLOR',            10,  2.50),
+('PEN', 'FULL_COLOR',            50,  0.80),
+('PEN', 'FULL_COLOR',           100,  0.60),
+('PEN', 'FULL_COLOR',           200,  0.55),
+('PEN', 'FULL_COLOR',           250,  0.50),
+('PEN', 'CLICHE_ONE_COLOR',       0, 10.00),
+('PEN', 'CLICHE_TWO_COLORS',      0, 13.00),
+('PEN', 'CLICHE_THREE_COLORS',    0, 16.00),
+
+('LIGHTER', 'SCREEN_ONE_COLOR',     100,  0.24),
+('LIGHTER', 'SCREEN_TWO_COLORS',    100,  0.47),
+('LIGHTER', 'SCREEN_THREE_COLORS',  100,  0.69),
+('LIGHTER', 'SCREEN_ONE_COLOR',     200,  0.21),
+('LIGHTER', 'SCREEN_TWO_COLORS',    200,  0.41),
+('LIGHTER', 'SCREEN_THREE_COLORS',  200,  0.60),
+('LIGHTER', 'SCREEN_ONE_COLOR',     300,  0.19),
+('LIGHTER', 'SCREEN_TWO_COLORS',    300,  0.37),
+('LIGHTER', 'SCREEN_THREE_COLORS',  300,  0.55),
+('LIGHTER', 'SCREEN_ONE_COLOR',     500,  0.17),
+('LIGHTER', 'SCREEN_TWO_COLORS',    500,  0.33),
+('LIGHTER', 'SCREEN_THREE_COLORS',  500,  0.49),
+('LIGHTER', 'SCREEN_ONE_COLOR',    1000,  0.13),
+('LIGHTER', 'SCREEN_TWO_COLORS',   1000,  0.25),
+('LIGHTER', 'SCREEN_THREE_COLORS', 1000,  0.37),
+('LIGHTER', 'PAD_ONE_COLOR',        100,  0.24),
+('LIGHTER', 'PAD_TWO_COLORS',       100,  0.47),
+('LIGHTER', 'PAD_THREE_COLORS',     100,  0.69),
+('LIGHTER', 'PAD_ONE_COLOR',        200,  0.21),
+('LIGHTER', 'PAD_TWO_COLORS',       200,  0.41),
+('LIGHTER', 'PAD_THREE_COLORS',     200,  0.60),
+('LIGHTER', 'PAD_ONE_COLOR',        300,  0.19),
+('LIGHTER', 'PAD_TWO_COLORS',       300,  0.37),
+('LIGHTER', 'PAD_THREE_COLORS',     300,  0.55),
+('LIGHTER', 'PAD_ONE_COLOR',        500,  0.17),
+('LIGHTER', 'PAD_TWO_COLORS',       500,  0.33),
+('LIGHTER', 'PAD_THREE_COLORS',     500,  0.49),
+('LIGHTER', 'PAD_ONE_COLOR',       1000,  0.13),
+('LIGHTER', 'PAD_TWO_COLORS',      1000,  0.25),
+('LIGHTER', 'PAD_THREE_COLORS',    1000,  0.37),
+('LIGHTER', 'FULL_COLOR',            10,  2.50),
+('LIGHTER', 'FULL_COLOR',            50,  0.80),
+('LIGHTER', 'FULL_COLOR',           100,  0.60),
+('LIGHTER', 'FULL_COLOR',           200,  0.55),
+('LIGHTER', 'FULL_COLOR',           250,  0.50),
+('LIGHTER', 'CLICHE_ONE_COLOR',       0, 10.00),
+('LIGHTER', 'CLICHE_TWO_COLORS',      0, 13.00),
+('LIGHTER', 'CLICHE_THREE_COLORS',    0, 16.00);
+
+DROP TABLE IF EXISTS Notes;
+CREATE TABLE Notes (
+    product   VARCHAR(250)  NOT NULL,
+    note_type VARCHAR(250)  NOT NULL,
+    price     DECIMAL(7, 2) NOT NULL
+);
+
+INSERT INTO Notes (product, note_type, price) VALUES
+('BUSINESS_CARD', 'FAST_PRODUCTION',     50.0 /* % */),
+('BUSINESS_CARD', 'EXPRESS_PRODUCTION', 100.0 /* % */),
+('BUSINESS_CARD', 'LAMINATION',          3.00 /* per 100 */),
+('BUSINESS_CARD', 'ROUNDED_CORNERS',     3.50 /* per 100 */),
+('BUSINESS_CARD', 'EFFECT_CARTON',       4.00 /* per 100 */),
+
+('WORK_CALENDAR', 'FAST_PRODUCTION',     30.0 /* % */),
+('WORK_CALENDAR', 'EXPRESS_PRODUCTION',  50.0 /* % */),
+('WORK_CALENDAR', 'LAMINATION',         35.00 /* per 100 */),
+('WORK_CALENDAR', 'EFFECT_CARTON',      40.00 /* per 100 */),
+('WORK_CALENDAR', 'PARTIAL_VARNISH',    40.00 /* per 100 */),
+
+('POCKET_CALENDAR', 'FAST_PRODUCTION',     50.0 /* % */),
+('POCKET_CALENDAR', 'EXPRESS_PRODUCTION', 100.0 /* % */),
+('POCKET_CALENDAR', 'LAMINATION',          3.00 /* per 100 */),
+('POCKET_CALENDAR', 'ROUNDED_CORNERS',     3.50 /* per 100 */),
+('POCKET_CALENDAR', 'EFFECT_CARTON',       4.00 /* per 100 */),
+
+('FLIER_10x15', 'FAST_PRODUCTION',     50.0 /* % */),
+('FLIER_10x15', 'EXPRESS_PRODUCTION', 100.0 /* % */),
+('FLIER_10x15', 'LAMINATION_MAT',      8.00 /* per 100 */),
+('FLIER_10x15', 'LAMINATION_GLOSSY',   7.00 /* per 100 */),
+
+('FLIER_10x20', 'FAST_PRODUCTION',     50.0 /* % */),
+('FLIER_10x20', 'EXPRESS_PRODUCTION', 100.0 /* % */),
+('FLIER_10x20', 'LAMINATION_MAT',     10.00 /* per 100 */),
+('FLIER_10x20', 'LAMINATION_GLOSSY',   9.00 /* per 100 */),
+
+('PEN', 'FAST_PRODUCTION',     50.0 /* % */),
+('PEN', 'EXPRESS_PRODUCTION', 100.0 /* % */),
+
+('LIGHTER', 'FAST_PRODUCTION',     50.0 /* % */),
+('LIGHTER', 'EXPRESS_PRODUCTION', 100.0 /* % */);
+
+DROP TABLE IF EXISTS Product_Models;
+CREATE TABLE Product_Models (
+    id                BIGSERIAL      PRIMARY KEY,
+    product           VARCHAR(250)   NOT NULL,
+    model             TEXT           NOT NULL,
+    catalogue_number  TEXT,          -- pens and lighters
+    price             DECIMAL(7, 2), -- pens and lighters
+    size              VARCHAR(250)  -- work calendars
+);
+
+INSERT INTO Product_Models (product, model, catalogue_number, price, size) VALUES
+('WORK_CALENDAR', '3 тела „БИЗНЕС“',          NULL, NULL, 'NORMAL'),
+('WORK_CALENDAR', '3 тела „БИЗНЕС-макси“',    NULL, NULL, 'BIG'),
+('WORK_CALENDAR', '4 тела „БИЗНЕС-икономик“', NULL, NULL, 'BIG'),
+('WORK_CALENDAR', '3 тела „УНИВЕРСАЛ“',       NULL, NULL, 'NORMAL'),
+('WORK_CALENDAR', '1 тяло „ИКОНОМИК-мини“',   NULL, NULL, 'SMALL'),
+('WORK_CALENDAR', '3 тела „ИКОНОМИК-макси“',  NULL, NULL, 'NORMAL'),
+('WORK_CALENDAR', '3 тела „ПРЕСТИЖ“',         NULL, NULL, 'NORMAL'),
+('WORK_CALENDAR', '1 тяло „СЧЕТОВОДЕН“',      NULL, NULL, 'MEDIUM'),
+('WORK_CALENDAR', '1 тяло „СТИЛ“',            NULL, NULL, 'MEDIUM'),
+
+('PEN', 'Сенатор', '00054-a', 0.89, NULL),
+('PEN', 'Сенатор', '09748-a', 0.49, NULL),
+('PEN', 'Сенатор', '11117-a', 0.58, NULL),
+('PEN', 'Сенатор', '00061-a', 0.63, NULL),
+('PEN', 'Сенатор', '00001-a', 0.82, NULL),
+
+('LIGHTER', 'Унилайт',             '5061',    0.60, NULL),
+('LIGHTER', 'Унилайт',             '8173',    0.65, NULL),
+('LIGHTER', 'Унилайт',             '8177',    0.60, NULL),
+('LIGHTER', 'Унилайт, плоска',     '17018-a', 0.60, NULL),
+('LIGHTER', 'Унилайт, обикновена', '18908-a', 0.45, NULL);
+
+DROP TABLE IF EXISTS Model_Colors;
+CREATE TABLE Model_Colors (
+    id              BIGSERIAL  PRIMARY KEY,
+    model_id        BIGSERIAL  NOT NULL,
+    primary_color   VARCHAR(7) NOT NULL,
+    secondary_color VARCHAR(7),
+    name            TEXT       NOT NULL,
+    path            TEXT
+);
+
+INSERT INTO Model_Colors (model_id, primary_color, secondary_color, name, path) VALUES
+(1, '#110b0c', '#f0372b', 'черно/червено', 'biznes-kalendar-cherno-cherveno-300.png'),
+(1, '#161112', '#42a93d', 'черно/зелено',  'biznes-kalendar-cherno-zeleno-300.png'),
+(1, '#151112', '#005faf', 'черно/синьо',   'biznes-kalendar-cherno-sinio-300.png'),
+(2, '#181415', '#ee2731', 'черно/червено', 'biznes-kalendar-maxi-cherno-cherveno-300.png'),
+(2, '#1e4270', '#ed2832', 'синьо/червено', 'biznes-kalendar-maxi-sinio-cherveno-300.png'),
+(3, '#002d62', NULL,      'синьо',         'biznes-kalendar-ikonomik-sinio-300.png'),
+(4, '#808084', '#1191cf', 'сиво/синьо',    'eko-kalendar-cherno-zeleno-300.png'),
+(5, '#ef4035', NULL,      'червено',       'ikonomik-kalendar-mini-cherveno-300.png'),
+(5, '#47aa42', NULL,      'зелено',        'ikonomik-kalendar-mini-zeleno-300.png'),
+(5, '#0068b3', NULL,      'синьо',         'ikonomik-kalendar-mini-sinio-300.png'),
+(6, '#ec0b47', NULL,      'червено',       'ikonomik-kalendar-maxi-cherveno-300.png'),
+(6, '#71c266', NULL,      'зелено',        'ikonomik-kalendar-maxi-zeleno-300.png'),
+(6, '#6f9dbe', NULL,      'синьо',         'ikonomik-kalendar-maxi-sinio-300.png'),
+(7, '#191315', '#e83e43', 'черно/червено', 'prestige_kalendar-cherno-cherveno-300.png'),
+(7, '#2f547c', '#ef3b3e', 'синьо/червено', 'prestige_kalendar-sinio-cherveno-300.png'),
+(8, '#275874', '#e83f6e', 'синьо/червено', 'schetovoden-kalendar-sinio-cherveno-300.png'),
+(8, '#a8a8ab', '#b69d68', 'сиво/златно',   'schetovoden-kalendar-sivo-zlatno-300.png'),
+(9, '#004073', '#adb1b4', 'синьо/сребро',  'stil_kalendar-sinio-srebro-300.png'),
+(9, '#1f4f3b', '#b69d68', 'зелено/златно', 'stil_kalendar-zeleno-zlatno-300.png'),
+
+(10, '#ffffff', NULL,      'бяла',                    'senator-bial-00054-a.jpg'),
+(10, '#000000', NULL,      'черна',                   'senator-cheren-00054-a.jpg'),
+(10, '#ff0000', NULL,      'червена',                 's-cherven-00054-a.jpg'),
+(10, '#78a2ee', NULL,      'светло синя',             's-svetlo-sin-00054-a.jpg'),
+(10, '#f2f101', NULL,      'жълта',                   's-yelow-00054-a.jpg'),
+(10, '#94f341', NULL,      'зелена',                  's-zelen-00054-a.jpg'),
+(11, '#ffffff', NULL,      'бяла',                    'senator-bial-09748-a.jpg'),
+(11, '#000000', NULL,      'черна',                   'senator-cheren-09748-a.jpg'),
+(11, '#0000ff', NULL,      'синя',                    'senator-sin-09748-a.jpg'),
+(11, '#ffff00', '#fb8034', 'бяла, с оранжев клипс',   'senator-bial-orangev-klips-09748-a.jpg'),
+(11, '#fb8034', NULL,      'оранжева',                's-orange-09748-a.jpg'),
+(11, '#f8c917', NULL,      'патешко жълто',           's-pateshko-julto-09748-a.jpg'),
+(11, '#f441c5', NULL,      'светла магента',          's-svetla-magenta-09748-a.jpg'),
+(11, '#f2f101', NULL,      'светло жълта',            's-svetlo-julto-09748-a.jpg'),
+(11, '#78a2ee', NULL,      'светло синя',             's-svetlo-sin-09748-a.jpg'),
+(11, '#94f341', NULL,      'светло зелена',           's-svetlo-zelen-09748-a.jpg'),
+(11, '#479353', NULL,      'тъмно зелена',            's-tumno-zelen-09748-a.jpg'),
+(11, '#ffffff', '#000000', 'бяла, с черен клипс',     'senator-bial-cheren-klips-09748-a.jpg'),
+(11, '#ffffff', '#ff0000', 'бяла, с червен клипс',    'senator-bial-cherven-klips-09748-a.jpg'),
+(11, '#ffffff', '#f8c917', 'бяла, с жълт клипс',      'senator-bial-jult-klips-09748-a.jpg'),
+(11, '#ffffff', '#479353', 'бяла, със зелен клипс',   'senator-bial-zelen-klips-09748-a.jpg'),
+(12, '#ffffff', NULL,      'черна, полупрозрачна',    's-black-11117-a.jpg'),
+(12, '#479353', NULL,      'зелена, полупрозрачна',   's-green-11117-a.jpg'),
+(12, '#fb8034', NULL,      'оранжева, полупрозрачна', 's-orange-11117-a.jpg'),
+(12, '#0000ff', NULL,      'синя, полупрозрачна',     's-sin-11117-a.jpg'),
+(12, '#f2f101', NULL,      'жълта, полупрозрачна',    's-yelow-11117-a.jpg'),
+(13, '#ffffff', '#0000ff', 'бяла, със син клипс',     's-bial-sin-klips-00061-a.jpg'),
+(13, '#ff0000', NULL,      'червена',                 's-cherven-00061-a.jpg'),
+(13, '#0000ff', NULL,      'синя',                    's-sin-00061-a.jpg'),
+(13, '#00ff00', NULL,      'зелена',                  's-zelen-00061-a.jpg'),
+(13, '#ffffff', NULL,      'бяла',                    'senator-bial-00061-a.jpg'),
+(13, '#ffffff', '#ff0000', 'бяла, с червен клипс',    'senator-bial-cherven-klips-00061-a.jpg'),
+(13, '#ffffff', '#f8c917', 'бяла, с жълт клипс',      'senator-bial-jult-klips-00061-a.jpg'),
+(13, '#ffffff', '#479353', 'бяла, със зелен клипс',   'senator-bial-zelen-klips-00061-a.jpg'),
+(13, '#b6014e', NULL,      'цвят магента',            'senator-magenta-00061-a.jpg'),
+(13, '#fb8034', NULL,      'оранжева',                'senator-orangev-00061-a.jpg'),
+(13, '#78a2ee', NULL,      'светло синя',             'senator-svetlo-sin-00061-a.jpg'),
+(13, '#f2f101', NULL,      'светло жълта',            'senator-zelen-00061-a.jpg'),
+(14, '#ffffff', '#000000', 'бяла, с черен клипс',     'senator-bial-cheren-klips-00001-a.jpg'),
+(14, '#ffffff', '#0000ff', 'бяла, с червен клипс',    'senator-bial-cherven-klips-00001-a.jpg'),
+(14, '#ffffff', '#f8c917', 'бяла, с жълт клипс',      'senator-bial-jult-klips-00001-a.jpg'),
+(14, '#ffffff', '#0000ff', 'бяла, със син клипс',     'senator-bial-sin-klips-00001-a.jpg'),
+(14, '#ffffff', '#479353', 'бяла, със зелен клипс',   'senator-bial-zelen-klips-00001-a.jpg'),
+(14, '#000000', NULL,      'черна',                   'senator-cheren-00001-a.jpg'),
+
+(15, '#000000', NULL,      'черна',    'unilite-black-dius-5061.jpg'),
+(15, '#0000ff', NULL,      'синя',     'unilite-blue-dius-5061.jpg'),
+(15, '#ff0000', NULL,      'червена',  'unilite-red-dius-5061.jpg'),
+(15, '#ffffff', NULL,      'бяла',     'unilite-white-dius-5061.jpg'),
+(15, '#f8c917', NULL,      'жълта',    'unilite-yellow-dius-5061.jpg'),
+(16, '#0000ff', NULL,      'синя',     'unilite-blue-metal-8173.jpg'),
+(16, '#479353', NULL,      'зелена',   'unilite-green-metal-8173.jpg'),
+(16, '#f2f101', NULL,      'жълта',    'unilite-yellow-metal-8173.jpg'),
+(17, '#adb1b4', NULL,      'сребърна', 'unilite-silver-metal-8177.jpg'),
+(18, '#ffffff', NULL,      'бяла',     'unilite-white-ploska-17018-a'),
+(19, '#ffffff', NULL,      'бяла',     'unilinte-white-obiknovena-18908-a.jpg');
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    id                  BIGSERIAL  PRIMARY KEY,
+    role                VARCHAR(250) NOT NULL,
+    name                VARCHAR(250) NOT NULL,
+    surname             VARCHAR(250) NOT NULL,
+    password            VARCHAR(250) NOT NULL,
+    phone               VARCHAR(250),
+    email               VARCHAR(250) NOT NULL,
+    delivery_address    VARCHAR(250),
+    delivery_phone      VARCHAR(250),
+    email_verified      BOOLEAN,
+    cart_id             VARCHAR(250)
+);
+
+INSERT INTO Users (id, role, name, surname, password, email) VALUES
+(0, 'ADMIN', 'admin', 'admin', 'b5fe42f49eed550ebc50fac7e7a4a19da6eea5bb814420da3fe96503a15006ce', 'nqma_da_si_slagam_imeila_tuka_che_ne_moga_da_se_logna_kato_potrebitel_sus_sushtiq_imeil@gmail.com');
+-- aseiiz05_qpoho194
+
+DROP TABLE IF EXISTS Designs;
+CREATE TABLE Designs (
+    id                VARCHAR(37)  NOT NULL PRIMARY KEY,
+    product_type      VARCHAR(250) NOT NULL,
+    front_side_id     BIGINT,
+    back_side_id      BIGINT,
+    print_type        VARCHAR(250),
+    model_color_id    BIGINT,
+    is_favorite       BOOLEAN,
+    name              VARCHAR(250),
+    user_id           BIGINT
+);
+
+DROP TABLE IF EXISTS Design_Sides;
+CREATE TABLE Design_Sides (
+    id              BIGSERIAL PRIMARY KEY,
+    bg_path         VARCHAR(250),
+    bg_image_id     VARCHAR(250)
+);
+
+DROP TABLE IF EXISTS Design_Effects;
+CREATE TABLE Design_Effects (
+    design_id VARCHAR(37),
+    effect    VARCHAR(250) NOT NULL,
+    value     BIGSERIAL
+);
+
+DROP TABLE IF EXISTS Effect_Cartons;
+CREATE TABLE Effect_Cartons (
+    id    BIGSERIAL     PRIMARY KEY,
+    name  VARCHAR(250),
+    price DECIMAL(7, 2) /* per 100 */
+);
+INSERT INTO Effect_Cartons (name, price) VALUES
+('Двустранно хромов мат бял - 300 гр./',    0.00),
+('Акварело - бял - 250 гр./кв.м.',          4.00),
+('Акварело - слонова кост - 250 гр./кв.м',  4.00),
+('Дизайн - бял - 250 гр./кв.м',             4.00),
+('Дизайн - слонова кост - 250 гр./кв.м.',   4.00),
+('Герипт - шамоа - 250 гр./кв.м.',          4.00),
+('Айс голд - 300 гр./кв.м.',                4.00),
+('Айс силвър - 300 гр./кв.м.',              4.00),
+('Кобалт - 255 гр./кв.м.',                  4.00),
+('Кобалт елмаз - 255 гр./кв.м.',            4.00),
+('Металик лустре - 300 гр./кв.м.',          4.00),
+('Металик светлосив - 300 гр./кв.м.',       4.00),
+('Опал седефено бял - 250 гр./кв.м.',       4.00),
+('Опал седефено натурален - 250 гр./кв.м.', 4.00),
+('Паус - 230 гр./кв.м.',                    4.00),
+('Перлен Европа айвъри - 240 гр./кв.м.',    4.00),
+('Рисайкълд - 250 гр./кв.м.',               4.00),
+('Сиена 90% рециклирана - 270 гр./кв.м.',   4.00),
+('Силиций - 255 гр./кв.м.',                 4.00),
+('Силиций елмаз - 255 гр./кв.м.',           4.00),
+('Традишън бял - 250 гр./кв.м.',            4.00),
+('Традишън слонова кост - 250 гр./кв.м.',   4.00),
+('Виртуална перла - 240 гр./кв.м.',         4.00);
+
+DROP TABLE IF EXISTS Elements;
+CREATE TABLE Elements (
+    id              BIGSERIAL PRIMARY KEY,
+    position        TEXT      NOT NULL,
+    size            TEXT      NOT NULL,
+    design_side_id  BIGSERIAL,
+    type            VARCHAR(10),
+
+    -- image
+    name            VARCHAR(250),
+
+    -- text
+    text            VARCHAR(250),
+    bold            BOOLEAN,
+    italic          BOOLEAN,
+    underline       BOOLEAN,
+    
+    font_family     VARCHAR(250),
+    font_size       DECIMAL,
+    color           VARCHAR(250),
+    alignment       VARCHAR(250),
+    field_name      VARCHAR(250),
+    has_changed     BOOLEAN
+);
+
+
+DROP TABLE IF EXISTS Carts;
+CREATE TABLE Carts (
+    id              VARCHAR(37) PRIMARY KEY,
+    updated         timestamp
+);
+
+DROP TABLE IF EXISTS Cart_Items;
+CREATE TABLE Cart_Items (
+    id              BIGSERIAL PRIMARY KEY,
+    cart_id         VARCHAR(37),
+    design_id       VARCHAR(37),
+    amount          INTEGER,
+    production_time VARCHAR(100)
+);
+
+DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders (
+    id            BIGSERIAL   PRIMARY KEY,
+    cart_id       VARCHAR(37) NOT NULL,
+    order_details TEXT        NOT NULL,
+    user_id       BIGINT
+);

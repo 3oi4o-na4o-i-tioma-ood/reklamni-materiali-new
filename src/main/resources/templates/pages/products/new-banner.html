@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <body>
+    <div class="banner" th:fragment="banner(title, main, side)">
+      <div class="content">
+        <div class="title" th:insert="${title}"></div>
+        <div class="hr_container">
+          <hr class="zelen_hr" style="width: 60%" />
+          <hr style="background-color: White; width: 30%" />
+        </div>
+      </div>
+
+      <div class="banner-relative">
+        <div class="hero-image-wrapper">
+          <img th:src="${main}" />
+        </div>
+        <img class="banner-cards lighter" th:src="${side}" alt="banner-cards" />
+      </div>
+
+      <img
+        class="banner-thing-1"
+        src="/images/home/banner_thing_2.svg"
+        alt="banner_thing_1"
+      />
+      <img
+        class="banner-thing-2"
+        src="/images/vizitki/art-icon.png"
+        alt="banner_thing_2"
+      />
+      <img
+        class="banner-star"
+        src="/images/home/banner_star.svg"
+        alt="banner star"
+      />
+    </div>
+  </body>
+</html>

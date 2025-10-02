@@ -1,0 +1,50 @@
+.product-page-content .text {
+    font-size: var(--font-size-xs);
+}
+
+.product-page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.product-page-content>* {
+    padding: 3vw 5vw;
+}
+
+.product-page-content>.banner {
+    padding: 0;
+}
+
+.product-page-content>*:nth-child(2n + 1) {
+    background-color: var(--color-bg-secondary);
+}
+
+.product-page-content .accordions-group .summary {
+    font-weight: 600;
+    font-family: Montserrat;
+    font-size: var(--font-size-xs);
+}
+
+.product-page-content .accordions-group .content {
+    
+}
+
+@media screen and (max-width: 800px) {
+    .personalize .first_column {
+        order: 2;
+    }
+    .personalize .second_column a {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: rgba(89, 138, 24, 1);
+        border: none;
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+        padding: 10px 20px;
+        align-self: flex-start;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+}

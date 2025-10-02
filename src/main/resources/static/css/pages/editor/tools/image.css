@@ -1,0 +1,120 @@
+.editor-image-tool .image-actions {
+    position: relative;
+    margin: 15px 0;
+}
+
+.editor-image-tool .image-actions>* {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.editor-image-tool .image-actions.active>* {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.editor-image-tool .image-actions .message {
+    font-size: var(--font-size-xxs);
+    opacity: 1;
+    pointer-events: all;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.editor-image-tool .image-actions.active .message {
+    display: none;
+}
+
+.editor-image-tool .image-actions button {
+    font-size: var(--font-size-s);
+    width: 3em;
+    height: 3em;
+    border: 2px solid var(--color-primary);
+    display: flex;
+}
+
+.editor-image-tool .image-actions button img {
+    width: 1.5em;
+    margin: auto
+}
+
+.popup.cut-image-popup>.content {
+    width: auto;
+}
+
+.editor-image-tool .canvas {
+    max-width: 80vw;
+    max-height: 60vh;
+
+    border: 2px dashed #aaa;
+    border-radius: 5px;
+
+    position: relative;
+    box-sizing: content-box;
+}
+
+.editor-image-tool .canvas .frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+
+    border: 2px solid black;
+}
+
+#accept-crop-button {
+    margin: 10px 0 0 auto;
+}
+
+.cut-image-popup .cropped-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    min-width: 200px;
+    max-height: 60vh;
+}
+
+
+.editor-image-tool .images-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.editor-image-tool .images-list li {
+    display: flex;
+    gap: 1em;
+
+    width: 100%;
+    align-items: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    padding: 0.25em 0.5em;
+    box-sizing: border-box;
+}
+
+.editor-image-tool .images-list li.selected {
+    background-color: var(--color-bg-light-green);
+}
+
+.editor-image-tool .images-list li>img {
+    height: 50px;
+    width: 0;
+    flex-grow: 1;
+    object-fit: contain;
+    object-position: left;
+}
+
+.editor-image-tool .images-list li button {
+    margin-left: auto;
+}

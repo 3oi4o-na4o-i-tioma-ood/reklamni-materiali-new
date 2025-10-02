@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <th:block th:replace="pages/editor/base_head_content :: head-content"></th:block>
+    <script src="/js/editor/pens.js"></script>
+    <title>Химикалки - редактор</title>
+</head>
+<body>
+    <th:block th:replace="/pages/editor/base_layout :: layout(~{::#editor-page-content-pens})">
+
+        <div id="editor-page-content-pens" class="editor">
+            <th:block th:replace="pages/editor/tools/products/pens :: tools"></th:block>
+
+            <th:block th:replace="pages/editor/right_section/right_section :: right-section(false)"></th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

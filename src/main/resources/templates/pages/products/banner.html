@@ -1,0 +1,13 @@
+<div class="banner" th:fragment="banner(title, heroImageSrc)">
+    <div class="content">
+        <div class="main_container">
+            <div class="title" th:insert="${title}"></div>
+            <div class="hr_container">
+                <hr class="zelen_hr" style="width: 60%" />
+                <hr class="custom-hr" />
+            </div>
+        </div>
+    </div>
+
+    <img th:src="${heroImageSrc}" />
+</div>

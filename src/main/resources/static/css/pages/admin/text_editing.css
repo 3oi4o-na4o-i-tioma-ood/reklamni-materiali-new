@@ -1,0 +1,67 @@
+.admin-page .text-editing {
+    display: flex;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    background-color: white;
+    padding: 1em;
+    align-items: flex-start;
+}
+.admin-page .text-editing.number {
+    padding: 0.5em;
+    display: inline-flex;
+}
+
+.admin-page .text-editing input {
+    display: none;
+}
+
+.admin-page .text-editing button.edit {
+    margin: 0;
+    margin-left: 10%;
+    padding: 0;
+}
+
+.admin-page .text-editing button.cancel {
+    display: none;
+    font-size: 40px;
+    line-height: 0.5em;
+    color: var(--color-primary);
+}
+
+.admin-page .text-editing button.save {
+    display: none;
+    height: 23px;
+    padding: 0;
+}
+
+.admin-page .text-editing button.save img {
+    height: 100%;
+}
+
+.admin-page .text-editing .text {
+    margin: 0;
+    margin-right: auto;
+}
+
+.admin-page .text-editing.edited {
+    align-items: center;
+    gap: 1em;
+}
+
+.admin-page .text-editing.edited input,
+.admin-page .text-editing.edited button.save,
+.admin-page .text-editing.edited button.cancel {
+    display: block;
+}
+
+.admin-page .text-editing.edited .text,
+.admin-page .text-editing.edited button.edit {
+    display: none;
+}
+
+@media screen and (max-width:767px) {
+    .admin-page .text-editing.number {
+        height: 20px;
+        margin: 0px 5px;
+    }
+}

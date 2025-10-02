@@ -1,0 +1,7 @@
+<div id="basecontent" th:fragment="base-layout(pageContent)">
+    <th:block th:replace="components/top_nav_bar :: top-nav-bar"></th:block>
+
+    <th:block th:replace="${pageContent}"></th:block>
+
+    <th:block th:replace="components/footer :: footer" />
+</div>

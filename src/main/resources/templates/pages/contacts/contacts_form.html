@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <body>
+    <div class="second_section" th:fragment="contacts_form">
+      <div class="first_column">
+        <div class="title">Свържете се с нас</div>
+        <div class="subtitle">
+          Не се колебайте да се свържете с нас, нашият екип<br />
+          е винаги готов да Ви помогне, с каквото е необходимо.
+        </div>
+        <div class="adress">
+          <button class="circle_button">
+            <img src="/images/contacts/address.svg" />
+          </button>
+          <div class="row">
+            <span>Адрес</span>
+            <div class="text_addres">гр.София 1362, ул. "Дъб" №5</div>
+          </div>
+        </div>
+        <div class="adress">
+          <button class="circle_button">
+            <img src="/images/contacts/contacts_phone.svg" />
+          </button>
+          <div class="row">
+            <span>Телефон</span>
+            <div class="text_addres">
+              02/829 79 00
+              <br />
+              089/990 73 46
+            </div>
+          </div>
+        </div>
+        <div class="adress">
+          <button class="circle_button">
+            <img src="/images/contacts/contacts_mail_img.svg" />
+          </button>
+          <div class="row">
+            <span>Имейл</span>
+            <div class="text_addres">orders@reklamni-materiali.com</div>
+          </div>
+        </div>
+      </div>
+      <div class="second_column">
+        <div class="title">Контактна форма</div>
+        <input class="input" type="text" placeholder="Вашето име" />
+        <div class="form-row">
+          <input class="input" type="text" placeholder="Вашият телефон" />
+          <input class="input" type="text" placeholder="Вашият E-mail" />
+        </div>
+        <textarea class="input" rows="4" placeholder="Вашето съобщение"></textarea>
+        <button class="button">Изпрати</button>
+      </div>
+    </div>
+  </body>
+</html>

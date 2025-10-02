@@ -1,0 +1,14 @@
+.izrabotka_content {
+  background-color: rgba(230, 235, 233, 1);
+}
+.izrabotka_content .izrabotka {
+  width: 100%;
+  text-align: center;
+  margin: 10vw auto;
+}
+.izrabotka_content .izrabotka .text {
+  font-family: Montserrat;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}

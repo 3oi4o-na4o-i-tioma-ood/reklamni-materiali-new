@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div class="table-wrapper" th:fragment="table_flyers">
+
+        <div class="table">
+            <div id="info-table-tabs" class="links">
+                <button class="selected">Цени</button>
+                <button>Забележки</button>
+                <button>Размери</button>
+                <button>Промоции</button>
+            </div>
+            <div class="main_content" id="tabs-content-wrapper">
+                <div class="selected">
+                    <div class="text">
+                        Всички цени на <string>флаери</string> са в лева без ДДС за стандартен срок от 48 часа.
+                    </div>
+
+                    <h4 style="text-align: center;">Флаери 10x15 см</h4>
+                    <table>
+                        <thead>
+                            <th>
+                                <div>Лице / гръб</div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / без гръб </div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / Пълноцветен</div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / Черен </div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="q, index : ${price_info_flyer_10x15}">
+                                <td>
+                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_NO_BACK"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="text-align: center;">Флаери 10x20 см</h4>
+
+                    <table>
+                        <thead>
+                            <th>
+                                <div>Лице / гръб</div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / без гръб </div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / Пълноцветен</div>
+                            </th>
+                            <th>
+                                <div>Пълноцветно / Черен </div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="q, index : ${price_info_flyer_10x20}">
+                                <td>
+                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_NO_BACK"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <ul>
+                        <li>Надценка за бърза изработка на <strong>флаери</strong> (6 часа): +50%;</li>
+                        <li>Надценка за експресна изработка на <strong>флаери</strong> (4 часа): +100%;</li>
+                        <li>Ламиниране мат ламинат: цена <strong>0,08 лв./бр.</strong> - 100/150мм; Гланц ламинат цена
+                            0,07 лв./бр.</li>
+                        <li>Ламиниране мат ламинат: цена <strong>0,10 лв./бр.</strong> - 100/200мм; Гланц ламинат цена
+                            0,09 лв./бр.</li>
+                        <li>При поръчка на стойност над 150 лв. куриерската услуга в рамките на гр. София е
+                            <strong>безплатна</strong>.
+                        </li>
+                    </ul>
+                </div>
+                <p>
+                    Размерът на <strong>флаерите</strong> варира в зависимост от вида. За повече информация вижте
+                    по-горе.
+
+                    Стандартно флаерите се изработват на двустранно хромова хартия 130 гр./кв.м.
+
+                    При качване на Ваш дизайн или фон, размерът трябва да бъде <strong>204/101 мм.</strong> на 300 DPI
+                    (или <strong>2409/1193 px</strong>). Препоръчително е файлът да е в CMYK цветово пространство.
+
+                    При качване на Ваш дизайн или фон, размерът трябва да бъде <strong>152/101 мм.</strong> на 300 DPI
+                    (или <strong>1795/1193 px</strong>). Препоръчително е файлът да е в CMYK цветово пространство.
+
+                    Поддържани файлови формати при качване на ваши фонове или лога:
+
+                    <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+                </p>
+                <ul>
+                    <li>При поръчка над 500 бр. <strong>флаери</strong> - получавате 50 бр. визитки
+                        <strong>подарък</strong> /които трябва да си направите с нова поръчка/.</li>
+                    <li>При поръчка над 2000 бр. <strong>флаери</strong> - получавате 100 бр. визитки
+                        <strong>подарък</strong> /които трябва да си направите с нова поръчка/ + безплатна доставка за
+                        гр.София.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

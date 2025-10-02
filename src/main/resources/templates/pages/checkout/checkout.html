@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <th:block th:replace="components/base_head_content :: head-content" />
+
+  <title>Приключване на поръчката</title>
+
+  <link rel="stylesheet" href="/css/pages/checkout/checkout.css">
+  <link rel="stylesheet" href="/css/components/loader.css">
+  
+
+  <script src="/js/checkout/checkout.js"></script>
+  <script src="/js/editor/storage.js"></script>
+  <script src="/js/components/order_code.js"></script>
+</head>
+
+<body>
+  <th:block th:replace="components/base_layout :: base-layout(~{::#checkout-page-content})">
+    <div id="checkout-page-content">
+      <h4 class="title">Приключване на поръчката</h4>
+
+      <!-- <div class="checkout-page-columns"> -->
+      <div class="left-section">
+        <th:block th:replace="pages/checkout/delivery :: delivery"></th:block>
+
+        <th:block th:replace="pages/checkout/invoice :: invoice"></th:block>
+
+        <th:block th:replace="pages/checkout/payment :: payment"></th:block>
+
+        <button id="order-button" class="button">Поръчай</button>
+      </div>
+
+      <div class="backdrop" id="loading-backdrop" style="display: none;">
+        <div class="loader"></div>
+      </div>
+
+      <!-- <div class="cart-checkout-container">
+          <div class="price-overview">
+            <h4 class="header">Вашата поръчка</h4>
+
+            <div id="cart-overview">
+
+            </div>
+
+            <div class="prices-container">
+              <div class="price-row">
+                <span class="name">Стандартна цена</span>
+                <span class="price"></span>
+              </div>
+              <div class="price-row">
+                <span class="name">Срок за изработка</span>
+                <span class="price"></span>
+              </div>
+
+              <hr class="zelen_hr" style="height:2px">
+              <div class="price-row">
+                <span class="name">Общо</span>
+                <span class="price"></span>
+              </div>
+              <div class="price-row bold">
+                <span class="name">Общо с ДДС</span>
+                <span class="price"></span>
+              </div>
+
+              <button id="order-button" class="button">Поръчай</button>
+            </div>
+
+          </div>
+        </div> -->
+      <!-- </div> -->
+
+
+    </div>
+    </div>
+  </th:block>
+</body>
+
+
+</html>

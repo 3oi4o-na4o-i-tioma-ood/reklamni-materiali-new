@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <body>
+    <div class="editor-actions-top" th:fragment="editor_actions_top(hasSides)">
+      <div
+        id="editor-card-side-select"
+        class="editor-card-side-select"
+        th:if="${hasSides}"
+      >
+        <button id="button-select-product-face" class="button active">
+          Лице
+        </button>
+        <button id="button-select-product-back" class="button secondary">
+          Гръб
+        </button>
+      </div>
+
+      <button
+        id="remove-background"
+        class="remove-background-button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+        <span>Премахни фона</span>
+        
+      </button>
+
+      <button id="save-design-button" class="save-design-button">
+        <img src="/images/editor/save.svg" alt="запази" />
+      </button>
+
+      <div
+        class="snackbar bottom middle warning"
+        id="save-design-snackbar"
+      ></div>
+    </div>
+  </body>
+</html>

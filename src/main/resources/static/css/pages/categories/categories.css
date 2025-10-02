@@ -1,0 +1,134 @@
+.categories-page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin: 7vw 5vw;
+}
+
+.categories-page-content .categories-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    width: 100%;
+}
+
+.categories-page-content .upper_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.categories-page-content .upper_container .title {
+    font-size: var(--font-size-s);
+}
+
+.categories-page-content .upper_container .subtitle {
+    font-weight: 600;
+    font-size: var(--font-size-xs);
+}
+
+.categories-page-content .upper_container>* {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.categories-page-content .upper_container>div select option {
+    padding: 0;
+}
+
+.categories-page-content .images_container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1vw;
+}
+
+.categories-page-content .images_container .image_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+.categories-page-content .images_container img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+
+
+.categories-page-content.fliers_10x15 .images_container,
+.categories-page-content.fliers_10x20 .images_container,
+.categories-page-content.zapalki .images_container {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.categories-page-content.fliers_10x15 .images_container img {
+    aspect-ratio: 101 / 154;
+}
+
+
+.categories-page-content.fliers_10x20 .images_container img {
+    aspect-ratio: 101 / 204;
+}
+
+.categories-page-content.vizitki .images_container {
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 1119/974;
+}
+
+.categories-page-content.vizitki .images_container img {
+    aspect-ratio: 94 / 54;
+}
+
+
+
+.categories-page-content.vizitki .images_container {
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 1119/974;
+}
+
+.categories-page-content.vizitki .images_container img {
+    aspect-ratio: 94 / 54;
+}
+
+
+.categories-page-content.zapalki .images_container a {
+    aspect-ratio: 122 / 374;
+}
+
+.categories-page-content.zapalki .images_container img {
+    width: calc(100% * 374 / 122);
+    transform-origin: top right;
+    transform: translateX(-100%) rotate(-90deg);
+}
+
+#top-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin-left: auto;
+}
+
+@media screen and (min-width: 800px) {
+    .categories-page-content {
+
+        flex-direction: row;
+    }
+
+    .categories-page-content .upper_container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+}
+@media screen and (max-width: 800px) {
+    a#continue-without-bg-button {
+        padding: 5px 15px 5px 15px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <body>
+    <div
+      class="service"
+      th:fragment="service-card(image_url, title, description,see_more_link,order_link)"
+    >
+      <img th:src="${image_url}" />
+      <span class="title" th:text="${title}"></span>
+      <span class="standart_text" th:insert="${description}"></span>
+      <div class="actions">
+        <a class="see_more secondary" th:href="@{'/' + ${see_more_link}}"
+          >Виж повече</a
+        >
+        <a class="see_more" th:href="@{'/' + ${order_link}}">Поръчай</a>
+      </div>
+    </div>
+  </body>
+</html>

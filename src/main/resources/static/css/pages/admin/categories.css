@@ -1,0 +1,64 @@
+.admin-page .categories {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.admin-page .add-category {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.admin-page .categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0;
+}
+
+.admin-page .categories-list li {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.admin-page .categories-list .main-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-grow: 1;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 1em;
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    color: black;
+    font-family: Montserrat;
+}
+
+.admin-page .category-path,
+.admin-page .categories-settings .title,
+.admin-page .category-path button {
+    font-size: var(--font-size-s);
+    font-family: Montserrat;
+    font-weight: 600;
+}
+
+.admin-page .category-path {
+    color: var(--color-primary);
+}
+
+.admin-page .category-path button {
+    color: var(--color-primary);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    padding: 0;
+}

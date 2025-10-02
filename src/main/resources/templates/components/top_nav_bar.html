@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+  <div class="top_nav" th:fragment="top-nav-bar">
+    <div class="container_up">
+      <div class="content-left">
+        <a href="/">
+          <span class="text">Начало</span>
+        </a>
+        <a href="/контакти">
+          <span class="text">Контакти</span>
+        </a>
+      </div>
+      <a href="/">
+        <img class="image_logo" src="/images/logo.png" alt="сайт за рекламни материали онлайн"
+          title="сайт за рекламни материали онлайн" />
+      </a>
+      <div class="content-right">
+        <a id="top-nav-bar-admin-link" href="/админ" style="display: none;">
+          <img src="/images/admin/admin.svg" />
+        </a>
+        <a id="top-nav-bar-profile-link" href="/профил">
+          <img src="/images/topNav_person_icon.svg" />
+        </a>
+        <a href="/профил/запазени-дизайни">
+          <img src="/images/top_Nav_heart_icon.svg" />
+        </a>
+        <a href="/количка">
+          <img src="/images/topNav_shoping_cart_icon.svg" />
+        </a>
+        <button class="button secondary sliding-menu-button" id="sliding-menu-button">
+          <img src="/images/common/hamburger.svg" alt="hamburger">
+        </button>
+        <div class="backdrop" id="sliding-menu-backdrop">
+          <div class="sliding-menu" id="sliding-menu">
+            <div class="close-btn" id="close-btn">
+              <svg height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2.6 -2.6 31.20 31.20" xml:space="preserve" fill="#ffffff" stroke="#ffffff" stroke-width="1.1179999999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#598a18;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25 C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0 L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467 L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468 c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467 C19.033,16.725,19.033,17.138,18.78,17.394z"></path> </g> </g></svg>
+            </div>
+            <ul class="content">
+              <li><a href="/визитки">За Визитките</a></li>
+              <li><a href="/категории/визитки">Поръчай Визитки</a></li>
+              <li><a href="/работни-календари">За Работните календари</a></li>
+              <li><a href="/модели/работни-календари">Поръчай Работни календари</a></li>
+              <li><a href="/джобни-календарчета">За Джобни календари</a></li>
+              <li><a href="/категории/джобни-календарчета">Поръчай Джобни календарчета</a></li>
+              <li><a href="/флаери">За Флаери</a></li>
+              <li><a href="/категории/флаери">Поръчай Флаери</a></li>
+              <li><a href="/химикалки">За Химикалки</a></li>
+              <li><a href="/модели/химикалки">Поръчай Химикалки</a></li>
+              <li><a href="/запалки">За Запалки</a></li>
+              <li><a href="/модели/запалки">Поръчай Запалки</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="bottom-container">
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Визитки</span>
+          <img class="image" src="/images/down-arrow.svg" />
+        </button>
+
+        <div class="dropdown-content">
+          <a href="/визитки">За Визитките</a>
+          <a href="/категории/визитки">Поръчай Визитки</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Работни календари</span>
+          <img class="image" src="/images/down-arrow.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/работни-календари">За Работните календари</a>
+          <a href="/модели/работни-календари">Поръчай Работни календари</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Джобни календарчета </span><img class="image" src="/images/down-arrow.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/джобни-календарчета">За Джобни календари</a>
+          <a href="/категории/джобни-календарчета">Поръчай Джобни календарчета</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Флаери</span>
+          <img class="image" src="/images/down-arrow.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/флаери">За Флаери</a>
+          <a href="/категории/флаери">Поръчай Флаери</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Химикалки</span>
+          <img class="image" src="/images/down-arrow.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/химикалки">За Химикалки</a>
+          <a href="/модели/химикалки">Поръчай Химикалки</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">
+          <span class="text">Запалки</span>
+          <img class="image" src="/images/down-arrow.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/запалки">За Запалки</a>
+          <a href="/модели/запалки">Поръчай Запалки</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

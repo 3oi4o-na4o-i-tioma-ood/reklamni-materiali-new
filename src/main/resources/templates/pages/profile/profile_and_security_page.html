@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="pages/profile/base_head_content :: head-content"></th:block>
+</head>
+
+<body>
+    <th:block th:replace="pages/profile/base_layout :: layout(~{::#orders-page-content}, 'профил-и-сигурност')">
+
+        <div id="orders-page-content" class="sub-page">
+            <h1 class="title">Профил и сигурност</h1>
+            <hr class="zelen_hr">
+        </div>
+    </th:block>
+</body>
+
+</html>

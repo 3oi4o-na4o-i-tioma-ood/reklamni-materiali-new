@@ -1,0 +1,14 @@
+<div class="text-editing number" th:fragment="number-editing(value)">
+    <p class="text" th:text="${value}"></p>
+
+    <input type="number" class="input">
+    <button class="icon-button save" id="row-save-button">
+        <img src="/images/common/tick.svg" alt="save">
+    </button>
+    <button class="icon-button cancel" id="row-cancel-button">
+        &#215;
+    </button>
+    <button class="icon-button edit" id="row-edit-button">
+        <img src="/images/common/edit_green.svg" alt="edit">
+    </button>
+</div>

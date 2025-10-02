@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div th:fragment="backgrounds" id="editor-backgrounds-tool" class="editor-tool active editor-backgrounds-tool">
+        <h4 class="title">Фонове</h4>
+
+        <div class="tabs" id="background-tool-tabs">
+            <button class="button">Съществуващи фонове</button>
+            <button class="button secondary">Качи собствен фон</button>
+        </div>
+
+        <th:block
+            th:replace="components/popup :: popup('cut-background-popup', 'Изрязване и оразмеряване', ~{::#cut-background-popup-body}, 'cut-image-popup')">
+            <th:block id="cut-background-popup-body">
+                <div class="canvas editor-canvas" id="crop-background-canvas">
+                    <img src="" alt="" id="cropped-image" class="cropped-image">
+                </div>
+
+                <button class="button" id="accept-crop-button">
+                    Запази
+                </button>
+            </th:block>
+        </th:block>
+
+        <div id="choose-bg-container" class="tab-content choose-bg-container">
+            <h6 class="subtitle">Избран фон</h6>
+
+            <img id="bg-tool-current-bg" alt="Current bg">
+
+            <h6 class="subtitle">Всички фонове</h6>
+
+            <div class="bg-options" id="bg-options"></div>
+
+            <div class="pagination" id="backgrounds-pagination"></div>
+        </div>
+
+        <div class="tab-content" id="upload-bg-container">
+            <th:block th:replace="components/image_upload :: image-upload(bg-tool-upload-bg)"></th:block>
+        </div>
+    </div>
+</body>
+
+</html>

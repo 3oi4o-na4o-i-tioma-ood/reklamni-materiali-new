@@ -1,0 +1,202 @@
+.banner {
+  position: relative;
+  height: 450px;
+  max-height: 50vh;
+  overflow: hidden;
+  background-color: var(--color-dark-grey);
+  display: flex;
+}
+
+.banner .hero-image-wrapper {
+  border-radius: 1000px;
+  border: 6px solid var(--color-primary);
+  overflow: hidden;
+  height: 55%;
+  aspect-ratio: 1;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(30%, 21%);
+}
+
+.banner .hero-image-wrapper img {
+  object-fit: cover;
+  height: 90%;
+  left: -30%;
+  position: relative;
+}
+
+.banner .banner-thing-1 {
+  position: absolute;
+  top: 10%;
+  left: 80%;
+  width: 12%;
+}
+
+.banner .banner-thing-2 {
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  width: 12%;
+}
+
+.banner .banner-star {
+  position: absolute;
+  bottom: 30%;
+  left: auto;
+  right: 250px;
+  width: 15px;
+}
+
+.banner .content {
+  z-index: 10;
+  margin-left: 7%;
+  margin-top: 7%;
+  color: white;
+  gap: var(--font-size-s);
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  width: 100%;
+  position: relative;
+  padding: 0;
+}
+
+.banner .content .title {
+  font-family: Montserrat;
+  font-size: var(--font-size-xxxl);
+  font-weight: 700;
+  color: rgba(230, 235, 233, 1);
+  line-height: 1;
+}
+
+.banner .content .online {
+  display: flex;
+}
+
+.banner .content .online > hr {
+  width: 2vw;
+  align-self: flex-end;
+  background-color: rgba(230, 235, 233, 1);
+}
+
+.banner .content .online hr {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.banner .content .online img {
+  width: 58%;
+}
+
+.banner .content .online .text {
+  display: flex;
+  flex-direction: column;
+  font-family: Montserrat;
+  font-size: var(--font-size-l);
+  font-weight: 700;
+  color: rgba(89, 138, 24, 1);
+  line-height: 1;
+}
+
+.banner .content .text_container {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  width: 80%;
+}
+.mobile-banner {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .banner .content .text_container {
+    font-size: var(--font-size-s);
+  }
+  
+}
+@media screen and (max-width: 700px) {
+  /* .banner {
+    display: none;
+  } */
+
+  /* .mobile-banner {
+    display: block;
+    background-image: url('../../../images/banner-reklamni-materiali-mobile\ 1.png');
+  } */
+}
+
+.banner .content a {
+  /* padding: 1vw 1.5vw; */
+  font-size: var(--font-size-xxs);
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+@media screen and (min-width: 800px) {
+  .banner {
+    height: calc(100px + 30vw);
+  }
+
+  .banner .hero-image-wrapper {
+    height: 130%;
+    transform: translate(10%, 31%);
+    border: calc(6px + 0.2vw) solid var(--color-primary);
+  }
+
+  .banner .banner-thing-1 {
+    top: 10%;
+    left: 40%;
+    width: auto;
+    height: 12%;
+  }
+
+  .banner .banner-thing-2 {
+    bottom: 5%;
+    left: 20%;
+    width: auto;
+    height: 12%;
+  }
+
+  .banner .banner-star {
+    bottom: 10%;
+    left: 40%;
+    width: auto;
+    height: 5%;
+  }
+
+  .banner .content {
+    margin: auto 0;
+    margin-left: 7%;
+  }
+
+  .banner .content .text_container {
+    width: calc(55% - 100px);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .banner {
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .title br {
+    display: none;
+  }
+
+  .banner img {
+    width: 100%;
+    object-fit: cover;
+    /* height: 105px */
+  }totop-
+  .banner .hero-image-wrapper{
+    height: 66%;
+  }
+  .banner{
+    max-height: 70vh;
+  }
+}

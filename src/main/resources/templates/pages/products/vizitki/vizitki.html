@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/pages/products/banner.css" />
+  <th:block th:replace="pages/products/product_page_head_content :: head-content"></th:block>
+
+  <title>Визитки - рекламни материали</title>
+</head>
+<body>
+  <th:block th:replace="components/base_layout :: base-layout(~{::#product-page-content})">
+    <div class="product-page-content business_card" id="product-page-content">
+
+      <th:block th:replace="pages/products/new-banner :: banner(~{::#title}, '/images/vizitki/business-banner.png', '/images/vizitki/Businesscards.png')">
+        <th:block id="title">ЗА ВИЗИТКИТЕ</th:block>
+      </th:block>
+
+      <!-- <th:block th:replace="pages/products/banner :: banner(~{::#title}, '/images/vizitki/banner.svg')">
+        <th:block id="title">ЗА ВИЗИТКИТЕ</th:block>
+      </th:block> -->
+
+      <th:block th:replace="pages/products/vizitki/product_info :: product_info"></th:block>
+      <th:block th:replace="pages/products/vizitki/personalize :: personalize"></th:block>
+      <th:block th:replace="pages/products/vizitki/personal_design :: personal_design"></th:block>
+      <th:block th:replace="pages/products/vizitki/table_vizitki :: table_vizitki"></th:block>
+      <th:block th:replace="pages/products/vizitki/delivery :: delivery"></th:block>
+  
+      <th:block th:replace="components/popular_services :: popular-services"></th:block>
+    </div>
+  </th:block>
+</body>
+</html>

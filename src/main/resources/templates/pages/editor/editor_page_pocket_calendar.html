@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <th:block th:replace="/pages/editor/editor_page :: editor-page-base(~{::#editor-page-content-visitki}, ~{::script})">
+        <script src="/js/editor/pocket_calendars.js"></script>
+
+        <div id="editor-page-content-visitki" class="editor">
+            <th:block th:replace="pages/editor/tools :: editor_tools('visitki')"></th:block>
+
+            <th:block th:replace="pages/editor/right_section/right_section :: right-section(true)"></th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

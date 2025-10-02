@@ -1,0 +1,73 @@
+.admin-page .table-scroll-wrapper {
+    overflow: auto;
+}
+
+.admin-page .editable-table {
+    /* max-width:  */
+}
+
+.admin-page .table-wrapper {
+    padding: 1em;
+}
+
+.admin-page .editable-table tr .row-cancel-cell button {
+    font-size: 40px;
+    line-height: 0.5em;
+    color: var(--color-primary);
+}
+
+.admin-page .table-button {
+    border-radius: 0;
+    width: 100%;
+}
+
+.admin-page .editable-table tr.edited .row-edit-cell,
+.admin-page .editable-table tr.edited .row-delete-cell,
+.admin-page .editable-table tr .row-save-cell,
+.admin-page .editable-table tr input,
+.admin-page .editable-table tr .row-cancel-cell {
+    display: none;
+}
+
+.admin-page .editable-table .row-edit-cell,
+.admin-page .editable-table .row-delete-cell,
+.admin-page .editable-table tr.edited .row-save-cell,
+.admin-page .editable-table tr.edited .row-cancel-cell {
+    display: table-cell;
+}
+
+.admin-page .editable-table .row-edit-cell,
+.admin-page .editable-table .row-delete-cell,
+.admin-page .editable-table .row-save-cell,
+.admin-page .editable-table .row-cancel-cell{
+    min-width: auto;
+}
+
+
+.admin-page .editable-table input,
+.admin-page .editable-table tr.edited .editable-cell .cell-content {
+    display: none;
+}
+
+.admin-page .editable-table tr.edited input,
+.admin-page .editable-table .cell-content {
+    display: inline-block;
+}
+
+.admin-page .editable-table input {
+    width: 100%;
+    border-bottom: none;
+    border-right: none;
+}
+
+.admin-page .editable-table td {
+    min-width: 150px;
+}
+
+.admin-page #row-delete-button {
+    border-right: 1px solid var(--color-primary);
+}
+
+.admin-page tr:last-child #row-delete-button {
+    border-bottom-right-radius: 5px;
+}

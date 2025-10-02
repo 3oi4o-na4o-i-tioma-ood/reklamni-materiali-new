@@ -1,0 +1,13 @@
+package com.rm.models.prices;
+
+public enum NoteType {
+    FAST_PRODUCTION,
+    EXPRESS_PRODUCTION,
+
+    LAMINATION,
+    LAMINATION_MAT,
+    LAMINATION_GLOSSY,
+    ROUNDED_CORNERS,
+    EFFECT_CARTON,
+    PARTIAL_VARNISH,
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div th:fragment="image" id="editor-image-tool" class="editor-tool editor-image-tool">
+        <h4 class="title">Картинка</h4>
+
+        <th:block th:replace="components/image_upload :: image-upload(image-tool-upload-image)"></th:block>
+
+        <th:block
+            th:replace="components/popup :: popup('cut-image-popup', 'Изрязване', ~{::#cut-image-popup-body}, 'cut-image-popup')">
+            <th:block id="cut-image-popup-body">
+                <div class="canvas editor-canvas" id="crop-canvas">
+                    <img src="" alt="" id="cropped-image" class="cropped-image">
+                </div>
+
+                <button class="button" id="accept-crop-button">
+                    Запази
+                </button>
+            </th:block>
+        </th:block>
+
+        <!-- <div class="image-actions" id="image-actions">
+            <button class="icon-button" id="open-image-cut-popup">
+                <img src="/images/editor/tools/cut_green.svg" alt="cut">
+            </button>
+
+            <div class="message">Изберете картинка за редактиране</div>
+        </div> -->
+
+        <ul id="image-tool-images-list" class="images-list">
+
+        </ul>
+    </div>
+</body>
+
+</html>

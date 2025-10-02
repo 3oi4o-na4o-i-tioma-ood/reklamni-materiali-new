@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="components/base_head_content :: head-content"></th:block>
+    <title>Поръчка - рекламни материали</title>
+
+    <link rel="stylesheet" href="/css/pages/order_complete.css">
+
+    <script src="/js/components/order_code.js"></script>
+    <script src="/js/order_complete.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="components/base_layout :: base-layout(~{::#order-complete-page-content})">
+        <div id="order-complete-page-content" class="page-content">
+            <img src="/images/checkout/order-complete.svg" alt="order-complete">
+            <h1 class="header">Благодарим Ви за поръчката!</h1>
+            <p class="thanks-message">Вие успешно направихте своята поръчка! Вашият избор ни вдъхновява да продължаваме да предлагаме
+                иновативни и ефективни решения за Вас и Вашия бизнес.</p>
+            <div class="details-container">
+                <h4 class="title">Детайли на поръчката</h4>
+
+                <div class="details">
+
+                    <div class="row">
+                        Номер на поръчката
+                        <span id="order-number"></span>
+                    </div>
+                    <!-- <hr>
+                    <div class="row">
+                        Доставка
+                        <span id="delivery-type"></span>
+                    </div> -->
+                    <hr>
+                    <div class="row">
+                        Начин на плащане
+                        <span id="payment-method"></span>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <strong>Общо</strong>
+                        <strong id="total"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="header">
+                Всичките данни за поръчката са изпратени на Вашия имейл
+            </h3>
+        </div>
+    </th:block>
+</body>
+
+</html>

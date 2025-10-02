@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2>Нова поръчка</h2>
+        <h2 th:text="${orderDetails.userDetails.name} + ' ' + ${orderDetails.userDetails.surname}"></h2>
+        <span>Поръчка # <strong th:text="${orderNumber}"></strong></span>
+        <!-- <div th:text="${cart}"></div> -->
+        <!-- <div th:text="${orderDetails}"></div> -->
+
+        <h2>Информация за поръчката</h2>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>Доставка</td>
+                    <td th:if="${#strings.equals(orderDetails.userDetails.deliveryType, 'address')}">До адрес</td>
+                    <td th:if="${#strings.equals(orderDetails.userDetails.deliveryType, 'office')}">До офис на еконт
+                    </td>
+                </tr>
+                <tr>
+                    <td>Адрес на доставка</td>
+                    <td th:if="${#strings.equals(orderDetails.userDetails.deliveryType, 'address')}"
+                        th:text="${orderDetails.userDetails.address}"></td>
+                    <td th:if="${#strings.equals(orderDetails.userDetails.deliveryType, 'office')}"
+                        th:text="${orderDetails.userDetails.econtAddress}"></td>
+                </tr>
+                <tr>
+                    <td>Начин на плащане</td>
+                    <td th:if="${#strings.equals(orderDetails.paymentMethod, 'ON_DELIVERY')}">На куриер при получаване
+                    </td>
+                    <td th:if="${#strings.equals(orderDetails.paymentMethod, 'BANK_TRANSFER')}">Банков превод</td>
+                </tr>
+                <!-- <tr>
+                    <td>Допълнителни уточнения</td>
+                    <td></td>
+                </tr> -->
+            </tbody>
+        </table>
+
+        <th:block th:if="${invoiceDetails} != null">
+            <h2>Данни за фактура</h2>
+
+            <table>
+                <tbody>
+                    <!-- <tr>
+                        <td>Доставка</td>
+                        <td th:if="${orderDetails.userDetails.deliveryType} == 'address'">До адрес</td>
+                        <td th:if="${orderDetails.userDetails.deliveryType} == 'office'">До офис на еконт</td>
+                    </tr>
+                    <th>
+                        <td>Адрес на доставка</td>
+                        <td th:if="${orderDetails.userDetails.deliveryType} == 'address'" th:text="${orderDetails.userDetails.address}"></td>
+                        <td th:if="${orderDetails.userDetails.deliveryType} == 'office'" th:text="${orderDetails.userDetails.econtAddress}"></td>
+                    </th>
+                    <tr>
+                        <td>Начин на плащане</td>
+                        <td th:if="${orderDetails.paymentMethod} == 'ON_DELIVERY'">На куриер при получаване</td>
+                        <td th:if="${orderDetails.paymentMethod} == 'BANK_TRANSFER'">Банков превод</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </th:block>
+
+        <h2>Цена</h2>
+        <span th:text="${cartPrice}"></span>
+
+        <h2>Поръчани продукти</h2>
+
+        <div th:each="cartItem, index : ${cart.items}">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Продукт</td>
+                        <th:block th:switch="${cartItem.design.productType}">
+                            <td th:case="${T(com.rm.models.prices.ProductType).BUSINESS_CARD}">Визитки</td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).WORK_CALENDAR}">Работни календари</td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).POCKET_CALENDAR}">Джобни календарчета
+                            </td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).FLIER_10x15}">Флаери-10x15</td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).FLIER_10x20}">Флаери-10x20</td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).PEN}">Химикалки</td>
+                            <td th:case="${T(com.rm.models.prices.ProductType).LIGHTER}">Запалки</td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td>Брой</td>
+                        <td th:text="${cartItem.amount}"></td>
+                    </tr>
+                    <tr>
+                        <th:block th:switch="${cartItem.design.printType}">
+                            <td th:case="${T(com.rm.models.prices.PrintType).BLACK_NO_BACK}">   Цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).BLACK_BLACK}">     Цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_NO_BACK}"> Цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_BLACK}">   Цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_COLORED}"> Цвят</td>
+
+                            <td th:case="${T(com.rm.models.prices.PrintType).SMALL}"> Размер календар </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).MEDIUM}"> Размер календар </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).NORMAL}"> Размер календар </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).BIG}"> Размер календар </td>
+
+
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_ONE_COLOR}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_TWO_COLORS}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_THREE_COLORS}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_ONE_COLOR}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_TWO_COLORS}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_THREE_COLORS}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).FULL_COLOR}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_ONE_COLOR}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_TWO_COLORS}"> Тип печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_THREE_COLORS}"> Тип печат </td>
+
+                            <td th:case="*"> --- </td>
+                        </th:block>
+
+                        <th:block th:switch="${cartItem.design.printType}">
+                            <td th:case="${T(com.rm.models.prices.PrintType).BLACK_NO_BACK}">Черно-бял</td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).BLACK_BLACK}">Черно-бял / черно-бял</td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_NO_BACK}">Пълноцветен</td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_BLACK}">Пълноцветен / черно-бял
+                            </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).COLORED_COLORED}">Пълноцветен / пълноцветен
+                            </td>
+
+                            <td th:case="${T(com.rm.models.prices.PrintType).SMALL}"> Малък </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).MEDIUM}"> Среден </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).NORMAL}"> Нормален </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).BIG}"> Голям </td>
+
+
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_ONE_COLOR}"> Сито печат 1 цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_TWO_COLORS}"> Сито печат 2 цвята </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).SCREEN_THREE_COLORS}"> Сито печат 3 цвята </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_ONE_COLOR}"> Тампонен печат 1 цвят </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_TWO_COLORS}"> Тампонен печат 2 цвята </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).PAD_THREE_COLORS}"> Тампонен печат 3 цвята </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).FULL_COLOR}"> Пълноцветен дигитален печат </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_ONE_COLOR}">    ? </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_TWO_COLORS}">   ? </td>
+                            <td th:case="${T(com.rm.models.prices.PrintType).CLICHE_THREE_COLORS}"> ? </td>
+
+                            <td th:case="*"> --- </td>
+                        </th:block>
+
+                    </tr>
+                    <tr>
+                        <td>Картон</td>
+                        <td th:text="${cartItem.design.effects['EFFECT_CARTON']}"></td>
+                    </tr>
+                    <tr>
+                        <td>Време на изработка</td>
+                        <th:block th:switch="${cartItem.productionTime}">
+                            <td th:case="${T(com.rm.models.carts.ProductionTime).NORMAL}">Нормално</td>
+                            <td th:case="${T(com.rm.models.carts.ProductionTime).FAST}">Бързо</td>
+                            <td th:case="${T(com.rm.models.carts.ProductionTime).EXPRESS}">Експресно</td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td>Ламиниране</td>
+                        <th:block th:switch="${cartItem.design.effects['LAMINATION']}">
+                            <td th:case="1">Да</td>
+                            <td th:case="*">Не</td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td>Заоблени ъгли</td>
+                        <th:block th:switch="${cartItem.design.effects['ROUNDED_CORNERS']}">
+                            <td th:case="1">Да</td>
+                            <td th:case="*">Не</td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a th:href="${websiteUrl} + '/api/pdf?designId=' + ${cartItem.design.id} + '&front=true&productType=' + ${cartItem.design.productType}">
+                                PDF лице
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${cartItem.design.back != null}">
+                        <td colspan="2">
+                            <a th:href="${websiteUrl} + '/api/pdf?designId=' + ${cartItem.design.id} + '&front=false&productType=' + ${cartItem.design.productType}">
+                                PDF гръб
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a th:href="${websiteUrl} + '/api/editor/preview?name=' + ${cartItem.design.id} + '&side=front'">
+                                Преглед лице
+                            </a>
+                        </td>
+                    </tr>                    
+                    <tr th:if="${cartItem.design.back != null}">
+                        <td colspan="2">
+                            <a th:href="${websiteUrl} + '/api/editor/preview?name=' + ${cartItem.design.id} + '&side=back'">
+                                Преглед гръб
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+        </div>
+    </div>
+</body>
+
+</html>

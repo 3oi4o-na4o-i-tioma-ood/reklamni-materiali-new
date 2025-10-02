@@ -1,0 +1,124 @@
+.footer {
+  background-color: var(--color-dark-grey);
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  align-items: center;
+  padding: 5vw 6vw 2vw;
+}
+
+.footer .sitemap {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footer .sitemap .column {
+  display: flex;
+}
+
+.footer .sitemap .column.first {
+  flex-direction: column;
+  margin-top: 1vw;
+}
+
+.footer .sitemap .column.first .text {
+  color: rgba(255, 255, 255, 1);
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 1.25em;
+  font-weight: 500;
+}
+
+.footer .sitemap .column.first .image {
+  width: 250px;
+}
+
+.footer .sitemap .column .list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(1px + 0.8vw);
+}
+
+.footer .sitemap .column .list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.footer .sitemap .column  {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer .sitemap .column .title_text {
+  color: rgba(255, 255, 255, 1);
+  font-family: Montserrat;
+  font-size: 20px;
+  margin-block: 0;
+  padding-bottom: 5px;
+  font-weight: 600;
+
+  border-bottom: calc(0.1vw + 1px) solid var(--color-hr);
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.footer .sitemap .column .text {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 1);
+}
+
+.footer .copyright {
+  display: flex;
+  justify-content: center;
+  font-family: 'Poppins';
+  font-size: var(--font-size-xxs);
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.footer > hr {
+  border: none;
+  width: 100%;
+  background-color: rgba(253, 252, 255, 0.48);
+  height: 2.5px;
+  margin-block: 0;
+}
+
+@media screen and (min-width: 800px) {
+  .footer .sitemap {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    column-gap: 3vw;
+}
+
+  .footer .sitemap .column.first .text {
+    font-size: var(--font-size-xs);
+  }
+  
+  .footer .sitemap .column .title_text {
+    font-size: var(--font-size-s);
+  }
+
+  .footer .sitemap .column .text {
+    font-size: var(--font-size-xs);
+  }
+
+  .footer .sitemap .column.first .image {
+    width: 18vw;
+  }
+}
+
+.footer .footer_images {
+  width: 2vw;
+  min-width: 25px;
+}

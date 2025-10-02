@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <th:block th:replace="pages/admin/admin_head_content :: head-content"></th:block>
+    <title>Админ - рекламни материали</title>
+
+    <link rel="stylesheet" href="/css/pages/admin/dashboard.css">
+</head>
+
+<body>
+    <th:block th:replace="pages/admin/admin_layout :: admin-layout(~{::#admin-page-content}, 'Админ')">
+        <div id="admin-page-content" class="dashboard-page-content">
+            <div class="cards">
+                <a class="card" href="/админ/визитки">
+                    <img src="/images/product_icons/business_card.svg" alt="Визитки">
+                    Визитки
+                </a>
+                <a class="card" href="/админ/работни-календари">
+                    <img src="/images/product_icons/work_calendar.svg" alt="Работни календари">
+                    Работни календари
+                </a>
+                <a class="card" href="/админ/джобни-календарчета">
+                    <img src="/images/product_icons/pocket_calendar.svg" alt="Джобни календарчета">
+                    Джобни календарчета
+                </a>
+                <a class="card" href="/админ/флаери">
+                    <img src="/images/product_icons/flyer.svg" alt="Флаери">
+                    Флаери
+                </a>
+                <a class="card" href="/админ/химикалки">
+                    <img src="/images/product_icons/pen.svg" alt="Химикалки">
+                    Химикалки
+                </a>
+                <a class="card" href="/админ/запалки">
+                    <img src="/images/product_icons/lighter.svg" alt="Запалки">
+                    Запалки
+                </a>
+            </div>
+        </div>
+    </th:block>
+</body>
+
+</html>

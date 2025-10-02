@@ -1,0 +1,33 @@
+<th:block th:replace="components/base_layout :: base-layout(~{::#profile-page-content})" th:fragment="layout(profilePageInnerContent, page)">
+
+    <div id="profile-page-content">
+        <h1>Моят профил</h1>
+
+        <div class="layout">
+            <div class="side-menu">
+                <div class="header">
+                    <div id="menu-user-icon"></div>
+                    <span id="menu-username"></span>
+                </div>
+                <hr class="zelen_hr" style="margin: 0">
+                <ul>
+                    <li th:classappend="${#strings.equals(page, 'поръчки')} ? 'selected' : ''"><a
+                            href="/профил/поръчки">Моите поръчки</a></li>
+                    <li th:classappend="${#strings.equals(page, 'данни-за-доставка')} ? 'selected' : ''"><a
+                            href="/профил/данни-за-доставка">Данни за доставката</a></li>
+                    <li th:classappend="${#strings.equals(page, 'запазени-дизайни')} ? 'selected' : ''"><a
+                            href="/профил/запазени-дизайни">Запазени дизайни</a></li>
+                    <!-- <li th:classappend="${#strings.equals(page, 'профил-и-сигурност')} ? 'selected' : ''"><a
+                                href="/профил/профил-и-сигурност">Профил и сигурност</a></li> -->
+                    <li><button id="exit-button" class="button">Изход</button></li>
+                </ul>
+            </div>
+
+            <th:block th:replace="${profilePageInnerContent}"></th:block>
+
+            <div class="snackbar bottom middle" id="profile-page-snackbar">
+
+            </div>
+        </div>
+    </div>
+</th:block>

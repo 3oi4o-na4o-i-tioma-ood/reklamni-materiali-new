@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <th:block
+        th:replace="pages/categories/base_page :: categories-base-page(~{::title}, ~{::link}, ~{::script}, 'work-calendars', 'Работни календари', ~{::#menu}, ~{::#top-actions})">
+        <title>Работни календари - категории</title>
+
+        <link rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/js/categories/work_calendar.js"></script>
+
+        <th:block id="menu" th:replace="pages/categories/menu_categories :: menu_categories"></th:block>
+
+        <div id="top-actions">
+            <a class="button" href="" id="continue-without-bg-button">Собствен фон</a>
+        </div>
+    </th:block>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<th:block th:fragment="services">
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/business_card.svg', 'Визитки', ~{::#visitki-description},'визитки','категории/визитки')">
+    <th:block id="visitki-description">Създайте уникални визитки с нашия онлайн редактор, за да проектирате визитка, която напълно отразява вашето послание.
+    </th:block>
+  </div>
+
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/flyer.svg', 'Флаери', ~{::#flaeri-description},'флаери','категории/флаери')">
+    <div id="flaeri-description">Създайте персонализирани работни календари с нашия онлайн редактор. Изберете от готовите шаблони или добавете собствени идеи.
+    </div>
+  </div>
+
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/work_calendar.svg', 'Работни Календари', ~{::#rabotni-kalendari-description},'работни-календари','модели/работни-календари')">
+    <div id="rabotni-kalendari-description">Създайте персонализирани джобни календари с нашия онлайн редактор, който да не е само полезен, но и уникален.
+    </div>
+  </div>
+
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/pen.svg', 'Химикалки', ~{::#himikalki-description},'химикалки','категории-химикалки')">
+    <div id="himikalki-description">Създайте впечатляващи флаери с нашия онлайн редактор, за да направите флаера перфектен за вашето събитие или промоция.
+    </div>
+  </div>
+
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/pocket_calendar.svg', 'Джобни Календари', ~{::#dzobni-kalendari-description},'джобни-календарчета','категории/джобни-календарчета')">
+    <div id="dzobni-kalendari-description">Персонализирайте химикалки с нашия онлайн редактор, за да създадете уникални и практични рекламни средства.
+    </div>
+  </div>
+
+  <div th:replace="pages/home/service_card :: service-card('images/product_icons/lighter.svg', 'Запалки', ~{::#zapalki-description},'запалки','категории/запалки')">
+    <div id="zapalki-description">Персонализирайте запалки с нашия онлайн редактор, за да създадете уникални и практични рекламни средства.
+    </div>
+  </div>
+</th:block>
+
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+  <div class="our-services" id="our-services" th:fragment="our-services">
+    <div class="title">
+      <span class="text">Нашите Услуги</span>
+      <hr class="zelen_hr" style="--custom-width:40%">
+
+      <div class="our-services_text">Услугите, които предлагаме са подходящи както за бизнеса Ви, така и за лични нужди.
+      </div>
+    </div>
+
+    <th:block th:replace="components/carousel :: carousel('services-carousel', ~{::#services-carousel-items})">
+      <th:block id="services-carousel-items" th:insert=":: services">
+
+      </th:block>
+    </th:block>
+
+    <div class="services-grid" th:insert=":: services">
+    </div>
+
+  </div>
+</body>
+
+</html>

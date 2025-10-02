@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <th:block th:replace="pages/editor/base_head_content :: head-content"></th:block>
+    <script src="/js/editor/visitki.js"></script>
+    <title>Визитки - редактор</title>
+</head>
+<body>
+    <th:block th:replace="/pages/editor/base_layout :: layout(~{::#editor-page-content-visitki})">
+
+        <div id="editor-page-content-visitki" class="editor">
+            <th:block th:replace="pages/editor/tools :: editor_tools('visitki')"></th:block>
+
+            <th:block th:replace="pages/editor/right_section/right_section :: right-section(true)"></th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <th:block th:replace="pages/profile/base_head_content :: head-content"></th:block>
+
+    <script src="/js/profile/user_data.js"></script>
+</head>
+<body>
+    <th:block th:replace="pages/profile/base_layout :: layout(~{::#delivery-page-content}, 'данни-за-доставка')">
+
+        <div id="delivery-page-content" class="sub-page">
+            <h1 class="title">Данни за доставка</h1>
+            <hr class="zelen_hr">
+
+            <form id="delivery-form" class="form-section">
+                <div>
+                    <label for="form-name">Име</label>
+                    <input id="form-name" name="name" type="text" class="input" placeholder="Име" required>
+                </div>
+
+                <div>
+                    <label for="form-surname">Фамилия</label>
+                    <input id="form-surname" name="surname" type="text" class="input" placeholder="Фамилия" required>
+                </div>
+
+                <div>
+                    <label for="form-email">Email</label>
+                    <input readonly id="form-email" name="email" type="text" class="input" placeholder="Email" required>
+                </div>
+
+                <div>
+                    <label for="form-phone">Телефон</label>
+                    <!-- <input id="form-phone" name="phone" type="text" class="input" placeholder="Телефон" required> -->
+                    <input 
+                        id="form-phone" 
+                        name="phone" 
+                        type="text" 
+                        class="input" 
+                        placeholder="Телефон (e.g., (123) 456-7890)" 
+                        required 
+                        title="Please enter a valid phone number"
+                    >
+                    <span id="phone-error" style="color: red; display: none;">Invalid phone number format</span>
+                </div>
+
+                <div class="full-width form-section" style="padding: 0">
+                    <h4 class="full-width">Адрес за доставка</h4>
+
+                    <div>
+                        <label for="form-address-city">Град</label>
+                        <input id="form-address-city" name="addressCity" type="text" class="input" placeholder="Град" required>
+                    </div>
+
+                    <div>
+                        <label for="form-address-street">Улица</label>
+                        <input id="form-address-street" name="addressStreet" type="text" class="input"
+                            placeholder="Улица" required>
+                    </div>
+
+                    <div>
+                        <label for="form-address-number">Номер</label>
+                        <input id="form-address-number" name="addressNumber" type="text" class="input"
+                            placeholder="Номер" required>
+                    </div>
+
+                    <div>
+                        <label for="form-address-entrance">Вход</label>
+                        <input id="form-address-entrance" name="addressEntrance" type="text" class="input"
+                            placeholder="Вход" required>
+                    </div>
+
+                    <div>
+                        <label for="form-address-apartment">Апартамент</label>
+                        <input id="form-address-apartment" name="addressApartment" type="text" class="input"
+                            placeholder="Апартамент" required>
+                    </div>
+                </div>
+                <div></div>
+                <div>
+                    <button type="submit" class="button submit-btn" id="submit-btn">
+                        <span id="button_text">Запази</span>
+                        <div id="loader" style="display: none;" class="loader"></div>
+                    </button>
+                </div>
+            </form>
+            <div class="snackbar bottom middle warning" id="save-profie-snackbar"></div>
+        </div>
+    </th:block>
+</body>
+
+
+<script>
+document.getElementById("form-phone").addEventListener("input", function () {
+    const phoneInput = this;
+    const phoneValue = phoneInput.value;
+
+    // Define the phone number regex
+    const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+
+    // Get the error message span
+    const errorMessage = document.getElementById("phone-error");
+
+    if (phoneRegex.test(phoneValue)) {
+        // Valid phone number
+        phoneInput.style.borderColor = "green";
+        errorMessage.style.display = "none";
+
+        document.getElementById("submit-btn").classList.remove("disabled");
+    } else {
+        // Invalid phone number
+        phoneInput.style.borderColor = "red";
+        errorMessage.style.display = "block";
+        document.getElementById("submit-btn").classList.add("disabled");
+    }
+});
+
+
+</script>
+</html>

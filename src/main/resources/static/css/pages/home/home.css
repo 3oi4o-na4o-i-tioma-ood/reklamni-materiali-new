@@ -1,0 +1,7 @@
+.home-page>* {
+    padding: 2vw 5vw;
+}
+
+.home-page>*:nth-child(2n + 3) {
+    background-color: var(--color-bg-secondary);
+}

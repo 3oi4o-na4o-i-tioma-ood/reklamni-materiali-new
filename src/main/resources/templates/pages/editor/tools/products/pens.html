@@ -1,0 +1,22 @@
+<div th:fragment="tools" class="tools" id="tools-parent">
+    <div class="tools-menu" id="editor-tools-menu">
+        <!-- <button id="editor-pens-tool-button" class="active">
+            <img src="/images/editor/tools/pen.svg" alt="Химикалки">
+            Химикалки
+        </button> -->
+        <button id="editor-text-tool-button" class="active">
+            <img src="/images/editor/tools/text.svg" alt="текст">
+            Текст
+        </button>
+        <button id="editor-image-tool-button">
+            <img src="/images/editor/tools/images.svg" alt="картинка">
+            Картинка
+        </button>
+    </div>
+
+    <!-- <th:block th:replace="pages/editor/tools/pens :: pens"></th:block> -->
+
+    <th:block th:replace="pages/editor/tools/image :: image"></th:block>
+
+    <th:block th:replace="pages/editor/tools/text :: text(is_active = true)"></th:block>
+</div>

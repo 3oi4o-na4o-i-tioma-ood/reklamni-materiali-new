@@ -1,0 +1,78 @@
+.editor-page-content  .editor-card-side-select {
+    background-color: var(--color-bg-light-green);
+    border-radius: 0.5em;
+    display: flex;
+}
+
+.editor-page-content  .editor-card-side-select button {
+    border-radius: 0.5em;
+    color: black;
+    background-color: transparent;
+    border: none;
+    padding: 1em 2em;
+}
+
+.editor-page-content .editor-card-side-select button.active {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.editor-page-content .save-design-button {
+    width: 3.5em;
+    height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 0.5em;
+    background-color: transparent;
+    margin-left: auto;
+    cursor: pointer;
+}
+.editor-page-content .save-design-button.active {
+    background-color: var(--color-primary);
+}
+
+.editor-page-content .save-design-button img {
+    width: 1.75em;
+}
+
+#save-design-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+
+#save-design-form #button-save {
+    margin-left: auto;
+}
+
+.editor-page-content .editor-actions-top {
+    display: flex;
+    gap: 1em;
+}
+
+button#remove-background {
+    border: 2px solid green;
+    border-radius: 8px;
+    background: white;
+    width: 200px;
+    height: 45px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+button#remove-background svg {
+    width: 25px;
+    height: 25px;
+    stroke: red;
+}
+
+@media screen and (max-width:767px) {
+    .editor-page-content .editor-actions-top{
+        flex-wrap: wrap;
+    }
+}

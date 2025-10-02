@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+  <div class="popular_services" th:fragment="popular-services">
+    <div class="title">
+      <span class="text">Подобни услуги</span>
+      <hr class="zelen_hr" style="--custom-width: 17%" />
+    </div>
+    <th:block th:replace="components/carousel :: carousel('popular-services', ~{::#popular-services-items})">
+      <th:block id="popular-services-items">
+
+        <div class="container">
+          <img class="carousel-image" src="/images/vizitki/vizitki_second.svg" alt="Визитки" />
+          <a class="text" href="./визитки">Визитки</a>
+        </div>
+        <div class="container">
+          <img class="carousel-image" src="/images/rabotni_kalendari/rabotni_kalendari_second.svg"
+            alt="Работни календари" />
+          <a class="text" href="./работни-календари">Работни Календари</a>
+        </div>
+        <div class="container">
+          <img class="carousel-image" src="/images/dzobni_kalendari/first_dzobni_no_year.jpg" alt="Джобни календари" />
+          <a class="text" href="./джобни-календарчета">Джобни Календари</a>
+        </div>
+        <div class="container">
+          <img class="carousel-image" src="/images/flaeri/how_to_make.svg" alt="Флаери" />
+          <a class="text" href="./флаери">Флаери</a>
+        </div>
+        <div class="container">
+          <img class="carousel-image" src="/images/himikalki/how_to_make.svg" alt="Работни календари" />
+          <a class="text" href="./химикалки">Химикалки</a>
+        </div>
+        <div class="container">
+          <img class="carousel-image" src="/images/zapalki/how_to_make.svg" alt="Джобни календари" />
+          <a class="text" href="./запалки">Запалки</a>
+        </div>
+      </th:block>
+    </th:block>
+  </div>
+</body>
+
+</html>

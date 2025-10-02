@@ -1,0 +1,37 @@
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 0.5em;
+
+    box-sizing: border-box;
+    border: 2px dashed #aaa;
+    border-radius: 5px;
+    min-height: 300px;
+
+    position: relative;
+}
+
+.upload-image-container.dragover {
+    background-color: #aaa;
+}
+
+
+.upload-image-container input {
+    /* display: none; */
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+}
+
+.upload-image-container img {
+    width: 50px;
+}
+
+div#image-upload {
+    position: relative;
+}

@@ -1,0 +1,229 @@
+.editor-page-content .tools {
+  width: 100%;
+  position: absolute;
+  bottom: 100px;
+  z-index: var(--z-index-content);
+  border-radius: 5px;
+}
+
+.editor-page-content .tools-menu {
+  display: inline-flex;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.editor-page-content .tools-menu button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+  height: 60px;
+  padding: 5px;
+  box-sizing: content-box;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: var(--font-size-xxs);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.editor-page-content .tools-menu button.active {
+  background-color: var(--color-bg-light-green);
+  color: black;
+}
+
+.editor-page-content .tools-menu button.active img {
+  filter: invert(1);
+}
+
+.editor-page-content .tools-menu img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  overflow: visible;
+  margin: auto;
+}
+
+.editor-page-content .editor-tool {
+  display: none;
+  flex-grow: 1;
+  box-sizing: border-box;
+
+  /* On screens under 800px */
+  position: absolute;
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+  bottom: 100%;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid var(--color-primary);
+  z-index: var(--z-index-content);
+  padding: 0.5em;
+}
+
+.editor-page-content .editor-tool.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.templates-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1em;
+  min-width: 300px;
+}
+
+.templates-container .template-button img {
+  width: 100%;
+}
+
+.editor-page-content .editor-tool .title {
+  margin: 0;
+  margin-bottom: 1em;
+  padding-bottom: 0.25em;
+  width: max-content;
+  border-bottom: 3px solid var(--color-primary);
+
+  font-size: var(--font-size-m);
+  font-weight: 500;
+}
+
+@media screen and (min-width: 800px) {
+  .editor-page-content .tools {
+    width: 40%;
+    padding: 2vw 1vw;
+    display: flex;
+    gap: 1vw;
+    background-color: var(--color-bg-secondary);
+    position: static;
+  }
+
+  .editor-page-content .tools-menu {
+    flex-direction: column;
+  }
+
+  .editor-page-content .tools-menu button:last-child {
+    padding-bottom: 10px;
+  }
+
+  .editor-page-content .editor-tool {
+    position: static;
+    width: 0;
+
+    /* Overwrite inline styling */
+    height: auto !important;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tools.active:before {
+    inset: 0;
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 10%;
+    height: 3px;
+    background-color: #598a18;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1000;
+    border-radius: 100px;
+    animation-name: slideUp;
+    animation-duration: 1.2s;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .editor-page-content .editor-tool.active {
+    margin-top: -40px;
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: 40px !important;
+    padding-bottom: 30px;
+  }
+
+  .editor-page-content .editor-tool.slideDown{
+    display: block;
+  }
+
+  .editor-page-content .tools-menu {
+    margin-top: -180px !important;
+    z-index: 1000;
+    position: relative;
+  }
+
+  .editor-page-content .tools {
+    width: 100%;
+    position: initial;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0px;
+    /* margin-top: -40px; */
+  }
+
+  .editor-actions-bottom {
+    margin-top: 0px !important;
+    margin-bottom: 15px;
+  }
+
+  .editor-page-content .tools-menu {
+    display: flex;
+    margin: auto;
+    width: 100%;
+  }
+
+  .editor-page-content .editor-tool {
+    display: none;
+    margin-top: -40px;
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .editor-page-content .tools-menu button {
+    flex-grow: 1;
+    height: 60px;
+    width: auto;
+  }
+}
+
+.slideUp {
+  animation: slideUp 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.slideDown {
+  animation: slideDown 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    top: 40px;
+    opacity: 1;
+  }
+  100% {
+    top: 90px;
+    opacity: 0;
+  }
+}

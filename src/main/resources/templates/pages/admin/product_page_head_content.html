@@ -1,0 +1,14 @@
+<th:block th:fragment="head-content">
+    <th:block th:replace="pages/admin/admin_head_content :: head-content"></th:block>
+    <!-- <title th:text="${titleText}">Визитки - админ</title> -->
+
+    <link rel="stylesheet" href="/css/pages/admin/editable_table.css">
+    <link rel="stylesheet" href="/css/pages/admin/text_editing.css">
+    <link rel="stylesheet" href="/css/pages/admin/product.css">
+    <link rel="stylesheet" href="/css/pages/admin/categories.css">
+    <link rel="stylesheet" href="/css/pages/reusable/products/table.css">
+
+    <script src="/js/admin/categories.js"></script>
+    <script src="/js/admin/product_page.js"></script>
+    <script src="/js/table.js"></script>
+</th:block>

@@ -1,0 +1,51 @@
+.popup {
+    display: none;
+    background-color: #0008;
+
+    position: fixed;
+    z-index: var(--z-index-popup);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.popup.visible {
+    display: flex;
+}
+
+.popup .content {
+    margin: auto;
+    width: 500px;
+    max-width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.popup .header {
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.popup .header .close-button {
+    padding: 0;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 1.5em;
+    margin: auto;
+    margin-right: 0;
+}
+
+.popup .popup-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    align-items: flex-start;
+}

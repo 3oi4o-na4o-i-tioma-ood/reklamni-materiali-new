@@ -1,0 +1,76 @@
+.how_to_make {
+  margin: auto 6vw;
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+}
+.how_to_make .first_row {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+.how_to_make .first_row .title {
+  font-family: Montserrat;
+  font-size: var(--font-size-l);
+  font-weight: 700;
+  color: rgba(89, 138, 24, 1);
+}
+.how_to_make .second_row img {
+  width: 40vw;
+}
+.how_to_make .first_row .text {
+  font-family: Montserrat;
+  font-size: var(--font-size-xxs);
+  font-weight: 500;
+}
+.how_to_make .first_row .step {
+  display: flex;
+  flex-direction: row;
+}
+.how_to_make .first_row .inner_step {
+  display: flex;
+  justify-content: flex-start;
+}
+.how_to_make .first_row .step .text_container {
+  margin-left: 1vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+.how_to_make .section1 img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.how_to_make .step .text_container .text_chose_pr {
+  color: rgba(89, 138, 24, 1);
+  font-family: Montserrat;
+  font-size: var(--font-size-s);
+  font-weight: 700;
+  display: block;
+}
+.how_to_make .step .text_container .text_chose_design {
+  font-family: Montserrat;
+  font-size: var(--font-size-s);
+  font-weight: 700;
+  color: rgba(50, 50, 50, 1);
+  display: block;
+}
+.how_to_make .step .text_napravi_design .text_container .text {
+  font-family: Montserrat;
+  font-size: var(--font-size-xxs);
+  font-weight: 400;
+}
+.how_to_make .first_row .button_container button {
+  width: 11vw;
+  height: 2.6vw;
+  font-family: Montserrat;
+  font-size: var(--font-size-xxs);
+  text-align: center;
+  font-weight: 500;
+  color: white;
+  background-color: rgba(89, 138, 24, 1);
+  border-radius: 8%;
+  border: none;
+  cursor: pointer;
+}

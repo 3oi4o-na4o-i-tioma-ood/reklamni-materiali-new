@@ -1,0 +1,2 @@
+name=Други
+priority=0

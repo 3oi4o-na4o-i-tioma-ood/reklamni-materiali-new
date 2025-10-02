@@ -1,0 +1,80 @@
+.home-page .create-design {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-design>.title {
+    margin: 2vw auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    align-items: center;
+    text-align: center;
+}
+
+.create-design>.title .text {
+    font-size: var(--font-size-xl);
+    color: rgba(89, 138, 24, 1);
+    font-family: Montserrat;
+    font-weight: 600;
+}
+
+.create-design>.title .description {
+    font-family: 'Popins';
+}
+
+
+.create-design .central_container {
+    margin: auto 6vw;
+    display: grid;
+    gap: 1.5vw;
+    grid-template-columns: 1fr 1fr;
+}
+
+.create-design .central_container .text_napravi_design {
+    margin: auto;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    row-gap: 1vw;
+}
+
+.home-page .create-design .step {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* .create-design .central_container .text_napravi_design .text_container {
+  margin: auto 10px;
+} */
+.home-page .create-design .central_container .text_container {
+    margin-left: 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.create-design .central_container .text_napravi_design .text_container .text_chose_pr {
+    color: rgba(89, 138, 24, 1);
+    font-family: Montserrat;
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    display: block;
+}
+
+.create-design .central_container .text_napravi_design .text_container .text_chose_design {
+    font-family: Montserrat;
+    font-size: var(--font-size-s);
+    font-weight: 700;
+    color: rgba(50, 50, 50, 1);
+    display: block;
+}
+
+.home-page .create-design .step .title {}
+
+.create-design .central_container .text_napravi_design .text_container .text {
+    font-family: Montserrat;
+    font-size: var(--font-size-xxs);
+    font-weight: 400;
+}

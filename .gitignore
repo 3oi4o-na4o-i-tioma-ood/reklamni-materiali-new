@@ -1,0 +1,9 @@
+templates/templates_c
+tools/logs
+target
+target/**
+htdocs.iml
+.idea/
+/images/
+/designs/
+/Java/designs/

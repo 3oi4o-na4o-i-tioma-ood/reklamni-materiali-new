@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div class="table-wrapper" th:fragment="table_lighters">
+
+        <div class="table">
+            <div id="info-table-tabs" class="links">
+                <button class="selected">Цени</button>
+                <button>Забележки</button>
+                <button>Размери</button>
+                <button>Промоции</button>
+            </div>
+            <div class="main_content" id="tabs-content-wrapper">
+                <div class="selected">
+                    <p class="text">
+                        Всички цени за печат на <strong>запалки</strong> са в лева без ДДС за стандартен срок от 7 до 10
+                        дни.
+
+                        Запалките се предплащат авансово на 100 %
+                    </p>
+                    <h4>Сито печат върху запалки</h4>
+                    <table style="width: 100%">
+                        <thead>
+                            <th>
+                                <div>Количество</div>
+                            </th>
+                            <th>
+                                <div>1 цвят</div>
+                            </th>
+                            <th>
+                                <div>2 цвят</div>
+                            </th>
+                            <th>
+                                <div>3 цвят</div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="q, index : ${price_info_screen}">
+                                <td>
+                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["SCREEN_ONE_COLOR"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["SCREEN_TWO_COLORS"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["SCREEN_THREE_COLORS"]}]]</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Тампонен печат върху запалки</h4>
+
+                    <table>
+                        <thead>
+                            <th>
+                                <div>Количество</div>
+                            </th>
+                            <th>
+                                <div>1 цвят</div>
+                            </th>
+                            <th>
+                                <div>2 цвят</div>
+                            </th>
+                            <th>
+                                <div>3 цвят</div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="q, index : ${price_info_pad}">
+                                <td>
+                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                </td>
+
+                                <td>
+                                    <div class="centered">[[${q["PAD_ONE_COLOR"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["PAD_TWO_COLORS"]}]]</div>
+                                </td>
+                                <td>
+                                    <div class="centered">[[${q["PAD_THREE_COLORS"]}]]</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    Към цената на тампонния печат се добавят:<br />
+                    +[[${CLICHE_ONE_COLOR}]] лв. клише за 1 цвят печат. <br />
+
+                    +[[${CLICHE_TWO_COLORS}]] лв. клишета за 2 цвята печат.<br />
+
+                    +[[${CLICHE_THREE_COLORS}]] лв. клишета за 3 цвята печат.<br />
+
+                    <h4>Пълноцветен дигитален печат върху запалки</h4>
+                    <table>
+                        <thead>
+                            <th>
+                                <div>Количество</div>
+                            </th>
+                            <th>
+                                <div>Цена</div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="q, index : ${price_info_full_color}">
+                                <td>
+                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                </td>
+
+                                <td>
+                                    <div class="centered">[[${q["FULL_COLOR"]}]]</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <ul>
+                        <li>Надценка за бърза изработка на <strong>запалки (5 дни): +50%;</strong></li>
+                        <li>Надценка за експресна изработка на <strong>запалки (3 дни): +100%;</strong> при техническа
+                            възможност</li>
+                        <li>При поръчка на стойност над 300 лв. куриерската услуга в рамките на гр. София е
+                            <strong>безплатна</strong>.
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text">
+
+                        Размерът на печата върху <strong>запалките</strong> е около 50 мм. дължина и 10-12 мм. височина.
+                        За повече информация вижте описателните страници по-горе.
+
+                        При качване на Ваш дизайн или лого, размерът трябва да бъде с височина до 10-12 мм на 300 DPI
+
+                        Поддържани файлови формати при качване на ваши фонове или лога:
+
+                        <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+                        Когато запалката ще се печати на сито или тампонен печат трябва да изпратите логото във векторен
+                        формат /*.cdr или *.eps/ на нашия e-mail: <strong>orders@reklamni-materiali.com</strong>
+                    </p>
+                </div>
+                <ul>
+                    <li>При поръчка над 300 бр. <strong>запалки</strong> - получавате 50 бр. визитки
+                        <strong>подарък</strong> /които трябва да си направите с нова поръчка/.</li>
+                    <li>При поръчка над 500 бр. <strong>запалки</strong> - получавате 100 бр. визитки
+                        <strong>подарък</strong> /които трябва да си направите с нова поръчка/ + безплатна доставка.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

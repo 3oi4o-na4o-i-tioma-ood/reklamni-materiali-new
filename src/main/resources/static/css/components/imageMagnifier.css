@@ -1,0 +1,23 @@
+.magnifier-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  cursor: none;
+}
+
+.magnifier-container img {
+    display: block;
+}
+
+.magnifier-glass {
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.6);
+  cursor: none;
+  display: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+} 

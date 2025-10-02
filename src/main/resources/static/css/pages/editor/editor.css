@@ -1,0 +1,249 @@
+.editor-page-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+
+.editor-page-content .editor {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1vw;
+  margin: 1vw 1vw 100px;
+  position: relative;
+  /* width: 100%; */
+}
+
+@media screen and (min-width: 1200px) {
+  .editor-page-content .editor {
+    margin: 1vw 6vw 100px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .editor-page-content {
+    padding-top: 50px;
+  }
+
+  .editor-page-content .editor {
+    flex-direction: row;
+  }
+}
+
+.editor-page-content .editor-right-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: relative;
+}
+
+#editor-overlayed-area {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-canvas {
+  position: relative;
+  border: 2px solid var(--color-primary);
+  /* height: 400px; */
+}
+
+.editor-canvas .canvas-boundary {
+  border: 1px dashed black;
+  pointer-events: none;
+  position: absolute;
+}
+
+.editor-canvas .element {
+  position: absolute;
+  cursor: move;
+}
+
+.editor-canvas .element .text {
+  display: block;
+  padding: 0;
+}
+
+.editor-canvas .editor-canvas-bg {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+
+  /* Will be overriden by inline stling */
+  visibility: hidden;
+}
+
+.editor-canvas .bg-wrapper {
+  width: 100%;
+}
+
+.editor-canvas .text-element {
+  z-index: 2;
+  display: grid;
+}
+
+.editor-canvas .text-element .action-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(100%, -50%);
+  opacity: 0.8;
+  display: none;
+  background: none;
+}
+
+.editor-canvas .text-element.edited .action-button.save,
+.editor-canvas .text-element.selected .action-button.edit {
+  display: block;
+}
+
+/* .editor-canvas .text-element .action-button.save, */
+.editor-canvas .text-element.edited .action-button.edit {
+  display: none;
+}
+
+.editor-canvas .text-element::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+  line-break: anywhere;
+}
+
+.editor-canvas .text-element textarea,
+.editor-canvas .text-element::after {
+  font: inherit;
+
+  /* Place on top of each other */
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.editor-canvas .text-element textarea {
+  width: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  resize: none;
+  cursor: inherit;
+
+  overflow: hidden;
+
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  text-align: inherit;
+  color: inherit;
+  z-index: -1;
+}
+
+.editor-canvas .element.edited textarea {
+  cursor: initial;
+}
+
+.editor-canvas .img-element {
+  z-index: 1;
+}
+
+.editor-canvas .img-element img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.editor-canvas .element .handle {
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.editor-canvas .element .handle.disabled {
+  cursor: inherit;
+}
+
+.editor-canvas .element .handle-right,
+.editor-canvas .element .handle-left {
+  background: url("/images/editor/marquee_line_v.gif") repeat-y;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  cursor: ew-resize;
+}
+
+.editor-canvas .element .handle-right {
+  background-position: right;
+  right: 0;
+  padding-left: 5px;
+}
+
+.editor-canvas .element .handle-left {
+  background-position: left;
+  left: 0;
+  padding-right: 5px;
+}
+
+.editor-canvas .element .handle-top,
+.editor-canvas .element .handle-bottom {
+  background: url("/images/editor/marquee_line_h.gif") repeat-x;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  cursor: ns-resize;
+}
+
+.editor-canvas .element .handle-top {
+  background-position: top;
+  top: 0;
+}
+
+.editor-canvas .element .handle-bottom {
+  background-position: bottom;
+  bottom: 0;
+}
+
+.editor-canvas .element.selected {
+  z-index: 10;
+}
+
+.editor-canvas .element.tooltip .content-wrapper {
+  font-size: var(--font-size-xs);
+  right: -40px;
+  top: calc(100% - 5px);
+}
+
+.editor-canvas .element:not(.selected) .content-wrapper,
+.editor-canvas .element.edited .content-wrapper {
+    display: none;
+}
+
+.editor-canvas .element.selected .handle {
+  display: block;
+}
+
+.selection-box {
+  border: 1px dashed black;
+  position: fixed;
+}
+
+@media screen and (min-width: 800px) {
+  .editor-page-content .editor-right-section {
+    width: 60%;
+    position: static;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .editor-page-content .editor {
+    margin-bottom: 15px !important;
+    gap: 0;
+  }
+
+  #editor-overlayed-area {
+    margin-bottom: 60px;
+  }
+
+  .editor-page-content .editor-right-section{
+    gap: 40px;
+  }
+}

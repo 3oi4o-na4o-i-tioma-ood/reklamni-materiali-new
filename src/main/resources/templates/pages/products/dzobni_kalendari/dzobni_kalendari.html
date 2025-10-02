@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/pages/products/banner.css" />
+    
+    <th:block
+      th:replace="pages/products/product_page_head_content :: head-content"
+    ></th:block>
+
+    <title>Джобни календари - рекламни материали</title>
+  </head>
+
+  <body>
+    <th:block
+      th:replace="components/base_layout :: base-layout(~{::#product-page-content})"
+    >
+      <div class="product-page-content" id="product-page-content">
+        <th:block
+          th:replace="pages/products/new-banner :: banner(~{::#title}, '/images/dzobni_kalendari/pocket-banner.png', '/images/dzobni_kalendari/pocket-calendar-small.png')"
+        >
+          <th:block id="title">ЗА ДЖОБНИТЕ<br />КАЛЕНДАРИ</th:block>
+        </th:block>
+
+        <!-- <th:block
+          th:replace="pages/products/banner :: banner(~{::#title}, '/images/dzobni_kalendari/banner.svg')"
+        >
+          <th:block id="title">ЗА ДЖОБНИТЕ<br />КАЛЕНДАРИ</th:block>
+        </th:block> -->
+        <th:block
+          th:replace="pages/products/dzobni_kalendari/how_to_make :: how_to_make"
+        ></th:block>
+        <th:block
+          th:replace="pages/products/dzobni_kalendari/personalize :: personalize"
+        ></th:block>
+        <th:block
+          th:replace="pages/products/dzobni_kalendari/table_dzobni :: table_dzobni"
+        ></th:block>
+        <th:block
+          th:replace="pages/products/dzobni_kalendari/delivery :: delivery"
+        ></th:block>
+        <th:block
+          th:replace="components/popular_services :: popular-services"
+        ></th:block>
+      </div>
+    </th:block>
+  </body>
+</html>

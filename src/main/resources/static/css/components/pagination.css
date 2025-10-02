@@ -1,0 +1,49 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination button {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    height: 2em;
+    aspect-ratio: 1;
+    border-radius: 50px;
+}
+
+.pagination .active_button_container {
+    display: flex;
+    gap: 5px;
+}
+
+.pagination button.active_button {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.pagination .active_button_container button:hover {
+    background-color: var(--color-primary-transparent);
+    color: white;
+}
+
+
+.pagination.left-ellipsis-hidden .arrow-left {
+    margin-left: 1.75em;
+}
+
+.pagination.right-ellipsis-hidden .arrow-right {
+    margin-right: 1.75em;
+}
+
+
+.pagination.left-ellipsis-hidden .pagination-ellipsis-left {
+    display: none;
+}
+
+.pagination.right-ellipsis-hidden .pagination-ellipsis-right {
+    display: none;
+}

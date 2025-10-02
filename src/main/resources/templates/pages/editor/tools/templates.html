@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="bg">
+<body>
+    <div th:fragment="templates(img_urls)" id="editor-templates-tool" class="editor-tool">
+        <h4 class="title">Шаблони</h4>
+
+        <div class="templates-container" id="editor-templates-container">
+            <button class="template-button" th:each="img_url, stat : ${img_urls}">
+                <img th:src="${img_url}" th:alt="|template-${stat.index}">
+            </button>
+        </div>
+    </div>
+</body>
+</html>

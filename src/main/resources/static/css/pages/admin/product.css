@@ -1,0 +1,38 @@
+.admin-page .page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-page .page-content-section {
+    border-radius: 5px;
+    background-color: var(--color-bg-secondary);
+    height: auto;
+    width: 100%;
+}
+
+.admin-page .page-content-section .title {
+    border-bottom: 1px solid var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    padding: 1em;
+    margin: 0;
+}
+
+.admin-page .page-content-section .table {
+    width: 100%;
+}
+
+.admin-page .table-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:767px) {
+    .admin-page .page-content{
+        margin-top: 65px;
+    }
+}

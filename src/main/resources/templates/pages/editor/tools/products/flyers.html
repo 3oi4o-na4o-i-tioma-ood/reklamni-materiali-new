@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div th:fragment="tools" class="tools" id="tools-parent">
+        <div class="tools-menu" id="editor-tools-menu">
+            <button id="editor-backgrounds-tool-button" class="active">
+                <img src="/images/editor/tools/backgrounds.png" alt="фонове">
+                Фонове
+            </button>
+            <button id="editor-image-tool-button">
+                <img src="/images/editor/tools/images.svg" alt="картинка">
+                Картинка
+            </button>
+            <button id="editor-text-tool-button">
+                <img src="/images/editor/tools/text.svg" alt="текст">
+                Текст
+            </button>
+            <button id="editor-effect-tool-button">
+                <img src="/images/editor/tools/effect.svg" alt="ефект">
+                Ефекти
+            </button>
+            <button id="editor-paper-type-tool-button">
+                <img src="/images/editor/tools/paper_type.svg" alt="картон">
+                Картон
+            </button>
+        </div>
+
+        <th:block th:replace="pages/editor/tools/backgrounds :: backgrounds"></th:block>
+
+        <th:block th:replace="pages/editor/tools/image :: image"></th:block>
+
+        <th:block th:replace="pages/editor/tools/text :: text"></th:block>
+
+        <th:block th:replace="pages/editor/tools/effects :: effects"></th:block>
+
+        <th:block th:replace="pages/editor/tools/paper_type :: paper-type"></th:block>
+    </div>
+</body>
+
+</html>

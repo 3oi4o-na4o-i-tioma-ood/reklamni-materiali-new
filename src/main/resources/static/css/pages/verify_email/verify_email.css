@@ -1,0 +1,40 @@
+#verify-email-content .section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: auto;
+    margin: auto;
+}
+
+#verify-email-content .section h1 {
+    text-align: center;
+}
+
+#verify-email-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20%;
+}
+
+
+#finish-signup-page-content .section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: auto;
+    margin: auto;
+}
+
+#finish-signup-page-content .section h1 {
+    text-align: center;
+}
+
+#finish-signup-page-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20%;
+}

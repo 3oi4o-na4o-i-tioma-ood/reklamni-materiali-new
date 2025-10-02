@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="components/base_head_content :: head-content"></th:block>
+    <title>Запалки - модели</title>
+    <link rel="stylesheet" href="/css/pages/products/rabotni_kalendari/models.css">
+    <link rel="stylesheet" href="/css/components/popup.css">
+
+    <script src="/js/models.js"></script>
+    <script src="/js/models/lighter.js"></script>
+    <script src="/js/components/popup.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="components/base_layout :: base-layout(~{::#models-page-content})">
+
+        <div id="models-page-content">
+            <h1 class="title">
+                Модел запалки
+            </h1>
+            <div id="models-container" class="models-container">
+                <th:block th:each="model, index : ${models}">
+                    <div class="model" th:each="color, colorIndex : ${model.colors}" th:attr="data-model-color-id=${color.id}">
+                        <div class="images-container">
+                            <img th:src="${'/api/model-image?modelColorId=' + color.id}">
+                        </div>
+
+                        <div th:text="${model.model}" style="text-align: center; font-weight: bold;"></div>
+
+                        <button style="margin: 20px 0 0 auto" class="button small" id="model-popup-button">Виж повече</button>
+                    </div>
+                </th:block>
+            </div>
+            <th:block th:replace="components/popup :: popup('model-info-popup', '', ~{::#popup-body}, '')">
+                <th:block id="popup-body">
+                    <img id="popup-model-image">
+
+                    <a id="continue-link" class="button small" style="margin-left: auto">Към избор на фон</a>
+                </th:block>
+            </th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

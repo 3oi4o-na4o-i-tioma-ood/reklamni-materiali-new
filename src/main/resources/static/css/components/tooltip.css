@@ -1,0 +1,31 @@
+.tooltip {
+    position: relative;
+    min-width: 20px;
+}
+
+.tooltip .summary {
+    cursor: pointer;
+}
+
+.content-wrapper {
+    display: none;
+    position: absolute;
+    top: calc(100% - 10px);
+    right: 0;
+    padding: 10px;
+}
+
+.tooltip:hover .content-wrapper {
+    display: block;
+}
+
+
+.tooltip .content {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    box-shadow: 10px 10px 10px 1px black;;
+    width: 200px;
+    background-color: white;
+}
+

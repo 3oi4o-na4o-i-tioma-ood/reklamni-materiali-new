@@ -1,0 +1,82 @@
+<div class="section" th:fragment="delivery">
+    <div class="header">
+        <div class="number">1</div>
+
+        <h4>Избери метод за доставка</h4>
+    </div>
+
+
+    <form class="section-form" id="delivery-form">
+        <div class="radio-input-wrapper">
+            <input id="delivery-type-address" type="radio" name="deliveryType" value="address" checked>
+            <label for="delivery-type-address">Доставка до адрес</label>
+        </div>
+
+        <div class="radio-input-wrapper">
+            <input id="delivery-type-office" type="radio" name="deliveryType" value="office">
+            <label for="delivery-type-office">Доставка до офис</label>
+        </div>
+
+        <h4 class="full-width">Данни на получаталя</h4>
+
+        <div>
+            <label for="form-name">Име</label>
+            <input id="form-name" name="name" type="text" class="input" placeholder="Име">
+        </div>
+
+        <div>
+            <label for="form-surname">Фамилия</label>
+            <input id="form-surname" name="surname" type="text" class="input" placeholder="Фамилия">
+        </div>
+
+        <div>
+            <label for="form-email">Email</label>
+            <input id="form-email" name="email" type="text" class="input" placeholder="Email">
+        </div>
+
+        <div>
+            <label for="form-phone">Телефон</label>
+            <input id="form-phone" name="phone" type="text" class="input" placeholder="Телефон">
+        </div>
+
+        <div class="full-width section-form" style="padding: 0" id="delivery-address-container">
+            <h4 class="full-width">Адрес за доставка</h4>
+
+            <div>
+                <label for="form-address-city">Град</label>
+                <input id="form-address-city" name="addressCity" type="text" class="input" placeholder="Град">
+            </div>
+
+            <div>
+                <label for="form-address-street">Улица</label>
+                <input id="form-address-street" name="addressStreet" type="text" class="input" placeholder="Улица">
+            </div>
+
+            <div>
+                <label for="form-address-number">Номер</label>
+                <input id="form-address-number" name="addressNumber" type="text" class="input" placeholder="Номер">
+            </div>
+
+            <div>
+                <label for="form-address-entrance">Вход (незадължително)</label>
+                <input id="form-address-entrance" name="addressEntrance" type="text" class="input" placeholder="Вход">
+            </div>
+
+            <div>
+                <label for="form-address-apartment">Апартамент (незадължително)</label>
+                <input id="form-address-apartment" name="addressApartment" type="text" class="input" placeholder="Апартамент">
+            </div>
+        </div>
+
+        <div class="full-width" id="delivery-office-data-container" style="display: none;">
+            <h4 class="delivery-office-data">Офис на куриер - Еконт Експрес</h4>
+
+            <div>
+                <label for="form-econt-address">Адрес на офис на Еконт</label>
+                <input id="form-econt-address" name="econtAddress" type="text" class="input"
+                    placeholder="Адрес на офис на Еконт">
+            </div>
+        </div>
+    </form>
+
+</div>

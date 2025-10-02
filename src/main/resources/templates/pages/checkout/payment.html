@@ -1,0 +1,19 @@
+<div class="section" th:fragment="payment">
+    <div class="header">
+        <div class="number">3</div>
+
+        <h4>Метод на плащане</h4>
+    </div>
+
+    <form class="section-form" id="payment-form">
+        <div class="radio-input-wrapper">
+            <input id="payment-cash" type="radio" name="paymentMethod" value="ON_DELIVERY" checked>
+            <label for="payment-cash">На куриер с паричен превод /наложен платеж/</label>
+        </div>
+
+        <div class="radio-input-wrapper">
+            <input id="payment-transfer" type="radio" name="paymentMethod" value="BANK_TRANSFER">
+            <label for="payment-transfer">По банков път</label>
+        </div>
+    </form>
+</div>

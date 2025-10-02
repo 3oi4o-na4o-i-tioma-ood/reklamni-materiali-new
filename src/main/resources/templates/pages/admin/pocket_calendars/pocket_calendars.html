@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="pages/admin/product_page_head_content :: head-content"></th:block>
+
+    <title>Джобни календари - админ</title>
+
+    <script src="/js/admin/products/pocket_calendars.js"></script>
+</head>
+
+<body>
+    <th:block
+        th:replace="pages/admin/product_page_layout :: product-page-layout(~{::#temp_table}, ~{::#temp_categories}, 'Джобни календари - редактиране')">
+        <th:block id="temp_table" th:replace="pages/admin/pocket_calendars/table :: table"></th:block>
+        <th:block id="temp_categories" th:replace="pages/admin/categories :: categories"></th:block>
+    </th:block>
+</body>
+
+</html>

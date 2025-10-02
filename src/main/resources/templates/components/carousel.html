@@ -1,0 +1,21 @@
+<div th:fragment="carousel(id, items)" class="carousel" th:id="${id}">
+    <div class="carousel-arrows-wrapper">
+        <button class="arrow_left button">
+            <img src="/images/arrow_buton_left_services.svg" class="left_arrow_img" alt="Previous" />
+        </button>
+
+        <div class="carousel-content-wrapper">
+            <div id="popular_services_content" class="content">
+                <th:block th:replace="${items}"></th:block>
+            </div>
+        </div>
+
+        <button class="arrow_right button">
+            <img class="right_arrow_img" src="/images/arrow_button_right_services.svg" alt="Next" />
+        </button>
+    </div>
+    <div class="navigation">
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>

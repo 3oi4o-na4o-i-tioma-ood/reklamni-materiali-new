@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div class="footer" th:fragment="footer">
+        <div class="sitemap">
+            <div class="column first">
+                <img class="image" src="/images/logo.png">
+                <p class="text">Тук имате невероятната възможност, на едно място да поръчате всички
+                    видове
+                    печатни рекламни материализа Вашия бизнес, офис, заведение или лично за вас. Всичко
+                    това без да излизате от офиса или дома си.
+                </p>
+            </div>
+            <div class="column">
+                <p class="title_text">Продукти</p>
+
+                <ul class="list">
+                    <li><a class="text" href="/визитки">Визитки</a></li>
+                    <li><a class="text" href="/работни-календари">Работни-календари</a></li>
+                    <li><a class="text" href="/джобни-календарчета">Джобни-календарчета</a></li>
+                    <li><a class="text" href="/флаери">Флаери</a></li>
+                    <li><a class="text" href="/химикалки">Химикалки</a></li>
+                    <li><a class="text" href="/запалки">Запалки</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <p class="title_text">Информация</p>
+                <ul class="list">
+                    <li class="text">За нас</li>
+                    <li class="text">
+                        <a href="/contacts" style="color: white; text-decoration: none;">
+                            Контакти
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <p class="title_text">Контакти</p>
+                <ul class="list">
+
+                    <li class="text"><img class="footer_images" src="/images/footer_adress.svg">
+                        <!-- <a href="geo:42.696662,23.222523">
+                        </a> -->
+                            София
+                            1362, ул. "Дъб" №5
+                    </li>
+                    <li class="text"><img class="footer_images" src="/images/footer_phone.svg"> Телефон:
+                        02 / 829 79 00</li>
+                    <li class="text"><img class="footer_images" src="/images/footer_smartphone.svg">
+                        Телефон: 089 / 990 73 46
+                    </li>
+                    <li style="margin-top: 5px">
+                        <a><img class="footer_images" src="/images/footer_facebook.svg"></img></a>
+                        <a><img class="footer_images" src="/images/footer_instagram.svg"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <div class="copyright">
+
+            © 2010 - [(${#dates.year(#dates.createNow())})] reklamni-materiali.com
+            <!-- | <a style="text-decoration: none;" href="http://reklamni-materiali.com">рекламни материали</a> онлайн -->
+        </div>
+    </div>
+</body>
+
+</html>

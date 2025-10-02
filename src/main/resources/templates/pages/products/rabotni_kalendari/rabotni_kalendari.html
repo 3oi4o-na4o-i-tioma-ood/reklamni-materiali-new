@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <th:block th:replace="pages/products/product_page_head_content :: head-content"></th:block>
+
+  <title>Работни календари - рекламни материали</title>
+
+  <link rel="stylesheet" href="/css/components/accordion.css">
+  <link rel="stylesheet" href="/css/pages/products/rabotni_kalendari/types.css">
+
+  <script src="/js/components/accordion.js"></script>
+  <script src="/js/product_pages/work_calendars.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/pages/products/banner.css" />
+</head>
+
+<body>
+  <th:block th:replace="components/base_layout :: base-layout(~{::#product-page-content})">
+    <div class="product-page-content work-calendars" id="product-page-content">
+
+      <th:block th:replace="pages/products/new-banner :: banner(~{::#title}, '/images/rabotni_kalendari/calendars.png', '/images/rabotni_kalendari/pocket-calendars.png')">
+        <th:block id="title">ЗА РАБОТНИТЕ<br />КАЛЕНДАРИ</th:block>
+      </th:block>
+
+      <!-- <th:block th:replace="pages/products/banner :: banner(~{::#title}, '/images/rabotni_kalendari/banner.svg')">
+        <th:block id="title">ЗА РАБОТНИТЕ<br />КАЛЕНДАРИ</th:block>
+      </th:block> -->
+
+      <th:block th:replace="pages/products/rabotni_kalendari/personal_design :: personal_design"></th:block>
+      <th:block th:replace="pages/products/rabotni_kalendari/types :: types"></th:block>
+      <th:block th:replace="pages/products/rabotni_kalendari/table_rabotni_kalendari :: table_rabotni_kalendari"></th:block>
+      <th:block th:replace="components/popular_services :: popular-services"></th:block>
+    </div>
+  </th:block>
+</body>
+
+</html>

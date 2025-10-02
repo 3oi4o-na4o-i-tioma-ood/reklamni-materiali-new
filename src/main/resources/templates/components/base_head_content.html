@@ -1,0 +1,79 @@
+<th:block th:fragment="head-content">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="/css/themes/reklamni-materiali/jquery.ui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/components/footer.css" />
+    <link rel="stylesheet" type="text/css" href="/css/variables.css" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="/css/components/top_nav_bar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/components/sliding_menu.css" />
+    <link rel="stylesheet" href="/css/utils.css" />
+
+    <script type="text/javascript" src="/js/products.js"></script>
+    <script type="text/javascript" src="/js/backend_url.js"></script>
+    <script type="text/javascript" src="/js/api.js"></script>
+    <script type="text/javascript" src="/js/components/auth.js"></script>
+    <script type="text/javascript" src="/js/components/top_nav_bar.js"> </script>
+
+    <!-- google analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(
+            window,
+            document,
+            "script",
+            "https://www.google-analytics.com/analytics.js",
+            "ga"
+        );
+
+        ga("create", "UA-35696418-1", "auto");
+        ga("send", "pageview");
+    </script>
+    <!-- google analytics end -->
+
+    <!-- facebook pixel code -->
+    <script>
+        !(function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod
+                    ? n.callMethod.apply(n, arguments)
+                    : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = "2.0";
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+        })(
+            window,
+            document,
+            "script",
+            "https://connect.facebook.net/en_US/fbevents.js"
+        );
+
+        fbq("init", "831811380251162");
+        fbq("track", "PageView");
+    </script>
+
+    <noscript><img height="1" width="1" style="display: none"
+            src="https://www.facebook.com/tr?id=831811380251162&ev=PageView&noscript=1" /></noscript>
+    <!-- facebook pixel code end -->
+</th:block>

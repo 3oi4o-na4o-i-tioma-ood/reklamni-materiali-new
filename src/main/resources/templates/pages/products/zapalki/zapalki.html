@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <th:block
+      th:replace="pages/products/product_page_head_content :: head-content"
+    ></th:block>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/pages/products/banner.css"
+    />
+    <title>Запалки - рекламни материали</title>
+  </head>
+
+  <body>
+    <th:block
+      th:replace="components/base_layout :: base-layout(~{::#product-page-content})"
+    >
+      <div class="product-page-content lighters" id="product-page-content">
+        <th:block
+          th:replace="pages/products/new-banner :: banner(~{::#title}, '/images/zapalki/lighters-main.png', '/images/zapalki/lighter.png')"
+        >
+          <th:block id="title">ЗА ЗАПАЛКИТЕ</th:block>
+        </th:block>
+        <!-- <th:block th:replace="pages/products/zapalki/banner :: banner"></th:block> -->
+        <th:block th:replace="pages/products/zapalki/how_to_make :: how_to_make"></th:block>
+      
+        <th:block
+          th:replace="pages/products/zapalki/table :: table_lighters"
+        ></th:block>
+        <th:block
+          th:replace="components/popular_services :: popular-services"
+        ></th:block>
+      </div>
+    </th:block>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <th:block th:replace="/pages/editor/editor_page :: editor-page-base(~{::#editor-page-content-lighters}, ~{::script})">
+        <script src="/js/editor/lighters.js"></script>
+
+        <div id="editor-page-content-lighters" class="editor">
+            <th:block th:replace="pages/editor/tools/products/lighters :: tools"></th:block>
+
+            <th:block th:replace="pages/editor/right_section/right_section :: right-section(false)"></th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

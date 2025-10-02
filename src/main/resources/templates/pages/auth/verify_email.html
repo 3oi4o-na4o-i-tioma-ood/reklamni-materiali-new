@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <th:block th:replace="baseWithTopNav :: base-with-top-nav(~{::title}, ~{::link}, ~{::script}, ~{::#verify-email-content})">
+        <script src="/js/verify_email.js"></script>
+        <link rel="stylesheet" href="/css/pages/verify_email/verify_email.css">
+        <title>Потвърждение на имейл</title>
+
+        <div id="verify-email-content">
+            <div class="section" id="email-verified-section" style="display: none;">
+                <h1>Вашият имейл е потвърден. Може да затворите тази страница</h1>
+                <a href="/" class="button">Начало</a>
+            </div>
+            <div class="section" id="verifying-email-section">
+                <h1 id="status-message">Моля изчакайте. Вашият имейл се потвърждава</h1>
+                <img src="" alt="" id="loading-indicator">
+            </div>
+        </div>
+    </th:block>
+</html>

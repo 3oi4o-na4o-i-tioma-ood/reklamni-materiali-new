@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="bg">
+<th:block
+  th:replace="pages/categories/base_page :: categories-base-page(~{::title}, ~{::link}, ~{::script}, 'vizitki', 'Визитки', ~{::#menu}, ~{::#top-actions})">
+  <th:block id="menu" th:replace="pages/categories/menu_categories :: menu_categories"></th:block>
+
+  <title>Визитки - категории</title>
+
+  <link rel="stylesheet" href="">
+
+  <script type="text/javascript" src="/js/categories/vizitki.js"></script>
+
+  <div id="top-actions">
+    <select id="select-orientation">
+      <option value="" disabled selected>Тип дизайн</option>
+      <option value="horizontal">Хоризонтален</option>
+      <option value="vertical">Вертикален</option>
+    </select>
+
+    <a class="button" href="" id="continue-without-bg-button">Собствен фон</a>
+  </div>
+
+</th:block>
+
+</html>

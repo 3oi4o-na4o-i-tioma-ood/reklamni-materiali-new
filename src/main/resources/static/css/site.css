@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: Montserrat;
+  src: url(/fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(/fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Azbuka";
+    src: url("/fonts/azbuka02.ttf");
+}
+
+@font-face {
+    font-family: "Azbuka Decorative";
+    src: url("/fonts/azbuka03_d.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 68";
+    src: url("/fonts/nk68.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 85";
+    src: url("/fonts/nk85.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 91";
+    src: url("/fonts/nk91.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 112";
+    src: url("/fonts/nk112.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 113";
+    src: url("/fonts/nk113.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 114";
+    src: url("/fonts/nk114.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 115";
+    src: url("/fonts/nk115.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 162";
+    src: url("/fonts/nk162.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 226";
+    src: url("/fonts/nk226.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 251";
+    src: url("/fonts/nk251.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 254";
+    src: url("/fonts/nk254.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 257";
+    src: url("/fonts/nk257.ttf");
+}
+
+@font-face {
+    font-family: "Kovanovic 510";
+    src: url("/fonts/nk510.ttf");
+}
+
+@font-face {
+    font-family: "Old Cyrillic";
+    src: url("/fonts/nkcirpp.ttf");
+}
+
+@font-face {
+    font-family: "Monotype Corsiva";
+    src: url("/fonts/nk_mono.ttf");
+}
+
+@font-face {
+    font-family: "Shadow";
+    src: url("/fonts/senka.ttf");
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat;
+}
+
+.zelen_hr {
+  border: none;
+  background-color: rgba(89, 138, 24, 1);
+  height: calc(0.1vw + 1px);
+  width: var(--custom-width, 100%);
+}
+
+.custom-hr {
+  border: none;
+
+  height: calc(0.1vw + 1px);
+  width: var(--custom-width, 100%);
+}
+
+/*changed vartical-hr to vertical-hr-zelen*/
+.vertical-hr-zelen {
+  border: none;
+  border-left: 0.3vw solid rgba(89, 138, 24, 1);
+  /* Use border-left for vertical line */
+  width: 100%;
+  /* Set width to ensure the line is not too thin */
+  height: var(--custom-height,
+      100%);
+  /* Default height if custom-height is not set */
+
+  transform-origin: left center;
+  /* Pivot point for rotation */
+  margin: 0 auto;
+  /* Center the line horizontally if needed */
+}
+
+.vertical-hr {
+  border: none;
+  /* Use border-left for vertical line */
+  width: 100%;
+  /* Set width to ensure the line is not too thin */
+  height: var(--custom-height,
+      100%);
+  /* Default height if custom-height is not set */
+
+  transform-origin: left center;
+  /* Pivot point for rotation */
+  margin: 0 auto;
+}
+
+.vertical-hr-siv {
+  border: none;
+  border-left: 0.3vw solid rgba(230, 235, 233, 1);
+  /* Use border-left for vertical line */
+  width: 100%;
+  /* Set width to ensure the line is not too thin */
+  height: var(--custom-height,
+      100%);
+  /* Default height if custom-height is not set */
+
+  transform-origin: left center;
+  /* Pivot point for rotation */
+  margin: 0 auto;
+  /* Center the line horizontally if needed */
+}
+
+
+.button-green {
+  font-family: Montserrat;
+  font-size: var(--font-size-s);
+  font-weight: 500;
+  background-color: rgba(89, 138, 24, 1);
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  padding: 1vw 4.2vw;
+  align-self: flex-start;
+  border-radius: 0.65vw;
+}
+
+#basecontent {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

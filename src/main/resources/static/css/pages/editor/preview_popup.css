@@ -1,0 +1,130 @@
+.preview-popup .content {
+    width: 500px;
+    min-height: 550px;
+}
+
+
+/* .preview-popup .popup-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    align-items: flex-start;
+} */
+
+.preview-popup .cart-settings {
+    display: none;
+}
+
+.preview-popup .preview-image-message {
+    margin: 2em auto;
+    font-size: var(--font-size-m);
+}
+
+.preview-popup.cart .content {
+    min-height: 60%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+.preview-popup .cart-price-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-popup .cart-price {
+    font-size: var(--font-size-l);
+    color: var(--color-primary);
+}
+
+.preview-popup #cart-price-after-tax {
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+}
+
+.preview-popup.cart .cart-settings {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.preview-popup.cart #product-amount-select {
+    margin-right: auto;
+}
+
+#preview-popup #preview-image {
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+    margin: 15px 0 0;
+    max-height: 200px;
+    max-width: 100%;
+}
+
+#preview-popup #button-add-to-cart {
+    margin: 0;
+    margin-left: auto;
+}
+
+
+.preview-popup .editor-card-side-select .button {
+    /* padding: 0.75em 1.5em; */
+    font-size: var(--font-size-xxs);
+}
+
+.preview-popup .effects {
+    width: 100%;
+}
+
+.preview-popup .effects .title {
+    margin: 1em 0;
+}
+
+.preview-popup .title {
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 0.5em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.preview-popup .close-button-bottom {
+    margin: 20px auto;
+}
+
+.preview-popup.cart .close-button-bottom {
+    display: none;
+}
+
+.preview-popup .bottom-container {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.preview-popup .cart-settings .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.preview-popup .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-popup .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.preview-popup .radio-label input[type="radio"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.preview-popup .radio-label span {
+    font-size: 14px;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <th:block th:replace="components/base_head_content :: head-content" />
+
+  <title>Рекламни материали</title>
+  <link rel="stylesheet" type="text/css" href="/css/home_page.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/home.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/our_services.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/about_us.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/banner.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/create_design.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/home/create_design.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages/reusable/personal_design.css" />
+
+  <link rel="stylesheet" href="/css/components/carousel.css">
+  
+  <script type="text/javascript" src="/js/components/carousel.js"></script>
+  <script type="text/javascript" src="/js/home_page/home.js"></script>
+</head>
+
+<body>
+  <th:block th:replace="components/base_layout :: base-layout(~{::#home-page})">
+    <div id="home-page" class="home-page">
+      <th:block th:replace="pages/home/banner :: banner"></th:block>
+
+      <th:block th:replace="pages/home/our_services :: our-services"></th:block>
+
+      <th:block th:replace="pages/home/about_us :: about-us"></th:block>
+
+      <th:block th:replace="pages/home/personal_design :: personal_design"></th:block>
+
+      <th:block th:replace="pages/home/more_about_us :: more-about-us"></th:block>
+    </div>
+  </th:block>
+</body>
+
+</html>

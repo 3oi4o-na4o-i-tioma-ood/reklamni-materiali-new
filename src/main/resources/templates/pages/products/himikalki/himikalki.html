@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/pages/products/banner.css"
+    />
+
+    <th:block
+      th:replace="pages/products/product_page_head_content :: head-content"
+    ></th:block>
+
+    <title>Химикалки - рекламни материали</title>
+  </head>
+
+  <body>
+    <th:block
+      th:replace="components/base_layout :: base-layout(~{::#product-page-content})"
+    >
+      <div class="product-page-content" id="product-page-content">
+        <th:block
+          th:replace="pages/products/new-banner :: banner(~{::#title}, '/images/himikalki/pen-banner.png', '/images/himikalki/pens.png')"
+        >
+          <th:block id="title">ЗА ХИМИКАЛКИТЕ</th:block>
+        </th:block>
+
+        <!-- <th:block
+          th:replace="pages/products/banner :: banner(~{::#title}, '/images/himikalki/banner.svg')"
+        >
+          <th:block id="title">ЗА ХИМИКАЛКИТЕ</th:block>
+        </th:block> -->
+
+        <th:block
+          th:replace="pages/products/himikalki/how_to_make :: how_to_make"
+        ></th:block>
+        <th:block
+          th:replace="pages/products/himikalki/personal_design :: personal_design"
+        ></th:block>
+        <th:block th:replace="pages/products/himikalki/table :: table_pens">
+        </th:block>
+        <th:block
+          th:replace="pages/products/himikalki/delivery :: delivery"
+        ></th:block>
+        <th:block
+          th:replace="components/popular_services :: popular-services"
+        ></th:block>
+      </div>
+    </th:block>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<div class="popup" th:classappend="${className}" th:fragment="popup(id, title, popupBody, className)" th:id="${id}">
+    <div class="content">
+        <div class="header">
+            <span id="popup-header-text" class="header-text" th:text="${title}"></span>
+
+            <button class="button close-button">&#x2715;</button>
+        </div>
+        <div class="popup-body" th:insert="${popupBody}"></div>
+    </div>
+</div>

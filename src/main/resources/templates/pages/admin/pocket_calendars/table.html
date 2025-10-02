@@ -1,0 +1,118 @@
+<div class="table-wrapper" th:fragment="table">
+
+  <div class="table">
+    <div id="info-table-tabs" class="links">
+      <button class="selected">Цени</button>
+      <button>Забележки</button>
+      <button>Размери</button>
+      <button>Промоции</button>
+    </div>
+    <div class="main_content" id="tabs-content-wrapper">
+      <div class="selected">
+        <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing})">
+          <p id="business-card-price-editing" class="text">
+            Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на
+            двустранно хромов матов картон (300 гр/м²)
+          </p>
+        </th:block>
+        <div class="table-scroll-wrapper">
+          <table style="width: 100%" id="editable-prices-table" class="editable-table">
+            <thead>
+              <th>
+                <div>Лице / гръб </div>
+              </th>
+              <th>
+                <div>Пълноцветно / Черен </div>
+              </th>
+              <th>
+                <div>Пълноцветно / Пълноцветен</div>
+              </th>
+              <th colspan="2">
+                <div></div>
+              </th>
+            </thead>
+            <tbody>
+              <tr th:each="q, index : ${price_info}">
+                <td>
+                  <div class="centered">[[${q["amount"]}]] бр.</div>
+                </td>
+                <td>
+                  <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                </td>
+                <td>
+                  <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                </td>
+                <td class="row-edit-cell">
+                  <button class="icon-button table-button" id="row-edit-button">
+                    <img src="/images/common/edit_green.svg" alt="edit">
+                  </button>
+                </td>
+                <td class="row-delete-cell">
+                  <button class="icon-button table-button" id="row-delete-button">
+                    <img src="/images/common/delete.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-save-cell">
+                  <button class="icon-button table-button" id="row-save-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-cancel-cell">
+                  <button class="icon-button table-button" id="row-cancel-button">
+                    &#215;
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <button class="button" id="add-table-row-button" style="margin-left: auto">+</button> -->
+      </div>
+      <ul>
+        <li>Надценка за бърза изработка на <strong>визитки (5 часа): +
+            <th:block th:replace="components/number_editing :: number-editing(50)" />%;
+          </strong>
+        </li>
+        <li>Надценка за експресна изработка на <strong>визитки (2 часа): +
+            <th:block th:replace="components/number_editing :: number-editing(100)" />%;
+          </strong>
+        </li>
+        <li>Ламиниране (матов ламинат): <strong>+
+            <th:block th:replace="components/number_editing :: number-editing(3.00)" />лв. / 100 бр.
+          </strong> - препоръчително при тъмни фонове;
+        </li>
+        <li>Заоблени ъгли: <strong>+
+            <th:block th:replace="components/number_editing :: number-editing(3.50)" />лв. / 100 бр.
+          </strong>
+        </li>
+        <li>Ефектен картон: <strong>+
+            <th:block th:replace="components/number_editing :: number-editing(4.00)" />лв. / 100 бр.
+          </strong></li>
+        <li>При поръчка на стойност над 100 лв. куриерската услуга в рамките на гр. София е
+          <strong>безплатна</strong>.
+        </li>
+        <li>Повече информация за <strong>визитки</strong>.</li>
+      </ul>
+      <div>
+        <strong>Размерът на визитните картички в готов вид е 50/90 мм.</strong>
+        При качване на Ваш дизайн или фон, размерът трябва да бъде 54/94 мм. на 300 DPI (или 638/1110 px).
+        Препоръчително е файлът да е в CMYK цветово пространство.
+        Ако качвате готов дизайн за печат текстовете и логата трябва да са на 7 мм. навътре от всички страни
+        Стандартно визитните картички се изработват на двустранно хромов мат картон 300гр./кв.м.
+        Поддържани файлови формати при качване на ваши фонове или лога:
+        <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+      </div>
+      <ul>
+        <li>При поръчка на 100 бр. пълноцветни <strong>визитки</strong> - получавате 106 бр.</li>
+        <li>При поръчка на 200 бр. пълноцветни <strong>визитки</strong> - получавате 206 бр. </li>
+        <li>При поръчка на 300 бр. пълноцветни <strong>визитки</strong> - получавате 304 бр. и рекламна химикалка или
+          запалка. </li>
+        <li>При поръчка над 400 бр. пълноцветни <strong>визитки</strong> - получавате рекламна химикалка и запалка.
+        </li>
+        <li>Ако притежавате <strong>промоционален код</strong> и го използвате при поръчката другите промоции отпадат.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

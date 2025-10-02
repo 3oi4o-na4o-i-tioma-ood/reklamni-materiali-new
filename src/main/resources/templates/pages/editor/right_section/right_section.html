@@ -1,0 +1,15 @@
+<div class="editor-right-section" th:fragment="right-section(hasSides)">
+    <div id="editor-overlayed-area">
+        <th:block th:replace="/pages/editor/right_section/actions_top :: editor_actions_top(${hasSides})"></th:block>
+        
+        <th:block th:replace="/pages/editor/right_section/canvas :: editor_canvas"></th:block>
+    </div>
+
+    <div class="editor-actions-bottom desktop">
+        <button id="button-open-preview" class="button secondary">Преглед</button>
+        <button id="button-open-cart-preview" class="button">Добави в количката</button>
+    </div>
+
+    <th:block th:replace="/pages/editor/preview_popup :: preview-popup(id = 'preview-popup', hasSides = ${hasSides})"></th:block>
+    <th:block th:replace="/pages/editor/right_section/save_design_popup :: save-design-popup"></th:block>
+</div>

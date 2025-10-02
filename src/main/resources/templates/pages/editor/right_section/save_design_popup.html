@@ -1,0 +1,18 @@
+<th:block th:fragment="save-design-popup"
+    th:replace="components/popup :: popup(save-design-popup, 'Запази в любими', ~{::#popup-body}, 'save-design-popup')">
+    <th:block id="popup-body">
+        <form id="save-design-form">
+            <!-- <div id="save-type-select">
+                <input type="radio" id="current" name="saveType" value="current">
+                <label for="current" checked>Редактирай текущия</label><br>
+                <input type="radio" id="new" name="saveType" value="new">
+                <label for="new">Запази като нов</label><br>
+            </div> -->
+            
+            <label for="new-design-name">Име на дизайна</label>
+            <input class="input" name="designName" type="text" id="new-design-name">
+            
+            <button type="submit" id="button-save" class="button">Запази дизайн</button>
+        </form>
+    </th:block>
+</th:block>

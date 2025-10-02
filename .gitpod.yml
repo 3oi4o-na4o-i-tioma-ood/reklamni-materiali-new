@@ -1,0 +1,11 @@
+image: gitpod/workspace-full
+
+tasks:
+  - init: |
+      sdk install java 21.0.5-amzn
+      sdk default java 21.0.5-amzn
+      export JAVA_HOME=$(sdkman_path)/candidates/java/current
+      export PATH=$JAVA_HOME/bin:$PATH
+  - command: |
+      mvn clean install
+      mvn spring-boot:run

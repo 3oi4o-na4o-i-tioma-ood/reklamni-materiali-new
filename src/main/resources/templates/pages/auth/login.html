@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <th:block th:replace="components/base_head_content :: head-content"></th:block>
+  <title>Влизане - рекламни материали</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/pages/profile/login.css" />
+  <script type="text/javascript" src="/js/profile/login.js"></script>
+</head>
+
+<body>
+  <th:block th:replace="components/base_layout :: base-layout(~{::#login})">
+
+    <th:block id="login">
+      <div class="login">
+        <div class="title">Влезте във вашия профил</div>
+        <div>
+          <hr class="custom-hr" style="background-color: var(--color-primary);">
+        </div>
+        <div class="button_container">
+          <button class="button" id="login_profile">Вход</button>
+          <button class="button secondary" id="sign_up_profile">Регистрация</button>
+        </div>
+
+        <div class="inputs_container">
+          <form action="javascript:;" id="login-form" class="login_content">
+            <input class="input" name="username" placeholder="Вашият Е-mail или потребителско име">
+            <input class="input" name="password" type="password" placeholder="Парола">
+            <div class="login_checks">
+              <div>
+                <input name="remember" type="checkbox">
+                Запомни ме
+              </div>
+              <a href="/" class="forgotten-password-link">Забравена Парола</a>
+            </div>
+            <p class="error-container" id="login-error"></p>
+
+            <button type="submit" class="button" id="login-submit">Вход</button>
+          </form>
+
+          <form action="javascript:;" id="signup-form" class="login_content">
+            <input class="input" name="name" type="text" placeholder="Име">
+            <input class="input" name="surname" type="text" placeholder="Фамилия">
+            <input class="input" name="email" type="email" placeholder="Вашият Е-mail">
+            <input class="input" name="phone" placeholder="Телефон">
+            <input class="input" name="password" type="password" placeholder="Парола">
+            <input class="input" name="confirmPassword" type="password" placeholder="Потвърдете парола">
+            <div class="sign_up_checks">
+              <div>
+                <input name="acceptTC" type="checkbox">
+                Приемам правилата и условията на Рекламни материали
+              </div>
+            </div>
+            <p class="error-container" id="signup-error"></p>
+            <button class="button" id="signup-submit">Регистрация</button>
+          </form>
+        </div>
+      </div>
+    </th:block>
+  </th:block>
+
+</body>
+
+</html>

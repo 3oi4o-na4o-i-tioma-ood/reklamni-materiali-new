@@ -1,0 +1,232 @@
+#editor-text-tool-elements {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    flex-shrink: 0;
+    overflow: auto;
+}
+
+.editor-tool .text-editor-wrapper {
+    width: 100%;
+    min-height: 50px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5em;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    padding: 0.25em 0.5em;
+    box-sizing: border-box;
+}
+
+.editor-tool .text-editor-wrapper.selected {
+    background-color: var(--color-bg-light-green);
+}
+
+
+.editor-tool .text-editor-wrapper input {
+    flex-grow: 1;
+}
+
+.editor-tool .text-editor-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+#editor-text-tool-add-text-button {
+    margin-right: auto;
+    margin-top: 1em;
+}
+
+.editor-tool .clr-field button {
+    display: none;
+}
+
+#more-colors-button {
+    padding: 0.5em 0.75em;
+}
+
+.editor-tool .text-format-section > * {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.editor-tool .text-format-section.active > *,
+.editor-tool .text-format-section .message
+{
+    opacity: 1;
+    pointer-events: all;
+}
+
+.editor-tool .text-format-section {
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.editor-tool .text-format-section .row {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.editor-tool .text-format-section .row .nice-select {
+    margin-right: 0.5em;
+}
+
+.editor-tool .text-format-section .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
+    text-align: center;
+}
+
+.editor-tool .text-format-section.active .message {
+    display: none;
+}
+
+.editor-tool .text-editor-wrapper input {
+    outline: none;
+    /* border: none; */
+    border: 1px dashed grey;
+    height: 100%;
+    background: none;
+}
+
+.editor-tool .text-editor-wrapper .text,
+.editor-tool .text-editor-wrapper input {
+    margin-right: auto;
+    font-size: var(--font-size-xs);
+}
+
+.editor-tool .text-editor-wrapper .approve-button,
+.editor-tool .text-editor-wrapper input {
+    display: none;
+}
+
+.editor-tool .text-editor-wrapper.edited .approve-button,
+.editor-tool .text-editor-wrapper.edited input {
+    display: block;
+}
+
+.editor-tool .text-editor-wrapper .edit-button,
+.editor-tool .text-editor-wrapper .text {
+    display: block;
+}
+
+.editor-tool .text-editor-wrapper.edited .edit-button,
+.editor-tool .text-editor-wrapper.edited .text {
+    display: none;
+}
+
+.editor-tool .text-editor-wrapper .button {
+    padding: 0.5em 0.75em;
+    background: none;
+}
+
+.editor-tool .text-editor-wrapper .button img {
+    width: 1.5em;
+}
+
+
+.editor-tool .text-editor-wrapper .delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#recomended-colors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 5px;
+    margin: 10px 0;
+}
+
+#recomended-colors .color-button {
+    border-radius: 3px;
+    border: none;
+    width: 30px;
+    height: 30px;
+}
+
+#recomended-colors .color-button.selected {
+    border: 2px solid var(--color-primary);
+}
+
+
+.editor-tool .text-alignment {
+    display: inline-flex;
+    border-radius: 5px;
+    overflow: hidden;
+
+}
+
+.editor-tool .text-alignment .button {
+    border-radius: 0;
+    background-color: white;
+    display: flex;
+    width: 3em;
+    height: 2.5em;
+    padding: 0;
+}
+
+.editor-tool .text-alignment .button.active {
+    background-color: var(--color-primary);
+}
+
+.editor-tool .text-alignment .button.active img {
+    filter: invert(1);
+}
+
+.editor-tool .text-alignment .button img {
+    width: 2em;
+    height: 2em;
+    margin: auto;
+}
+
+.editor-tool .font-style {
+    display: flex;
+    gap: 0.5em;
+    margin: 0.5em 0;
+}
+
+.editor-tool .font-style .button {
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0;
+    background-color: white;
+    color: black;
+}
+
+.editor-tool .font-style .button.active {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.editor-tool .row-text-settings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1em;
+}
+
+#toggle-bold {
+    font-weight: bold;
+}
+
+#toggle-italic {
+    font-style: italic;
+}
+
+#toggle-underline {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 800px) {
+    #editor-text-tool-elements {
+        min-height: 50px;
+        max-height: 400px;
+    }
+}

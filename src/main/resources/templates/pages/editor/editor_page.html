@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bg">
+<th:block th:fragment="editor-page-base(editor_content, scripts)">
+
+    <head>
+        <th:block th:replace="${scripts}"></th:block>
+        <title></title>
+
+        <th:block th:replace="pages/editor/base_head_content :: head-content"></th:block>
+    </head>
+
+    <body>
+
+        <th:block th:replace="components/base_layout :: base-layout(~{::#editor-page-content})">
+            <div id="editor-page-content" class="editor-page-content">
+                <th:block th:replace="${editor_content}"></th:block>
+                
+                <th:block th:replace="components/popular_services :: popular-services"></th:block>
+           
+                <div class="snackbar bottom middle" id="add-to-cart-snackbar">
+                    <img src="/images/common/tick.svg" alt="tick">
+                    Продуктът е добавен в количката
+                </div>
+            </div>
+            
+
+        </th:block>
+
+    </body>
+
+</th:block>
+
+</html>

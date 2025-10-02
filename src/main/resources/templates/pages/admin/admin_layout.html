@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html lang="bg" th:fragment="admin-page(title, style, scripts, pageContent)">
+
+<head th:insert="pages/admin/admin_base_content :: head-content">
+    <title th:replace="${title}">Рекламни материали</title>
+</head>
+
+<body> -->
+
+<div class="admin-page" th:fragment="admin-layout(pageContent, header)">
+  <div class="side-menu" id="admin-side-menu" style="left: -400px">
+    <div class="header">
+      <a href="/">
+        <img src="/images/logo.png" alt="Reklamni materiali" />
+      </a>
+
+      <button class="close-icon" onclick="toggleMenu()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <hr />
+
+    <ul class="links">
+      <li>
+        <a href="/админ">
+          <img src="/images/admin/dashboard.svg" alt="dashboard" />
+          Табло
+        </a>
+      </li>
+      <li><a href="/админ/визитки">Визитки</a></li>
+      <li><a href="/админ/работни-календари">Работни календари</a></li>
+      <li><a href="/админ/джобни-календарчета">Джобни календарчета</a></li>
+      <li><a href="/админ/флаери">Флаери</a></li>
+      <li><a href="/админ/химикалки">Химикалки</a></li>
+      <li><a href="/админ/запалки">Запалки</a></li>
+    </ul>
+  </div>
+
+  <div class="right-page-section">
+    <div class="content-right">
+      <button
+        onclick="toggleMenu()"
+        class="admin-toggle-button"
+        id="admin-menu-button"
+      >
+        <img src="/images/common/hamburger.svg" alt="hamburger" />
+      </button>
+      <span class="admin-heading" th:text="${header}">
+        Приятна работа, Админ!
+      </span>
+      <a id="top-nav-bar-admin-link" class="admin-icon" href="/админ/визитки">
+        <img src="/images/admin/user.png" />
+      </a>
+      <div onclick="toggleMenu()" class="overlay" id="overlay"></div>
+    </div>
+
+    <!-- <div class="header">
+      <div id="page-title-container" th:text="${header}"></div>
+
+      <div class="user-icon">
+        <button id="user-button">
+          <img src="" alt="" />
+        </button>
+      </div>
+    </div> -->
+    <th:block th:replace="${pageContent}"></th:block>
+
+    <div class="snackbar bottom middle" id="snackbar">
+    </div>
+  </div>
+
+  <script>
+    const toggleMenu = () => {
+      const menu = document.getElementById("admin-side-menu");
+      const menu_overlay = document.getElementById("overlay");
+      if (menu && menu_overlay) {
+        if (menu.style.left === "-400px") {
+          menu.style.left = "0px";
+          menu_overlay.style.display = "block";
+        } else {
+          menu.style.left = "-400px";
+          menu_overlay.style.display = "none";
+        }
+      }
+    };
+  </script>
+</div>

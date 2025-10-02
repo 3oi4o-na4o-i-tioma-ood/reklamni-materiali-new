@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="pages/admin/product_page_head_content :: head-content"></th:block>
+
+    <title>Визитки - админ</title>
+
+    <link rel="stylesheet" href="/css/pages/admin/product.css">
+    <link rel="stylesheet" href="/css/components/pagination.css">
+    <link rel="stylesheet" href="/css/components/image_upload.css">
+    <link rel="stylesheet" href="/css/components/utils.css">
+    <link rel="stylesheet" href="/css/pages/admin/category_editing.css">
+
+    <script src="/js/admin/edit_category/business_card.js"></script>
+    <script src="/js/products.js"></script>
+    <!-- <script src="/js/admin/product_page.js"></script> -->
+    <!-- <script src="/js/table.js"></script> -->
+    <script src="/js/components/pagination.js"></script>
+    <!-- <script src="/js/components/image_upload.js"></script> -->
+    <script src="/js/admin/categories.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="pages/admin/admin_layout :: admin-layout(~{::#page-content}, ${header})">
+        <div id="page-content" class="page-content edit-category-page-content">
+            <div class="page-content-section images-section">
+                <h1 class="title">
+                    Визитки <span class="category-path" id="category-path-container"></span>
+                </h1>
+
+                <div id="images-container" class="images-container"></div>
+
+                <div class="pagination" id="pagination-container"></div>
+            </div>
+
+            <div class="page-content-section categories-settings">
+                <h1 class="title">
+                    Добавяне на шаблони<span class="category-path" id="category-path-container"></span>
+                </h1>
+
+                <!-- <th:block th:replace="components/image_upload :: image-upload('image-upload')"></th:block> -->
+
+                <div class="upload-image-container">
+                    <img src="/images/common/upload1.svg" alt="upload"/>
+                    <input type="file" id="admin-business-upload" accept="image/png, image/jpg">
+            
+                    Drag & drop или
+                    <button class="button" id="bg-browse-file-button">Избери файл</button>
+                </div>
+
+                <div class="snackbar bottom middle" id="files-added-snackbar">
+                    <img src="/images/common/tick.svg" alt="tick">
+
+                    Файловете са добавени!
+                </div>
+            </div>
+        </div>
+
+    </th:block>
+</body>
+
+</html>

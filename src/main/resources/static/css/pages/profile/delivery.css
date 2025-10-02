@@ -1,0 +1,28 @@
+#delivery-page-content .form-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1em;
+    gap: 1em;
+}
+
+#delivery-page-content .full-width {
+    grid-column: 1 / 3;
+}
+
+@media screen and (max-width:767px) {
+    #delivery-page-content .form-section {
+        display: flex;
+        padding: 1em;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    #delivery-form label {
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    #delivery-page-content .full-width {
+        margin-bottom: 0;
+    }
+}

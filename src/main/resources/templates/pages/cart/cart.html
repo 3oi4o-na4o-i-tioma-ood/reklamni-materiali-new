@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="components/base_head_content :: head-content" />
+
+    <title>Количка</title>
+
+    <link rel="stylesheet" href="/css/pages/cart/cart.css">
+    <link rel="stylesheet" href="/css/libs/nice-select2.css">
+    <link rel="stylesheet" href="/css/components/dropdown.css">
+    <link rel="stylesheet" href="/css/components/tooltip.css">
+
+    <script src="/js/cart/cart.js"></script>
+    <script src="/js/editor/storage.js"></script>
+    <script src="/js/libs/nice-select2.js"></script>
+    <script src="/js/components/prices.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="components/base_layout :: base-layout(~{::#cart-page-content})">
+        <div id="cart-page-content">
+            <div class="cart-items-container">
+                <h4 class="title">Продукти</h4>
+
+                <p id="cart-is-empty" style="display: none;">Количката Ви е празна</p>
+                <div class="cart-items" id="cart-items">
+
+                </div>
+            </div>
+            <div class="right-sections-container">
+                <div class="price-overview">
+                    <h4 class="title">Обща сума на количката</h4>
+
+                    <div class="prices-container">
+                        <div class="price-row">
+                            <span class="name">Цена на продуктите</span>
+                            <span class="price" id="price-standard-container"></span>
+                        </div>
+
+                        <div class="price-row">
+                            <span class="name">Цена за по-бърза изработка</span>
+                            <span class="price" id="price-faster-delivery-container"></span>
+                        </div>
+
+                        <div class="price-row">
+                            <span class="name">Цена за доставка</span>
+                            <div class="tooltip" id="price-delivery-container">
+                                <div class="summary">?</div>
+                                <div class="content-wrapper">
+                                    <div class="content">За доставка работим с куриерска фирма Еконт. Цената на доставката зависи от размера на поръчката и тарифите на Еконт</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr class="zelen_hr" style="height:2px">
+                        <div class="price-row">
+                            <span class="name">Общо</span>
+                            <span class="price" id="price-total-container"></span>
+                        </div>
+                        <div class="price-row bold">
+                            <span class="name">Общо с ДДС</span>
+                            <span class="price" id="price-total-after-tax-container"></span>
+                        </div>
+
+                        <a class="button to-payment-button" href="/приключване-на-поръчката">Продължи към поръчка</a>
+                    </div>
+
+                </div>
+                <div class="message">
+                    <h4 class="title">Важно</h4>
+                    <span>
+                        Логото reklamni-materiali.com няма да бъде отпечатано на крайния продукт.
+                        Моля, проверете още веднъж Вашия дизайн за неточни данни или нечетими
+                        текстове. reklamni-materiali.com не носи отговорност за грешки, допуснати от клиента!
+                    </span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</body>
+
+</html>

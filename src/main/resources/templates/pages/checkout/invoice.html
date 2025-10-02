@@ -1,0 +1,52 @@
+<div class="section" th:fragment="invoice">
+    <div class="header">
+        <div class="number">2</div>
+
+        <h4>Лице</h4>
+    </div>
+
+    <form class="section-form" id="invoice-form">
+        <div class="radio-input-wrapper">
+            <input id="invoice-without-invoice" type="radio" name="issueInvoice" value=0 checked>
+            <label for="invoice-without-invoice">Физическо лице</label>
+        </div>
+
+        <div class="radio-input-wrapper">
+            <input id="invoice-with-invoice" type="radio" name="issueInvoice" value=1>
+            <label for="invoice-with-invoice">Юридическо лице</label>
+        </div>
+
+        <div class="section-form full-width" style="padding: 0; display: none;" id="invoice-data-container">
+            <h4 class="full-width">Данни за фактура</h4>
+
+            <div>
+                <label for="form-invoice-company-name">Име на фирмата</label>
+                <input id="form-invoice-company-name" name="invoiceCompanyName" type="text" class="input"
+                    placeholder="Име на фирмата">
+            </div>
+
+            <div>
+                <label for="form-invoice-address">Адрес на фирмата</label>
+                <input id="form-invoice-address" name="invoiceCompanyAddress" type="text" class="input"
+                    placeholder="Адрес на фирмата">
+            </div>
+
+            <div>
+                <label for="form-invoice-uic">ЕИК (ИН) /Булстат/</label>
+                <input id="form-invoice-uic" name="invoiceUIC" type="text" class="input"
+                    placeholder="ЕИК (ИН) /Булстат/">
+            </div>
+
+            <div>
+                <label for="form-invoice-tax-id">ИН по ЗДДС</label>
+                <input id="invoice-tax-id" name="invoiceTaxId" type="text" class="input" placeholder="ИН по ЗДДС">
+            </div>
+
+            <div class="full-width">
+                <label for="form-invoice-receiver">Получател</label>
+                <input id="form-address-receiver" name="invoiceReceiver" type="text" class="input"
+                    placeholder="Получател">
+            </div>
+        </div>
+    </form>
+</div>

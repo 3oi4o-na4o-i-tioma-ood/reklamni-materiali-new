@@ -1,0 +1,70 @@
+.home-page .about-us {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.home-page .about-us .container1 {
+  /* width: 100%;
+    
+    height: Fixed (640px) px; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+
+  align-items: flex-start;
+}
+
+.home-page .about-us .container1 .title {
+  /* font-family: Montserrat; */
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+
+  text-align: left;
+  color: rgba(89, 138, 24, 1);
+  margin-bottom: 0.5em;
+}
+
+.home-page .about-us .container1 .description {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.home-page .about-us .container1 .description .zelen-span {
+  color: rgba(89, 138, 24, 1);
+  font-weight: 700;
+}
+
+.home-page .about-us .container1 .description span {
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+}
+
+.home-page .about-us .container1 .description a {
+  color: rgba(89, 138, 24, 1);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.home-page .about-us img {
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .home-page .about-us {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3vw;
+  }
+
+  .home-page .about-us .container1 .description {
+    font-size: var(--font-size-xs);
+  }
+
+  .home-page .about-us img {
+    width: 40vw;
+  }
+  
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div th:fragment="text" id="editor-text-tool" class="editor-tool" th:classappend="${is_active} ? 'active' : ''">
+        <h4 class="title">Форматиране</h4>
+
+        <div class="text-format-section" id="text-format-section">
+            <div class="row">
+                <!-- <label for="editor-select-font">Шрифт</label> -->
+                <select id="editor-select-font">
+
+                </select>
+
+                <!-- <label for="editor-select-font-size">Размер</label> -->
+                <select id="editor-select-font-size">
+
+                </select>
+            </div>
+            <div class="row row-text-settings">
+                <div class="font-style">
+                    <button class="button" id="toggle-bold">B</button>
+                    <button class="button" id="toggle-italic">I</button>
+                    <button class="button" id="toggle-underline">U</button>
+                </div>
+
+                <div class="text-alignment">
+                    <button class="button active" id="button-text-align-left"><img src="/images/common/align-left.svg"
+                            alt="align-left"></button>
+                    <button class="button" id="button-text-align-center"><img src="/images/common/align-center.svg"
+                            alt="align-center"></button>
+                    <button class="button" id="button-text-align-right"><img src="/images/common/align-right.svg"
+                            alt="align-right"></button>
+                </div>
+            </div>
+
+                <div class="recomended-colors" id="recomended-colors"></div>
+                
+                <input id="more-colors-button" class="button" type="submit" value="Повече цветове" data-coloris></input>
+
+            <div class="message">Изберете текстов елемент за редактиране</div>
+        </div>
+
+        <h4 class="title">Текст</h4>
+
+        <div id="editor-text-tool-elements">
+
+        </div>
+
+        <button class="button" id="editor-text-tool-add-text-button">
+            +
+        </button>
+    </div>
+</body>
+
+</html>

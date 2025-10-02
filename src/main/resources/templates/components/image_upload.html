@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="bg">
+<body>
+    <div th:fragment="image-upload(id)" class="upload-image-container" th:id="${id}">
+        <img src="/images/common/upload1.svg" alt="upload"/>
+        <input type="file" id="bg-file-input" accept="image/png, image/jpg, image/jpeg, image/tiff">
+
+        Drag & drop или
+        <button class="button" id="bg-browse-file-button">Избери файл</button>
+    </div>
+</body>
+</html>

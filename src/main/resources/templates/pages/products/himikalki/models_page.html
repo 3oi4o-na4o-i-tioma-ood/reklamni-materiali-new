@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <th:block th:replace="components/base_head_content :: head-content"></th:block>
+    <title>Химикалки - модели</title>
+    <link rel="stylesheet" href="/css/pages/products/rabotni_kalendari/models.css">
+    <link rel="stylesheet" href="/css/components/popup.css">
+
+    <script src="/js/models.js"></script>
+    <script src="/js/models/pen.js"></script>
+    <script src="/js/components/popup.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="components/base_layout :: base-layout(~{::#models-page-content})">
+
+        <div id="models-page-content" class="pens-models-page">
+            <h1 class="title">
+                Модел химикалка
+            </h1>
+            <!-- <a class="button" id="continue-link">Към дизайн</a> -->
+            <div id="models-container" class="models-container">
+                <div class="model" th:each="model, index : ${models}" th:attr="data-model-id=${model.id}">
+
+                    <div class="images-container">
+                        <img th:each="color, colorIndex : ${model.colors}"
+                            th:src="${'/api/model-image?modelColorId=' + color.id}"
+                            th:style="${'display:' + (colorIndex.index == 0 ? 'block' : 'none')}">
+                    </div>
+
+                    <div class="info-row">
+                        <div th:text="${model.model}"></div>
+                        <div th:text="${model.catalogueNumber}"></div>
+                        <div style="margin-left: auto" th:text="${model.price} + ' лв.'"></div>
+                    </div>
+
+                    <div class="colors-container">
+                        <th:block th:each="color, colorIndex : ${model.colors}">
+                            <button class="color-circle" th:classappend="${colorIndex.index == 0 ? 'selected' : ''}"
+                                th:if="${color.secondaryColor == null}"
+                                th:style="${'background-color:' + color.primaryColor}"
+                                th:attr="data-model-color-id=${color.id}">
+                            </button>
+                            <button class="color-circle" th:classappend="${colorIndex.index == 0 ? 'selected' : ''}"
+                                th:unless="${color.secondaryColor == null}" th:attr="data-model-color-id=${color.id}">
+                                
+                                <div class="primary" th:style="${'background-color:' + color.primaryColor}"></div>
+                                <div class="secondary" th:style="${'background-color:' + color.secondaryColor}"></div>
+                            </button>
+                        </th:block>
+                    </div>
+
+                    <button class="button small model-popup-button" id="model-popup-button">Виж повече</button>
+                </div>
+            </div>
+            <th:block
+                th:replace="components/popup :: popup('model-info-popup', '', ~{::#popup-body}, 'model-info-popup')">
+                <th:block id="popup-body">
+                    <img id="popup-model-image">
+
+                    <a id="continue-link" class="button small" style="margin-left: auto">Към избор на фон</a>
+                </th:block>
+            </th:block>
+        </div>
+    </th:block>
+</body>
+
+</html>

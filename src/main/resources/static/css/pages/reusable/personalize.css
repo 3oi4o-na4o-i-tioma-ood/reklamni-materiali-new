@@ -1,0 +1,55 @@
+.personalize {
+  padding: 7vw 6vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2vw;
+  background-color: rgba(230, 235, 233, 1);
+}
+
+.personalize .second_column {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.personalize .second_column .title {
+  color: rgba(89, 138, 24, 1);
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: var(--font-size-l);
+}
+
+.personalize .second_column .text {
+  color: rgba(0, 0, 0, 1);
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+}
+
+.personalize .second_column .text span {
+  color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+}
+
+.personalize .second_column .text .zelen-span {
+  color: rgba(89, 138, 24, 1);
+  font-weight: 700;
+}
+
+.personalize .first_column img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.personalize .second_column a {
+  font-family: Montserrat;
+  font-size: var(--font-size-xxs);
+  font-weight: 500;
+  background-color: rgba(89, 138, 24, 1);
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  padding: 1vw 1.5vw;
+  align-self: flex-start;
+  border-radius: 8px;
+}

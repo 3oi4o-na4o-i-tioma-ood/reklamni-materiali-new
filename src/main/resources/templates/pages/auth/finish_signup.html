@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <th:block th:replace="components/base_head_content :: head-content"></th:block>
+
+    <title>Приключване на регистрацията</title>
+
+    <link rel="stylesheet" href="/css/pages/verify_email/verify_email.css">
+</head>
+<body>
+    <th:block th:replace="components/base_layout :: base-layout(~{::#finish-signup-page-content})">
+        <div id="finish-signup-page-content">
+            <div class="section" id="email-verified-section">
+                <h1>Инструкции за приключване на регистрацията са изпратени на посочения имейл. Можете да затворите тази страница</h1>
+                <a href="/" class="button">Начало</a>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>
