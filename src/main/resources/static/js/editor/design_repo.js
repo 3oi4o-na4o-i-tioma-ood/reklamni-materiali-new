@@ -30,11 +30,23 @@ const designRepo = {
 
             const { bgUrl, ...rest } = side
 
-            rest.elements = side.elements?.map(({ backendId, ...element }) => ({
-                ...element,
-                fieldName: element.id,
-                id: backendId
-            }))
+            rest.elements = side.elements?.map(({ backendId, ...element }) => {
+                const normalized = {
+                    ...element,
+                    fieldName: element.id,
+                    id: backendId
+                }
+
+                try {
+                    if (normalized.type === "text") {
+                        normalized.text = renderElements.computeWrappedText(normalized)
+                    }
+                } catch (e) {
+                    console.warn("Failed to normalize wrapped text:", e)
+                }
+
+                return normalized
+            })
 
 
             return rest

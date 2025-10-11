@@ -309,6 +309,71 @@ function newRenderElements(editorId) {
       }
     },
 
+    computeWrappedText(elementProps) {
+      try {
+        const widthPx = (elementProps?.size?.w || 0) * editor.canvasPxPerProductMM;
+        if (!widthPx || !elementProps?.text?.length) {
+          return elementProps?.text || "";
+        }
+
+        const sizer = document.createElement("div");
+        sizer.style.position = "fixed";
+        sizer.style.left = "-10000px";
+        sizer.style.top = "0";
+        sizer.style.visibility = "hidden";
+        sizer.style.whiteSpace = "pre-wrap";
+        sizer.style.wordBreak = "break-word";
+        sizer.style.overflowWrap = "anywhere";
+        sizer.style.width = widthPx + "px";
+        sizer.style.fontFamily = `'${elementProps.fontFamily}'` || "Arial";
+        sizer.style.fontSize =
+          (elementProps.fontSize || 0) * editor.canvasPxPerProductMM + "px";
+        sizer.style.fontWeight = elementProps.bold ? "bold" : "normal";
+        sizer.style.fontStyle = elementProps.italic ? "italic" : "normal";
+        sizer.style.letterSpacing = "normal";
+        sizer.style.lineHeight = "normal";
+
+        const textNode = document.createTextNode(elementProps.text);
+        sizer.append(textNode);
+        document.body.appendChild(sizer);
+
+        const range = document.createRange();
+        const result = [];
+        let currentLine = [];
+        let lastTop = null;
+
+        for (let i = 0; i < textNode.length; i++) {
+          range.setStart(textNode, i);
+          range.setEnd(textNode, i + 1);
+          const rects = range.getClientRects();
+          if (!rects || rects.length === 0) {
+            currentLine.push(textNode.data[i]);
+            continue;
+          }
+          const top = Math.round(rects[0].top);
+          if (lastTop === null) {
+            lastTop = top;
+          }
+          if (top !== lastTop) {
+            result.push(currentLine.join(""));
+            currentLine = [textNode.data[i]];
+            lastTop = top;
+          } else {
+            currentLine.push(textNode.data[i]);
+          }
+        }
+        if (currentLine.length > 0) {
+          result.push(currentLine.join(""));
+        }
+
+        document.body.removeChild(sizer);
+        return result.join("\n");
+      } catch (e) {
+        console.warn("Failed to compute wrapped text, fallback to original.", e);
+        return elementProps?.text || "";
+      }
+    },
+
     renderTextElement(props) {
       const canvas = renderElements.getCanvas();
 

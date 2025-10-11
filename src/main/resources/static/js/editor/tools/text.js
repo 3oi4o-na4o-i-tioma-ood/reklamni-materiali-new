@@ -444,12 +444,12 @@ const textTool = {
             if(renderElements.selectedElements.length > 0){
                 renderElements.selectedElements.forEach((element) => {
                     editor.updateElement(element.id, {
-                        fontSize: Math.round(e.target.value * textTool.fontSizeUnitInMM * 100) / 100
+                        fontSize: Math.round(e.target.value * textTool.fontSizeUnitInMM * 100000) / 100000
                     })
                 })
             }else{
                 editor.updateElement(editor.selectedElementId, {
-                    fontSize: Math.round(e.target.value * textTool.fontSizeUnitInMM * 100) / 100
+                    fontSize: Math.round(e.target.value * textTool.fontSizeUnitInMM * 100000) / 100000
                 })
             }
         })

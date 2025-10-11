@@ -112,6 +112,7 @@
 .editor-canvas .text-element .textarea-sizer {
   font: inherit;
 
+  word-break: break-word;
   /* Place on top of each other */
   grid-area: 1 / 1 / 2 / 2;
 }
