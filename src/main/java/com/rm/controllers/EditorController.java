@@ -3,8 +3,8 @@ package com.rm.controllers;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
@@ -12,6 +12,7 @@ import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -339,28 +340,31 @@ public class EditorController implements EditorApi {
                         break;
                     }
 
+                    System.out.println("fontFamily=" + fontFamily);
+
                     JTextPane pane = new JTextPane();
                     pane.setBounds(mmToPixels(position.x(), product, image.getWidth()),
                             mmToPixels(position.y(), product, image.getWidth()),
                             mmToPixels(size.w(), product, image.getWidth()), image.getHeight());
                     pane.setMargin(new Insets(0, 0, 0, 0));
-                    pane.setFont(
-                            new Font(fontFamily == null ? "Arial" : fontFamily, Font.PLAIN,
-                                    mmToPixels(fontSize, product, image.getWidth())/*
-                                                                                    * (int) (fontSize * product.dpi() /
-                                                                                    * 25.4)
-                                                                                    */).deriveFont(
-                                            Map.ofEntries(
-                                                    Map.entry(TextAttribute.WEIGHT,
-                                                            bold ? TextAttribute.WEIGHT_BOLD
-                                                                    : TextAttribute.WEIGHT_REGULAR),
-                                                    Map.entry(TextAttribute.POSTURE,
-                                                            italic ? TextAttribute.POSTURE_OBLIQUE
-                                                                    : TextAttribute.POSTURE_REGULAR),
-                                                    Map.entry(TextAttribute.UNDERLINE,
-                                                            underline ? TextAttribute.UNDERLINE_ON : -1),
-                                                    Map.entry(TextAttribute.FOREGROUND,
-                                                            color == null ? Color.BLACK : Color.decode(color)))));
+                    Font baseFont = resolveFontFromResources(fontFamily);
+                    if (baseFont == null) {
+                        baseFont = new Font(fontFamily == null ? "Arial" : fontFamily, Font.PLAIN,
+                                mmToPixels(fontSize, product, image.getWidth()));
+                    } else {
+                        baseFont = baseFont.deriveFont((float) mmToPixels(fontSize, product, image.getWidth()));
+                    }
+
+                    pane.setFont(baseFont.deriveFont(
+                            Map.ofEntries(
+                                    Map.entry(TextAttribute.WEIGHT,
+                                            bold ? TextAttribute.WEIGHT_BOLD : TextAttribute.WEIGHT_REGULAR),
+                                    Map.entry(TextAttribute.POSTURE,
+                                            italic ? TextAttribute.POSTURE_OBLIQUE : TextAttribute.POSTURE_REGULAR),
+                                    Map.entry(TextAttribute.UNDERLINE,
+                                            underline ? TextAttribute.UNDERLINE_ON : -1),
+                                    Map.entry(TextAttribute.FOREGROUND,
+                                            color == null ? Color.BLACK : Color.decode(color)))));
                     pane.setForeground(color == null ? Color.BLACK : Color.decode(color));
                     pane.setBackground(new Color(0, 0, 0, 0));
                     pane.setText(breakLines(text, graphics.getFontMetrics(pane.getFont()), pane.getWidth()));
@@ -382,6 +386,50 @@ public class EditorController implements EditorApi {
         }
 
         ImageIO.write(image, "png", savePath.toFile());
+    }
+
+    private static final Map<String, String> FONT_FILES = Map.ofEntries(
+            Map.entry("Arial", "/static/fonts/arial.ttf"),
+            Map.entry("Azbuka", "/static/fonts/azbuka02.ttf"),
+            Map.entry("Azbuka Decorative", "/static/fonts/azbuka03_d.ttf"),
+            Map.entry("Comic Sans MS", "/static/fonts/comic.ttf"),
+            Map.entry("Courier New", "/static/fonts/cour.ttf"),
+            Map.entry("Kovanovic 68", "/static/fonts/nk68.ttf"),
+            Map.entry("Kovanovic 85", "/static/fonts/nk85.ttf"),
+            Map.entry("Kovanovic 91", "/static/fonts/nk91.ttf"),
+            Map.entry("Kovanovic 112", "/static/fonts/nk112.ttf"),
+            Map.entry("Kovanovic 113", "/static/fonts/nk113.ttf"),
+            Map.entry("Kovanovic 114", "/static/fonts/nk114.ttf"),
+            Map.entry("Kovanovic 115", "/static/fonts/nk115.ttf"),
+            Map.entry("Kovanovic 162", "/static/fonts/nk162.ttf"),
+            Map.entry("Kovanovic 226", "/static/fonts/nk226.ttf"),
+            Map.entry("Kovanovic 251", "/static/fonts/nk251.ttf"),
+            Map.entry("Kovanovic 254", "/static/fonts/nk254.ttf"),
+            Map.entry("Kovanovic 257", "/static/fonts/nk257.ttf"),
+            Map.entry("Kovanovic 510", "/static/fonts/nk510.ttf"),
+            Map.entry("Old Cyrillic", "/static/fonts/nkcirpp.ttf"),
+            Map.entry("Shadow", "/static/fonts/senka.ttf"),
+            Map.entry("Times New Roman", "/static/fonts/times.ttf"),
+            Map.entry("Verdana", "/static/fonts/verdana.ttf"));
+
+    private static Font resolveFontFromResources(String fontFamily) {
+        String path = FONT_FILES.get(fontFamily);
+        if (path == null) {
+            return null;
+        }
+        try (InputStream is = EditorController.class.getResourceAsStream(path)) {
+            if (is == null) {
+                return null;
+            }
+            Font created = Font.createFont(Font.TRUETYPE_FONT, is);
+            try {
+                GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(created);
+            } catch (Exception ignored) {
+            }
+            return created;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Design.Raw getDesign(String id) {

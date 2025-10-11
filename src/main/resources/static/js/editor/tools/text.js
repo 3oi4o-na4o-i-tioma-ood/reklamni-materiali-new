@@ -400,12 +400,12 @@ const textTool = {
             if(renderElements.selectedElements.length > 0){
                 renderElements.selectedElements.forEach((element) => {
                     editor.updateElement(element.id, {
-                        fontFamily: "'" + e.target.value + "'"
+                        fontFamily: e.target.value
                     })
                 })
             }else{
                 editor.updateElement(editor.selectedElementId, {
-                    fontFamily: "'" + e.target.value + "'"
+                    fontFamily: e.target.value
                 })
             }
         })
