@@ -359,6 +359,21 @@ const editor = {
       return initialEditorTextElements[editor.currentProduct];
     }
   },
+  _getInitialPrintType() {
+    if (["PEN", "LIGHTER"].includes(editor.currentProduct)) {
+      return "SCREEN_ONE_COLOR";
+    }
+
+    if (editor.currentProduct === "WORK_CALENDAR") {
+      return "NORMAL";
+    }
+
+    if(["BUSINESS_CARD", "POCKET_CALENDAR", "FLIER_10x15", "FLIER_10x20"].includes(editor.currentProduct)) {
+      return "COLORED_NO_BACK";
+    }
+
+    console.error("No initial print type for product: ", editor.currentProduct);
+  },
   async init(product_name) {
     editor.currentProduct = product_name;
     designRepo.modelColorId =
@@ -367,7 +382,9 @@ const editor = {
     renderElements.setBoundary(editor.getBoundaryInPx());
 
     editor.setElements(editor._getInitialElements());
-
+    if(!designRepo.printType) {
+      designRepo.printType = editor._getInitialPrintType();
+    }
     editor.getBgFromUrl();
 
     tools.init();

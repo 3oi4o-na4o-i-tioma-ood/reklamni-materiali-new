@@ -11,7 +11,7 @@ const designRepo = {
         null
     ],
     selectedProductSide: 0,
-    _printType: null,
+    printType: null,
     effects: {},
     isFavorite: null,
     name: null,
@@ -57,7 +57,7 @@ const designRepo = {
             productType: editor.currentProduct,
             front: formatedSides[0],
             back: formatedSides[1],
-            printType: designRepo._printType,
+            printType: designRepo.printType,
             effects: designRepo.effects,
             isFavorite: designRepo.isFavorite,
             name: designRepo.name,

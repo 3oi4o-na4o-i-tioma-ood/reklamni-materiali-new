@@ -137,7 +137,7 @@ const editorPreviewPopups = {
         const faceBwCheckbox = document.getElementById("preview-cart-checkbox-face-bw")
         const backBwCheckbox = document.getElementById("preview-cart-checkbox-back-bw")
         async function onChange() {
-            designRepo._printType = editorPreviewPopups._getPrintType()
+            designRepo.printType = editorPreviewPopups._getPrintType()
             await editorPreviewPopups._updatePrice()
         }
 
@@ -176,7 +176,7 @@ const editorPreviewPopups = {
             const selectedPrintType = document.querySelector('.preview-popup input[name="print-type"]:checked')?.value;
             updateColorsCountVisibility(selectedPrintType);
 
-            designRepo._printType = editorPreviewPopups._getPrintType();
+            designRepo.printType = editorPreviewPopups._getPrintType();
             await editorPreviewPopups._updatePrice();
             editorPreviewPopups._updateSelectAmount()
         }

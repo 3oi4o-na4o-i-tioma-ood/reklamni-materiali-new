@@ -7,7 +7,7 @@ public enum ProductType {
     FLIER_10x15(101, 154, 300),
     FLIER_10x20(101, 204, 300),
     PEN(140, 35, 300),
-    LIGHTER(101, 204, 300);
+    LIGHTER(107, 35, 132);
 
     private static final double INCHES_PER_MM = 0.0393701;
 

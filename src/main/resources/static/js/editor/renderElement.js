@@ -297,7 +297,7 @@ function newRenderElements(editorId) {
           ? "underline"
           : "none";
         element.style.fontStyle = elementProps.italic ? "italic" : "normal";
-        element.style.fontFamily = `'${elementProps.fontFamily}'` || "Arial";
+        element.style.fontFamily = elementProps.fontFamily || "Arial";
         element.style.color = elementProps.color;
         element.style.textAlign = elementProps.alignment;
         element.style.height = "auto";

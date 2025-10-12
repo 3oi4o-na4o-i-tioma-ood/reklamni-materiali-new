@@ -213,7 +213,9 @@ public interface EditorRepository extends JpaRepository<Design.Raw, String> {
                         text.fontFamily = resultSet.getString("font_family");
                         text.fontSize = resultSet.getDouble("font_size");
                         text.color = resultSet.getString("color");
-                        text.alignment = TextElement.Alignment.valueOf(resultSet.getString("alignment"));
+                        String alignment = resultSet.getString("alignment");
+
+                        text.alignment = TextElement.Alignment.valueOf(alignment == null ? "CENTER" : alignment);
                         text.hasChanged = resultSet.getBoolean("has_changed");
                     }
                     case Element.ImageRaw image -> {

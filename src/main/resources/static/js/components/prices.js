@@ -24,7 +24,15 @@ const pricesCalculation = {
     },
     async getCartItemPrice({ productType, modelColorId, printType, amount, effects }) {
         const {priceAmounts, modelPrice} = await pricesCalculation.getCartItemAmountsPrices(productType, modelColorId, printType)
-        const basePrice = priceAmounts.find(amountOption => amountOption.amount === amount)?.price
+        const basePriceMaybeSingle = priceAmounts.find(amountOption => amountOption.amount === amount)?.price
+
+        let basePrice
+        if (["PEN", "LIGHTER"].includes(productType)) {
+            basePrice = basePriceMaybeSingle * amount
+        }
+        else {
+            basePrice = basePriceMaybeSingle
+        }
 
         const effectsOverhead = await pricesCalculation.getEffectsOverhead(effects, productType, amount)
 

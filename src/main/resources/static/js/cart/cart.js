@@ -151,19 +151,22 @@ const shoppingCart = {
 
         return itemSettings
     },
-    async _createItemMainSection(item, title, signlePrice) {
+    async _createItemMainSection(item, signlePrice) {
+        const product = products.find(product => product.name === item.design.productType)
+        const title = product.displayName
+
         const mainSection = document.createElement("div")
         mainSection.classList.add("cart-item-main-section")
 
         const titleEl = document.createElement("h4")
         titleEl.innerText = title
 
-        const singlePriceEl = document.createElement("span")
-        singlePriceEl.innerText = signlePrice
+        //const singlePriceEl = document.createElement("span")
+        //singlePriceEl.innerText = 'Единична цена: ' + signlePrice
 
         const itemSettings = await shoppingCart._createItemSettings(item)
 
-        mainSection.append(titleEl, singlePriceEl, itemSettings)
+        mainSection.append(titleEl, /* singlePriceEl, */itemSettings)
 
         return mainSection
     },
@@ -186,7 +189,7 @@ const shoppingCart = {
         }
 
         container.append(image)
-        container.append(await shoppingCart._createItemMainSection(item, "Визитки", null))
+        container.append(await shoppingCart._createItemMainSection(item, null))
         container.append(await shoppingCart._createItemRightSection(item, deleteItem))
 
         return container

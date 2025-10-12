@@ -304,6 +304,8 @@ public class EditorController implements EditorApi {
             graphics.dispose();
         }
 
+        System.out.println("Image size: x=" + image.getWidth() + " y=" + image.getHeight());
+
         if (image.getColorModel().getColorSpace().getType() == ColorSpace.TYPE_CMYK) {
             image = ColorUtils.cmykToRgb(image);
         }

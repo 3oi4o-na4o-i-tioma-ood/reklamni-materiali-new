@@ -62,8 +62,9 @@ public sealed interface Element permits ImageElement, TextElement {
             }
         }
 
-        resultElement.designSide = new DesignSide.Raw();
-        resultElement.designSide.id = designSide.id;
+        // Reuse the same DesignSide.Raw instance to avoid multiple detached instances
+        // with the same id in the persistence context
+        resultElement.designSide = designSide;
         
         return resultElement;
     }

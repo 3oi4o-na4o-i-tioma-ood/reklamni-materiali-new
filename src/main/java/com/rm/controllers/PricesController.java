@@ -139,6 +139,7 @@ public class PricesController implements PricesApi {
             throw new RuntimeException(e);
         }
         System.out.println(item.design.printType);
+        System.out.println("modelPriceInfo: " + modelPriceInfo.modelPrice());
         double price = (modelPriceInfo.modelPrice() == null ? 0 : modelPriceInfo.modelPrice()) * item.amount
                 + modelPriceInfo
                         .printPrices()
@@ -148,6 +149,8 @@ public class PricesController implements PricesApi {
                                 .mapToDouble(PriceForAmount::price).findFirst().getAsDouble())
                         .findFirst()
                         .orElse(0);
+
+        System.out.println("price before effects: " + price);
 
         for (Map.Entry<NoteType, Long> effect : item.design.effects.entrySet()) {
             NoteType type = effect.getKey();
