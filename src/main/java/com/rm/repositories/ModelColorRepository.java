@@ -27,6 +27,11 @@ public class ModelColorRepository {
         return database.findFirstIntoRecord(ColorPath.class, "SELECT Model_Colors.path, Product_Models.product FROM Model_Colors JOIN Product_Models ON Product_Models.id = Model_Colors.model_id WHERE Model_Colors.id = ?", modelColorId);
     }
 
+
+    public Optional<Model.Color> findColorById(long modelColorId) {
+        return database.findFirstIntoRecord(Model.Color.class, "SELECT * FROM Model_Colors WHERE id = ?", modelColorId);
+    }
+
     public record ColorPath(String path, ProductType product) {
         public String getPath() {
             return product.name().toLowerCase() + "_models/" + path;

@@ -3,15 +3,15 @@ package com.rm.controllers;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -21,10 +21,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.swing.JTextPane;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+// Removed Swing text components in favor of manual drawing for consistent wrapping
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rm.apis.EditorApi;
@@ -299,7 +296,7 @@ public class EditorController implements EditorApi {
         } else if (modelColorId != null) {
             image = ImageIO.read(categoriesController.getModelImage(modelColorId).getFile());
         } else {
-            image = new BufferedImage(product.imagePixelWidth(), product.imagePixelHeight(),
+            image = new BufferedImage((int) product.imagePixelWidth(), (int) product.imagePixelHeight(),
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics = image.createGraphics();
             graphics.setBackground(Color.WHITE);
@@ -329,59 +326,117 @@ public class EditorController implements EditorApi {
                 case ImageElement(Long id, Element.Size size, Element.Position position, String name, String fieldName) ->
                     graphics.drawImage(
                             ImageIO.read(getImage(name).getInputStream()),
-                            mmToPixels(position.x(), product, image.getWidth()),
-                            mmToPixels(position.y(), product, image.getWidth()),
-                            mmToPixels(size.w(), product, image.getWidth()),
-                            mmToPixels(size.h(), product, image.getWidth()),
+                            (int) mmToPixels(position.x(), product),
+                            (int) mmToPixels(position.y(), product),
+                            (int) mmToPixels(size.w(), product),
+                            (int) mmToPixels(size.h(), product),
                             null);
                 case TextElement(Long id, Element.Size size, Element.Position position, String text, boolean bold, boolean italic, boolean underline, String fontFamily, double fontSize, String color, TextElement.Alignment alignment, String fieldName, boolean hasChanged) -> {
                     if (!hasChanged) {
                         break;
                     }
 
-                    JTextPane pane = new JTextPane();
-                    pane.setBounds(mmToPixels(position.x(), product, image.getWidth()),
-                            mmToPixels(position.y(), product, image.getWidth()),
-                            mmToPixels(size.w(), product, image.getWidth()), image.getHeight());
-                    pane.setMargin(new Insets(0, 0, 0, 0));
-                    pane.setFont(
-                            new Font(fontFamily == null ? "Arial" : fontFamily, Font.PLAIN,
-                                    mmToPixels(fontSize, product, image.getWidth())/*
-                                                                                    * (int) (fontSize * product.dpi() /
-                                                                                    * 25.4)
-                                                                                    */).deriveFont(
-                                            Map.ofEntries(
-                                                    Map.entry(TextAttribute.WEIGHT,
-                                                            bold ? TextAttribute.WEIGHT_BOLD
-                                                                    : TextAttribute.WEIGHT_REGULAR),
-                                                    Map.entry(TextAttribute.POSTURE,
-                                                            italic ? TextAttribute.POSTURE_OBLIQUE
-                                                                    : TextAttribute.POSTURE_REGULAR),
-                                                    Map.entry(TextAttribute.UNDERLINE,
-                                                            underline ? TextAttribute.UNDERLINE_ON : -1),
-                                                    Map.entry(TextAttribute.FOREGROUND,
-                                                            color == null ? Color.BLACK : Color.decode(color)))));
-                    pane.setForeground(color == null ? Color.BLACK : Color.decode(color));
-                    pane.setBackground(new Color(0, 0, 0, 0));
-                    pane.setText(breakLines(text, graphics.getFontMetrics(pane.getFont()), pane.getWidth()));
-                    System.out.println(image.getWidth());
-                    System.out.println(pane.getWidth());
-                    System.out.println(pane.getFont().getSize2D());
-                    System.out.println(color == null ? Color.BLACK : Color.decode(color));
+                    System.out.println("fontFamily=" + fontFamily);
 
-                    StyledDocument alignmentDocument = pane.getStyledDocument();
-                    SimpleAttributeSet alignmentAttribute = new SimpleAttributeSet();
-                    StyleConstants.setAlignment(alignmentAttribute, alignment.styleConstantsAlignment());
-                    alignmentDocument.setParagraphAttributes(0, text.length(), alignmentAttribute, false);
+                    int xPx = (int) mmToPixels(position.x(), product);
+                    int yPx = (int) mmToPixels(position.y(), product);
+                    int widthPx = (int) mmToPixels(size.w(), product);
 
-                    graphics.translate(pane.getX(), pane.getY());
-                    pane.paint(graphics);
-                    graphics.translate(-pane.getX(), -pane.getY());
+                    Font baseFont = resolveFontFromResources(fontFamily);
+                    if (baseFont == null) {
+                        baseFont = new Font(fontFamily == null ? "Arial" : fontFamily, Font.PLAIN,
+                                (int) mmToPixels(fontSize, product));
+                    } else {
+                        baseFont = baseFont.deriveFont((float) mmToPixels(fontSize, product));
+                    }
+
+                    Font drawFont = baseFont.deriveFont(Map.ofEntries(
+                            Map.entry(TextAttribute.WEIGHT,
+                                    bold ? TextAttribute.WEIGHT_BOLD : TextAttribute.WEIGHT_REGULAR),
+                            Map.entry(TextAttribute.POSTURE,
+                                    italic ? TextAttribute.POSTURE_OBLIQUE : TextAttribute.POSTURE_REGULAR)
+                    ));
+
+                    Color drawColor = color == null ? Color.BLACK : Color.decode(color);
+                    graphics.setFont(drawFont);
+                    graphics.setColor(drawColor);
+
+                    FontMetrics fm = graphics.getFontMetrics(drawFont);
+                    int lineHeight = fm.getHeight();
+                    int ascent = fm.getAscent();
+
+                    String[] lines = (text == null ? "" : text).split("\\n", -1);
+                    for (int i = 0; i < lines.length; i++) {
+                        String line = lines[i];
+                        int textWidth = fm.stringWidth(line);
+                        int drawX = xPx;
+                        switch (alignment) {
+                            case CENTER -> drawX = xPx + Math.max(0, (widthPx - textWidth) / 2);
+                            case RIGHT -> drawX = xPx + Math.max(0, widthPx - textWidth);
+                            default -> drawX = xPx;
+                        }
+
+                        int drawY = yPx + i * lineHeight + ascent;
+                        graphics.drawString(line, drawX, drawY);
+
+                        if (underline) {
+                            int underlineY = drawY + 1;
+                            graphics.drawLine(drawX, underlineY, drawX + textWidth, underlineY);
+                        }
+                    }
                 }
             }
         }
 
         ImageIO.write(image, "png", savePath.toFile());
+    }
+
+    private static final Map<String, String> FONT_FILES = Map.ofEntries(
+            Map.entry("Arial", "/static/fonts/arial.ttf"),
+            Map.entry("Azbuka", "/static/fonts/azbuka02.ttf"),
+            Map.entry("Azbuka Decorative", "/static/fonts/azbuka03_d.ttf"),
+            Map.entry("Comic Sans MS", "/static/fonts/comic.ttf"),
+            Map.entry("Courier New", "/static/fonts/cour.ttf"),
+            Map.entry("Kovanovic 68", "/static/fonts/nk68.ttf"),
+            Map.entry("Kovanovic 85", "/static/fonts/nk85.ttf"),
+            Map.entry("Kovanovic 91", "/static/fonts/nk91.ttf"),
+            Map.entry("Kovanovic 112", "/static/fonts/nk112.ttf"),
+            Map.entry("Kovanovic 113", "/static/fonts/nk113.ttf"),
+            Map.entry("Kovanovic 114", "/static/fonts/nk114.ttf"),
+            Map.entry("Kovanovic 115", "/static/fonts/nk115.ttf"),
+            Map.entry("Kovanovic 162", "/static/fonts/nk162.ttf"),
+            Map.entry("Kovanovic 226", "/static/fonts/nk226.ttf"),
+            Map.entry("Kovanovic 251", "/static/fonts/nk251.ttf"),
+            Map.entry("Kovanovic 254", "/static/fonts/nk254.ttf"),
+            Map.entry("Kovanovic 257", "/static/fonts/nk257.ttf"),
+            Map.entry("Kovanovic 510", "/static/fonts/nk510.ttf"),
+            Map.entry("Old Cyrillic", "/static/fonts/nkcirpp.ttf"),
+            Map.entry("Shadow", "/static/fonts/senka.ttf"),
+            Map.entry("Times New Roman", "/static/fonts/times.ttf"),
+            Map.entry("Verdana", "/static/fonts/verdana.ttf"));
+
+    private static Font resolveFontFromResources(String fontFamily) {
+        if(fontFamily == null) {
+            return null;
+        }
+
+        String path = FONT_FILES.get(fontFamily);
+        if (path == null) {
+            return null;
+        }
+        try (InputStream is = EditorController.class.getResourceAsStream(path)) {
+            if (is == null) {
+                return null;
+            }
+            Font created = Font.createFont(Font.TRUETYPE_FONT, is);
+            try {
+                GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(created);
+            } catch (Exception ignored) {
+            }
+            return created;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Design.Raw getDesign(String id) {
@@ -408,41 +463,14 @@ public class EditorController implements EditorApi {
         }
     }
 
-    private static int mmToPixels(double mm, ProductType product, int imagePixelWidth) {
-        double scale = product.imageMMWidth() / (double) imagePixelWidth;
+    private static double mmToPixels(double mm, ProductType product) {
+        //double imagePixelsPerMm = (double) imagePixelWidth / (double) product.imageMMWidth();
 
-        return (int) (mm / scale);
-        // return (int) (mm * product.dpi() / 25.4);
+        //return (int) (mm * imagePixelsPerMm);
+        return mm * product.dpi() / 25.4;
     }
 
-    private static String breakLines(String text, FontMetrics fontMetrics, int width) {
-        StringBuilder result = new StringBuilder();
-        StringBuilder current = new StringBuilder();
-        int breakableIdx = -1;
-
-        for (char c : text.toCharArray()) {
-            if (Character.isWhitespace(c)) {
-                breakableIdx = current.length();
-            }
-            current.append(c);
-
-            if (fontMetrics.stringWidth(current.toString()) > width) {
-                if (breakableIdx != -1) {
-                    result.append(current, 0, breakableIdx).append("\n");
-                    current.delete(0, breakableIdx + 1);
-                } else {
-                    result.append(current, 0, current.length() - 1).append("\n");
-                    current.delete(0, current.length() - 1);
-                }
-                breakableIdx = -1;
-            }
-        }
-        if (!current.isEmpty()) {
-            result.append(current);
-        }
-
-        return result.toString();
-    }
+    // Browser computes wrapping; backend draws explicit lines only
 
     private record PDFDimensions(int width, int height, float topMargin, float leftMargin, String orientation) {
     }

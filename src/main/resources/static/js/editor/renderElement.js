@@ -202,7 +202,7 @@ function newRenderElements(editorId) {
       element.style.top =
         elementProps.position.y * editor.canvasPxPerProductMM + "px";
       element.style.width = elementProps.size.w
-        ? elementProps.size.w * editor.canvasPxPerProductMM + "px"
+        ? elementProps.size.w * editor.canvasPxPerProductMM - 1 + "px"
         : null;
       element.style.height = elementProps.size.h
         ? elementProps.size.h * editor.canvasPxPerProductMM + "px"
@@ -236,7 +236,7 @@ function newRenderElements(editorId) {
         onResize(dimensions) {
           renderElements._onElementResize({
             id: elementProps.id,
-            dimensions,
+            dimensions: {...dimensions, width: dimensions.width + 1},
             element: div,
           });
         },
@@ -286,22 +286,91 @@ function newRenderElements(editorId) {
         .querySelector(`#${elementProps.id}`);
 
       const textarea = element.querySelector("textarea");
+      const textareaSizer = element.querySelector(".textarea-sizer");
+      const styledElements = [textarea, textareaSizer];
 
-      textarea.style.fontWeight = elementProps.bold ? "bold" : "normal";
-      textarea.style.fontSize =
-        elementProps.fontSize * editor.canvasPxPerProductMM + "px";
-        textarea.style.textDecoration = elementProps.underline
-        ? "underline"
-        : "none";
-      textarea.style.fontStyle = elementProps.italic ? "italic" : "normal";
-      textarea.style.fontFamily = elementProps.fontFamily || "Arial";
-      textarea.style.color = elementProps.color;
-      textarea.style.textAlign = elementProps.alignment;
-      textarea.style.height = "auto";
+      styledElements.forEach(element => {
+        element.style.fontWeight = elementProps.bold ? "bold" : "normal";
+        element.style.fontSize =
+          elementProps.fontSize * editor.canvasPxPerProductMM + "px";
+        element.style.textDecoration = elementProps.underline
+          ? "underline"
+          : "none";
+        element.style.fontStyle = elementProps.italic ? "italic" : "normal";
+        element.style.fontFamily = `'${elementProps.fontFamily}'` || "Arial";
+        element.style.color = elementProps.color;
+        element.style.textAlign = elementProps.alignment;
+        element.style.height = "auto";
+      });
 
       if (textarea) {
         textarea.value = elementProps.text;
-        element.dataset.replicatedValue = textarea.value;
+        textareaSizer.innerText = textarea.value + ".";
+      }
+    },
+
+    computeWrappedText(elementProps) {
+      try {
+        const widthPx = (elementProps?.size?.w || 0) * editor.canvasPxPerProductMM;
+        if (!widthPx || !elementProps?.text?.length) {
+          return elementProps?.text || "";
+        }
+
+        const sizer = document.createElement("div");
+        sizer.style.position = "fixed";
+        sizer.style.left = "-10000px";
+        sizer.style.top = "0";
+        sizer.style.visibility = "hidden";
+        sizer.style.whiteSpace = "pre-wrap";
+        sizer.style.wordBreak = "break-word";
+        sizer.style.overflowWrap = "anywhere";
+        sizer.style.width = widthPx + "px";
+        sizer.style.fontFamily = `'${elementProps.fontFamily}'` || "Arial";
+        sizer.style.fontSize =
+          (elementProps.fontSize || 0) * editor.canvasPxPerProductMM + "px";
+        sizer.style.fontWeight = elementProps.bold ? "bold" : "normal";
+        sizer.style.fontStyle = elementProps.italic ? "italic" : "normal";
+        sizer.style.letterSpacing = "normal";
+        sizer.style.lineHeight = "normal";
+
+        const textNode = document.createTextNode(elementProps.text);
+        sizer.append(textNode);
+        document.body.appendChild(sizer);
+
+        const range = document.createRange();
+        const result = [];
+        let currentLine = [];
+        let lastTop = null;
+
+        for (let i = 0; i < textNode.length; i++) {
+          range.setStart(textNode, i);
+          range.setEnd(textNode, i + 1);
+          const rects = range.getClientRects();
+          if (!rects || rects.length === 0) {
+            currentLine.push(textNode.data[i]);
+            continue;
+          }
+          const top = Math.round(rects[0].top);
+          if (lastTop === null) {
+            lastTop = top;
+          }
+          if (top !== lastTop) {
+            result.push(currentLine.join(""));
+            currentLine = [textNode.data[i]];
+            lastTop = top;
+          } else {
+            currentLine.push(textNode.data[i]);
+          }
+        }
+        if (currentLine.length > 0) {
+          result.push(currentLine.join(""));
+        }
+
+        document.body.removeChild(sizer);
+        return result.join("\n");
+      } catch (e) {
+        console.warn("Failed to compute wrapped text, fallback to original.", e);
+        return elementProps?.text || "";
       }
     },
 
@@ -314,11 +383,14 @@ function newRenderElements(editorId) {
 
       const textarea = document.createElement("textarea");
       textarea.className = "text";
+      const textareaSizer = document.createElement("div");
+      textareaSizer.className = "textarea-sizer";
       element.append(textarea);
+      element.append(textareaSizer);
       textarea.rows = 1;
 
       textarea.addEventListener("input", () => {
-        element.dataset.replicatedValue = textarea.value;
+        textareaSizer.innerText = textarea.value + ".";
       });
 
       function createEditButton() {

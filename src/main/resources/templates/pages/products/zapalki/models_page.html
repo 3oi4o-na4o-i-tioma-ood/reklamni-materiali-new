@@ -15,18 +15,20 @@
 <body>
     <th:block th:replace="components/base_layout :: base-layout(~{::#models-page-content})">
 
-        <div id="models-page-content">
+        <div id="models-page-content" class="lighters-models-page">
             <h1 class="title">
                 Модел запалки
             </h1>
             <div id="models-container" class="models-container">
                 <th:block th:each="model, index : ${models}">
-                    <div class="model" th:each="color, colorIndex : ${model.colors}" th:attr="data-model-color-id=${color.id}">
+                    <div class="model" th:each="color, colorIndex : ${model.colors}" th:attr="data-model-color-id=${color.id}, data-model-id=${model.id}">
                         <div class="images-container">
                             <img th:src="${'/api/model-image?modelColorId=' + color.id}">
                         </div>
 
-                        <div th:text="${model.model}" style="text-align: center; font-weight: bold;"></div>
+                        <div th:text="${model.model} + ', ' + ${color.name}" style="text-align: center; font-weight: bold;"></div>
+
+                        <div th:text="'Цена за брой: ' + ${#numbers.formatDecimal(model.price, 1, 2)} + ' лв.'" style="font-size: var(--font-size-xxs); font-weight: bold;"></div>
 
                         <button style="margin: 20px 0 0 auto" class="button small" id="model-popup-button">Виж повече</button>
                     </div>
@@ -36,7 +38,7 @@
                 <th:block id="popup-body">
                     <img id="popup-model-image">
 
-                    <a id="continue-link" class="button small" style="margin-left: auto">Към избор на фон</a>
+                    <a id="continue-link" class="button small" style="margin-left: auto">Към дизайн</a>
                 </th:block>
             </th:block>
         </div>

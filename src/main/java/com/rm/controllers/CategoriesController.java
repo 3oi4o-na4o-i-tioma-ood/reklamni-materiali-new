@@ -169,8 +169,14 @@ public class CategoriesController implements CategoriesApi {
     }
 
     @Override
-    public Model getModelById(long modelColorId) {
-        return productModelRepository.findOne(modelColorId);
+    public Model getModelById(long modelId) {
+        return productModelRepository.findOne(modelId);
+    }
+
+
+    @Override
+    public Model.Color getModelColorById(long modelColorId) {
+        return modelColorRepository.findColorById(modelColorId).get();
     }
 
 

@@ -13,15 +13,15 @@ public enum ProductType {
 
     private final int imageMMWidth;
     private final int imageMMHeight;
-    private final int imagePixelWidth;
-    private final int imagePixelHeight;
+    private final double imagePixelWidth;
+    private final double imagePixelHeight;
     private final int dpi;
 
     ProductType(int imageRealWidthMM, int imageRealHeightMM, int dpi) {
         imageMMWidth = imageRealWidthMM;
         imageMMHeight = imageRealHeightMM;
-        imagePixelWidth = (int) (imageRealWidthMM * INCHES_PER_MM * dpi);
-        imagePixelHeight = (int) (imageRealHeightMM * INCHES_PER_MM * dpi);
+        imagePixelWidth = imageRealWidthMM * INCHES_PER_MM * dpi;
+        imagePixelHeight = imageRealHeightMM * INCHES_PER_MM * dpi;
         this.dpi = dpi;
     }
 
@@ -33,11 +33,11 @@ public enum ProductType {
         return imageMMHeight;
     }
 
-    public int imagePixelWidth() {
+    public double imagePixelWidth() {
         return imagePixelWidth;
     }
 
-    public int imagePixelHeight() {
+    public double imagePixelHeight() {
         return imagePixelHeight;
     }
 

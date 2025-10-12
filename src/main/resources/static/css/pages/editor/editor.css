@@ -105,17 +105,15 @@
   display: none;
 }
 
-.editor-canvas .text-element::after {
-  content: attr(data-replicated-value) " ";
-  white-space: pre-wrap;
+.editor-canvas .text-element .textarea-sizer {
   visibility: hidden;
-  line-break: anywhere;
 }
 
 .editor-canvas .text-element textarea,
-.editor-canvas .text-element::after {
+.editor-canvas .text-element .textarea-sizer {
   font: inherit;
 
+  word-break: break-word;
   /* Place on top of each other */
   grid-area: 1 / 1 / 2 / 2;
 }

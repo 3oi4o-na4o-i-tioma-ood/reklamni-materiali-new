@@ -116,6 +116,14 @@ const editor = {
           bottom: 13,
         };
       }
+      case "LIGHTER": {
+        return {
+          left: 20,
+          right: 35,
+          top: 8,
+          bottom: 8,
+        };
+      }
       default: {
         return {
           left: 7,

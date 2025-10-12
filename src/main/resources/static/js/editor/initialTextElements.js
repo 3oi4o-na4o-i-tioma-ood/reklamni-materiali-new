@@ -195,6 +195,51 @@ const initialEditorTextElements = {
     ],
     FLIER_10x15: flyerElements,
     FLIER_10x20: flyerElements,
+    LIGHTER: [
+        {
+            text: "Име на фирмата",
+            bold: true,
+            fontSize: 3.53,
+            id: "company_name",
+            type: "text",
+            size: {
+                w: 47
+            },
+            position: {
+                x: 22,
+                y: 10
+            },
+            alignment: "CENTER"
+        },
+        {
+            text: "Контакти",
+            fontSize: 2.82,
+            id: "contacts",
+            type: "text",
+            size: {
+                w: 47
+            },
+            position: {
+                x: 22,
+                y: 14
+            },
+            alignment: "CENTER"
+        },
+        {
+            text: "Website",
+            fontSize: 2.82,
+            id: "web",
+            type: "text",
+            size: {
+                w: 47
+            },
+            position: {
+                x: 22,
+                y: 18
+            },
+            alignment: "CENTER"
+        }
+    ],
     common: [
         {
             text: "Име на фирмата",

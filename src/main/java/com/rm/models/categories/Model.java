@@ -14,6 +14,7 @@ public record Model(long id,
     public record Color(long id,
                         @ColumnName("primary_color") String primaryColor,
                         @ColumnName("secondary_color") String secondaryColor,
+                        @ColumnName("model_id") long modelId,
                         String name,
                         String path) {}
 
