@@ -204,6 +204,13 @@ const API = {
       result: await resp.json()
     }
   },
+  async getModelColor(modelColorId) {
+    const resp = await fetch(`${backendUrl}/model-color/${modelColorId}`)
+    return {
+      response: resp,
+      result: await resp.json()
+    }
+  },
   async getFavoriteDesigns() {
     const jwt = auth.getToken()
 

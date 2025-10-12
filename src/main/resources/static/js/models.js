@@ -80,6 +80,7 @@ const modelsPage = {
     async openModelPopup(modelId, modelColorId) {
         const popupId = "model-info-popup"
         const {result: modelData} = await API.getModel(modelId)
+        const {result: modelColorData} = await API.getModelColor(modelColorId)
 
         const popupElement = document.getElementById(popupId)
 
@@ -90,8 +91,10 @@ const modelsPage = {
         const image = popupElement.querySelector("#popup-model-image")
         image.src = `/api/model-image?modelColorId=${modelColorId}`
 
+        console.log(modelData)
+
         const headerText = popupElement.querySelector("#popup-header-text")
-        headerText.innerText = modelData.model
+        headerText.innerText = modelData.model + ', ' + modelColorData.name
 
         popup.init(popupId)
         popup.open(popupId)

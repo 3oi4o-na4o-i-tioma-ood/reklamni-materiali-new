@@ -51,6 +51,11 @@ public interface CategoriesApi {
     @ResponseBody
     Model getModelById(@PathVariable("modelColorId") long modelColorId);
 
+    @Operation(summary = "Get model color by modelColorId")
+    @GetMapping("/api/model-color/{modelColorId}")
+    @ResponseBody
+    Model.Color getModelColorById(@PathVariable("modelColorId") long modelColorId);
+
     @Operation(summary = "Get model image")
     @GetMapping("/api/model-image")
     @ResponseBody
