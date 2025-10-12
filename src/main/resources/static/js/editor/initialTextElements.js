@@ -1,3 +1,49 @@
+const flyerElements = [
+    {
+        text: "Име на фирмата",
+        bold: true,
+        fontSize: 7.06,
+        id: "company_name",
+        type: "text",
+        size: {
+            w: 85
+        },
+        position: {
+            x: 8,
+            y: 8
+        },
+        alignment: "CENTER"
+    },
+    {
+        text: "Мото",
+        fontSize: 7.06,
+        id: "moto",
+        type: "text",
+        size: {
+            w: 85
+        },
+        position: {
+            x: 8,
+            y: 23
+        },
+        alignment: "CENTER"
+    },
+    {
+        text: "Свободен текст",
+        fontSize: 7.06,
+        id: "free_text",
+        type: "text",
+        size: {
+            w: 85
+        },
+        position: {
+            x: 8,
+            y: 32
+        },
+        alignment: "CENTER"
+    }
+]
+
 const initialEditorTextElements = {
     WORK_CALENDAR: [
         {
@@ -147,6 +193,8 @@ const initialEditorTextElements = {
             alignment: "CENTER"
         }
     ],
+    FLIER_10x15: flyerElements,
+    FLIER_10x20: flyerElements,
     common: [
         {
             text: "Име на фирмата",

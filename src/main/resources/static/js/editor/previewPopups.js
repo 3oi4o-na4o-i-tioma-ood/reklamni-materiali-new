@@ -308,9 +308,11 @@ const editorPreviewPopups = {
                 break;
             case "BUSINESS_CARD":
             case "POCKET_CALENDAR":
+                hiddenIds.push("preview-effect-checkbox-PARTIAL_VARNISH-container", "colors-count-container", "print-type")
+                break;
             case "FLIER_10x15":
             case "FLIER_10x20":
-                hiddenIds.push("preview-effect-checkbox-PARTIAL_VARNISH-container", "colors-count-container", "print-type")
+                hiddenIds.push("preview-effect-checkbox-PARTIAL_VARNISH-container", "colors-count-container", "print-type", "preview-effect-checkbox-ROUNDED_CORNERS-container")
                 break;
             default:
                 break;
