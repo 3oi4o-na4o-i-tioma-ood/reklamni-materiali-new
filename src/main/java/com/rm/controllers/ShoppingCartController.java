@@ -2,6 +2,8 @@ package com.rm.controllers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 import com.rm.models.carts.CartInfo;
@@ -130,11 +132,14 @@ public class ShoppingCartController implements ShoppingCartApi {
         return Long.toString(orderId * 452930477, 36).toUpperCase();
     }
 
-    private void sendVendorEmail(Cart cart, OrderDetails orderDetails) {
+    private void sendVendorEmail(Cart cart, OrderDetails orderDetails, Map<Long, String> effectCartonNames, String orderCode) {
         Context vendorOrderContext = new Context();
         vendorOrderContext.setVariable("cart", cart);
         vendorOrderContext.setVariable("cartPrice", Formatter.PRICE_FORMAT.format(pricesController.calculatePrice(cart.items)));
         vendorOrderContext.setVariable("orderDetails", orderDetails);
+        vendorOrderContext.setVariable("orderNumber", orderCode);
+
+        vendorOrderContext.setVariable("effectCartonNames", effectCartonNames);
 
         String websiteUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         vendorOrderContext.setVariable("websiteUrl", websiteUrl);
@@ -154,15 +159,21 @@ public class ShoppingCartController implements ShoppingCartApi {
                 : JWTManager.decodeClaim(authorization.substring(7), "id", Long.class);
 
         long orderId = cartRepository2.saveOrder(cartId, userId, orderDetails).get();
+        String orderCode = getOrderCode(orderId);
 
-        sendVendorEmail(cart, orderDetails);
-
+        Map<Long, String> effectCartonNames = new HashMap<>();
+        pricesController.getEffectCartons().forEach(ec -> effectCartonNames.put(ec.id(), ec.name()));
+        
+        sendVendorEmail(cart, orderDetails, effectCartonNames, orderCode);
+        
         Context userOrderContext = new Context();
         userOrderContext.setVariable("cart", cart);
         userOrderContext.setVariable("cartPrice", Formatter.PRICE_FORMAT.format(pricesController.calculatePrice(cart.items)));
-        userOrderContext.setVariable("orderNumber", getOrderCode(orderId));
+        userOrderContext.setVariable("orderNumber", orderCode);
         userOrderContext.setVariable("orderDetails", orderDetails);
         userOrderContext.setVariable("authorized", userId != null);
+        userOrderContext.setVariable("effectCartonNames", effectCartonNames);
+
         String websiteUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         userOrderContext.setVariable("websiteUrl", websiteUrl);
         emailSender.sendTemplate(orderDetails.userDetails().email(), "Успешна поръчка", "emails/user_order",
