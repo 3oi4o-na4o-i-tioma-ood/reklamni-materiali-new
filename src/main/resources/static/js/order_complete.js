@@ -1,12 +1,16 @@
 const orderCompletePage = {
     _renderOrderData(order, orderCode) {
         const orderNumberContainer = document.getElementById("order-number")
-        orderNumberContainer.innerText = orderCode
-
         const paymentMethodContainer = document.getElementById("payment-method")
+        const priceContainer = document.getElementById("total")
+
+        
+        orderNumberContainer.innerText = orderCode
+        
         const paymentMethod = order.details.paymentMethod === "ON_DELIVERY"
         const paymentMethodName = paymentMethod ? "На куриер при получаване" : "Банков превод"
         paymentMethodContainer.innerText = paymentMethodName
+        priceContainer.innerText = pricesCalculation.formatPrice(order.price)
     },
     async init() {
         const orderCode = new URLSearchParams(window.location.search).get("orderNumber")

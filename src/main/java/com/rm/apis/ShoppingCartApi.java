@@ -3,6 +3,7 @@ package com.rm.apis;
 import com.rm.models.carts.CartInfo;
 import com.rm.models.carts.CartItemCreationInfo;
 import com.rm.models.carts.Order;
+import com.rm.models.carts.OrderWithPrice;
 import com.rm.models.carts.ProductionTime;
 import com.rm.models.design.Design;
 import com.rm.models.users.OrderDetails;
@@ -56,7 +57,7 @@ public interface ShoppingCartApi {
     @Operation(summary = "Get order details")
     @GetMapping("/api/orders/{orderId}")
     @ResponseBody
-    Order getOrder(@PathVariable("orderId") long orderId);
+    OrderWithPrice getOrder(@PathVariable("orderId") long orderId);
 
     @Operation(summary = "Get user orders")
     @GetMapping("/api/orders/user")

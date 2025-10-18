@@ -5,4 +5,4 @@ import com.rm.util.db.ColumnName;
 
 public record Order(long id,
                     @ColumnName("cart_id") String cartId,
-                    OrderDetails details) {}
+                    @ColumnName("order_details") OrderDetails details) {}

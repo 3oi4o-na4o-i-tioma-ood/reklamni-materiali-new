@@ -123,7 +123,7 @@ const editorPreviewPopups = {
 
         const face = editorPreviewPopups._faceBlackWhite ? "BLACK" : "COLORED"
         const backColored = editorPreviewPopups._faceBlackWhite ? "BLACK" : "COLORED"
-        const back = editorPreviewPopups._design?.back ? backColored : "NO_BACK"
+        const back = editorPreviewPopups._design?.back || editor.currentProduct === "POCKET_CALENDAR" ? backColored : "NO_BACK"
 
         const printType = face + "_" + back
 
@@ -269,7 +269,11 @@ const editorPreviewPopups = {
         editorPreviewPopups._selectAmountHandler?.update()
     },
     async _initSelectAmount() {
-        await editorPreviewPopups._updateSelectAmount()
+        try {
+            await editorPreviewPopups._updateSelectAmount()
+        } catch (error) {
+            console.error("Error initializing select amount: ", error)
+        }
         
         const selectAmount = document.getElementById("product-amount-select")
         editorPreviewPopups._selectAmountHandler = NiceSelect.bind(selectAmount, { placeholder: "Брой" })

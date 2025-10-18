@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.rm.models.carts.CartInfo;
 import com.rm.models.carts.CartItemCreationInfo;
 import com.rm.models.carts.Order;
+import com.rm.models.carts.OrderWithPrice;
 import com.rm.models.users.OrderDetails;
 import com.rm.repositories.CartRepository2;
 import com.rm.repositories.UsersRepository;
@@ -132,6 +133,7 @@ public class ShoppingCartController implements ShoppingCartApi {
     private void sendVendorEmail(Cart cart, OrderDetails orderDetails) {
         Context vendorOrderContext = new Context();
         vendorOrderContext.setVariable("cart", cart);
+        vendorOrderContext.setVariable("cartPrice", Formatter.PRICE_FORMAT.format(pricesController.calculatePrice(cart.items)));
         vendorOrderContext.setVariable("orderDetails", orderDetails);
 
         String websiteUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
@@ -175,8 +177,14 @@ public class ShoppingCartController implements ShoppingCartApi {
     }
 
     @Override
-    public Order getOrder(long orderId) {
-        return cartRepository2.findOrder(orderId).get();
+    public OrderWithPrice getOrder(long orderId) {
+        Order order = cartRepository2.findOrder(orderId).get();
+        Cart cart = cartRepository.findByIdNoJakarta(order.cartId(), editorRepository);
+        if (cart == null) {
+            throw new NotFoundException("CART_NOT_FOUND");
+        }
+
+        return new OrderWithPrice(order.id(), order.cartId(), order.details(), pricesController.calculatePrice(cart.items));
     }
 
     @Override

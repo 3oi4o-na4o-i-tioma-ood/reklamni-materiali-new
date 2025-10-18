@@ -26,7 +26,9 @@ public class CartRepository2 {
             },
             (resultSet, columnIndex) -> {
                 try {
-                    return new ObjectMapper().reader().readValue(resultSet.getString(columnIndex));
+                    return new ObjectMapper()
+                        .readerFor(OrderDetails.class)
+                        .readValue(resultSet.getString(columnIndex));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }

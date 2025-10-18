@@ -372,14 +372,23 @@ const editor = {
       return "NORMAL";
     }
 
-    if(["BUSINESS_CARD", "POCKET_CALENDAR", "FLIER_10x15", "FLIER_10x20"].includes(editor.currentProduct)) {
+    if(["BUSINESS_CARD", "FLIER_10x15", "FLIER_10x20"].includes(editor.currentProduct)) {
       return "COLORED_NO_BACK";
+    }
+
+    if(editor.currentProduct === "POCKET_CALENDAR") {
+      return "COLORED_COLORED";
     }
 
     console.error("No initial print type for product: ", editor.currentProduct);
   },
   async init(product_name) {
     editor.currentProduct = product_name;
+
+    if(editor.currentProduct === "POCKET_CALENDAR") {
+      designRepo.productSides[1] = designRepo.productSides[0];
+    }
+
     designRepo.modelColorId =
       new URLSearchParams(window.location.search).get("modelColorId") || null;
     editor.onResize();
