@@ -2,9 +2,11 @@ const mmPerInch = 25.4;
 
 const editor = {
   getElements() {
+    console.log("getElements. Side:", designRepo.selectedProductSide, "side:", designRepo.productSides[designRepo.selectedProductSide]);
     return designRepo.productSides[designRepo.selectedProductSide].elements;
   },
   setElements(elements) {
+    console.trace("setElements. Side:", designRepo.selectedProductSide, "elements:", elements);
     designRepo.productSides[designRepo.selectedProductSide].elements = elements;
   },
   getImageUrl({ bgPath, bgImageId, modelColorId }) {
@@ -358,6 +360,8 @@ const editor = {
     if (initialEditorTextElements[editor.currentProduct]) {
       return initialEditorTextElements[editor.currentProduct];
     }
+
+    return [];
   },
   _getInitialPrintType() {
     if (["PEN", "LIGHTER"].includes(editor.currentProduct)) {

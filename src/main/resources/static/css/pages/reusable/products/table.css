@@ -68,6 +68,10 @@
   display: flex;
 }
 
+#tabs-content-wrapper>.selected.block {
+  display: block;
+}
+
 
 #tabs-content-wrapper>* {
   flex-direction: column;
