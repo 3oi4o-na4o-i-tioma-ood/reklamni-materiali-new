@@ -304,7 +304,7 @@ const editorPreviewPopups = {
                 hiddenIds.push("effects-container", "colors-container")
                 break;
             case "WORK_CALENDAR":
-                hiddenIds.push("colors-container", "preview-effect-checkbox-ROUNDED_CORNERS-container", "colors-count-container", "print-type")
+                hiddenIds.push("colors-container", "preview-effect-checkbox-ROUNDED_CORNERS-container", "preview-effect-checkbox-PARTIAL_VARNISH-container", "colors-count-container", "print-type")
                 break;
             case "BUSINESS_CARD":
             case "POCKET_CALENDAR":
