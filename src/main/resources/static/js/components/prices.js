@@ -49,17 +49,15 @@ const pricesCalculation = {
 
         const effectsOverhead = Object
             .entries(effects)
-            .reduce((sum, [effectName, effectValue]) => {
-                if (!effectValue) {
-                    return sum
-                }
-
+            .filter(([effectName, effectValue]) => effectName !== "EFFECT_CARTON" && effectValue)
+            .map(([effectName]) => {
                 const effectNote = effectsPrices.find(note => note.noteType === effectName)
-                return sum + (effectNote?.price * effectMultiplier || 0)
-            }, 0)
+                return effectNote?.price * effectMultiplier || 0
+            })
+            .reduce((sum, effectPrice) => sum + effectPrice, 0)
 
         const effectPaper = effects.EFFECT_CARTON
-        const effectPaperPrice = await pricesCalculation.getEffectPaperPrice(effectPaper)
+        const effectPaperPrice = await pricesCalculation.getEffectPaperPrice(effectPaper) * effectMultiplier
 
         return effectsOverhead + effectPaperPrice
     },

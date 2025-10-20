@@ -16,3 +16,7 @@ $ mvn spring-boot:run
 ## How to deploy to server (server already set up)
 
 1. rsync -r ./src root@164.138.217.202:/root/reklamni-materiali
+
+2. ssh root@164.138.217.202
+
+2.1 cd reklamni-materiali
