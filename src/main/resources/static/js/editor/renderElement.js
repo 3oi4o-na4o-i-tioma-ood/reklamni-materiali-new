@@ -17,6 +17,10 @@ function newRenderElements(editorId) {
       return renderElements.getCanvas().getBoundingClientRect();
     },
     setElementSelected(id) {
+      if(id === null) {
+        renderElements.selectedElements = [];
+      }
+      
       if (editor.selectedElementId === id) {
         return;
       }

@@ -129,7 +129,7 @@ const designRepo = {
 
         setInterval(async () => {
             const currentData = designRepo.getDesignData()
-            console.log(JSON.parse(JSON.stringify(designRepo._savedEditorData)), "\n\n", JSON.parse(JSON.stringify(currentData)))
+            //console.log(JSON.parse(JSON.stringify(designRepo._savedEditorData)), "\n\n", JSON.parse(JSON.stringify(currentData)))
             if (JSON.stringify(designRepo._savedEditorData) !== JSON.stringify(currentData)) {
                 await designRepo.updateOrCreateDesign()
                 designRepo._savedEditorData = JSON.parse(JSON.stringify(currentData))
