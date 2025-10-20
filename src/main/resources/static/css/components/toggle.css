@@ -1,0 +1,47 @@
+.toggle {
+    width: 30px;
+    height: 19px;
+    border-radius: 19px;
+    position: relative;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.toggle .active-background-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
+    position: relative;
+}
+
+.toggle .active-background {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary);
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: left 0.3s ease-in-out;
+}
+
+.toggle .toggle-ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(100% - 12px);
+    border: 1px solid #ccc;
+    transition: right 0.3s ease-in-out;
+}
+
+.toggle.active .active-background {
+    left: 0;
+}
+
+.toggle.active .toggle-ball {
+    right: -8px;
+}

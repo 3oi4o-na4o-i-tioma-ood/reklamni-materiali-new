@@ -1,9 +1,8 @@
 const orderCodeUtil = {
-    // 452930477 is hard-coded on front- and back-end. See Java/src/main/java/com/rm/controllers/ShoppingCartController.java
     getOrderCode(orderId) {
-        return (Number(orderId) * 452930477).toString(36).toUpperCase()
+        return Number(orderId).toString(10).toUpperCase()
     },
     getOrderId(orderCode) {
-        return parseInt(orderCode, 36) / 452930477
+        return parseInt(orderCode, 10)
     }
 }

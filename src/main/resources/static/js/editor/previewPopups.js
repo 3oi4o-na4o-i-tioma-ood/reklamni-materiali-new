@@ -38,6 +38,10 @@ const editorPreviewPopups = {
         })
 
         back.addEventListener("click", () => {
+            if(back.classList.contains("disabled")) {
+                return;
+            }
+
             back.classList.add("active")
             back.classList.remove("secondary")
 

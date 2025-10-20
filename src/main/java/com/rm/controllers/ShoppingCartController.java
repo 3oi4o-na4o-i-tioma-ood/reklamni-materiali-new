@@ -127,9 +127,7 @@ public class ShoppingCartController implements ShoppingCartApi {
     }
 
     private String getOrderCode(long orderId) {
-        // 452930477 is hard-coded on front- and back-end. See
-        // Java/src/main/resources/static/js/components/order_code.js
-        return Long.toString(orderId * 452930477, 36).toUpperCase();
+        return Long.toString(orderId, 10).toUpperCase();
     }
 
     private void sendVendorEmail(Cart cart, OrderDetails orderDetails, Map<Long, String> effectCartonNames, String orderCode) {

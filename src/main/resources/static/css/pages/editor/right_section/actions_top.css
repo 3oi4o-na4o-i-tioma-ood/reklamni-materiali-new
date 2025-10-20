@@ -57,8 +57,7 @@ button#remove-background {
     border: 2px solid green;
     border-radius: 8px;
     background: white;
-    width: 200px;
-    height: 45px;
+    padding: 0 1em;
     gap: 10px;
     justify-content: center;
     align-items: center;

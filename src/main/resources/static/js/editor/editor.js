@@ -35,19 +35,23 @@ const editor = {
     renderElements.renderBG(bgUrl);
     bgTool.setCurrentBackground(bgUrl);
   },
+  setInitialBackSide() {
+    designRepo.productSides[1] = {
+      elements: editor._getInitialElements(),
+      bgUrl: designRepo.productSides[0].bgUrl,
+      bgPath: designRepo.productSides[0].bgPath,
+      bgImageId: designRepo.productSides[0].bgImageId,
+    };
+  },
   selectSide(index /* 0 - front; 1 - back */) {
+    console.log("selectSide: ", index);
     if (index !== 0 && index !== 1) {
       console.error("Nah. You can't choose side ", index);
       return;
     }
 
     if (index === 1 && !designRepo.productSides[1]) {
-      designRepo.productSides[1] = {
-        elements: editor._getInitialElements(),
-        bgUrl: designRepo.productSides[0].bgUrl,
-        bgPath: designRepo.productSides[0].bgPath,
-        bgImageId: designRepo.productSides[0].bgImageId,
-      };
+      editor.setInitialBackSide();
     }
 
     editor.unselectElements();
@@ -286,6 +290,46 @@ const editor = {
       }
     }
   },
+  selectFaceSide() {
+
+    const face = document.getElementById("button-select-product-face");
+    const back = document.getElementById("button-select-product-back");
+
+    if (!face || !back) {
+      return;
+    }
+
+    if(face.classList.contains("disabled")) {
+      return;
+    }
+
+    face.classList.add("active");
+      face.classList.remove("secondary");
+
+      back.classList.remove("active");
+      back.classList.add("secondary");
+    editor.selectSide(0);
+  },
+  selectBackSide() {
+    const face = document.getElementById("button-select-product-face");
+    const back = document.getElementById("button-select-product-back");
+
+    if (!face || !back) {
+      return;
+    }
+
+    if(back.classList.contains("disabled")) {
+      return;
+    }
+
+    back.classList.add("active");
+      back.classList.remove("secondary");
+
+      face.classList.remove("active");
+      face.classList.add("secondary");
+
+    editor.selectSide(1);
+  },
   initBackFaceButtons() {
     const face = document.getElementById("button-select-product-face");
     const back = document.getElementById("button-select-product-back");
@@ -295,24 +339,16 @@ const editor = {
     }
 
     face.addEventListener("click", () => {
-      face.classList.add("active");
-      face.classList.remove("secondary");
-
-      back.classList.remove("active");
-      back.classList.add("secondary");
-
-      editor.selectSide(0);
+      editor.selectFaceSide();
     });
 
     back.addEventListener("click", () => {
-      back.classList.add("active");
-      back.classList.remove("secondary");
-
-      face.classList.remove("active");
-      face.classList.add("secondary");
-
-      editor.selectSide(1);
+      editor.selectBackSide();
     });
+
+    if(designRepo.productSides[1] === null) {
+      back.classList.add("disabled");
+    }
   },
 
   unselectElements() {
@@ -382,6 +418,26 @@ const editor = {
 
     console.error("No initial print type for product: ", editor.currentProduct);
   },
+  initToggleBack() {
+    const toggle = document.getElementById("remove-back-toggle");
+    if(!toggle) {
+      return;
+    }
+
+    toggle.addEventListener("click", () => {
+      toggle.classList.toggle("active");
+      const backButton = document.getElementById("button-select-product-back");
+
+      if(toggle.classList.contains("active")) {
+        editor.setInitialBackSide();
+        backButton.classList.remove("disabled");
+      } else {
+        editor.selectFaceSide();
+        designRepo.productSides[1] = null;
+        backButton.classList.add("disabled");
+      }
+    });
+  },
   async init(product_name) {
     editor.currentProduct = product_name;
 
@@ -402,35 +458,37 @@ const editor = {
 
     tools.init();
 
+    editor.initToggleBack();
     editor.selectSide(0);
 
     renderElements.resizeListeners.push(editor.onElementResize);
     renderElements.moveListeners.push(editor.onElementMove);
     renderElements.onElementSelected = editor.onElementSelectedFromCanvas;
 
-    editor.initBackFaceButtons();
-
+    
     editorPreviewPopups.init();
     designRepo.initAutoSave();
-
+    
     editor.initElementsBlur();
-
+    
     const productDescription = editor.getCurrentProductDescription();
-
+    
     const bgWrapper = document.getElementById("editor-bg-wrapper");
-
+    
     bgWrapper.style.aspectRatio =
-      productDescription.sizeMM.width / productDescription.sizeMM.height;
-
+    productDescription.sizeMM.width / productDescription.sizeMM.height;
+    
     editor.resizeObserver = new ResizeObserver(editor.onResize);
     const canvas = document.getElementById("editor-canvas");
     editor.resizeObserver.observe(canvas);
-
+    
     designRepo._savedEditorData = designRepo.getDesignData();
-
+    
     await designRepo.loadSavedDesign();
     saveToFavorite.init();
     effectsTool.update();
     paperTypeTool.update();
+    
+    editor.initBackFaceButtons();
   },
 };
