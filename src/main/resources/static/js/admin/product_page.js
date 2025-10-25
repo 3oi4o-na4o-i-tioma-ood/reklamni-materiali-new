@@ -1,7 +1,7 @@
 const adminProductPage = {
     _productType: null,
     _columns: null,
-    initTextEditingElement(element) {
+    initTextEditingElement(element, onValueChange) {
         const editButton = element.querySelector("#row-edit-button")
         const cancelButton = element.querySelector("#row-cancel-button")
         const saveButton = element.querySelector("#row-save-button")
@@ -24,6 +24,7 @@ const adminProductPage = {
         }
 
         saveButton.addEventListener("click", () => {
+            onValueChange(input.value)
             element.classList.remove("edited")
 
             const text = input.value
@@ -127,6 +128,25 @@ const adminProductPage = {
 
         // })
     },
+    initNotesEditing(note) {
+        const noteTypeSelect = document.getElementById("note-type-select")
+        const priceInput = document.getElementById("price-input")
+
+        noteTypeSelect.addEventListener("change", () => {
+            note.noteType = noteTypeSelect.value
+        })
+    },
+    onTextElementValueChange(value, id) {
+        if(["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON"].includes(id)) {
+            API.updateNotePrice(id, value)
+            return
+        }
+
+        if(["BUSINESS_CARD_PRICES_NOTE", "FLYER_PRICES_NOTE"].includes(id)) {
+            API.updateTextPiece(id, value)
+            return
+        }
+    },
     init(productType, columns) {
         adminProductPage._productType = productType
         adminProductPage._columns = columns
@@ -134,7 +154,7 @@ const adminProductPage = {
         const textEditingElements = document.querySelectorAll(".text-editing")
 
         for (const element of textEditingElements) {
-            adminProductPage.initTextEditingElement(element)
+            adminProductPage.initTextEditingElement(element, value => adminProductPage.onTextElementValueChange(value, element.id))
         }
 
         adminProductPage.initTableEditing("editable-prices-table")

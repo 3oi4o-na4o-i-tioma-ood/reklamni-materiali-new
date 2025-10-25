@@ -15,7 +15,7 @@
         </button>
       </div>
 
-      <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em; padding: 0 1em;">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em; padding: 0 1em;" th:if="${hasSides}">
         <th:block th:replace="components/toggle :: toggle(id = 'remove-back-toggle')"></th:block>
         <span>Гръб</span>
       </div>
@@ -23,6 +23,7 @@
       <button
         id="remove-background"
         class="remove-background-button"
+        th:if="${hasSides}"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

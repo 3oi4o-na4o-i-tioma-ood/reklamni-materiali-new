@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rm.models.carts.Cart;
-import com.rm.models.carts.CartItem;
 
 @Tag(name = "Shopping carts")
 public interface ShoppingCartApi {

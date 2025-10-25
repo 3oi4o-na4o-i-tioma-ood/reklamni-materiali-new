@@ -9,7 +9,7 @@
     </div>
     <div class="main_content" id="tabs-content-wrapper">
       <div class="selected">
-        <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing})">
+        <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing}, 'BUSINESS_CARD_PRICES_NOTE')">
           <p id="business-card-price-editing" class="text">
             Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на
             двустранно хромов матов картон (300 гр/м²)
@@ -88,24 +88,24 @@
       </div>
       <ul>
         <li>Надценка за бърза изработка на <strong>визитки (5 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(50)" />%;
+            <th:block th:replace="components/number_editing :: number-editing(50, 'FAST_PRODUCTION')" />%;
           </strong>
         </li>
         <li>Надценка за експресна изработка на <strong>визитки (2 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(100)" />%;
+            <th:block th:replace="components/number_editing :: number-editing(100, 'EXPRESS_PRODUCTION')" />%;
           </strong>
         </li>
         <li>Ламиниране (матов ламинат): <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.00)" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(3.00, 'LAMINATION')" />лв. / 100 бр.
           </strong> - препоръчително при тъмни фонове;
         </li>
         <li>Заоблени ъгли: <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.50)" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(3.50, 'ROUNDED_CORNERS')" />лв. / 100 бр.
           </strong>
         </li>
-        <li>Ефектен картон: <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(4.00)" />лв. / 100 бр.
-          </strong></li>
+        <!-- <li>Ефектен картон: <strong>+
+            <th:block th:replace="components/number_editing :: number-editing(4.00, 'EFFECT_CARTON')" />лв. / 100 бр.
+          </strong></li> -->
         <li>При поръчка на стойност над 100 лв. куриерската услуга в рамките на гр. София е
           <strong>безплатна</strong>.
         </li>
@@ -121,11 +121,11 @@
         <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
       </div>
       <ul>
-        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(100)" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(106)" /> бр.</li>
-        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(200)" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(206)" /> бр. </li>
-        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(300)" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(304)" /> бр. и рекламна химикалка или
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(100, 'BUSINESS_CARD_PROMOTION_CONDITION_1')" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(106, 'BUSINESS_CARD_PROMOTION_REWARD_1')" /> бр.</li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(200, 'BUSINESS_CARD_PROMOTION_CONDITION_2')" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(206, 'BUSINESS_CARD_PROMOTION_REWARD_2')" /> бр. </li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(300, 'BUSINESS_CARD_PROMOTION_CONDITION_3')" /> бр. пълноцветни <strong>визитки</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(304, 'BUSINESS_CARD_PROMOTION_REWARD_3')" /> бр. и рекламна химикалка или
           запалка. </li>
-        <li>При поръчка над <th:block th:replace="components/number_editing :: number-editing(400)" /> бр. пълноцветни <strong>визитки</strong> - получавате рекламна химикалка и запалка.
+        <li>При поръчка над <th:block th:replace="components/number_editing :: number-editing(400, 'BUSINESS_CARD_PROMOTION_CONDITION_4')" /> бр. пълноцветни <strong>визитки</strong> - получавате рекламна химикалка и запалка.
         </li>
         <li>Ако притежавате <strong>промоционален код</strong> и го използвате при поръчката другите промоции отпадат.
         </li>

@@ -3,6 +3,8 @@ package com.rm.apis;
 import java.io.IOException;
 import java.util.List;
 
+import com.rm.models.TextPiece;
+import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
 import com.rm.models.prices.ProductType;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -72,6 +74,17 @@ public interface AdminApi {
     @ResponseBody
     void deleteCategoryImage(@RequestParam ProductType product,
                              @RequestParam String path) throws IOException;
+
+    @Operation(summary = "Update note price")
+    @PutMapping("/notes")
+    @ResponseBody
+    void updateNotePrice(@RequestBody Note note);
+
+    @Operation(summary = "Update text piece")
+    @PutMapping("/text-pieces")
+    @ResponseBody
+    void updateTextPiece(@RequestBody TextPiece textPiece);
+
 
     record CategoryPriorityRequest(ProductType productType, String parentPath, List<Integer> newPriorities) {}
 }

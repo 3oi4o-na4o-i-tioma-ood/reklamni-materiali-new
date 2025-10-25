@@ -287,6 +287,23 @@ INSERT INTO Notes (product, note_type, price) VALUES
 ('LIGHTER', 'FAST_PRODUCTION',     50.0 /* % */),
 ('LIGHTER', 'EXPRESS_PRODUCTION', 100.0 /* % */);
 
+DROP TABLE IF EXISTS Text_Pieces;
+
+CREATE TABLE Text_Pieces (
+    name              VARCHAR(250)   NOT NULL,
+    text              TEXT           NOT NULL
+);
+
+INSERT INTO Text_Pieces (name, text) VALUES
+('BUSINESS_CARD_PRICES_NOTE', 'Всички цени на ***визитки*** са в лева без ДДС за стандартен срок (от 24 до 48 часа) на двустранно хромов матов картон (300 гр/м²)'),
+('BUSINESS_CARD_PROMOTION_CONDITION_1', '100'),
+('BUSINESS_CARD_PROMOTION_REWARD_1', '106'),
+('BUSINESS_CARD_PROMOTION_CONDITION_2', '200'),
+('BUSINESS_CARD_PROMOTION_REWARD_2', '206'),
+('BUSINESS_CARD_PROMOTION_CONDITION_3', '300'),
+('BUSINESS_CARD_PROMOTION_REWARD_3', '304'),
+('BUSINESS_CARD_PROMOTION_CONDITION_4', '400'),
+
 DROP TABLE IF EXISTS Product_Models;
 CREATE TABLE Product_Models (
     id                BIGSERIAL      PRIMARY KEY,

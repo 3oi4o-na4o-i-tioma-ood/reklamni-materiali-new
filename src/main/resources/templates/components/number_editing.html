@@ -1,7 +1,7 @@
-<div class="text-editing number" th:fragment="number-editing(value)">
-    <p class="text" th:text="${value}"></p>
+<div class="text-editing number" th:fragment="number-editing(value, id)" th:id="${id}">
+    <p id="number-editing-display-value" class="text" th:text="${value}"></p>
 
-    <input type="number" class="input">
+    <input id="number-editing-input" type="number" class="input">
     <button class="icon-button save" id="row-save-button">
         <img src="/images/common/tick.svg" alt="save">
     </button>

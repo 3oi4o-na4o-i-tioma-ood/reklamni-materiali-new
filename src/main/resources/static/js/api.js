@@ -348,6 +348,34 @@ const API = {
     })
     return await resp.json()  
   },
+  async updateNotePrice(note) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/notes`, {
+      method: "PUT",
+      body: JSON.stringify(note),
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+    return await resp.json()
+  },
+  async updateTextPiece(name, text) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/text-pieces`, {
+      method: "PUT",
+      body: JSON.stringify({ name, text }),
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+    return await resp.json()
+  },
+  async getTextPiece(name) {
+    const resp = await fetch(`${backendUrl}/text-pieces/${name}`)
+    return await resp.json()
+  },
   async getOrder(orderId) {
     const resp = await fetch(`${backendUrl}/orders/${orderId}`)
 

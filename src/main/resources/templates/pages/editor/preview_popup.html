@@ -7,7 +7,8 @@
         </div>
 
         <img src="" alt="preview" id="preview-image">
-        <div id="preview-image-message" class="preview-image-message">Няма добавен гръб</div>
+
+        <div id="preview-image-message" class="preview-image-message" th:if="${hasSides}">Няма добавен гръб</div>
 
 
         <div class="cart-settings">

@@ -16,10 +16,14 @@ import javax.imageio.ImageIO;
 import com.rm.apis.AdminApi;
 import com.rm.exceptions.BadRequestException;
 import com.rm.exceptions.NotFoundException;
+import com.rm.models.TextPiece;
 import com.rm.models.categories.Category;
+import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
 import com.rm.models.prices.ProductType;
 import com.rm.repositories.PricesRepository;
+import com.rm.repositories.TextPieceRepository;
+import com.rm.repositories.NotesRepository;
 import com.rm.util.ColorUtils;
 import com.rm.util.MetadataManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +37,14 @@ public class AdminController implements AdminApi {
     private String categoriesDirectory;
 
     private final PricesRepository pricesRepository;
+    private final NotesRepository notesRepository;
+    private final TextPieceRepository textPiecesRepository;
 
     @Autowired
-    public AdminController(PricesRepository pricesRepository) {
+    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository) {
         this.pricesRepository = pricesRepository;
+        this.notesRepository = notesRepository;
+        this.textPiecesRepository = textPiecesRepository;
     }
 
     @Override
@@ -146,5 +154,15 @@ public class AdminController implements AdminApi {
         }
 
         Files.delete(imagePath);
+    }
+
+    @Override
+    public void updateNotePrice(Note note) {
+        notesRepository.updateNotePrice(note.productType(), note.noteType(), note.price());
+    }
+
+    @Override
+    public void updateTextPiece(TextPiece textPiece) {
+        textPiecesRepository.updateTextPiece(textPiece);
     }
 }

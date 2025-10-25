@@ -1,8 +1,8 @@
-<div class="text-editing" th:fragment="text-editing(textContainer)">
+<div class="text-editing" th:fragment="text-editing(textContainer, id)" th:id="${id}">
     <!-- textContainer should be a "p" tag with class "text"  -->
     <th:block th:replace="${textContainer}"></th:block>
     
-    <input type="text" class="input">
+    <input id="text-editing-input" type="text" class="input">
     <button class="icon-button save" id="row-save-button">
         <img src="/images/common/tick.svg" alt="save">
     </button>

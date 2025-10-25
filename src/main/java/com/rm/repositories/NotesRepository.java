@@ -25,4 +25,8 @@ public class NotesRepository {
     public List<Note> findNotesForProduct(ProductType productType) {
         return database.findAllIntoRecord(Note.class, "SELECT * FROM Notes WHERE product = ?", productType);
     }
+
+    public void updateNotePrice(ProductType productType, NoteType noteType, double price) {
+        database.update("UPDATE Notes SET price = ? WHERE product = ? AND note_type = ?", price, productType, noteType);
+    }
 }
