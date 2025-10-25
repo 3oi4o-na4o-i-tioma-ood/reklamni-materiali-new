@@ -79,6 +79,11 @@ function newRenderElements(editorId) {
       const editorContainer = document.getElementById(renderElements._editorId);
 
       editorContainer.addEventListener("mousedown", (event) => {
+
+        if (event.button !== 0) {
+          return;
+        }
+
         renderElements.isDragging = true;
         renderElements.startX = event.clientX;
         renderElements.startY = event.clientY;
