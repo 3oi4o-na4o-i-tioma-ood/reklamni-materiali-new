@@ -2,6 +2,7 @@ package com.rm.apis;
 
 import com.rm.models.carts.CartInfo;
 import com.rm.models.carts.CartItemCreationInfo;
+import com.rm.models.carts.CartItemUpdateInfo;
 import com.rm.models.carts.Order;
 import com.rm.models.carts.OrderWithPrice;
 import com.rm.models.carts.ProductionTime;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +38,12 @@ public interface ShoppingCartApi {
     @ResponseBody
     void createShoppingCartItem(@PathVariable String cartId,
                                 @RequestBody CartItemCreationInfo itemInfo);
+
+    @Operation(summary = "Update shopping cart item")
+    @PutMapping("/api/cart/item/{itemId}")
+    @ResponseBody
+    void updateCartItem(@PathVariable long itemId,
+                        @RequestBody CartItemUpdateInfo itemInfo);
 
     @Operation(summary = "Get shopping cart")
     @GetMapping("/api/cart/{cartId}")

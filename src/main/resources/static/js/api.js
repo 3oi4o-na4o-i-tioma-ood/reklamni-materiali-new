@@ -248,6 +248,15 @@ const API = {
 
     return resp.text()
   },
+  async updateCartItem(itemId, item) {
+    return fetch(`${backendUrl}/cart/item/${itemId}`, {
+      method: "PUT",
+      body: JSON.stringify(item),
+      headers: {
+        "content-type": "application/json"
+      }
+    })
+  },
   async getCart(cartId) {
     const resp = await fetch(`${backendUrl}/cart/${cartId}`, {
       headers: {

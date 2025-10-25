@@ -71,7 +71,7 @@ const shoppingCart = {
 
         return rightSection
     },
-    async _createAmountSelect(item) {
+    async _createAmountSelect(item, saveItem) {
         console.log("_createAmountSelect: ", item)
         const {
             priceAmounts
@@ -95,11 +95,12 @@ const shoppingCart = {
 
             await shoppingCart._updateCartItemPrice(item.id)
             await shoppingCart.updateTotalPrice(shoppingCart._cart)
+            await saveItem()
         })
 
         return amountSelect
     },
-    _createProductionTimeSelect(item) {
+    _createProductionTimeSelect(item, saveItem) {
         const productionTimeOptions = [
             {
                 name: "Стандартна",
@@ -133,16 +134,17 @@ const shoppingCart = {
 
             await shoppingCart._updateCartItemPrice(item.id)
             await shoppingCart.updateTotalPrice(shoppingCart._cart)
+            await saveItem()
         })
 
         return productionTimeSelect
     },
-    async _createItemSettings(item) {
+    async _createItemSettings(item, saveItem) {
         const itemSettings = document.createElement("div")
         itemSettings.classList.add("item-settings")
 
-        const amountSelect = await shoppingCart._createAmountSelect(item)
-        const productionTimeSelect = shoppingCart._createProductionTimeSelect(item)
+        const amountSelect = await shoppingCart._createAmountSelect(item, saveItem)
+        const productionTimeSelect = shoppingCart._createProductionTimeSelect(item, saveItem)
 
         itemSettings.append(amountSelect, productionTimeSelect)
 
@@ -151,7 +153,7 @@ const shoppingCart = {
 
         return itemSettings
     },
-    async _createItemMainSection(item, signlePrice) {
+    async _createItemMainSection(item, signlePrice, saveItem) {
         const product = products.find(product => product.name === item.design.productType)
         const title = product.displayName
 
@@ -164,7 +166,7 @@ const shoppingCart = {
         //const singlePriceEl = document.createElement("span")
         //singlePriceEl.innerText = 'Единична цена: ' + signlePrice
 
-        const itemSettings = await shoppingCart._createItemSettings(item)
+        const itemSettings = await shoppingCart._createItemSettings(item, saveItem)
 
         mainSection.append(titleEl, /* singlePriceEl, */itemSettings)
 
@@ -188,8 +190,24 @@ const shoppingCart = {
             container.remove()
         }
 
+
+        
+        const saveItem = createDebounce(async () => {
+            const updatedItem = shoppingCart._cart.items.find(i => i.id === item.id)
+
+            if(!updatedItem) {
+                console.error("Item not found in cart: ", item.id)
+                return
+            }
+
+            await API.updateCartItem(item.id, {
+                amount: updatedItem?.amount,
+                productionTime: updatedItem?.productionTime
+            })
+        }, 1000)
+
         container.append(image)
-        container.append(await shoppingCart._createItemMainSection(item, null))
+        container.append(await shoppingCart._createItemMainSection(item, null, saveItem))
         container.append(await shoppingCart._createItemRightSection(item, deleteItem))
 
         return container

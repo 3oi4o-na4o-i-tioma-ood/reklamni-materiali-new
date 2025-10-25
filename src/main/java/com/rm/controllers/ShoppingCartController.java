@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import com.rm.models.carts.CartInfo;
 import com.rm.models.carts.CartItemCreationInfo;
+import com.rm.models.carts.CartItemUpdateInfo;
 import com.rm.models.carts.Order;
 import com.rm.models.carts.OrderWithPrice;
 import com.rm.models.users.OrderDetails;
@@ -100,6 +101,17 @@ public class ShoppingCartController implements ShoppingCartApi {
         cart.updated = new Date();
 
         cartRepository.save(cart);
+    }
+
+
+    @Override
+    public void updateCartItem(long itemId, CartItemUpdateInfo itemInfo) {
+        CartItem existingItem = findCartItemOrThrow(itemId);
+        existingItem.amount = itemInfo.amount();
+        existingItem.productionTime = itemInfo.productionTime();
+        existingItem.cart.updated = new Date();
+        cartItemRepository.save(existingItem);
+        cartRepository.save(existingItem.cart);
     }
 
     @Override
