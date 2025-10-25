@@ -170,7 +170,7 @@ const initialEditorTextElements = {
             id: "company_name",
             type: "text",
             size: {
-                w: 110
+                w: 89
             },
             position: {
                 x: 30,
@@ -184,7 +184,7 @@ const initialEditorTextElements = {
             id: "contacts",
             type: "text",
             size: {
-                w: 110
+                w: 89
             },
             position: {
                 x: 30,

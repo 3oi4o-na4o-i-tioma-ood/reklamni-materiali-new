@@ -140,8 +140,8 @@ public class PricesController implements PricesApi {
         }
         System.out.println(item.design.printType);
         System.out.println("modelPriceInfo: " + modelPriceInfo.modelPrice());
-        double price = (modelPriceInfo.modelPrice() == null ? 0 : modelPriceInfo.modelPrice()) * item.amount
-                + modelPriceInfo
+        double modelPrice = (modelPriceInfo.modelPrice() == null ? 0 : modelPriceInfo.modelPrice()) * item.amount;
+        double printPrice = modelPriceInfo
                         .printPrices()
                         .stream()
                         .filter(info -> info.printType() == item.design.printType)
@@ -149,6 +149,7 @@ public class PricesController implements PricesApi {
                                 .mapToDouble(PriceForAmount::price).findFirst().getAsDouble())
                         .findFirst()
                         .orElse(0);
+        double price = modelPrice + printPrice * (item.design.productType == ProductType.PEN || item.design.productType == ProductType.LIGHTER ? item.amount : 1);
 
         System.out.println("price before effects: " + price);
 

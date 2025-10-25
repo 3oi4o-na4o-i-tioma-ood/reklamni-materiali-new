@@ -28,7 +28,7 @@ const pricesCalculation = {
 
         let basePrice
         if (["PEN", "LIGHTER"].includes(productType)) {
-            basePrice = basePriceMaybeSingle * amount
+            basePrice = (modelPrice + basePriceMaybeSingle) * amount
         }
         else {
             basePrice = basePriceMaybeSingle

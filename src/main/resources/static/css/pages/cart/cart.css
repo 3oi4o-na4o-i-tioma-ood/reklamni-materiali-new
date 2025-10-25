@@ -135,6 +135,7 @@
 
 #cart-page-content .price-row .price {
     white-space: nowrap;
+    margin-left: 10px;
 }
 
 #cart-page-content .price-row.bold {
