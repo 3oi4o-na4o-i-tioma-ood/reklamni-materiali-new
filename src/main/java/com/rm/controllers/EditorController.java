@@ -347,7 +347,7 @@ public class EditorController implements EditorApi {
                     Font baseFont = resolveFontFromResources(fontFamily);
                     if (baseFont == null) {
                         baseFont = new Font(fontFamily == null ? "Arial" : fontFamily, Font.PLAIN,
-                                (int) mmToPixels(fontSize, product));
+                                (int) Math.round(mmToPixels(fontSize, product)));
                     } else {
                         baseFont = baseFont.deriveFont((float) mmToPixels(fontSize, product));
                     }
