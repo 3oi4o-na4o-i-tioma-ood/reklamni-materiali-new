@@ -171,7 +171,17 @@ const adminProductPage = {
             "POCKET_CALENDAR_PROMOTION_CONDITION_2",
             "POCKET_CALENDAR_PROMOTION_CONDITION_3",
             "POCKET_CALENDAR_PROMOTION_CONDITION_4",
-            "POCKET_CALENDAR_PROMOTION_CONDITION_5"].includes(id)) {
+            "POCKET_CALENDAR_PROMOTION_CONDITION_5",
+
+            "WORK_CALENDAR_PROMOTION_CONDITION_1",
+            "WORK_CALENDAR_PROMOTION_CONDITION_2",
+            "WORK_CALENDAR_PROMOTION_REWARD_2",
+            "WORK_CALENDAR_PROMOTION_CONDITION_3",
+            "WORK_CALENDAR_PROMOTION_REWARD_3",
+            "WORK_CALENDAR_PROMOTION_CONDITION_4",
+            "WORK_CALENDAR_PROMOTION_REWARD_4_1",
+            "WORK_CALENDAR_PROMOTION_REWARD_4_2"
+        ].includes(id)) {
             API.updateTextPiece(id, value)
             return
         }

@@ -9,11 +9,8 @@
         </div>
         <div class="main_content" id="tabs-content-wrapper">
             <div class="selected">
-                <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing})">
-                    <p id="business-card-price-editing" class="text">
-                        Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа)
-                        на
-                        двустранно хромов матов картон (300 гр/м²)
+                <th:block th:replace="components/text_editing :: text-editing(~{::#work-calendar-price-editing}, 'WORK_CALENDAR_PRICES_NOTE')">
+                    <p id="work-calendar-price-editing" class="text" th:utext='${textPieces["WORK_CALENDAR_PRICES_NOTE"]}'>
                     </p>
                 </th:block>
                 <div class="table-scroll-wrapper">
@@ -38,16 +35,16 @@
                         <tbody>
                             <tr th:each="q, index : ${price_info}">
                                 <td>
-                                    <div class="centered">[[${q["amount"]}]] бр.</div>
+                                    <div class="cell-content centered">[[${q["amount"]}]] бр.</div>
                                 </td>
-                                <td>
-                                    <div class="centered">[[${q["SMALL"]}]]</div>
+                                <td class="editable-cell">
+                                    <div class="cell-content centered">[[${q["SMALL"]}]]</div>
                                 </td>
-                                <td>
-                                    <div class="centered">[[${q["MEDIUM"]}]]</div>
+                                <td class="editable-cell">
+                                    <div class="cell-content centered">[[${q["MEDIUM"]}]]</div>
                                 </td>
-                                <td>
-                                    <div class="centered">[[${q["BIG"]}]]</div>
+                                <td class="editable-cell">
+                                    <div class="cell-content centered">[[${q["BIG"]}]]</div>
                                 </td>
                                 <th:block th:replace="pages/admin/row_actions_buttons :: row-actions-buttons">
                                 </th:block>
@@ -58,51 +55,42 @@
                 <!-- <button class="button" id="add-table-row-button" style="margin-left: auto">+</button> -->
             </div>
             <ul>
-                <li>Надценка за бърза изработка на <strong>визитки (5 часа): +
-                        <th:block th:replace="components/number_editing :: number-editing(50)" />%;
-                    </strong>
-                </li>
-                <li>Надценка за експресна изработка на <strong>визитки (2 часа): +
-                        <th:block th:replace="components/number_editing :: number-editing(100)" />%;
-                    </strong>
-                </li>
-                <li>Ламиниране (матов ламинат): <strong>+
-                        <th:block th:replace="components/number_editing :: number-editing(3.00)" />лв. / 100 бр.
-                    </strong> - препоръчително при тъмни фонове;
-                </li>
-                <li>Заоблени ъгли: <strong>+
-                        <th:block th:replace="components/number_editing :: number-editing(3.50)" />лв. / 100 бр.
-                    </strong>
-                </li>
-                <li>Ефектен картон: <strong>+
-                        <th:block th:replace="components/number_editing :: number-editing(4.00)" />лв. / 100 бр.
-                    </strong></li>
+                <li>Надценка за бърза изработка на <strong>работни календари</strong> (4 дни): +
+                    <th:block th:replace="components/number_editing :: number-editing(${effectPrices.FAST_PRODUCTION}, 'FAST_PRODUCTION')" />%;</li>
+                <li>Надценка за експресна изработка на <strong>работни календари</strong> (2 дни): +
+                    <th:block th:replace="components/number_editing :: number-editing(${effectPrices.EXPRESS_PRODUCTION}, 'EXPRESS_PRODUCTION')" />%;</li>
+                <li>Ламиниране (матов ламинат): +
+                    <th:block th:replace="components/number_editing :: number-editing(${effectPrices.LAMINATION}, 'LAMINATION')" /> лв. / 100 бр.</li>
+                <li>Ефектен картон: +
+                    <th:block th:replace="components/number_editing :: number-editing(${effectPrices.EFFECT_CARTON}, 'EFFECT_CARTON')" /> лв. / 100 бр.</li>
                 <li>При поръчка на стойност над 100 лв. куриерската услуга в рамките на гр. София е
                     <strong>безплатна</strong>.
                 </li>
-                <li>Повече информация за <strong>визитки</strong>.</li>
+                <li>Повече информация за <strong>календари</strong>.</li>
             </ul>
             <div>
-                <strong>Размерът на визитните картички в готов вид е 50/90 мм.</strong>
-                При качване на Ваш дизайн или фон, размерът трябва да бъде 54/94 мм. на 300 DPI (или 638/1110 px).
-                Препоръчително е файлът да е в CMYK цветово пространство.
-                Ако качвате готов дизайн за печат текстовете и логата трябва да са на 7 мм. навътре от всички страни
-                Стандартно визитните картички се изработват на двустранно хромов мат картон 300гр./кв.м.
-                Поддържани файлови формати при качване на ваши фонове или лога:
-                <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+                <p class="text">
+                    Размерът на <strong>работните календари</strong> варира в зависимост от вида. За повече информация вижте по-горе.
+                    При качване на Ваш дизайн или фон за главата, размерът трябва да бъде 336/235 мм. на 225 DPI (или 2976/2082 px). Препоръчително е файлът да е в CMYK цветово пространство.
+                    Стандартно работните календари се изработват на едностранно хромов мат картон 230 гр./кв.м.
+                    Поддържани файлови формати при качване на ваши фонове или лога:
+                    <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+                </p>
             </div>
             <ul>
-                <li>При поръчка на 100 бр. пълноцветни <strong>визитки</strong> - получавате 106 бр.</li>
-                <li>При поръчка на 200 бр. пълноцветни <strong>визитки</strong> - получавате 206 бр. </li>
-                <li>При поръчка на 300 бр. пълноцветни <strong>визитки</strong> - получавате 304 бр. и рекламна
-                    химикалка или
-                    запалка. </li>
-                <li>При поръчка над 400 бр. пълноцветни <strong>визитки</strong> - получавате рекламна химикалка и
-                    запалка.
+                <li>
+                    При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_CONDITION_1']}, 'WORK_CALENDAR_PROMOTION_CONDITION_1')" /> бр. <strong>работни календари</strong> - получавате рекламна химикалка или запалка + безплатна доставка за гр. София.
                 </li>
-                <li>Ако притежавате <strong>промоционален код</strong> и го използвате при поръчката другите промоции
-                    отпадат.
+                <li>
+                    При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_CONDITION_2']}, 'WORK_CALENDAR_PROMOTION_CONDITION_2')" /> бр. <strong>работни календари</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_REWARD_2']}, 'WORK_CALENDAR_PROMOTION_REWARD_2')" /> бр. <strong>визитки</strong> /които трябва да си направите с нова поръчка/ + рекламна химикалка или запалка + безплатна доставка за гр. София.
                 </li>
+                <li>
+                    При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_CONDITION_3']}, 'WORK_CALENDAR_PROMOTION_CONDITION_3')" /> бр. <strong>работни календари</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_REWARD_3']}, 'WORK_CALENDAR_PROMOTION_REWARD_3')" /> бр. <strong>визитки</strong> /които трябва да си направите с нова поръчка/ + рекламна химикалка или запалка + безплатна доставка за гр. София.
+                </li>
+                <li>
+                    При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_CONDITION_4']}, 'WORK_CALENDAR_PROMOTION_CONDITION_4')" /> бр. <strong>работни календари</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_REWARD_4_1']}, 'WORK_CALENDAR_PROMOTION_REWARD_4_1')" /> + <th:block th:replace="components/number_editing :: number-editing(${textPieces['WORK_CALENDAR_PROMOTION_REWARD_4_2']}, 'WORK_CALENDAR_PROMOTION_REWARD_4_2')" /> бр. <strong>визитки</strong> /които трябва да си направите с нови поръчки/ + рекламна химикалка или запалка + безплатна доставка за гр. София.
+                </li>
+                <li>*Промоциите <strong>не важат</strong> от 10 Ноември до 31 Декември</li>
             </ul>
         </div>
     </div>

@@ -314,6 +314,14 @@ INSERT INTO Text_Pieces (name, text) VALUES
 ('POCKET_CALENDAR_PROMOTION_CONDITION_5', '500'),
 
 ('WORK_CALENDAR_PRICES_NOTE', 'Всички цени на <strong>работни календари</strong> са в лева без ДДС за стандартен срок (от 5 до 7 дни). Календари на стойност над 50,00 лв. се предплащат авансово на 100 %'),
+('WORK_CALENDAR_PROMOTION_CONDITION_1', '50'),
+('WORK_CALENDAR_PROMOTION_CONDITION_2', '100'),
+('WORK_CALENDAR_PROMOTION_REWARD_2', '50'),
+('WORK_CALENDAR_PROMOTION_CONDITION_3', '150'),
+('WORK_CALENDAR_PROMOTION_REWARD_3', '100'),
+('WORK_CALENDAR_PROMOTION_CONDITION_4', '200'),
+('WORK_CALENDAR_PROMOTION_REWARD_4_1', '100'),
+('WORK_CALENDAR_PROMOTION_REWARD_4_2', '50'),
 ('FLYER_PRICES_NOTE', 'Всички цени на <strong>флаери</strong> са в лева без ДДС за стандартен срок (от 7 до 10 дни). Флаери се предплащат авансово на 100 %'),
 ('PEN_PRICES_NOTE', 'Всички цени за печат на <strong>химикалки</strong> са в лева без ДДС за стандартен срок от 7 до 10 дни. Химикалки се предплащат авансово на 100 %'),
 ('LIGHTER_PRICES_NOTE', 'Всички цени за печат на <strong>запалки</strong> са в лева без ДДС за стандартен срок от 7 до 10 дни. Запалки се предплащат авансово на 100 %');
