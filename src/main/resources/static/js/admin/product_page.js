@@ -139,6 +139,7 @@ const adminProductPage = {
         })
     },
     onTextElementValueChange(value, id) {
+        console.log(id)
         if (["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON"].includes(id)) {
             API.updateNotePrice({
                 productType: adminProductPage._productType,
@@ -148,7 +149,22 @@ const adminProductPage = {
             return
         }
 
-        if (["BUSINESS_CARD_PRICES_NOTE", "FLYER_PRICES_NOTE"].includes(id)) {
+        if ([
+            "BUSINESS_CARD_PRICES_NOTE",
+            "FLYER_PRICES_NOTE",
+            "PEN_PRICES_NOTE",
+            "LIGHTER_PRICES_NOTE",
+            "WORK_CALENDAR_PRICES_NOTE",
+            "POCKET_CALENDAR_PRICES_NOTE",
+            "FLYER_PRICES_NOTE",
+
+            "BUSINESS_CARD_PROMOTION_CONDITION_1",
+            "BUSINESS_CARD_PROMOTION_REWARD_1",
+            "BUSINESS_CARD_PROMOTION_CONDITION_2",
+            "BUSINESS_CARD_PROMOTION_REWARD_2",
+            "BUSINESS_CARD_PROMOTION_CONDITION_3",
+            "BUSINESS_CARD_PROMOTION_REWARD_3",
+            "BUSINESS_CARD_PROMOTION_CONDITION_4"].includes(id)) {
             API.updateTextPiece(id, value)
             return
         }
@@ -158,6 +174,7 @@ const adminProductPage = {
         adminProductPage._columns = columns
 
         const textEditingElements = document.querySelectorAll(".text-editing")
+        console.log(textEditingElements)
 
         for (const element of textEditingElements) {
             adminProductPage.initTextEditingElement(element, value => adminProductPage.onTextElementValueChange(value, element.id))
