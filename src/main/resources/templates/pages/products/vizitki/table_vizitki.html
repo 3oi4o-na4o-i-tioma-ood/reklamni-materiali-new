@@ -13,8 +13,7 @@
       </div>
       <div class="main_content" id="tabs-content-wrapper">
         <div class="selected">
-          <p class="text">
-            Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на двустранно хромов матов картон (300 гр/м²)
+          <p class="text" th:utext='${textPieces["BUSINESS_CARD_PRICES_NOTE"]}'>
           </p>
           <table style="width: 100%">
             <thead>
@@ -64,11 +63,11 @@
         </div>
         <div>
           <ul>
-            <li>Надценка за бърза изработка на <strong>визитки (5 часа): +50%;</strong></li>
-            <li>Надценка за експресна изработка на <strong>визитки (2 часа): +100%;</strong></li>
-            <li>Ламиниране (матов ламинат): <strong>+3,00 лв. / 100 бр.</strong> - препоръчително при тъмни фонове;</li>
-            <li>Заоблени ъгли: <strong>+3,50 лв. / 100 бр.</strong></li>
-            <li>Ефектен картон: <strong>+4,00 лв. / 100 бр.</strong></li>
+            <li>Надценка за бърза изработка на <strong>визитки (5 часа): +[[${#numbers.formatDecimal(effectPrices["FAST_PRODUCTION"], 0, 0)}]]%;</strong></li>
+            <li>Надценка за експресна изработка на <strong>визитки (2 часа): +[[${#numbers.formatDecimal(effectPrices["EXPRESS_PRODUCTION"], 0, 0)}]]%;</strong></li>
+            <li>Ламиниране (матов ламинат): <strong>+[[${#numbers.formatDecimal(effectPrices["LAMINATION"], 0, 2)}]] лв. / 100 бр.</strong> - препоръчително при тъмни фонове;</li>
+            <li>Заоблени ъгли: <strong>+[[${#numbers.formatDecimal(effectPrices["ROUNDED_CORNERS"], 0, 2)}]] лв. / 100 бр.</strong></li>
+            <li>Ефектен картон: <strong>+[[${#numbers.formatDecimal(effectPrices["EFFECT_CARTON"], 0, 2)}]] лв. / 100 бр.</strong></li>
             <li>При поръчка на стойност над 100 лв. куриерската услуга в рамките на гр. София е
               <strong>безплатна</strong>.
             </li>

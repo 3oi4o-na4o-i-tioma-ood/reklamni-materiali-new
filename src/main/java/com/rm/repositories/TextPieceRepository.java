@@ -1,5 +1,6 @@
 package com.rm.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -21,5 +22,9 @@ public class TextPieceRepository {
 
     public Optional<TextPiece> findTextPiece(String name) {
         return database.findFirstIntoRecord(TextPiece.class, "SELECT * FROM Text_Pieces WHERE name = ?", name);
+    }
+
+    public List<TextPiece> findAll() {
+        return database.findAllIntoRecord(TextPiece.class, "SELECT * FROM Text_Pieces");
     }
 }

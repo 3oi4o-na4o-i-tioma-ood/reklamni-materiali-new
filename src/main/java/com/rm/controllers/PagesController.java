@@ -6,15 +6,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.rm.apis.PagesApi;
+import com.rm.apis.TextPieceApi;
 import com.rm.models.categories.PaginatedModels;
+import com.rm.models.prices.Note;
 import com.rm.models.prices.PrintType;
 import com.rm.models.prices.ProductPrice;
 import com.rm.models.prices.ProductType;
 import com.rm.repositories.PricesRepository;
 import com.rm.util.Formatter;
 
-import com.rm.models.prices.ProductPriceTemplateDTO;
-
+import com.rm.apis.PricesApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,15 @@ import org.springframework.ui.Model;
 public class PagesController implements PagesApi {
     private final CategoriesController categoriesController;
     private final PricesRepository pricesRepository;
+    private final PricesApi pricesApi;
+    private final TextPieceApi textPieceApi;
 
     @Autowired
-    public PagesController(CategoriesController categoriesController, PricesRepository pricesRepository) {
+    public PagesController(CategoriesController categoriesController, PricesRepository pricesRepository, PricesApi pricesApi, TextPieceApi textPieceApi) {
         this.categoriesController = categoriesController;
         this.pricesRepository = pricesRepository;
+        this.pricesApi = pricesApi;
+        this.textPieceApi = textPieceApi;
     }
 
     @Override
@@ -84,34 +89,47 @@ public class PagesController implements PagesApi {
     @Override
     public String adminBusinessCards(Model model) {
         addPriceInfo(model, ProductType.BUSINESS_CARD);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.BUSINESS_CARD);
         return "pages/admin/business_cards/business_cards";
     }
 
     @Override
     public String adminWorkCalendars(Model model) {
         addPriceInfo(model, ProductType.WORK_CALENDAR);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.WORK_CALENDAR);
         return "pages/admin/work_calendars/work_calendars";
     }
 
     @Override
     public String adminPocketCalendars(Model model) {
         addPriceInfo(model, ProductType.POCKET_CALENDAR);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.POCKET_CALENDAR);
         return "pages/admin/pocket_calendars/pocket_calendars";
     }
 
     @Override
     public String adminFlyers(Model model){
         addPriceInfo(model, ProductType.FLIER_10x20);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.FLIER_10x15);
+        addEffectPrices(model, ProductType.FLIER_10x20);
         return "pages/admin/flyers/flyers";
     }
 
     @Override
     public String adminPens(Model model){
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.PEN);
         return "pages/admin/pens/pens";
     }
 
     @Override
     public String adminLighters(Model model){
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.LIGHTER);
         return "pages/admin/lighters/lighters";
     }
 
@@ -141,18 +159,24 @@ public class PagesController implements PagesApi {
     @Override
     public String businessCards(Model model) {
         addPriceInfo(model, ProductType.BUSINESS_CARD);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.BUSINESS_CARD);
         return "pages/products/vizitki/vizitki";
     }
 
     @Override
     public String workCalendars(Model model) {
         addPriceInfo(model, ProductType.WORK_CALENDAR);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.WORK_CALENDAR);
         return "pages/products/rabotni_kalendari/rabotni_kalendari";
     }
 
     @Override
     public String pocketCalendars(Model model) {
         addPriceInfo(model, ProductType.POCKET_CALENDAR);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.POCKET_CALENDAR);
         return "pages/products/dzobni_kalendari/dzobni_kalendari";
     }
 
@@ -160,18 +184,25 @@ public class PagesController implements PagesApi {
     public String fliers(Model model) {
         addPriceInfo(model, ProductType.FLIER_10x15, "price_info_flyer_10x15");
         addPriceInfo(model, ProductType.FLIER_10x20, "price_info_flyer_10x20");
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.FLIER_10x15);
+        addEffectPrices(model, ProductType.FLIER_10x20);
         return "pages/products/flaeri/flaeri";
     }
 
     @Override
     public String pens(Model model) {
         addPriceInfoPensAndLighters(model, ProductType.PEN);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.PEN);
         return "pages/products/himikalki/himikalki";
     }
 
     @Override
     public String lighters(Model model) {
         addPriceInfoPensAndLighters(model, ProductType.LIGHTER);
+        addTextPieces(model);
+        addEffectPrices(model, ProductType.LIGHTER);
         return "pages/products/zapalki/zapalki";
     }
 
@@ -195,7 +226,6 @@ public class PagesController implements PagesApi {
 
     @Override
     public String pensModels(Model model) {
-
         PaginatedModels models = categoriesController.getModels(ProductType.PEN, 0, 100000);
 
         model.addAttribute("models", models.items());
@@ -349,5 +379,20 @@ public class PagesController implements PagesApi {
         addPriceInfo(model, screenPrices, "price_info_screen");
         addPriceInfo(model, padPrices, "price_info_pad");
         addPriceInfo(model, fullColorPrices, "price_info_full_color");
+    }
+
+    private void addEffectPrices(Model model, ProductType productType) {
+        List<Note> effectPrices = pricesApi.getEffectPrices(productType);
+        Map<String, Double> effectPricesMap = effectPrices
+                .stream()
+                .collect(Collectors.toMap(
+                        note -> note.noteType().name(),
+                        note -> note.price()));
+        model.addAttribute("effectPrices", effectPricesMap);
+    }
+
+    private void addTextPieces(Model model) {
+        Map<String, String> textPieces = textPieceApi.getAllTextPieces();
+        model.addAttribute("textPieces", textPieces);
     }
 }

@@ -10,9 +10,7 @@
     <div class="main_content" id="tabs-content-wrapper">
       <div class="selected">
         <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing}, 'BUSINESS_CARD_PRICES_NOTE')">
-          <p id="business-card-price-editing" class="text">
-            Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на
-            двустранно хромов матов картон (300 гр/м²)
+          <p id="business-card-price-editing" class="text" th:utext='${textPieces["BUSINESS_CARD_PRICES_NOTE"]}'>
           </p>
         </th:block>
         <div class="table-scroll-wrapper">
@@ -88,19 +86,19 @@
       </div>
       <ul>
         <li>Надценка за бърза изработка на <strong>визитки (5 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(50, 'FAST_PRODUCTION')" />%;
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.FAST_PRODUCTION}, 'FAST_PRODUCTION')" />%;
           </strong>
         </li>
         <li>Надценка за експресна изработка на <strong>визитки (2 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(100, 'EXPRESS_PRODUCTION')" />%;
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.EXPRESS_PRODUCTION}, 'EXPRESS_PRODUCTION')" />%;
           </strong>
         </li>
         <li>Ламиниране (матов ламинат): <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.00, 'LAMINATION')" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.LAMINATION}, 'LAMINATION')" />лв. / 100 бр.
           </strong> - препоръчително при тъмни фонове;
         </li>
         <li>Заоблени ъгли: <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.50, 'ROUNDED_CORNERS')" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.ROUNDED_CORNERS}, 'ROUNDED_CORNERS')" />лв. / 100 бр.
           </strong>
         </li>
         <!-- <li>Ефектен картон: <strong>+

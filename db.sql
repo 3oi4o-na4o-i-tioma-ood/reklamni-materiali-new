@@ -295,7 +295,7 @@ CREATE TABLE Text_Pieces (
 );
 
 INSERT INTO Text_Pieces (name, text) VALUES
-('BUSINESS_CARD_PRICES_NOTE', 'Всички цени на ***визитки*** са в лева без ДДС за стандартен срок (от 24 до 48 часа) на двустранно хромов матов картон (300 гр/м²)'),
+('BUSINESS_CARD_PRICES_NOTE', 'Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на двустранно хромов матов картон (300 гр/м²)'),
 ('BUSINESS_CARD_PROMOTION_CONDITION_1', '100'),
 ('BUSINESS_CARD_PROMOTION_REWARD_1', '106'),
 ('BUSINESS_CARD_PROMOTION_CONDITION_2', '200'),
@@ -303,6 +303,12 @@ INSERT INTO Text_Pieces (name, text) VALUES
 ('BUSINESS_CARD_PROMOTION_CONDITION_3', '300'),
 ('BUSINESS_CARD_PROMOTION_REWARD_3', '304'),
 ('BUSINESS_CARD_PROMOTION_CONDITION_4', '400'),
+
+('POCKET_CALENDAR_PRICES_NOTE', 'Всички цени на <strong>джобни календарчета</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на двустранно хромов матов картон (300 гр/м²)'),
+('WORK_CALENDAR_PRICES_NOTE', 'Всички цени на <strong>работни календари</strong> са в лева без ДДС за стандартен срок (от 5 до 7 дни). Календари на стойност над 50,00 лв. се предплащат авансово на 100 %'),
+('FLYER_PRICES_NOTE', 'Всички цени на <strong>флаери</strong> са в лева без ДДС за стандартен срок (от 7 до 10 дни). Флаери се предплащат авансово на 100 %'),
+('PEN_PRICES_NOTE', 'Всички цени за печат на <strong>химикалки</strong> са в лева без ДДС за стандартен срок от 7 до 10 дни. Химикалки се предплащат авансово на 100 %'),
+('LIGHTER_PRICES_NOTE', 'Всички цени за печат на <strong>запалки</strong> са в лева без ДДС за стандартен срок от 7 до 10 дни. Запалки се предплащат авансово на 100 %'),
 
 DROP TABLE IF EXISTS Product_Models;
 CREATE TABLE Product_Models (

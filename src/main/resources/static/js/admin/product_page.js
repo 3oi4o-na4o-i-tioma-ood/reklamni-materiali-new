@@ -23,12 +23,7 @@ const adminProductPage = {
             return "<strong>" + string.slice(3, -3) + "</strong>"
         }
 
-        saveButton.addEventListener("click", () => {
-            onValueChange(input.value)
-            element.classList.remove("edited")
-
-            const text = input.value
-
+        function formatToHTML(text) {
             const boldMatches = [...text.matchAll(/\*\*\*[^\*]*\*\*\*/g)]
 
             const html = boldMatches
@@ -38,10 +33,17 @@ const adminProductPage = {
                     text.slice(match.index + match[0].length, boldMatches[index + 1]?.index),
                     text.slice(0, boldMatches[0]?.index))
 
-            console.log(boldMatches
-                .sort((m1, m2) => m1.index - m2.index), html)
+            return html
+        }
 
+
+        saveButton.addEventListener("click", () => {
+            const html = formatToHTML(input.value)
+
+            onValueChange(html)
             textContainer.innerHTML = html
+
+            element.classList.remove("edited")
         })
 
         cancelButton.addEventListener("click", () => {
@@ -93,7 +95,7 @@ const adminProductPage = {
             })
 
             console.log(cellsData)
-            if(adminProductPage._columns) {
+            if (adminProductPage._columns) {
 
                 const prices = cellsData.map((value, index) => ({
                     printType: adminProductPage._columns[index],
@@ -102,7 +104,7 @@ const adminProductPage = {
 
                 await API.updatePrices(adminProductPage._productType, parseInt(cells[0].innerText), prices)
             }
-            
+
             row.classList.remove("edited")
         })
 
@@ -137,12 +139,16 @@ const adminProductPage = {
         })
     },
     onTextElementValueChange(value, id) {
-        if(["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON"].includes(id)) {
-            API.updateNotePrice(id, value)
+        if (["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON"].includes(id)) {
+            API.updateNotePrice({
+                productType: adminProductPage._productType,
+                noteType: id,
+                price: Number(value)
+            })
             return
         }
 
-        if(["BUSINESS_CARD_PRICES_NOTE", "FLYER_PRICES_NOTE"].includes(id)) {
+        if (["BUSINESS_CARD_PRICES_NOTE", "FLYER_PRICES_NOTE"].includes(id)) {
             API.updateTextPiece(id, value)
             return
         }

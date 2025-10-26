@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,4 +19,9 @@ public interface TextPieceApi {
     @GetMapping("/api/text-pieces/{name}")
     @ResponseBody
     TextPiece getTextPiece(@PathVariable String name);
+
+    @Operation(summary = "Get all text pieces")
+    @GetMapping("/api/text-pieces")
+    @ResponseBody
+    Map<String, String> getAllTextPieces();
 }
