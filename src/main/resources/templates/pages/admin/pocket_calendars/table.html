@@ -9,10 +9,8 @@
     </div>
     <div class="main_content" id="tabs-content-wrapper">
       <div class="selected">
-        <th:block th:replace="components/text_editing :: text-editing(~{::#business-card-price-editing})">
-          <p id="business-card-price-editing" class="text">
-            Всички цени на <strong>визитки</strong> са в лева без ДДС за стандартен срок (от 24 до 48 часа) на
-            двустранно хромов матов картон (300 гр/м²)
+        <th:block th:replace="components/text_editing :: text-editing(~{::#pocket-calendar-price-editing}, 'POCKET_CALENDAR_PRICES_NOTE')">
+          <p id="pocket-calendar-price-editing" class="text" th:utext='${textPieces["POCKET_CALENDAR_PRICES_NOTE"]}'>
           </p>
         </th:block>
         <div class="table-scroll-wrapper">
@@ -34,13 +32,13 @@
             <tbody>
               <tr th:each="q, index : ${price_info}">
                 <td>
-                  <div class="centered">[[${q["amount"]}]] бр.</div>
+                  <div class="cell-content centered">[[${q["amount"]}]] бр.</div>
                 </td>
-                <td>
-                  <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["COLORED_BLACK"]}]]</div>
                 </td>
-                <td>
-                  <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["COLORED_COLORED"]}]]</div>
                 </td>
                 <td class="row-edit-cell">
                   <button class="icon-button table-button" id="row-edit-button">
@@ -69,24 +67,24 @@
         <!-- <button class="button" id="add-table-row-button" style="margin-left: auto">+</button> -->
       </div>
       <ul>
-        <li>Надценка за бърза изработка на <strong>визитки (5 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(50)" />%;
+        <li>Надценка за бърза изработка на <strong>джобни календарчета (5 часа): +
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.FAST_PRODUCTION}, 'FAST_PRODUCTION')" />%;
           </strong>
         </li>
-        <li>Надценка за експресна изработка на <strong>визитки (2 часа): +
-            <th:block th:replace="components/number_editing :: number-editing(100)" />%;
+        <li>Надценка за експресна изработка на <strong>джобни календарчета (3 часа): +
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.EXPRESS_PRODUCTION}, 'EXPRESS_PRODUCTION')" />%;
           </strong>
         </li>
         <li>Ламиниране (матов ламинат): <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.00)" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.LAMINATION}, 'LAMINATION')" />лв. / 100 бр.
           </strong> - препоръчително при тъмни фонове;
         </li>
         <li>Заоблени ъгли: <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(3.50)" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.ROUNDED_CORNERS}, 'ROUNDED_CORNERS')" />лв. / 100 бр.
           </strong>
         </li>
         <li>Ефектен картон: <strong>+
-            <th:block th:replace="components/number_editing :: number-editing(4.00)" />лв. / 100 бр.
+            <th:block th:replace="components/number_editing :: number-editing(${effectPrices.EFFECT_CARTON}, 'EFFECT_CARTON')" />лв. / 100 бр.
           </strong></li>
         <li>При поръчка на стойност над 100 лв. куриерската услуга в рамките на гр. София е
           <strong>безплатна</strong>.
@@ -103,14 +101,11 @@
         <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
       </div>
       <ul>
-        <li>При поръчка на 100 бр. пълноцветни <strong>визитки</strong> - получавате 106 бр.</li>
-        <li>При поръчка на 200 бр. пълноцветни <strong>визитки</strong> - получавате 206 бр. </li>
-        <li>При поръчка на 300 бр. пълноцветни <strong>визитки</strong> - получавате 304 бр. и рекламна химикалка или
-          запалка. </li>
-        <li>При поръчка над 400 бр. пълноцветни <strong>визитки</strong> - получавате рекламна химикалка и запалка.
-        </li>
-        <li>Ако притежавате <strong>промоционален код</strong> и го използвате при поръчката другите промоции отпадат.
-        </li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_CONDITION_1']}, 'POCKET_CALENDAR_PROMOTION_CONDITION_1')" /> бр. <strong>джобни календарчета</strong> - получавате <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_REWARD_1']}, 'POCKET_CALENDAR_PROMOTION_REWARD_1')" /> бр.</li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_CONDITION_2']}, 'POCKET_CALENDAR_PROMOTION_CONDITION_2')" /> бр. <strong>джобни календарчета</strong> - получавате рекламна химикалка или запалка.</li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_CONDITION_3']}, 'POCKET_CALENDAR_PROMOTION_CONDITION_3')" /> бр. <strong>джобни календарчета</strong> - получавате рекламна химикалка или запалка.</li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_CONDITION_4']}, 'POCKET_CALENDAR_PROMOTION_CONDITION_4')" /> бр. <strong>джобни календарчета</strong> - получавате рекламен календар за 2025 г.</li>
+        <li>При поръчка на <th:block th:replace="components/number_editing :: number-editing(${textPieces['POCKET_CALENDAR_PROMOTION_CONDITION_5']}, 'POCKET_CALENDAR_PROMOTION_CONDITION_5')" /> бр. <strong>джобни календарчета</strong> - получавате рекламен календар за 2025 г.</li>
       </ul>
     </div>
   </div>

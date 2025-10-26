@@ -164,7 +164,14 @@ const adminProductPage = {
             "BUSINESS_CARD_PROMOTION_REWARD_2",
             "BUSINESS_CARD_PROMOTION_CONDITION_3",
             "BUSINESS_CARD_PROMOTION_REWARD_3",
-            "BUSINESS_CARD_PROMOTION_CONDITION_4"].includes(id)) {
+            "BUSINESS_CARD_PROMOTION_CONDITION_4",
+
+            "POCKET_CALENDAR_PROMOTION_CONDITION_1",
+            "POCKET_CALENDAR_PROMOTION_REWARD_1",
+            "POCKET_CALENDAR_PROMOTION_CONDITION_2",
+            "POCKET_CALENDAR_PROMOTION_CONDITION_3",
+            "POCKET_CALENDAR_PROMOTION_CONDITION_4",
+            "POCKET_CALENDAR_PROMOTION_CONDITION_5"].includes(id)) {
             API.updateTextPiece(id, value)
             return
         }
