@@ -11,11 +11,13 @@
 const categoriesPage = {
   categoryPath: "",
   _productName: null,
-  _pageSize: null,
+  _getPageSize: null,
   _imagesTotal: 0,
+  getPageSize() {
+    return categoriesPage._getPageSize(categoriesPage._orientation);
+  },
   _getNumberOfPages() {
-    console.log("_getNumberOfPages: ", categoriesPage._imagesTotal, categoriesPage._pageSize)
-    return Math.ceil(categoriesPage._imagesTotal / categoriesPage._pageSize);
+    return Math.ceil(categoriesPage._imagesTotal / categoriesPage.getPageSize());
   },
   _onCategoryClick() {
 
@@ -109,7 +111,8 @@ const categoriesPage = {
   },
 
   async updateImages(page_number) {
-    const images = await API.getPictures(categoriesPage._productName, page_number, categoriesPage._pageSize, categoriesPage.categoryPath);
+    const categoryPath = categoriesPage._orientation ? (categoriesPage._orientation + "/" + categoriesPage.categoryPath) : categoriesPage.categoryPath
+    const images = await API.getPictures(categoriesPage._productName, page_number, categoriesPage.getPageSize(), categoryPath);
     categoriesPage._imagesTotal = images.total
     categoriesPage._generateImages(images.images, `images_container`, categoriesPage.getProductDescription()?.url, categoriesPage._productName);
   },
@@ -126,11 +129,16 @@ const categoriesPage = {
   },
   _orientationSelectInstance: null,
   _orientation: null,
+  _updateImagesLayout() {
+    const imagesContainer = document.getElementById("images_container")
+    imagesContainer.style.gridTemplateColumns = `repeat(${categoriesPage._orientation ? (categoriesPage._orientation === "horizontal" ? 3 : 5) : 3}, 1fr)`;
+  },
   _updateOrientation(orientation) {
     categoriesPage._orientation = orientation
 
-    const imagesContainer = document.getElementById("images_container")
-    imagesContainer.style.gridTemplateColumns = `repeat(${orientation === "horizontal" ? 3 : 5}, 1fr)`;
+    categoriesPage._updateImagesLayout()
+
+    categoriesPage.init(categoriesPage._productName, categoriesPage._getPageSize, categoriesPage._hasCategories)
   },
   _initOrientationSelect() {
     const select = document.getElementById("select-orientation")
@@ -138,6 +146,8 @@ const categoriesPage = {
     if(categoriesPage._orientationSelectInstance || !select) {
       return
     }
+
+    categoriesPage._orientation = "horizontal"
 
     categoriesPage._orientationSelectInstance = NiceSelect.bind(select, {placeholder: "Ориентация"})
     select.addEventListener("change", e => {
@@ -170,13 +180,15 @@ const categoriesPage = {
     }
   },
   
-  async init(product, page_size = 12, hasCategories = true) {
+  async init(product, getPageSize = () => 12, hasCategories = true) {
     categoriesPage._productName = product
-    categoriesPage._pageSize = page_size
+    categoriesPage._getPageSize = getPageSize
 
     categoriesPage._initSkipBgButton()
 
     categoriesPage._initOrientationSelect()
+
+    categoriesPage._updateImagesLayout()
 
     if (hasCategories) {
       categoriesPage.generateCategories(categoriesPage.getProductDescription()?.url, product)

@@ -240,7 +240,7 @@ public class PagesController implements PagesApi {
 
     @Override
     public String fliersCategories(Model model) {
-        return "pages/categories/flayers/flayers";
+        return "pages/categories/flyers/flyers";
     }
 
     @Override
