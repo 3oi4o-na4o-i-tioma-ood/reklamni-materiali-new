@@ -112,10 +112,11 @@ public class PagesController implements PagesApi {
 
     @Override
     public String adminFlyers(Model model){
-        addPriceInfo(model, ProductType.FLIER_10x20);
+        addPriceInfo(model, ProductType.FLIER_10x15, "price_info_flyer_10x15");
+        addPriceInfo(model, ProductType.FLIER_10x20, "price_info_flyer_10x20");
         addTextPieces(model);
-        addEffectPrices(model, ProductType.FLIER_10x15);
-        addEffectPrices(model, ProductType.FLIER_10x20);
+        addEffectPrices(model, ProductType.FLIER_10x15, "effectPricesFlyer10x15");
+        addEffectPrices(model, ProductType.FLIER_10x20, "effectPricesFlyer10x20");
         return "pages/admin/flyers/flyers";
     }
 
@@ -185,8 +186,8 @@ public class PagesController implements PagesApi {
         addPriceInfo(model, ProductType.FLIER_10x15, "price_info_flyer_10x15");
         addPriceInfo(model, ProductType.FLIER_10x20, "price_info_flyer_10x20");
         addTextPieces(model);
-        addEffectPrices(model, ProductType.FLIER_10x15);
-        addEffectPrices(model, ProductType.FLIER_10x20);
+        addEffectPrices(model, ProductType.FLIER_10x15, "effectPricesFlyer10x15");
+        addEffectPrices(model, ProductType.FLIER_10x20, "effectPricesFlyer10x20");
         return "pages/products/flaeri/flaeri";
     }
 
@@ -382,13 +383,17 @@ public class PagesController implements PagesApi {
     }
 
     private void addEffectPrices(Model model, ProductType productType) {
+        addEffectPrices(model, productType, "effectPrices");
+    }
+
+    private void addEffectPrices(Model model, ProductType productType, String attributeName) {
         List<Note> effectPrices = pricesApi.getEffectPrices(productType);
         Map<String, Double> effectPricesMap = effectPrices
                 .stream()
                 .collect(Collectors.toMap(
                         note -> note.noteType().name(),
                         note -> note.price()));
-        model.addAttribute("effectPrices", effectPricesMap);
+        model.addAttribute(attributeName, effectPricesMap);
     }
 
     private void addTextPieces(Model model) {

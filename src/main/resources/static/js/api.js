@@ -346,7 +346,7 @@ const API = {
         productType, amount, prices
       })
     })
-    return await resp.json()  
+    return await resp.text()  
   },
   async updateNotePrice(note) {
     const jwt = auth.getToken()
