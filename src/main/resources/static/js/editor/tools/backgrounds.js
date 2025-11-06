@@ -108,7 +108,7 @@ const bgTool = {
         const container = document.getElementById("bg-options")
 
         const productDescription = editor.getCurrentProductDescription()
-        aspectRatio = productDescription.sizeMM.width / productDescription.sizeMM.height
+        const aspectRatio = editor.getRotatedWidth(productDescription) / editor.getRotatedHeight(productDescription);
 
         const images = new Array(count).fill(null).map(() => {
             const button = document.createElement("button")
@@ -157,7 +157,7 @@ const bgTool = {
 
         const currentBgElement = document.getElementById("bg-tool-current-bg")
 
-        currentBgElement.style.aspectRatio = productDescription.sizeMM.width / productDescription.sizeMM.height
+        currentBgElement.style.aspectRatio = editor.getRotatedWidth(productDescription) / editor.getRotatedHeight(productDescription);
 
         if (allowUpload) {
             imageUpload.init("bg-tool-upload-bg", bgTool.handleUploadedFiles)
