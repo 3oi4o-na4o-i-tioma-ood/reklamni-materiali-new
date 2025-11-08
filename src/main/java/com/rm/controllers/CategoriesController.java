@@ -131,7 +131,7 @@ public class CategoriesController implements CategoriesApi {
     @Override
     public Resource getImage(ProductType product, String path) throws IOException {
         BufferedImage image = ImageIO.read(Path.of(categoriesDirectory, product.name().toLowerCase(), path).toFile());
-        Image scaled = image.getScaledInstance(300, -1, BufferedImage.SCALE_SMOOTH);
+        Image scaled = image.getScaledInstance(300, -1, Image.SCALE_SMOOTH);
 
         BufferedImage scaledBuffer = new BufferedImage(scaled.getWidth(null), scaled.getHeight(null),
                 BufferedImage.TYPE_INT_RGB);

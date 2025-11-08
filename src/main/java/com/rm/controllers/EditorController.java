@@ -1,5 +1,6 @@
 package com.rm.controllers;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -8,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
 import java.awt.font.TextAttribute;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,6 +56,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Controller
 public class EditorController implements EditorApi {
@@ -97,8 +100,16 @@ public class EditorController implements EditorApi {
         if (filename != null) {
             resource = new FileSystemResource(Path.of(imagesFolderPath, filename + ".png"));
         } else {
-            resource = new FileSystemResource(
-                    Path.of(categoriesDirectory, product.name().toLowerCase(), path).toFile());
+            String url = ServletUriComponentsBuilder.fromCurrentContextPath().build().getHost();
+            try {
+                BufferedImage image = ImageIO.read(Path.of(categoriesDirectory, product.name().toLowerCase(), path).toFile());
+                addWatermark(image, url);
+                ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+                ImageIO.write(image, "jpg", bytestream);
+                resource = new ByteArrayResource(bytestream.toByteArray());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         if (resource.exists() && resource.isReadable()) {
@@ -371,12 +382,11 @@ public class EditorController implements EditorApi {
                     for (int i = 0; i < lines.length; i++) {
                         String line = lines[i];
                         int textWidth = fm.stringWidth(line);
-                        int drawX = xPx;
-                        switch (alignment) {
-                            case CENTER -> drawX = xPx + Math.max(0, (widthPx - textWidth) / 2);
-                            case RIGHT -> drawX = xPx + Math.max(0, widthPx - textWidth);
-                            default -> drawX = xPx;
-                        }
+                        int drawX = switch (alignment) {
+                            case LEFT -> xPx;
+                            case CENTER -> xPx + Math.max(0, (widthPx - textWidth) / 2);
+                            case RIGHT -> xPx + Math.max(0, widthPx - textWidth);
+                        };
 
                         int drawY = yPx + i * lineHeight + ascent;
                         graphics.drawString(line, drawX, drawY);
@@ -393,13 +403,28 @@ public class EditorController implements EditorApi {
         ImageIO.write(image, "png", savePath.toFile());
     }
 
+    private static void addWatermark(BufferedImage image, String text) {
+        Graphics2D graphics = image.createGraphics();
+        graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
+        Font font = resolveFontFromResources("Arial").deriveFont(Font.PLAIN, 30);
+        graphics.setFont(font);
+        graphics.setColor(Color.WHITE);
+        Rectangle2D textBounds = graphics.getFontMetrics().getStringBounds(text, graphics);
+        float x = (image.getWidth() - (float) textBounds.getWidth()) / 2;
+        float y = (image.getHeight() - (float) textBounds.getHeight()) / 2;
+        graphics.drawString(text, x, y);
+
+        graphics.dispose();
+    }
+
     private static final Map<String, String> FONT_FILES = Map.ofEntries(
             Map.entry("Arial", "/static/fonts/arial.ttf"),
             Map.entry("Azbuka", "/static/fonts/azbuka02.ttf"),
             Map.entry("Azbuka Decorative", "/static/fonts/azbuka03_d.ttf"),
             Map.entry("Comic Sans MS", "/static/fonts/comic.ttf"),
             Map.entry("Courier New", "/static/fonts/cour.ttf"),
-            Map.entry("Kovanovic 68", "/static/fonts/nk68.ttf"),
+            Map.entry("Kovanovic 68", "/sgit tatic/fonts/nk68.ttf"),
             Map.entry("Kovanovic 85", "/static/fonts/nk85.ttf"),
             Map.entry("Kovanovic 91", "/static/fonts/nk91.ttf"),
             Map.entry("Kovanovic 112", "/static/fonts/nk112.ttf"),
