@@ -7,15 +7,35 @@
     <title>Запалки - админ</title>
 
     <script src="/js/admin/products/lighters.js"></script>
+    <script src="/js/admin/models.js"></script>
 </head>
 
 <body>
-    <th:block
-        th:replace="pages/admin/product_page_layout :: product-page-layout(~{::#temp_table}, ~{::#temp_categories}, 'Запалки - редактиране')">
-        <th:block id="temp_table" th:replace="pages/admin/lighters/table :: table"></th:block>
-        <th:block id="temp_categories" th:replace="pages/admin/categories :: categories"></th:block>
+    <th:block th:replace="pages/admin/admin_layout :: admin-layout(~{::#page-content}, 'Запалки - редактиране')">
+        <div id="page-content" class="page-content">
+            <div class="page-content-section prices-table-wrapper">
+                <h1 class="title">
+                    Редактиране на информацията
+                </h1>
+
+                <th:block th:replace="pages/admin/lighters/table :: table"></th:block>
+            </div>
+
+            <div class="page-content-section">
+                <h1 class="title">
+                    Добавяне на модел
+                </h1>
+
+                <th:block th:replace="pages/admin/models :: models"></th:block>
+            </div>
+
+            <div class="snackbar bottom middle" id="files-added-snackbar">
+                <img src="/images/common/tick.svg" alt="tick">
+
+                Файловете са добавени!
+            </div>
+        </div>
     </th:block>
 </body>
 
 </html>
-

@@ -1,6 +1,5 @@
 window.addEventListener("load", () => {
     adminCategories.init("PEN")
-    createCategoriesList("PEN")
 
     // Set product type once
     adminProductPage.init("PEN")
@@ -30,4 +29,6 @@ window.addEventListener("load", () => {
         "CLICHE_TWO_COLORS",
         "CLICHE_THREE_COLORS"
     ])
+
+    adminModels.init("PEN")
 })

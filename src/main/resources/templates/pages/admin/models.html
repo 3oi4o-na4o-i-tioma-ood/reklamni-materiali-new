@@ -1,0 +1,28 @@
+<div th:fragment="models">
+    <div class="add-model">
+        <label for="model-name">Име на модела</label>
+        <input id="model-name" type="text" class="input">
+        <label for="model-catalogue-number">Каталожен номер</label>
+        <input id="model-catalogue-number" type="text" class="input">
+        <label for="model-price">Цена</label>
+        <input id="model-price" type="text" class="input">
+        <select id="model-size"></select>
+
+        <button id="create-model-button" class="button">Добави</button>
+    </div>
+
+    <div class="add-model-color">
+        <select id="selected-model"></select>
+
+        <label for="primary-color">Основен цвят</label>
+        <input type="text" class="input" id="primary-color">
+        <label for="secondary-color">Вторичен цвят</label>
+        <input type="text" class="input" id="secondary-color">
+        <label for="color-name">Име на цвета</label>
+        <input type="text" class="input" id="color-name">
+        <label for="model-color-image">Изображение на модела</label>
+        <input type="file" id="model-color-image">
+
+        <button id="create-model-color-button" class="button">Добави</button>
+    </div>
+</div>

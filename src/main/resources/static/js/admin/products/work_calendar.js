@@ -9,4 +9,6 @@ window.addEventListener("load", () => {
     createCategoriesList("WORK_CALENDAR")
 
     adminProductPage.initTableEditing("editable-prices-table", "WORK_CALENDAR")
+
+    adminModels.init("WORK_CALENDAR")
 })
