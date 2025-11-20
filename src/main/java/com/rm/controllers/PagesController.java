@@ -152,8 +152,13 @@ public class PagesController implements PagesApi {
     }
 
     @Override
-    public String adminFlyersEditCategory(Model model) {
-        return "pages/admin/edit_category/flyers";
+    public String adminFlyers10x15EditCategory(Model model) {
+        return "pages/admin/edit_category/flyers_10x15";
+    }
+
+    @Override
+    public String adminFlyers10x20EditCategory(Model model) {
+        return "pages/admin/edit_category/flyers_10x20";
     }
 
     public String login(Model model) {

@@ -56,8 +56,11 @@ public interface PagesApi {
     @GetMapping("/админ/джобни-календарчета/редактиране-на-категория")
     String adminPocketCalendarsEditCategory(Model model);
 
-    @GetMapping("/админ/флаери/редактиране-на-категория")
-    String adminFlyersEditCategory(Model model);
+    @GetMapping("/админ/флаери-10x15/редактиране-на-категория")
+    String adminFlyers10x15EditCategory(Model model);
+
+    @GetMapping("/админ/флаери-10x20/редактиране-на-категория")
+    String adminFlyers10x20EditCategory(Model model);
 
     // Auth
 

@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
     adminCategories.init("LIGHTER")
+    createCategoriesList("LIGHTER")
 
     // Set product type once
     adminProductPage.init("LIGHTER")

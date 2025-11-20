@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+
+    <th:block th:replace="pages/admin/edit_category/edit_category_head :: edit-category-head"></th:block>
+
+    <script src="/js/admin/edit_category/pocket_calendar.js"></script>
+    <title>Джобни календари - админ</title>
+</head>
+
+<body>
+    <th:block th:replace="pages/admin/admin_layout :: admin-layout(~{::#page-content}, ${header})">
+        <div id="page-content" class="page-content edit-category-page-content">
+            <div class="page-content-section images-section">
+                <h1 class="title">
+                    Джобни календари <span class="category-path" id="category-path-container"></span>
+                </h1>
+
+                <div id="images-container" class="images-container"></div>
+
+                <div class="pagination" id="pagination-container"></div>
+            </div>
+
+            <th:block th:replace="pages/admin/edit_category/image_upload_section :: image-upload-section"></th:block>
+        </div>
+
+    </th:block>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
     ]
     adminProductPage.init("BUSINESS_CARD", columns)
     adminCategories.init("BUSINESS_CARD")
+    createCategoriesList("BUSINESS_CARD")
 
     adminProductPage.initTableEditing("editable-prices-table", "BUSINESS_CARD")
 })
