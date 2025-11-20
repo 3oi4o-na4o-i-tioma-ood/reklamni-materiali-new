@@ -70,7 +70,7 @@
         </th:block>
 
         <h2>Цена</h2>
-        <span th:text="${cartPrice}"></span>
+        <span th:insert="components/price :: price(${cartPrice})"></span>
 
         <h2>Поръчани продукти</h2>
 

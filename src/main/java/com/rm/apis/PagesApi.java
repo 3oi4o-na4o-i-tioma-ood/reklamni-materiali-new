@@ -73,8 +73,8 @@ public interface PagesApi {
     @GetMapping("/приключване-на-регистрацията")
     String finishSignup(Model model);
 
-    @GetMapping("/промоции")
-    String promos();
+    // @GetMapping("/промоции")
+    // String promos();
 
     @GetMapping("/помощен-център")
     String help();

@@ -558,6 +558,10 @@ function newRenderElements(editorId) {
       bg.style.visibility = url ? "visible" : "hidden";
 
       const remove_button = document.getElementById("remove-background");
+      if(!remove_button) {
+        return
+      }
+      
       if (url) {
         remove_button.style.backgroundColor = "white";
         remove_button.style.cursor = "pointer";

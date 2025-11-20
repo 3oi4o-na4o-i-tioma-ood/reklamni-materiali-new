@@ -38,13 +38,13 @@
                                     <div class="centered">[[${q["amount"]}]] бр.</div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_NO_BACK"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_NO_BACK']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_COLORED']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_BLACK']})"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,13 +73,13 @@
                                     <div class="centered">[[${q["amount"]}]] бр.</div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_NO_BACK"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_NO_BACK']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_COLORED']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['COLORED_BLACK']})"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -90,11 +90,11 @@
                         <li>Надценка за бърза изработка на <strong>флаери</strong> (6 часа): +[[${#numbers.formatDecimal(effectPricesFlyer10x15.FAST_PRODUCTION, 0, 0)}]]%;</li>
                         <li>Надценка за експресна изработка на <strong>флаери</strong> (4 часа): +[[${#numbers.formatDecimal(effectPricesFlyer10x15.EXPRESS_PRODUCTION, 0, 0)}]]%;</li>
                         <li>
-                            Ламиниране мат ламинат: <strong>цена [[${#numbers.formatDecimal(effectPricesFlyer10x15.LAMINATION_MAT, 1, 2)}]] лв./бр.</strong> - 100/150мм;
-                            Гланц ламинат: <strong>цена [[${#numbers.formatDecimal(effectPricesFlyer10x15.LAMINATION_GLOSSY, 1, 2)}]] лв./бр.</strong>
+                            Ламиниране мат ламинат: <strong><th:block th:insert="components/price :: price(${effectPricesFlyer10x15['LAMINATION_MAT']})"></th:block> /бр.</strong> - 100/150мм;
+                            Гланц ламинат: <strong><th:block th:insert="components/price :: price(${effectPricesFlyer10x15['LAMINATION_GLOSSY']})"></th:block> /бр.</strong>
                         <li>
-                            Ламиниране мат ламинат: <strong>цена [[${#numbers.formatDecimal(effectPricesFlyer10x20.LAMINATION_MAT, 1, 2)}]] лв./бр.</strong> - 100/200мм;
-                            Гланц ламинат: <strong>цена [[${#numbers.formatDecimal(effectPricesFlyer10x20.LAMINATION_GLOSSY, 1, 2)}]] лв./бр.</strong>
+                            Ламиниране мат ламинат: <strong><th:block th:insert="components/price :: price(${effectPricesFlyer10x20['LAMINATION_MAT']})"></th:block> /бр.</strong> - 100/200мм;
+                            Гланц ламинат: <strong><th:block th:insert="components/price :: price(${effectPricesFlyer10x20['LAMINATION_GLOSSY']})"></th:block> /бр.</strong>
                         </li>
                         <li>При поръчка на стойност над 150 лв. куриерската услуга в рамките на гр. София е
                             <strong>безплатна</strong>.

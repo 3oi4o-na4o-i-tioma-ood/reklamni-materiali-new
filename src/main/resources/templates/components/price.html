@@ -1,5 +1,5 @@
 <th:block th:fragment="price(price)">
-    [[${#numbers.formatDecimal(T(java.lang.Double).parseDouble((price + '').replace(',', '.')), 0, 2)}]] лв ([[${#numbers.formatDecimal(
-        T(java.lang.Double).parseDouble((price + '').replace(',', '.')) / 1.95,
+    [[${#numbers.formatDecimal(T(java.lang.Double).parseDouble((price + '').replace(',', '.')), 1, 2)}]] лв ([[${#numbers.formatDecimal(
+        T(java.lang.Double).parseDouble((price + '').replace(',', '.')) / 1.9558,
         1,2)}]] €)
 </th:block>

@@ -40,10 +40,10 @@ public class PagesController implements PagesApi {
         return "pages/home/home";
     }
 
-    @Override
-    public String promos() {
-        return "pages/promo";
-    }
+    // @Override
+    // public String promos() {
+    //     return "pages/promo";
+    // }
 
     @Override
     public String help() {

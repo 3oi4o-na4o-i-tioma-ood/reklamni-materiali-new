@@ -35,13 +35,13 @@
                   <div class="centered">[[${q["amount"]}]] бр.</div>
                 </td>
                 <td>
-                  <div class="centered">[[${q["SMALL"]}]]</div>
+                  <div class="centered" th:insert="components/price :: price(${q['SMALL']})"></div>
                 </td>
                 <td>
-                  <div class="centered">[[${q["MEDIUM"]}]]</div>
+                  <div class="centered" th:insert="components/price :: price(${q['MEDIUM']})"></div>
                 </td>
                 <td>
-                  <div class="centered">[[${q["BIG"]}]]</div>
+                  <div class="centered" th:insert="components/price :: price(${q['BIG']})"></div>
                 </td>
                 <!-- <td>
                   <div class="centered">[[${q["SMALL"]}]]</div>
@@ -55,12 +55,11 @@
             <li>Надценка за бърза изработка на <strong>работни календари</strong> (4 дни): +[[${#numbers.formatDecimal(effectPrices['FAST_PRODUCTION'], 0, 0)}]]%;</li>
             <li>Надценка за експресна изработка на <strong>работни календари</strong> (2 дни): +[[${#numbers.formatDecimal(effectPrices['EXPRESS_PRODUCTION'], 0, 0)}]]%;</li>
             <li>Посочените срокове <strong>не важат</strong> през месец Ноември и Декември;</li>
-            <li>Ламиниране (матов ламинат): +[[${#numbers.formatDecimal(effectPrices['LAMINATION'], 0, 2)}]] лв. / 100 бр.;</li>
-            <li>Ефектен картон: +[[${#numbers.formatDecimal(effectPrices['EFFECT_CARTON'], 0, 2)}]] лв. / 100 бр.</li>
+            <li>Ламиниране (матов ламинат): +<th:block th:insert="components/price :: price(${effectPrices['LAMINATION']})"></th:block> / 100 бр.;</li>
+            <li>Ефектен картон: +<th:block th:insert="components/price :: price(${effectPrices['EFFECT_CARTON']})"></th:block> / 100 бр.</li>
             <li>При поръчка на стойност над 150 лв. куриерската услуга в рамките на гр. София е
               <strong>безплатна</strong>.
             </li>
-            <li>Повече информация за <strong>календари</strong>.</li>
           </ul>
         </div>
         <div>

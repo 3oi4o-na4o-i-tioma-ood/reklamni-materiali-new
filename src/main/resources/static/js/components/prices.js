@@ -68,13 +68,20 @@ const pricesCalculation = {
             case "EXPRESS": return 2;
         }
     },
-    formatPrice(price) {
+    formatPrice(price, bgnOnly = false) {
         price = Number(price)
         if (isNaN(price)) {
             console.log("Invalid price")
             return "?"
         }
-        return price.toFixed(2) + " лв."
+
+        const priceBgn = price.toFixed(2) + " лв."
+
+        if(bgnOnly) {
+            return priceBgn
+        }
+
+        return `${priceBgn} (${(price / 1.9558).toFixed(2)} €)`
     },
     async getEffectsPrices(productType) {
         const cacheId = pricesCalculation._generateEffetcsCacheId(productType)

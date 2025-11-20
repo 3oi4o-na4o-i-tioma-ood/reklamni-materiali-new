@@ -59,7 +59,10 @@ const editorPreviewPopups = {
         const designId = editorStorage.getDesignId()
 
         const isSideAdded = isFront || designRepo.productSides[1]
-        previewImageMessage.style.display = isSideAdded ? "none" : null
+        if(previewImageMessage) {
+            previewImageMessage.style.display = isSideAdded ? "none" : null
+        }
+        
         previewImage.style.display = isSideAdded ? null : "none"
 
         previewImage.src = API.getDesignPreviewImageUrl(designId, isFront ? "front" : "back") + "&preventCache=" + new Date().getTime()

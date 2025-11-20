@@ -32,10 +32,10 @@
                 <div class="centered">[[${q["amount"]}]] бр.</div>
               </td>
               <td>
-                <div class="centered">[[${q["COLORED_BLACK"]}]]</div>
+                <div class="centered" th:insert="components/price :: price(${q['COLORED_BLACK']})"></div>
               </td>
               <td>
-                <div class="centered">[[${q["COLORED_COLORED"]}]]</div>
+                <div class="centered" th:insert="components/price :: price(${q['COLORED_COLORED']})"></div>
               </td>
             </tr>
           </table>
@@ -44,23 +44,22 @@
           <ul>
             <li>
               Надценка за бърза изработка на
-              <span>джобни календарчета (5 часа): +50%;</span>
+              <span>джобни календарчета (5 часа): +[[${#numbers.formatDecimal(effectPrices['FAST_PRODUCTION'], 0, 0)}]]%;</span>
             </li>
             <li>
               Надценка за експресна изработка на джобни календарчета (3 часа):
-              +100%;
+              +[[${#numbers.formatDecimal(effectPrices['EXPRESS_PRODUCTION'], 0, 0)}]]%;
             </li>
             <li>
-              Ламиниране (матов ламинат):<span> +3,00 лв. / 100 бр. </span>-
+              Ламиниране (матов ламинат):<span> +<th:block th:insert="components/price :: price(${effectPrices['LAMINATION']})"></th:block> / 100 бр. </span>-
               препоръчително при тъмни фонове;
             </li>
-            <li>Заоблени ъгли:<span> +3,50 лв. / 100 бр.</span></li>
-            <li>Ефектен картон:<span>+4,00 лв. / 100 бр.</span></li>
+            <li>Заоблени ъгли:<span> +<th:block th:insert="components/price :: price(${effectPrices['ROUNDED_CORNERS']})"></th:block> / 100 бр.</span></li>
+            <li>Ефектен картон:<span>+<th:block th:insert="components/price :: price(${effectPrices['EFFECT_CARTON']})"></th:block> / 100 бр.</span></li>
             <li>
               При поръчка на стойност над 100 лв. куриерската услуга в рамките
               на гр. София е<span> безплатна.</span>
             </li>
-            <li>Повече информация за <a href="/">календари.</a></li>
           </ul>
         </div>
         <div>

@@ -37,13 +37,13 @@
                                     <div class="centered">[[${q["amount"]}]] бр.</div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["SCREEN_ONE_COLOR"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['SCREEN_ONE_COLOR']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["SCREEN_TWO_COLORS"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['SCREEN_TWO_COLORS']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["SCREEN_THREE_COLORS"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['SCREEN_THREE_COLORS']})"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,24 +73,24 @@
                                 </td>
 
                                 <td>
-                                    <div class="centered">[[${q["PAD_ONE_COLOR"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['PAD_ONE_COLOR']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["PAD_TWO_COLORS"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['PAD_TWO_COLORS']})"></div>
                                 </td>
                                 <td>
-                                    <div class="centered">[[${q["PAD_THREE_COLORS"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['PAD_THREE_COLORS']})"></div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
                     Към цената на тампонния печат се добавят:<br />
-                    +[[${CLICHE_ONE_COLOR}]] лв. клише за 1 цвят печат. <br />
+                    +<th:block th:insert="components/price :: price(${CLICHE_ONE_COLOR})"></th:block> клише за 1 цвят печат. <br />
 
-                    +[[${CLICHE_TWO_COLORS}]] лв. клишета за 2 цвята печат.<br />
+                    +<th:block th:insert="components/price :: price(${CLICHE_TWO_COLORS})"></th:block> клишета за 2 цвята печат.<br />
 
-                    +[[${CLICHE_THREE_COLORS}]] лв. клишета за 3 цвята печат.<br />
+                    +<th:block th:insert="components/price :: price(${CLICHE_THREE_COLORS})"></th:block> клишета за 3 цвята печат.<br />
 
                     <h4>Пълноцветен дигитален печат върху запалки</h4>
                     <table>
@@ -109,7 +109,7 @@
                                 </td>
 
                                 <td>
-                                    <div class="centered">[[${q["FULL_COLOR"]}]]</div>
+                                    <div class="centered" th:insert="components/price :: price(${q['FULL_COLOR']})"></div>
                                 </td>
                             </tr>
                         </tbody>
