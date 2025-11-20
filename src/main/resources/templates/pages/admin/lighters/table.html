@@ -1,0 +1,261 @@
+<div class="table-wrapper" th:fragment="table">
+
+  <div class="table">
+    <div id="info-table-tabs" class="links">
+      <button class="selected">Цени</button>
+      <button>Забележки</button>
+      <button>Размери</button>
+      <button>Промоции</button>
+    </div>
+    <div class="main_content" id="tabs-content-wrapper">
+      <div class="selected">
+        <th:block th:replace="components/text_editing :: text-editing(~{::#lighter-price-editing}, 'LIGHTER_PRICES_NOTE')">
+          <p id="lighter-price-editing" class="text" th:utext='${textPieces["LIGHTER_PRICES_NOTE"]}'>
+          </p>
+        </th:block>
+
+        <h4>Сито печат върху запалки</h4>
+        <div class="table-scroll-wrapper">
+          <table style="width: 100%" id="editable-prices-table-lighter-screen" class="editable-table">
+            <thead>
+              <th>
+                <div>Количество</div>
+              </th>
+              <th>
+                <div>1 цвят</div>
+              </th>
+              <th>
+                <div>2 цвята</div>
+              </th>
+              <th>
+                <div>3 цвята</div>
+              </th>
+              <th colspan="2">
+                <div></div>
+              </th>
+            </thead>
+            <tbody>
+              <tr th:each="q, index : ${price_info_screen}">
+                <td>
+                  <div class="centered">[[${q["amount"]}]] бр.</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["SCREEN_ONE_COLOR"]}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["SCREEN_TWO_COLORS"]}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["SCREEN_THREE_COLORS"]}]]</div>
+                </td>
+                <td class="row-edit-cell">
+                  <button class="icon-button table-button" id="row-edit-button">
+                    <img src="/images/common/edit_green.svg" alt="edit">
+                  </button>
+                </td>
+                <td class="row-delete-cell">
+                  <button class="icon-button table-button" id="row-delete-button">
+                    <img src="/images/common/delete.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-save-cell">
+                  <button class="icon-button table-button" id="row-save-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-cancel-cell">
+                  <button class="icon-button table-button" id="row-cancel-button">
+                    &#215;
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Тампонен печат върху запалки</h4>
+        <div class="table-scroll-wrapper">
+          <table style="width: 100%" id="editable-prices-table-lighter-pad" class="editable-table">
+            <thead>
+              <th>
+                <div>Количество</div>
+              </th>
+              <th>
+                <div>1 цвят</div>
+              </th>
+              <th>
+                <div>2 цвята</div>
+              </th>
+              <th>
+                <div>3 цвята</div>
+              </th>
+              <th colspan="2">
+                <div></div>
+              </th>
+            </thead>
+            <tbody>
+              <tr th:each="q, index : ${price_info_pad}">
+                <td>
+                  <div class="centered">[[${q["amount"]}]] бр.</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["PAD_ONE_COLOR"]}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["PAD_TWO_COLORS"]}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["PAD_THREE_COLORS"]}]]</div>
+                </td>
+                <td class="row-edit-cell">
+                  <button class="icon-button table-button" id="row-edit-button">
+                    <img src="/images/common/edit_green.svg" alt="edit">
+                  </button>
+                </td>
+                <td class="row-delete-cell">
+                  <button class="icon-button table-button" id="row-delete-button">
+                    <img src="/images/common/delete.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-save-cell">
+                  <button class="icon-button table-button" id="row-save-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-cancel-cell">
+                  <button class="icon-button table-button" id="row-cancel-button">
+                    &#215;
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Клише (за тампонен печат)</h4>
+        <div class="table-scroll-wrapper">
+          <table style="width: 100%" id="editable-prices-table-lighter-cliches" class="editable-table">
+            <thead>
+              <th>
+                <div>Клише 1 цвят</div>
+              </th>
+              <th>
+                <div>Клише 2 цвята</div>
+              </th>
+              <th>
+                <div>Клише 3 цвята</div>
+              </th>
+              <th colspan="2">
+                <div></div>
+              </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${CLICHE_ONE_COLOR}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${CLICHE_TWO_COLORS}]]</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${CLICHE_THREE_COLORS}]]</div>
+                </td>
+                <td class="row-edit-cell">
+                  <button class="icon-button table-button" id="row-edit-button">
+                    <img src="/images/common/edit_green.svg" alt="edit">
+                  </button>
+                </td>
+                <td class="row-delete-cell">
+                  <button class="icon-button table-button" id="row-delete-button">
+                    <img src="/images/common/delete.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-save-cell">
+                  <button class="icon-button table-button" id="row-save-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-cancel-cell">
+                  <button class="icon-button table-button" id="row-cancel-button">
+                    &#215;
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Пълноцветен дигитален печат върху запалки</h4>
+        <div class="table-scroll-wrapper">
+          <table style="width: 100%" id="editable-prices-table-lighter-full-color" class="editable-table">
+            <thead>
+              <th>
+                <div>Количество</div>
+              </th>
+              <th>
+                <div>Цена</div>
+              </th>
+              <th colspan="2">
+                <div></div>
+              </th>
+            </thead>
+            <tbody>
+              <tr th:each="q, index : ${price_info_full_color}">
+                <td>
+                  <div class="centered">[[${q["amount"]}]] бр.</div>
+                </td>
+                <td class="editable-cell">
+                  <div class="cell-content centered">[[${q["FULL_COLOR"]}]]</div>
+                </td>
+                <td class="row-edit-cell">
+                  <button class="icon-button table-button" id="row-edit-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-delete-cell">
+                  <button class="icon-button table-button" id="row-delete-button">
+                    <img src="/images/common/delete.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-save-cell">
+                  <button class="icon-button table-button" id="row-save-button">
+                    <img src="/images/common/tick.svg" alt="delete">
+                  </button>
+                </td>
+                <td class="row-cancel-cell">
+                  <button class="icon-button table-button" id="row-cancel-button">
+                    &#215;
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ul>
+        <li>Надценка за бърза изработка на <strong>запалки</strong> (5 дни): +50%;</li>
+        <li>Надценка за експресна изработка на <strong>запалки</strong> (3 дни): +100% при техническа възможност;</li>
+        <li>При поръчка на стойност над 300 лв. куриерската услуга в рамките на гр. София е
+          <strong>безплатна</strong>.
+        </li>
+      </ul>
+      <div>
+        <p class="text">
+          Размерът на печата върху <strong>запалките</strong> е около 50 мм. дължина и 10-12 мм. височина.
+          За повече информация вижте описателните страници по-горе.
+          При качване на Ваш дизайн или лого, размерът трябва да бъде с височина до 10-12 мм на 300 DPI
+          Поддържани файлови формати при качване на ваши фонове или лога:
+          <strong>*.tif, *.jpg, *.png, *.eps (Adobe EPS, версия 8 – текстовете в криви)</strong>
+          Когато запалката ще се печати на сито или тампонен печат трябва да изпратите логото във векторен формат /*.cdr или *.eps/ на нашия e-mail:
+          <strong>orders@reklamni-materiali.com</strong>
+        </p>
+      </div>
+      <ul>
+        <li>При поръчка над 300 бр. <strong>запалки</strong> - получавате 50 бр. визитки <strong>подарък</strong> /които трябва да си направите с нова поръчка/.</li>
+        <li>При поръчка над 500 бр. <strong>запалки</strong> - получавате 100 бр. визитки <strong>подарък</strong> /които трябва да си направите с нова поръчка/ + безплатна доставка.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
