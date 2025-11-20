@@ -1,3 +1,3 @@
 window.addEventListener("load", () => {
-    editCategory.init("BUSINESS_CARD")
+    editCategory.init("FLIER_10x15")
 })

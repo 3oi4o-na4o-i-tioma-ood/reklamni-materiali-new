@@ -10,10 +10,58 @@
 </head>
 
 <body>
-    <th:block
-        th:replace="pages/admin/product_page_layout :: product-page-layout(~{::#temp_table}, ~{::#temp_categories}, 'Флаери - редактиране')">
-        <th:block id="temp_table" th:replace="pages/admin/flyers/table :: table"></th:block>
-        <th:block id="temp_categories" th:replace="pages/admin/categories :: categories"></th:block>
+    <th:block th:replace="pages/admin/admin_layout :: admin-layout(~{::#page-content}, 'Флаери - редактиране')">
+        <div id="page-content" class="page-content">
+            <div class="page-content-section prices-table-wrapper">
+                <h1 class="title">
+                    Редактиране на информацията
+                </h1>
+
+                <th:block id="temp_table" th:replace="pages/admin/flyers/table :: table"></th:block>
+            </div>
+
+            <div class="page-content-section categories-settings">
+                <h1 class="title">
+                    Добавяне на категория 10x15 <span class="category-path" id="category-path-container-10x15"></span>
+                </h1>
+
+                <div class="categories" id="categories-10x15">
+                    <div class="add-category">
+                        <input id="create-category-value" type="text" class="input">
+                
+                        <button id="create-category" class="button">Добави</button>
+                    </div>
+                
+                    <ul class="categories-list" id="categories-list">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-content-section categories-settings">
+                <h1 class="title">
+                    Добавяне на категория 10x20 <span class="category-path" id="category-path-container-10x20"></span>
+                </h1>
+
+                <div class="categories" id="categories-10x20">
+                    <div class="add-category">
+                        <input id="create-category-value" type="text" class="input">
+                
+                        <button id="create-category" class="button">Добави</button>
+                    </div>
+                
+                    <ul class="categories-list" id="categories-list">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="snackbar bottom middle" id="files-added-snackbar">
+                <img src="/images/common/tick.svg" alt="tick">
+
+                Файловете са добавени!
+            </div>
+        </div>
     </th:block>
 </body>
 

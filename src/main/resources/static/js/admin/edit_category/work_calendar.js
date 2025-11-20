@@ -1,3 +1,3 @@
 window.addEventListener("load", () => {
-    editCategory.init("BUSINESS_CARD")
+    editCategory.init("WORK_CALENDAR")
 })

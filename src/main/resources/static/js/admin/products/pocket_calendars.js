@@ -5,4 +5,7 @@ window.addEventListener("load", () => {
     ]
     adminProductPage.init("POCKET_CALENDAR", columns)
     adminCategories.init("POCKET_CALENDAR")
+    createCategoriesList("POCKET_CALENDAR")
+
+    adminProductPage.initTableEditing("editable-prices-table", "POCKET_CALENDAR")
 })

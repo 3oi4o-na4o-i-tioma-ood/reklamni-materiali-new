@@ -50,7 +50,7 @@ const adminProductPage = {
             element.classList.remove("edited")
         })
     },
-    initTableRowEditing(row) {
+    initTableRowEditing(row, productType, columns) {
         const cells = [...row.children].slice(0, -4)
 
         const editButton = row.querySelector("#row-edit-button")
@@ -94,15 +94,16 @@ const adminProductPage = {
 
             })
 
-            console.log(cellsData)
-            if (adminProductPage._columns) {
+            console.log(cellsData, adminProductPage._columns)
+            const usedColumns = columns || adminProductPage._columns
+            if (usedColumns) {
 
                 const prices = cellsData.map((value, index) => ({
-                    printType: adminProductPage._columns[index],
-                    value: Number(value)
+                    printType: usedColumns[index],
+                    value: Number(value.replaceAll(",", "."))
                 }))
 
-                await API.updatePrices(adminProductPage._productType, parseInt(cells[0].innerText), prices)
+                await API.updatePrices(productType, parseInt(cells[0].innerText), prices)
             }
 
             row.classList.remove("edited")
@@ -117,12 +118,22 @@ const adminProductPage = {
         })
 
     },
-    initTableEditing(id) {
+    initTableEditing(id, productType, columns) {
+        if(!productType) {
+            console.error("Product type is required")
+            return
+        }
+
         const table = document.getElementById(id)
+        if(!table) {
+            console.error(`Table with id ${id} not found`)
+            return
+        }
+
         const rows = table.querySelectorAll("tbody tr")
 
         for (const row of rows) {
-            adminProductPage.initTableRowEditing(row)
+            adminProductPage.initTableRowEditing(row, productType, columns)
         }
 
         // const addRowButton = document.getElementById("add-table-row-button")
@@ -140,9 +151,17 @@ const adminProductPage = {
     },
     onTextElementValueChange(value, id) {
         console.log(id)
-        if (["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON"].includes(id)) {
+        if (["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON", "FLYER_10x15_LAMINATION_MAT", "FLYER_10x15_LAMINATION_GLOSSY", "FLYER_10x20_LAMINATION_MAT", "FLYER_10x20_LAMINATION_GLOSSY"].includes(id)) {
+            let productType = adminProductPage._productType;
+            
+            if(adminProductPage._productType === "FLYER_BOTH_SIZES" && id.startsWith("FLYER_")) {
+                productType = "FLIER_"+ id.split("_")[1];
+                const prefixLength = "FLYER_10x15_".length;
+                id = id.slice(prefixLength);
+            }
+            
             API.updateNotePrice({
-                productType: adminProductPage._productType,
+                productType: productType,
                 noteType: id,
                 price: Number(value)
             })
@@ -196,7 +215,5 @@ const adminProductPage = {
         for (const element of textEditingElements) {
             adminProductPage.initTextEditingElement(element, value => adminProductPage.onTextElementValueChange(value, element.id))
         }
-
-        adminProductPage.initTableEditing("editable-prices-table")
     }
 }

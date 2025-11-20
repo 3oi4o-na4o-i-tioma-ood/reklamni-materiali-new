@@ -1,6 +1,7 @@
 const mmPerInch = 25.4;
 
 const editor = {
+  isRotated: false,
   getElements() {
     console.log("getElements. Side:", designRepo.selectedProductSide, "side:", designRepo.productSides[designRepo.selectedProductSide]);
     return designRepo.productSides[designRepo.selectedProductSide].elements;
@@ -94,6 +95,12 @@ const editor = {
   },
   getCurrentProductDescription() {
     return products.find((p) => p.name === editor.currentProduct);
+  },
+  getRotatedWidth(product) {
+    return editor.isRotated ? product.sizeMM.height : product.sizeMM.width;
+  },
+  getRotatedHeight(product) {
+    return editor.isRotated ? product.sizeMM.width : product.sizeMM.height;
   },
   getCanvas() {
     return document.getElementById("editor-canvas");
@@ -372,6 +379,9 @@ const editor = {
     const modelColorId = urlParams.get("modelColorId");
     //console.log("modelColorId: ", modelColorId, bg)
 
+    const isRotated = bg.startsWith("horizontal") || bg.startsWith("/horizontal");
+    editor.isRotated = isRotated;
+
     if (bg) {
       editor.setBg({
         bgPath: bg,
@@ -475,7 +485,7 @@ const editor = {
     
     const bgWrapper = document.getElementById("editor-bg-wrapper");
     
-    bgWrapper.style.aspectRatio =
+    bgWrapper.style.aspectRatio = editor.getRotatedWidth(productDescription) / editor.getRotatedHeight(productDescription);
     productDescription.sizeMM.width / productDescription.sizeMM.height;
     
     editor.resizeObserver = new ResizeObserver(editor.onResize);
