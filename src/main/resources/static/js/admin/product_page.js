@@ -50,7 +50,7 @@ const adminProductPage = {
             element.classList.remove("edited")
         })
     },
-    initTableRowEditing(row, productType) {
+    initTableRowEditing(row, productType, columns) {
         const cells = [...row.children].slice(0, -4)
 
         const editButton = row.querySelector("#row-edit-button")
@@ -95,10 +95,11 @@ const adminProductPage = {
             })
 
             console.log(cellsData, adminProductPage._columns)
-            if (adminProductPage._columns) {
+            const usedColumns = columns || adminProductPage._columns
+            if (usedColumns) {
 
                 const prices = cellsData.map((value, index) => ({
-                    printType: adminProductPage._columns[index],
+                    printType: usedColumns[index],
                     value: Number(value.replaceAll(",", "."))
                 }))
 
@@ -117,7 +118,7 @@ const adminProductPage = {
         })
 
     },
-    initTableEditing(id, productType) {
+    initTableEditing(id, productType, columns) {
         if(!productType) {
             console.error("Product type is required")
             return
@@ -132,7 +133,7 @@ const adminProductPage = {
         const rows = table.querySelectorAll("tbody tr")
 
         for (const row of rows) {
-            adminProductPage.initTableRowEditing(row, productType)
+            adminProductPage.initTableRowEditing(row, productType, columns)
         }
 
         // const addRowButton = document.getElementById("add-table-row-button")

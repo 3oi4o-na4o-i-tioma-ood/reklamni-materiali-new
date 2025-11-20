@@ -122,6 +122,7 @@ public class PagesController implements PagesApi {
 
     @Override
     public String adminPens(Model model){
+        addPriceInfoPensAndLighters(model, ProductType.PEN);
         addTextPieces(model);
         addEffectPrices(model, ProductType.PEN);
         return "pages/admin/pens/pens";
