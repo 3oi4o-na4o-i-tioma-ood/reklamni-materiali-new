@@ -1,0 +1,21 @@
+<div class="page-content-section categories-settings" th:fragment="image-upload-section">
+    <h1 class="title">
+        Добавяне на шаблони<span class="category-path" id="category-path-container"></span>
+    </h1>
+
+    <!-- <th:block th:replace="components/image_upload :: image-upload('image-upload')"></th:block> -->
+
+    <div class="upload-image-container">
+        <img src="/images/common/upload1.svg" alt="upload"/>
+        <input type="file" id="admin-image-upload" accept="image/png, image/jpg">
+
+        Drag & drop или
+        <button class="button" id="bg-browse-file-button">Избери файл</button>
+    </div>
+
+    <div class="snackbar bottom middle" id="files-added-snackbar">
+        <img src="/images/common/tick.svg" alt="tick">
+
+        Файловете са добавени!
+    </div>
+</div>

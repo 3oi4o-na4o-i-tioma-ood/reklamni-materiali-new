@@ -67,11 +67,14 @@ public class CategoriesController implements CategoriesApi {
     @Override
     public PaginatedCategoryImages getCategoryImages(HttpSession session, ProductType product, String categoryPath,
             int page, int pageSize) throws IOException {
-        if (product.equals(session.getAttribute("prev_product"))
-                && categoryPath.equals(session.getAttribute("prev_path"))) {
-            List<String> paths = (List<String>) session.getAttribute("paths");
-            return new PaginatedCategoryImages(paths, page, pageSize);
-        }
+
+        // Caching. Disabled, because it doesn't get invalidated correctly.
+
+        // if (product.equals(session.getAttribute("prev_product"))
+        //         && categoryPath.equals(session.getAttribute("prev_path"))) {
+        //     List<String> paths = (List<String>) session.getAttribute("paths");
+        //     return new PaginatedCategoryImages(paths, page, pageSize);
+        // }
 
         Path productPath = Path.of(categoriesDirectory, product.name().toLowerCase());
         Path path = productPath.resolve(categoryPath);

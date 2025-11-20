@@ -141,9 +141,21 @@ public class PagesController implements PagesApi {
         return "pages/admin/edit_category/business_cards";
     }
 
-
+    @Override
+    public String adminWorkCalendarsEditCategory(Model model) {
+        return "pages/admin/edit_category/work_calendars";
+    }
 
     @Override
+    public String adminPocketCalendarsEditCategory(Model model) {
+        return "pages/admin/edit_category/pocket_calendars";
+    }
+
+    @Override
+    public String adminFlyersEditCategory(Model model) {
+        return "pages/admin/edit_category/flyers";
+    }
+
     public String login(Model model) {
         return "pages/auth/login";
     }

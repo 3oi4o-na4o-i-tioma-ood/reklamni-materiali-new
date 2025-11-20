@@ -126,8 +126,9 @@ const adminCategories = {
         .map((category) => category.url)
         .join("/");
       const path = (parentPath ? parentPath + "/" : "") + category.url;
+      const productDescription = products.find(p => p.name === adminCategories._productType);
       mainButton.href =
-        "/админ/визитки/редактиране-на-категория?categoryPath=" + path;
+        `/админ/${productDescription.url}/редактиране-на-категория?categoryPath=${path}`;
     }
     mainButton.classList.add("main-button");
 
@@ -233,7 +234,7 @@ const adminCategories = {
   },
 
   addImageUploadListener() {
-    const uploadElement = document.getElementById("admin-business-upload");
+    const uploadElement = document.getElementById("admin-image-upload");
     if (!uploadElement) {
       return; // Skip if element doesn't exist on the page
     }
@@ -245,9 +246,8 @@ const adminCategories = {
       const categoryPath = new URLSearchParams(window.location.search).get(
         "categoryPath"
       );
-      const path = `/api/category-image?productType=BUSINESS_CARD&path=${categoryPath}&${file.name}`;
       adminCategories.addCategoryPicture(
-        "BUSINESS_CARD",
+        adminCategories._productType,
         file.name,
         categoryPath,
         file

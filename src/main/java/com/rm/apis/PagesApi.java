@@ -50,6 +50,15 @@ public interface PagesApi {
     @GetMapping("/админ/визитки/редактиране-на-категория")
     String adminBusinessCardsEditCategory(Model model);
 
+    @GetMapping("/админ/работни-календари/редактиране-на-категория")
+    String adminWorkCalendarsEditCategory(Model model);
+
+    @GetMapping("/админ/джобни-календарчета/редактиране-на-категория")
+    String adminPocketCalendarsEditCategory(Model model);
+
+    @GetMapping("/админ/флаери/редактиране-на-категория")
+    String adminFlyersEditCategory(Model model);
+
     // Auth
 
     @GetMapping("/влизане")
