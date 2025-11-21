@@ -197,6 +197,13 @@ const API = {
   getModelImage(modelColorId) {
     return `/api/model-image?modelColorId=${modelColorId}`
   },
+  async getModels() {
+    const resp = await fetch(`${backendUrl}/models`)
+    return {
+      response: resp,
+      result: await resp.json()
+    }
+  },
   async getModel(modelColorId) {
     const resp = await fetch(`${backendUrl}/models/${modelColorId}`)
     return {

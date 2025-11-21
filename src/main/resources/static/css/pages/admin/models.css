@@ -1,0 +1,11 @@
+.add-model-color,
+.add-model {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-model #create-model-button,
+.add-model-color #create-model-color-button {
+    margin-left: auto;
+}

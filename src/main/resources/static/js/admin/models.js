@@ -5,7 +5,9 @@ const adminModels = {
         adminModels.initModelForm()
         adminModels.initModelColorForm()
     },
-
+    async fetchModels() {
+        const modelsResponse = await API.getModels()
+    },
     async initModelForm() {
         const modelNameInput = document.querySelector("#model-name")
         const modelCatalogueNumberInput = document.querySelector("#model-catalogue-number")
