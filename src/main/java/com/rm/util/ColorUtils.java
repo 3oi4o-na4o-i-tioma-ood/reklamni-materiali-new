@@ -1,5 +1,6 @@
 package com.rm.util;
 
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
@@ -7,6 +8,11 @@ public class ColorUtils {
     private ColorUtils() {}
 
     public static BufferedImage cmykToRgb(BufferedImage image) {
+
+        if (image.getColorModel().getColorSpace().getType() != ColorSpace.TYPE_CMYK) {
+            return image; 
+        }
+        
         byte[] buffer = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         int bytesCount = buffer.length;
         byte[] new_data = new byte[bytesCount / 4 * 3];

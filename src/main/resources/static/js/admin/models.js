@@ -36,6 +36,34 @@ const adminModels = {
         const createModelButton = document.querySelector("#create-model-button")
 
         createModelButton.addEventListener("click", () => {
+            const modelNameError = document.querySelector("#model-name-error")
+            const modelCatalogueNumberError = document.querySelector("#model-catalogue-number-error")
+            const modelPriceError = document.querySelector("#model-price-error")
+
+            if(modelNameInput.value === "") {
+                modelNameError.innerText = "Това поле е задължително"
+                return
+            }
+            else {
+                modelNameError.innerText = ""
+            }
+
+            if(modelCatalogueNumberInput.value === "") {
+                modelCatalogueNumberError.innerText = "Това поле е задължително"
+                return
+            }
+            else {
+                modelCatalogueNumberError.innerText = ""
+            }
+
+            if(modelPriceInput.value === "") {
+                modelPriceError.innerText = "Това поле е задължително"
+                return
+            }
+            else {
+                modelPriceError.innerText = ""
+            }
+
             API.createModel({
                 model: modelNameInput.value,
                 catalogueNumber: modelCatalogueNumberInput.value,
@@ -52,6 +80,12 @@ const adminModels = {
         const colorNameInput = document.querySelector("#color-name")
         const modelColorImageInput = document.querySelector("#model-color-image")
 
+        const primaryColorError = document.querySelector("#primary-color-error")
+        const secondaryColorError = document.querySelector("#secondary-color-error")
+        const colorNameError = document.querySelector("#color-name-error")
+        const modelColorImageError = document.querySelector("#model-color-image-error")
+        const submitButton = document.getElementById("create-model-color-button")
+
         for(const model of adminModels._models) {
             const option = document.createElement("option")
             option.value = model.id
@@ -61,10 +95,69 @@ const adminModels = {
 
         NiceSelect.bind(selectedModelSelect, {placeholder: "Модел"})
 
-        const createModelColorButton = document.querySelector("#create-model-color-button")
 
-        createModelColorButton.addEventListener("click", () => {
-            adminModels.createModelColor()
+        modelColorImageInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            console.log(file);
+
+
+            const selectedImageContainer = document.querySelector("#selected-image-container")
+            selectedImageContainer.style.display = "block"
+            const selectedImage = document.querySelector("#selected-image")
+            selectedImage.src = URL.createObjectURL(file)
+        })
+
+        submitButton.addEventListener("click", () => {
+            const hexColorRegex = /^(?:[A-Fa-f0-9]{3}){1,2}$/;
+
+            if(primaryColorInput.value === "") {
+                primaryColorError.innerText = "Това поле е задължително"
+                return
+            }
+            else if(!hexColorRegex.test(primaryColorInput.value.trim())) {
+                primaryColorError.innerText = "Въведете валиден HEX цвят (напр. A1B2C3)"
+                return
+            }
+            else {
+                primaryColorError.innerText = ""
+            }
+
+            if(secondaryColorInput.value === "") {
+                secondaryColorError.innerText = "Това поле е задължително"
+                return
+            }
+            else if(!hexColorRegex.test(secondaryColorInput.value.trim())) {
+                secondaryColorError.innerText = "Въведете валиден HEX цвят (напр. A1B2C3)"
+                return
+            }
+            else {
+                secondaryColorError.innerText = ""
+            }
+
+            if(colorNameInput.value === "") {
+                colorNameError.innerText = "Това поле е задължително"
+                return
+            }
+            else {
+                colorNameError.innerText = ""
+            }
+
+            if(modelColorImageInput.files.length === 0) {
+                modelColorImageError.innerText = "Изберете изображение"
+                return
+            }
+            else {
+                modelColorImageError.innerText = ""
+            }
+
+            API.createModelColor({
+                primaryColor: primaryColorInput.value,
+                secondaryColor: secondaryColorInput.value,
+                name: colorNameInput.value,
+                modelId: selectedModelSelect.value,
+                product: adminModels._productType,
+                image: modelColorImageInput.files[0]
+            })
         })
     }
 }

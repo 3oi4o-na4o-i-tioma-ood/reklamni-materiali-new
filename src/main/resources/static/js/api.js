@@ -355,11 +355,20 @@ const API = {
   },
   async createModelColor(modelColor) {
     const jwt = auth.getToken()
-    const resp = await fetch(`${backendUrl}/admin/model-colors`, {
+    const formData = new FormData()
+    formData.append("image", modelColor.image)
+
+    const searchParams = new URLSearchParams()
+    searchParams.set("primaryColor", modelColor.primaryColor)
+    searchParams.set("secondaryColor", modelColor.secondaryColor)
+    searchParams.set("name", modelColor.name)
+    searchParams.set("modelId", modelColor.modelId)
+    searchParams.set("product", modelColor.product)
+
+    const resp = await fetch(`${backendUrl}/admin/model-colors?${searchParams.toString()}`, {
       method: "POST",
-      body: JSON.stringify(modelColor),
+      body: formData,
       headers: {
-        "content-type": "application/json",
         "Authorization": `Bearer ${jwt}`
       }
     })

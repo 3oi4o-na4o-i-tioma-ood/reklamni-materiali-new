@@ -95,21 +95,15 @@ const editCategory = {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            const result = await response.json(); // Parse response JSON
-            console.log("Image added successfully:", result);
-
             // Show success notification
             const snackbar = document.getElementById("snackbar");
-            snackbar.innerHTML = "Изображението е добавено успешно!";
+            snackbar.innerHTML = "Изображението е добавено успешно! Презаредете страницата за да видите промяната.";
             snackbar.classList.add("visible");
 
             setTimeout(() => {
                 snackbar.classList.remove("visible");
             }, 3000);
 
-            // Optionally reload the page
-            window.location.reload();
-            return result;
         } catch (error) {
             console.error("Error adding the category picture:", error);
 

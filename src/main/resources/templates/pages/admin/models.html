@@ -8,14 +8,17 @@
         <div class="add-model">
             <label for="model-name">Име на модела</label>
             <input id="model-name" type="text" class="input">
+            <div id="model-name-error" class="error-message"></div>
             <br>
 
             <label for="model-catalogue-number">Каталожен номер</label>
             <input id="model-catalogue-number" type="text" class="input">
+            <div id="model-catalogue-number-error" class="error-message"></div>
             <br>
 
             <label for="model-price">Цена</label>
-            <input id="model-price" type="text" class="input">
+            <input id="model-price" type="number" class="input">
+            <div id="model-price-error" class="error-message"></div>
             <br>
 
             <select id="model-size"></select>
@@ -36,14 +39,17 @@
 
             <label for="primary-color">Основен цвят</label>
             <input type="text" class="input" id="primary-color">
+            <div id="primary-color-error" class="error-message"></div>
             <br>
 
             <label for="secondary-color">Вторичен цвят</label>
             <input type="text" class="input" id="secondary-color">
+            <div id="secondary-color-error" class="error-message"></div>
             <br>
             
             <label for="color-name">Име на цвета</label>
             <input type="text" class="input" id="color-name">
+            <div id="color-name-error" class="error-message"></div>
             <br>
 
             <div class="page-content-section categories-settings" th:fragment="image-upload-section">
@@ -52,6 +58,12 @@
                 </h4>
             
                 <!-- <th:block th:replace="components/image_upload :: image-upload('image-upload')"></th:block> -->
+
+                <div id="selected-image-container" style="display: none;">
+                    <h4>Избрано изображение</h4>
+                    <img src="" alt="" id="selected-image">
+                </div>
+
             
                 <div class="upload-image-container">
                     <img src="/images/common/upload1.svg" alt="upload"/>
@@ -60,6 +72,9 @@
                     Drag & drop или
                     <button class="button" id="bg-browse-file-button">Избери файл</button>
                 </div>
+
+                <div id="model-color-image-error" class="error-message"></div>
+
             
                 <div class="snackbar bottom middle" id="files-added-snackbar">
                     <img src="/images/common/tick.svg" alt="tick">

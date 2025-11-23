@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -183,7 +184,22 @@ public class AdminController implements AdminApi {
     }
 
     @Override
-    public void createModelColor(Model.Color modelColor) {
-        productModelRepository.createModelColor(modelColor);
+    public void createModelColor(String primaryColor, String secondaryColor, long modelId, String name, ProductType product, MultipartFile image) throws IOException {
+        Path categoryPath = Path.of(categoriesDirectory, product.name().toLowerCase() + "_models");
+        System.out.println("categoryPath: " + categoryPath);
+        if (!Files.exists(categoryPath)) {
+            System.out.println("Models path not found");
+            throw new NotFoundException();
+        }
+
+        BufferedImage rawImage = ImageIO.read(image.getInputStream());
+
+        BufferedImage imageToSave = ColorUtils.cmykToRgb(rawImage);
+
+        String fileName = UUID.randomUUID().toString() + ".png";
+
+        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, product.name().toLowerCase() + "_models", fileName).toFile());
+
+        productModelRepository.createModelColor(new Model.Color(0, "#" + primaryColor, "#" + secondaryColor, modelId, name, fileName));
     }
 }
