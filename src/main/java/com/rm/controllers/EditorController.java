@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
 import java.awt.font.TextAttribute;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -103,7 +105,7 @@ public class EditorController implements EditorApi {
             String url = ServletUriComponentsBuilder.fromCurrentContextPath().build().getHost();
             try {
                 BufferedImage image = ImageIO.read(Path.of(categoriesDirectory, product.name().toLowerCase(), path).toFile());
-                addWatermark(image, url);
+                addWatermark(image, "reklamni-materiali.bg");
                 ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
                 ImageIO.write(image, "jpg", bytestream);
                 resource = new ByteArrayResource(bytestream.toByteArray());
@@ -407,13 +409,18 @@ public class EditorController implements EditorApi {
         Graphics2D graphics = image.createGraphics();
         graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
-        Font font = resolveFontFromResources("Arial").deriveFont(Font.PLAIN, 30);
-        graphics.setFont(font);
-        graphics.setColor(Color.WHITE);
+        Font font = resolveFontFromResources("Arial").deriveFont(Font.PLAIN, 1);
+        FontMetrics fontMetrics = graphics.getFontMetrics(font);
+        int textWidth = fontMetrics.stringWidth(text);
+        double maxWidth = Point2D.distance(0, 0, image.getWidth(), image.getHeight());
+        graphics.setFont(font.deriveFont((float) maxWidth / textWidth));
+
+        graphics.setColor(Color.GRAY);
         Rectangle2D textBounds = graphics.getFontMetrics().getStringBounds(text, graphics);
         float x = (image.getWidth() - (float) textBounds.getWidth()) / 2;
-        float y = (image.getHeight() - (float) textBounds.getHeight()) / 2;
-        graphics.drawString(text, x, y);
+        float y = ((float) textBounds.getHeight()) / 4;
+        graphics.setTransform(AffineTransform.getRotateInstance(image.getWidth(), image.getHeight()));
+        graphics.drawString(text, graphics.getFont().getSize(), y);
 
         graphics.dispose();
     }
