@@ -1,5 +1,6 @@
 package com.rm.controllers;
 
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
@@ -139,15 +140,21 @@ public class AdminController implements AdminApi {
     }
 
     @Override
-    public void addCategoryImage(ProductType productType, String path, MultipartFile image, String pathName) throws IOException {
-        Path categoryPath = Path.of(categoriesDirectory, productType.name(), path);
+    public void addCategoryImage(ProductType productType, String fileName, MultipartFile image, String pathName) throws IOException {
+        Path categoryPath = Path.of(categoriesDirectory, productType.name(), pathName);
+        System.out.println("categoryPath: " + categoryPath);
         if (!Files.exists(categoryPath)) {
+            System.out.println("Category path not found");
             throw new NotFoundException();
         }
 
         BufferedImage rawImage = ImageIO.read(image.getInputStream());
-        BufferedImage imageToSave = ColorUtils.cmykToRgb(rawImage);
-        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, productType.name().toLowerCase(), path, pathName).toFile());
+
+        BufferedImage imageToSave = rawImage;
+        if (rawImage.getColorModel().getColorSpace().getType() == ColorSpace.TYPE_CMYK) {
+            imageToSave = ColorUtils.cmykToRgb(rawImage);
+        }
+        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, productType.name().toLowerCase(), pathName, fileName).toFile());
     }
 
     @Override

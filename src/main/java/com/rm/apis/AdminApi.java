@@ -66,7 +66,7 @@ public interface AdminApi {
     @PostMapping("/categories/images")
     @ResponseBody
     void addCategoryImage(@RequestParam ProductType product,
-                          @RequestParam String path,
+                          @RequestParam String fileName,
                           @RequestParam MultipartFile image,
                           @RequestParam String pathName) throws IOException;
 
