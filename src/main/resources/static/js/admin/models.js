@@ -1,13 +1,17 @@
 const adminModels = {
     _productType: null,
-    init(productType) {
+    _models: [],
+    async init(productType) {
         adminModels._productType = productType
+        await adminModels.fetchModels()
         adminModels.initModelForm()
         adminModels.initModelColorForm()
     },
     async fetchModels() {
-        const modelsResponse = await API.getModels()
+        const modelsResponse = await API.getModels(adminModels._productType, 0, 100000)
+        adminModels._models = modelsResponse.result.items
     },
+
     async initModelForm() {
         const modelNameInput = document.querySelector("#model-name")
         const modelCatalogueNumberInput = document.querySelector("#model-catalogue-number")
@@ -32,7 +36,12 @@ const adminModels = {
         const createModelButton = document.querySelector("#create-model-button")
 
         createModelButton.addEventListener("click", () => {
-            adminModels.createModel()
+            API.createModel({
+                model: modelNameInput.value,
+                catalogueNumber: modelCatalogueNumberInput.value,
+                price: modelPriceInput.value,
+                size: modelSizeSelect.value || null
+            }, adminModels._productType)
         })
     },
 
@@ -42,6 +51,13 @@ const adminModels = {
         const secondaryColorInput = document.querySelector("#secondary-color")
         const colorNameInput = document.querySelector("#color-name")
         const modelColorImageInput = document.querySelector("#model-color-image")
+
+        for(const model of adminModels._models) {
+            const option = document.createElement("option")
+            option.value = model.id
+            option.text = model.model + " " + model.catalogueNumber
+            selectedModelSelect.appendChild(option)
+        }
 
         NiceSelect.bind(selectedModelSelect, {placeholder: "Модел"})
 

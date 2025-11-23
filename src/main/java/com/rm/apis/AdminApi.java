@@ -3,6 +3,7 @@ package com.rm.apis;
 import java.io.IOException;
 import java.util.List;
 
+import com.rm.models.categories.Model;
 import com.rm.models.TextPiece;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
@@ -85,6 +86,15 @@ public interface AdminApi {
     @ResponseBody
     void updateTextPiece(@RequestBody TextPiece textPiece);
 
+    @Operation(summary = "Create model")
+    @PostMapping("/models")
+    @ResponseBody
+    void createModel(@RequestBody Model model, @RequestParam ProductType product);
+
+    @Operation(summary = "Create model color")
+    @PostMapping("/model-colors")
+    @ResponseBody
+    void createModelColor(@RequestBody Model.Color modelColor);
 
     record CategoryPriorityRequest(ProductType productType, String parentPath, List<Integer> newPriorities) {}
 }

@@ -9,7 +9,8 @@
     <script src="/js/admin/products/pens.js"></script>
     <script src="/js/admin/models.js"></script>
 
-    <link rel="stylesheet" href="/css/pages/admin/models.css"></link>
+    <link rel="stylesheet" href="/css/pages/admin/models.css">
+    </link>
 </head>
 
 <body>
@@ -23,13 +24,7 @@
                 <th:block th:replace="pages/admin/pens/table :: table"></th:block>
             </div>
 
-            <div class="page-content-section">
-                <h1 class="title">
-                    Добавяне на модел
-                </h1>
-
-                <th:block th:replace="pages/admin/models :: models"></th:block>
-            </div>
+            <th:block th:replace="pages/admin/models :: models"></th:block>
 
             <div class="snackbar bottom middle" id="files-added-snackbar">
                 <img src="/images/common/tick.svg" alt="tick">

@@ -197,8 +197,8 @@ const API = {
   getModelImage(modelColorId) {
     return `/api/model-image?modelColorId=${modelColorId}`
   },
-  async getModels() {
-    const resp = await fetch(`${backendUrl}/models`)
+  async getModels(productType, page, pageSize) {
+    const resp = await fetch(`${backendUrl}/models?productType=${productType}&page=${page}&pageSize=${pageSize}`)
     return {
       response: resp,
       result: await resp.json()
@@ -340,6 +340,30 @@ const API = {
   async getEffectPapersPrices() {
     const resp = await fetch(`${backendUrl}/prices/effect-cartons`)
     return resp.json()
+  },
+  async createModel(model, product) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/models?product=${product}`, {
+      method: "POST",
+      body: JSON.stringify(model),
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+    return await resp.text()
+  },
+  async createModelColor(modelColor) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/model-colors`, {
+      method: "POST",
+      body: JSON.stringify(modelColor),
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+    return await resp.text()
   },
   async updatePrices(productType, amount, prices) {
     const jwt = auth.getToken()

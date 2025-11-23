@@ -18,10 +18,12 @@ import com.rm.exceptions.BadRequestException;
 import com.rm.exceptions.NotFoundException;
 import com.rm.models.TextPiece;
 import com.rm.models.categories.Category;
+import com.rm.models.categories.Model;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
 import com.rm.models.prices.ProductType;
 import com.rm.repositories.PricesRepository;
+import com.rm.repositories.ProductModelRepository;
 import com.rm.repositories.TextPieceRepository;
 import com.rm.repositories.NotesRepository;
 import com.rm.util.ColorUtils;
@@ -39,12 +41,14 @@ public class AdminController implements AdminApi {
     private final PricesRepository pricesRepository;
     private final NotesRepository notesRepository;
     private final TextPieceRepository textPiecesRepository;
+    private final ProductModelRepository productModelRepository;
 
     @Autowired
-    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository) {
+    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository, ProductModelRepository productModelRepository) {
         this.pricesRepository = pricesRepository;
         this.notesRepository = notesRepository;
         this.textPiecesRepository = textPiecesRepository;
+        this.productModelRepository = productModelRepository;
     }
 
     @Override
@@ -164,5 +168,15 @@ public class AdminController implements AdminApi {
     @Override
     public void updateTextPiece(TextPiece textPiece) {
         textPiecesRepository.updateTextPiece(textPiece);
+    }
+
+    @Override
+    public void createModel(Model model, ProductType product) {
+        productModelRepository.createModel(model, product);
+    }
+
+    @Override
+    public void createModelColor(Model.Color modelColor) {
+        productModelRepository.createModelColor(modelColor);
     }
 }
