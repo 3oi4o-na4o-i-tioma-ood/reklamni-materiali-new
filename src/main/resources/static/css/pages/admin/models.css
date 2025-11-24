@@ -13,3 +13,15 @@
 .error-message {
     color: red;
 }
+
+.admin-page .models-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    box-sizing: border-box;
+}
+
+.admin-page .models-container img {
+    width: 100%;
+}

@@ -86,4 +86,40 @@
             <button id="create-model-color-button" class="button" style="margin-top: 1em;">Добави</button>
         </div>
     </div>
+
+    <div id="models-container" class="models-container page-content-section">
+        <div class="model" th:each="model, index : ${models}" th:attr="data-model-id=${model.id}">
+
+            <div class="images-container">
+                <img th:each="color, colorIndex : ${model.colors}"
+                    th:src="${'/api/model-image?modelColorId=' + color.id}"
+                    th:style="${'display:' + (colorIndex.index == 0 ? 'block' : 'none')}">
+            </div>
+
+            <div class="info-row">
+                <div th:text="${model.model}"></div>
+                <div th:text="${model.catalogueNumber}"></div>
+                <div style="margin-left: auto" th:text="${model.price} + ' лв.'"></div>
+            </div>
+
+            <div class="colors-container">
+                <th:block th:each="color, colorIndex : ${model.colors}">
+                    <button class="color-circle" th:classappend="${colorIndex.index == 0 ? 'selected' : ''}"
+                        th:if="${color.secondaryColor == null}"
+                        th:style="${'background-color:' + color.primaryColor}"
+                        th:attr="data-model-color-id=${color.id}">
+                    </button>
+                    <button class="color-circle" th:classappend="${colorIndex.index == 0 ? 'selected' : ''}"
+                        th:unless="${color.secondaryColor == null}" th:attr="data-model-color-id=${color.id}">
+                        
+                        <div class="primary" th:style="${'background-color:' + color.primaryColor}"></div>
+                        <div class="secondary" th:style="${'background-color:' + color.secondaryColor}"></div>
+                    </button>
+                </th:block>
+            </div>
+
+            <button class="button small model-popup-button" id="delete-model-button">Изтрий модела</button>
+            <button class="button small model-popup-button" id="delete-model-color-button">Изтрий цвета</button>
+        </div>
+    </div>
 </th:block>

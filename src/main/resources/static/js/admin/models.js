@@ -159,5 +159,17 @@ const adminModels = {
                 image: modelColorImageInput.files[0]
             })
         })
+    },
+    initModelDeleteButton() {
+        const deleteModelButton = document.getElementById("delete-model-button")
+        deleteModelButton.addEventListener("click", () => {
+            API.deleteModel(adminModels._productType, selectedModelSelect.value)
+        })
+    },
+    initModelColorDeleteButton() {
+        const deleteModelColorButton = document.getElementById("delete-model-color-button")
+        deleteModelColorButton.addEventListener("click", () => {
+            API.deleteModelColor(adminModels._productType, selectedModelColorSelect.value)
+        })
     }
 }
