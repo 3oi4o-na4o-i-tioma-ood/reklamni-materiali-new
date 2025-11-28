@@ -374,6 +374,24 @@ const API = {
     })
     return await resp.text()
   },
+  async deleteModelColor(modelColorId) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/model-colors/${modelColorId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+  },
+  async deleteModel(modelId) {
+    const jwt = auth.getToken()
+    const resp = await fetch(`${backendUrl}/admin/models/${modelId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${jwt}`
+      }
+    })
+  },
   async updatePrices(productType, amount, prices) {
     const jwt = auth.getToken()
     const resp = await fetch(`${backendUrl}/admin/prices`, {

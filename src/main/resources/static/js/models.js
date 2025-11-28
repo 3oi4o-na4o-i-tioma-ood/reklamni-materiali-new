@@ -1,30 +1,6 @@
-const modelsPage = {
-    _productType: null,
-    _skipCategoriesPage: null,
-    _hasColorButtons: null,
-
-    _updateContinueLink(modelColorId) {
-        const link = document.getElementById("continue-link")
-
-        const product = products.find(product => product.name === modelsPage._productType)
-
-        const urlQuery = `?modelColorId=${modelColorId}`
-
-        link.classList.remove("disabled")
-        
-        if(modelsPage._skipCategoriesPage) {   
-            link.href = `/${product.url}/дизайн${urlQuery}`
-        }
-        else {
-            link.href = `/категории/${product.url}${urlQuery}`
-        }
-    },
+const colorButtonsModule = {
     _handleColorButtonClick(model, colorButtons, colorButtonIndex) {
         const colorButton = colorButtons[colorButtonIndex]
-
-        // const modelColorId = Number(colorButton.getAttribute("data-id")) || null
-
-        // modelsPage._updateContinueLink(modelColorId)
 
         colorButtons.forEach(otherColorButton => {
             otherColorButton.classList.remove("selected")
@@ -48,35 +24,43 @@ const modelsPage = {
 
         colorButtons.forEach((colorButton, colorButtonIndex) => {
             colorButton.addEventListener("click", () => {
-                modelsPage._handleColorButtonClick(model, colorButtons, colorButtonIndex)
+                colorButtonsModule._handleColorButtonClick(model, colorButtons, colorButtonIndex)
             })
         })
     },
-    _initColorButtons() {
+    init() {
         const modelsContainer = document.getElementById("models-container")
 
         const models = [...modelsContainer.children]
 
         models.forEach(model => {
-            modelsPage._initColorButtonsForModel(model)
-
-            // model.addEventListener("click", () => {
-            //     console.log("Click model")
-            //     // const selectedColorButton = model.querySelector(".colors-container button.selected") || model.querySelectorAll(".colors-container button")[0]
-
-            //     const modelColorId = Number(model.getAttribute("data-id")) || null
-
-            //     modelsPage._updateContinueLink(modelColorId)
-
-            //     models.forEach(otherModel => {
-            //         otherModel.classList.remove("selected")
-            //     })
-
-            //     model.classList.add("selected")
-
-            // })
+            colorButtonsModule._initColorButtonsForModel(model)
         })
     },
+}
+
+const modelsPage = {
+    _productType: null,
+    _skipCategoriesPage: null,
+    _hasColorButtons: null,
+
+    _updateContinueLink(modelColorId) {
+        const link = document.getElementById("continue-link")
+
+        const product = products.find(product => product.name === modelsPage._productType)
+
+        const urlQuery = `?modelColorId=${modelColorId}`
+
+        link.classList.remove("disabled")
+        
+        if(modelsPage._skipCategoriesPage) {   
+            link.href = `/${product.url}/дизайн${urlQuery}`
+        }
+        else {
+            link.href = `/категории/${product.url}${urlQuery}`
+        }
+    },
+    
     async openModelPopup(modelId, modelColorId) {
         const popupId = "model-info-popup"
         const {result: modelData} = await API.getModel(modelId)
@@ -129,7 +113,7 @@ const modelsPage = {
         modelsPage._hasColorButtons = hasColorButtons
 
         if(hasColorButtons) {
-            modelsPage._initColorButtons()
+            colorButtonsModule.init()
         }
 
         modelsPage.initModelPopups()

@@ -160,16 +160,37 @@ const adminModels = {
             })
         })
     },
-    initModelDeleteButton() {
-        const deleteModelButton = document.getElementById("delete-model-button")
+    _initModelDeleteButton(modelContainer, modelIndex) {
+        const deleteModelButton = modelContainer.querySelector("#delete-model-button")
         deleteModelButton.addEventListener("click", () => {
-            API.deleteModel(adminModels._productType, selectedModelSelect.value)
+            const model = adminModels._models[modelIndex]
+            API.deleteModel(adminModels._productType, model.id)
         })
     },
-    initModelColorDeleteButton() {
-        const deleteModelColorButton = document.getElementById("delete-model-color-button")
+    initModelDeleteButtons() {
+        const modelsContainer = document.getElementById("models-container")
+        const models = [...modelsContainer.children]
+
+        models.forEach((model, modelIndex) => {
+            adminModels._initModelDeleteButton(model, modelIndex)
+        })
+    },
+    _initModelColorDeleteButton(modelContainer, modelIndex) {
+        const deleteModelColorButton = modelContainer.querySelector("#delete-model-color-button")
+        const colorButtons = [...modelContainer.querySelectorAll(".colors-container button")]
+        selectedColorIndex = colorButtons.findIndex(button => button.classList.contains("selected"))
         deleteModelColorButton.addEventListener("click", () => {
-            API.deleteModelColor(adminModels._productType, selectedModelColorSelect.value)
+            const model = adminModels._models[modelIndex]
+            const modelColor = model.colors[selectedColorIndex]
+            API.deleteModelColor(adminModels._productType, modelColor.id)
+        })
+    },
+    initModelColorDeleteButtons() {
+        const modelsContainer = document.getElementById("models-container")
+        const models = [...modelsContainer.children]
+
+        models.forEach((model, modelIndex) => {
+            adminModels._initModelColorDeleteButton(model, modelIndex)
         })
     }
 }
