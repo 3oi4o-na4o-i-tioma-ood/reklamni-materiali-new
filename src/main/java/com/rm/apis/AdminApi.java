@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -95,6 +96,17 @@ public interface AdminApi {
     @PostMapping("/model-colors")
     @ResponseBody
     void createModelColor(@RequestParam String primaryColor, @RequestParam String secondaryColor, @RequestParam long modelId, @RequestParam String name, @RequestParam ProductType product, @RequestParam MultipartFile image) throws IOException;
+
+
+    @Operation(summary = "Delete model color")
+    @DeleteMapping("/model-colors/{modelColorId}")
+    @ResponseBody
+    void deleteModelColor(@PathVariable long modelColorId);
+
+    @Operation(summary = "Delete model")
+    @DeleteMapping("/models/{modelId}")
+    @ResponseBody
+    void deleteModel(@PathVariable long modelId);
 
     record CategoryPriorityRequest(ProductType productType, String parentPath, List<Integer> newPriorities) {}
 }

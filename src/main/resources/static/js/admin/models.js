@@ -164,7 +164,7 @@ const adminModels = {
         const deleteModelButton = modelContainer.querySelector("#delete-model-button")
         deleteModelButton.addEventListener("click", () => {
             const model = adminModels._models[modelIndex]
-            API.deleteModel(adminModels._productType, model.id)
+            API.deleteModel(model.id)
         })
     },
     initModelDeleteButtons() {
@@ -178,11 +178,12 @@ const adminModels = {
     _initModelColorDeleteButton(modelContainer, modelIndex) {
         const deleteModelColorButton = modelContainer.querySelector("#delete-model-color-button")
         const colorButtons = [...modelContainer.querySelectorAll(".colors-container button")]
-        selectedColorIndex = colorButtons.findIndex(button => button.classList.contains("selected"))
+
         deleteModelColorButton.addEventListener("click", () => {
+            selectedColorIndex = colorButtons.findIndex(button => button.classList.contains("selected"))
             const model = adminModels._models[modelIndex]
             const modelColor = model.colors[selectedColorIndex]
-            API.deleteModelColor(adminModels._productType, modelColor.id)
+            API.deleteModelColor(modelColor.id)
         })
     },
     initModelColorDeleteButtons() {

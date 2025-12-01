@@ -27,6 +27,7 @@ import com.rm.models.prices.ProductType;
 import com.rm.repositories.PricesRepository;
 import com.rm.repositories.ProductModelRepository;
 import com.rm.repositories.TextPieceRepository;
+import com.rm.repositories.ModelColorRepository;
 import com.rm.repositories.NotesRepository;
 import com.rm.util.ColorUtils;
 import com.rm.util.MetadataManager;
@@ -44,13 +45,15 @@ public class AdminController implements AdminApi {
     private final NotesRepository notesRepository;
     private final TextPieceRepository textPiecesRepository;
     private final ProductModelRepository productModelRepository;
+    private final ModelColorRepository modelColorRepository;
 
     @Autowired
-    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository, ProductModelRepository productModelRepository) {
+    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository, ProductModelRepository productModelRepository, ModelColorRepository modelColorRepository) {
         this.pricesRepository = pricesRepository;
         this.notesRepository = notesRepository;
         this.textPiecesRepository = textPiecesRepository;
         this.productModelRepository = productModelRepository;
+        this.modelColorRepository = modelColorRepository;
     }
 
     @Override
@@ -201,5 +204,15 @@ public class AdminController implements AdminApi {
         ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, product.name().toLowerCase() + "_models", fileName).toFile());
 
         productModelRepository.createModelColor(new Model.Color(0, "#" + primaryColor, "#" + secondaryColor, modelId, name, fileName));
+    }
+
+    @Override
+    public void deleteModelColor(long modelColorId) {
+        modelColorRepository.deleteModelColor(modelColorId);
+    }
+
+    @Override
+    public void deleteModel(long modelId) {
+        productModelRepository.deleteModel(modelId);
     }
 }

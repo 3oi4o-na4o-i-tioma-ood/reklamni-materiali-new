@@ -37,4 +37,8 @@ public class ProductModelRepository {
     public void createModelColor(Model.Color modelColor) {
         database.update("INSERT INTO Model_Colors (primary_color, secondary_color, model_id, name, path) VALUES (?, ?, ?, ?, ?)", modelColor.primaryColor(), modelColor.secondaryColor(), modelColor.modelId(), modelColor.name(), modelColor.path());
     }
+
+    public void deleteModel(long modelId) {
+        database.update("DELETE FROM Product_Models WHERE id = ?", modelId);
+    }
 }
