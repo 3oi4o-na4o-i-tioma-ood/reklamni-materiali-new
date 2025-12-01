@@ -27,7 +27,7 @@ const pricesCalculation = {
         const basePriceMaybeSingle = priceAmounts.find(amountOption => amountOption.amount === amount)?.price
 
         let basePrice
-        if (["PEN", "LIGHTER"].includes(productType)) {
+        if (["PEN", "LIGHTER", "WORK_CALENDAR"].includes(productType)) {
             basePrice = (modelPrice + basePriceMaybeSingle) * amount
         }
         else {
@@ -104,6 +104,7 @@ const pricesCalculation = {
         return fetchedPromise
     },
     async getCartItemAmountsPrices(productType, modelColorId, printType) {
+        console.log("pricesCalculation.getCartItemAmountsPrices: ", productType, modelColorId, printType)
         const prices = await pricesCalculation.getPrices(productType, modelColorId)
 
         let priceAmounts
