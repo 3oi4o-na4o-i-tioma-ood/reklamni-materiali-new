@@ -135,6 +135,10 @@ const tools = {
         this.setActiveTool(tool);
       });
     }
+
+    if(editor.currentProduct === "PEN" || editor.currentProduct === "LIGHTER") {
+      this.setActiveTool("text");
+    }
   },
 
   // setActiveTool(newActiveTool) {
@@ -225,15 +229,15 @@ const tools = {
 
       if (tool === newActiveTool) {
         button.classList.add("active");
-        toolContainer.classList.remove("slideDown");
+        //toolContainer.classList.remove("slideDown");
         toolContainer.classList.add("active");
-        toolContainer.classList.add("slideUp"); // Trigger slideUp animation
-        setTimeout(() => toolContainer.classList.remove("slideUp"), 1200); // Remove after animation
+        //toolContainer.classList.add("slideUp"); // Trigger slideUp animation
+        //setTimeout(() => toolContainer.classList.remove("slideUp"), 1200); // Remove after animation
         toolParent.classList.add("active");
       } else if (tool === prevTool) {
         toolContainer.classList.remove("active");
-        toolContainer.classList.add("slideDown"); // Trigger slideDown animation
-        setTimeout(() => toolContainer.classList.remove("slideDown"), 1200); // Remove after animation
+        //toolContainer.classList.add("slideDown"); // Trigger slideDown animation
+        //setTimeout(() => toolContainer.classList.remove("slideDown"), 1200); // Remove after animation
       } else {
         button.classList.remove("active");
         toolContainer.classList.remove("active");
@@ -244,27 +248,7 @@ const tools = {
   handleResize() {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    if (isMobile) {
-      this.setActiveTool(null); // No tool active by default on mobile
-    } else {
-      // Ensure the first tool is always active on desktop
-      if (this.allTools && this.allTools.length > 0) {
-        this.setActiveTool(this.allTools[0]);
-      }
-    }
 
-    // Add listener for viewport changes
-    window.matchMedia("(max-width: 768px)").addEventListener("change", (e) => {
-      if (e.matches) {
-        // Switched to mobile view
-        this.setActiveTool(null);
-      } else {
-        // Switched to desktop view, ensure the first tool is active
-        if (this.allTools && this.allTools.length > 0) {
-          this.setActiveTool(this.allTools[0]);
-        }
-      }
-    });
   },
 };
 

@@ -399,7 +399,12 @@ function newRenderElements(editorId) {
       textarea.rows = 1;
 
       textarea.addEventListener("input", () => {
+        // Needed for auto-growth
         textareaSizer.innerText = textarea.value + ".";
+
+        editor.updateElement(editor.selectedElementId, {
+          text: textarea.value,
+        });
       });
 
       function createEditButton() {
