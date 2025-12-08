@@ -1,5 +1,6 @@
 package com.rm.controllers;
 
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
@@ -8,6 +9,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,11 +20,14 @@ import com.rm.exceptions.BadRequestException;
 import com.rm.exceptions.NotFoundException;
 import com.rm.models.TextPiece;
 import com.rm.models.categories.Category;
+import com.rm.models.categories.Model;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
 import com.rm.models.prices.ProductType;
 import com.rm.repositories.PricesRepository;
+import com.rm.repositories.ProductModelRepository;
 import com.rm.repositories.TextPieceRepository;
+import com.rm.repositories.ModelColorRepository;
 import com.rm.repositories.NotesRepository;
 import com.rm.util.ColorUtils;
 import com.rm.util.MetadataManager;
@@ -39,12 +44,16 @@ public class AdminController implements AdminApi {
     private final PricesRepository pricesRepository;
     private final NotesRepository notesRepository;
     private final TextPieceRepository textPiecesRepository;
+    private final ProductModelRepository productModelRepository;
+    private final ModelColorRepository modelColorRepository;
 
     @Autowired
-    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository) {
+    public AdminController(PricesRepository pricesRepository, NotesRepository notesRepository, TextPieceRepository textPiecesRepository, ProductModelRepository productModelRepository, ModelColorRepository modelColorRepository) {
         this.pricesRepository = pricesRepository;
         this.notesRepository = notesRepository;
         this.textPiecesRepository = textPiecesRepository;
+        this.productModelRepository = productModelRepository;
+        this.modelColorRepository = modelColorRepository;
     }
 
     @Override
@@ -135,15 +144,21 @@ public class AdminController implements AdminApi {
     }
 
     @Override
-    public void addCategoryImage(ProductType productType, String path, MultipartFile image, String pathName) throws IOException {
-        Path categoryPath = Path.of(categoriesDirectory, productType.name(), path);
+    public void addCategoryImage(ProductType productType, String fileName, MultipartFile image, String pathName) throws IOException {
+        Path categoryPath = Path.of(categoriesDirectory, productType.name(), pathName);
+        System.out.println("categoryPath: " + categoryPath);
         if (!Files.exists(categoryPath)) {
+            System.out.println("Category path not found");
             throw new NotFoundException();
         }
 
         BufferedImage rawImage = ImageIO.read(image.getInputStream());
-        BufferedImage imageToSave = ColorUtils.cmykToRgb(rawImage);
-        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, productType.name().toLowerCase(), path, pathName).toFile());
+
+        BufferedImage imageToSave = rawImage;
+        if (rawImage.getColorModel().getColorSpace().getType() == ColorSpace.TYPE_CMYK) {
+            imageToSave = ColorUtils.cmykToRgb(rawImage);
+        }
+        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, productType.name().toLowerCase(), pathName, fileName).toFile());
     }
 
     @Override
@@ -164,5 +179,40 @@ public class AdminController implements AdminApi {
     @Override
     public void updateTextPiece(TextPiece textPiece) {
         textPiecesRepository.updateTextPiece(textPiece);
+    }
+
+    @Override
+    public void createModel(Model model, ProductType product) {
+        productModelRepository.createModel(model, product);
+    }
+
+    @Override
+    public void createModelColor(String primaryColor, String secondaryColor, long modelId, String name, ProductType product, MultipartFile image) throws IOException {
+        Path categoryPath = Path.of(categoriesDirectory, product.name().toLowerCase() + "_models");
+        System.out.println("categoryPath: " + categoryPath);
+        if (!Files.exists(categoryPath)) {
+            System.out.println("Models path not found");
+            throw new NotFoundException();
+        }
+
+        BufferedImage rawImage = ImageIO.read(image.getInputStream());
+
+        BufferedImage imageToSave = ColorUtils.cmykToRgb(rawImage);
+
+        String fileName = UUID.randomUUID().toString() + ".png";
+
+        ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, product.name().toLowerCase() + "_models", fileName).toFile());
+
+        productModelRepository.createModelColor(new Model.Color(0, "#" + primaryColor, "#" + secondaryColor, modelId, name, fileName));
+    }
+
+    @Override
+    public void deleteModelColor(long modelColorId) {
+        modelColorRepository.deleteModelColor(modelColorId);
+    }
+
+    @Override
+    public void deleteModel(long modelId) {
+        productModelRepository.deleteModel(modelId);
     }
 }

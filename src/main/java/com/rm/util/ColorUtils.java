@@ -1,5 +1,6 @@
 package com.rm.util;
 
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
@@ -7,16 +8,21 @@ public class ColorUtils {
     private ColorUtils() {}
 
     public static BufferedImage cmykToRgb(BufferedImage image) {
+
+        if (image.getColorModel().getColorSpace().getType() != ColorSpace.TYPE_CMYK) {
+            return image; 
+        }
+        
         byte[] buffer = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-        int pixelCount = buffer.length;
-        byte[] new_data = new byte[pixelCount / 4 * 3];
+        int bytesCount = buffer.length;
+        byte[] new_data = new byte[bytesCount / 4 * 3];
         float lastC = -1, lastM = -1, lastY = -1, lastK = -1;
         float C, M, Y, K;
         float[] rgb = new float[3];
         // loop through each pixel changing CMYK values to RGB
         int pixelReached = 0;
 
-        for (int i = 0; i < pixelCount; i += 4) {
+        for (int i = 0; i < bytesCount; i += 4) {
             C = (buffer[i] & 0xff) / 255f;
             M = (buffer[i + 1] & 0xff) / 255f;
             Y = (buffer[i + 2] & 0xff) / 255f;

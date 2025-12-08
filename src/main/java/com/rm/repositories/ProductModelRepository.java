@@ -29,4 +29,16 @@ public class ProductModelRepository {
     public Model findOne(long modelColorId) {
         return database.findFirstIntoRecord(Model.class, "SELECT * FROM Product_Models WHERE id = ?", modelColorId).get();
     }
+
+    public void createModel(Model model, ProductType product) {
+        database.update("INSERT INTO Product_Models (model, catalogue_number, price, size, product) VALUES (?, ?, ?, ?, ?)", model.model(), model.catalogueNumber(), model.price(), model.size(), product.name());
+    }
+
+    public void createModelColor(Model.Color modelColor) {
+        database.update("INSERT INTO Model_Colors (primary_color, secondary_color, model_id, name, path) VALUES (?, ?, ?, ?, ?)", modelColor.primaryColor(), modelColor.secondaryColor(), modelColor.modelId(), modelColor.name(), modelColor.path());
+    }
+
+    public void deleteModel(long modelId) {
+        database.update("DELETE FROM Product_Models WHERE id = ?", modelId);
+    }
 }

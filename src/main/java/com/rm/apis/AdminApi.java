@@ -3,6 +3,7 @@ package com.rm.apis;
 import java.io.IOException;
 import java.util.List;
 
+import com.rm.models.categories.Model;
 import com.rm.models.TextPiece;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,7 +67,7 @@ public interface AdminApi {
     @PostMapping("/categories/images")
     @ResponseBody
     void addCategoryImage(@RequestParam ProductType product,
-                          @RequestParam String path,
+                          @RequestParam String fileName,
                           @RequestParam MultipartFile image,
                           @RequestParam String pathName) throws IOException;
 
@@ -85,6 +87,26 @@ public interface AdminApi {
     @ResponseBody
     void updateTextPiece(@RequestBody TextPiece textPiece);
 
+    @Operation(summary = "Create model")
+    @PostMapping("/models")
+    @ResponseBody
+    void createModel(@RequestBody Model model, @RequestParam ProductType product);
+
+    @Operation(summary = "Create model color")
+    @PostMapping("/model-colors")
+    @ResponseBody
+    void createModelColor(@RequestParam String primaryColor, @RequestParam String secondaryColor, @RequestParam long modelId, @RequestParam String name, @RequestParam ProductType product, @RequestParam MultipartFile image) throws IOException;
+
+
+    @Operation(summary = "Delete model color")
+    @DeleteMapping("/model-colors/{modelColorId}")
+    @ResponseBody
+    void deleteModelColor(@PathVariable long modelColorId);
+
+    @Operation(summary = "Delete model")
+    @DeleteMapping("/models/{modelId}")
+    @ResponseBody
+    void deleteModel(@PathVariable long modelId);
 
     record CategoryPriorityRequest(ProductType productType, String parentPath, List<Integer> newPriorities) {}
 }

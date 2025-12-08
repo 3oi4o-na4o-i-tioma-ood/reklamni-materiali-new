@@ -31,4 +31,8 @@ window.addEventListener("load", () => {
     ])
 
     adminModels.init("PEN")
+
+    colorButtonsModule.init()
+    adminModels.initModelColorDeleteButtons()
+    adminModels.initModelDeleteButtons()
 })

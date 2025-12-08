@@ -379,7 +379,7 @@ const editor = {
     const modelColorId = urlParams.get("modelColorId");
     //console.log("modelColorId: ", modelColorId, bg)
 
-    const isRotated = bg.startsWith("horizontal") || bg.startsWith("/horizontal");
+    const isRotated = bg && (bg.startsWith("horizontal") || bg.startsWith("/horizontal"));
     editor.isRotated = isRotated;
 
     if (bg) {

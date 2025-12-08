@@ -125,6 +125,9 @@ public class PagesController implements PagesApi {
         addPriceInfoPensAndLighters(model, ProductType.PEN);
         addTextPieces(model);
         addEffectPrices(model, ProductType.PEN);
+        PaginatedModels models = categoriesController.getModels(ProductType.PEN, 0, 100000);
+
+        model.addAttribute("models", models.items());
         return "pages/admin/pens/pens";
     }
 
@@ -133,6 +136,9 @@ public class PagesController implements PagesApi {
         addPriceInfoPensAndLighters(model, ProductType.LIGHTER);
         addTextPieces(model);
         addEffectPrices(model, ProductType.LIGHTER);
+        PaginatedModels models = categoriesController.getModels(ProductType.LIGHTER, 0, 100000);
+
+        model.addAttribute("models", models.items());
         return "pages/admin/lighters/lighters";
     }
 

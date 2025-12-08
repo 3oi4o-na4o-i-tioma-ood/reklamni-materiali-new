@@ -50,7 +50,7 @@ function createCategoriesList(productType, containerId = null) {
                     },
                     body: JSON.stringify({
                         productType: categoriesList._productType,
-                        parentPath: categoriesList._openedCategoryPath.map(cat => cat.url).join('/'),
+                        parentPath: categoriesList._getCategoryPath(),
                         newPriorities: currentPriorities
                     })
                 });
@@ -65,6 +65,9 @@ function createCategoriesList(productType, containerId = null) {
             } catch (error) {
                 console.error('Error updating priority:', error);
             }
+        },
+        _getCategoryPath() {
+            return categoriesList._openedCategoryPath.map(cat => cat.url).join('/');
         },
         _createCategoryItem(category, index) {
             const li = document.createElement("li");
@@ -118,9 +121,7 @@ function createCategoriesList(productType, containerId = null) {
                 });
             } else {
                 mainButton = document.createElement("a");
-                const parentPath = categoriesList._openedCategoryPath
-                    .map((category) => category.url)
-                    .join("/");
+                const parentPath = categoriesList._getCategoryPath();
                 const path = (parentPath ? parentPath + "/" : "") + category.url;
                 const productDescription = products.find(p => p.name === categoriesList._productType);
                 mainButton.href =
@@ -193,14 +194,16 @@ function createCategoriesList(productType, containerId = null) {
             categoryPathContainer.append(...path);
         },
 
-        async CreateCategory(name, productType) {
+        async createCategory(displayName, pathName, productType) {
             const searchParams = new URLSearchParams();
 
-            searchParams.set("pathName", name);
-            searchParams.set("name", name);
+            const selectedPath = categoriesList._getCategoryPath();
+
+            searchParams.set("pathName", pathName);
+            searchParams.set("name", displayName);
 
             searchParams.set("productType", productType);
-            searchParams.set("path", name);
+            searchParams.set("path", selectedPath);
 
             await fetch(`${backendUrl}/admin/categories?${searchParams.toString()}`, {
                 method: "POST",
@@ -232,10 +235,11 @@ function createCategoriesList(productType, containerId = null) {
 
         initCreateCategory() {
             const add_category_button = categoriesList._getContainer().querySelector("#create-category");
-            const add_category_value = categoriesList._getContainer().querySelector("#create-category-value");
+            const addCategoryDisplayName = categoriesList._getContainer().querySelector("#create-category-display-name");
+            const addCategoryPathName = categoriesList._getContainer().querySelector("#create-category-path-name");
 
             add_category_button?.addEventListener("click", async (e) => {
-                await this.CreateCategory(add_category_value.value, categoriesList._productType);
+                await this.createCategory(addCategoryDisplayName.value, addCategoryPathName.value, categoriesList._productType);
             });
         },
 

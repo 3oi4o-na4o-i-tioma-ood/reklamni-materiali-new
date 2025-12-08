@@ -125,7 +125,7 @@ const editorPreviewPopups = {
         }
 
         if (editor.currentProduct === "WORK_CALENDAR") {
-            return "NORMAL"
+            return null
         }
 
         const face = editorPreviewPopups._faceBlackWhite ? "BLACK" : "COLORED"

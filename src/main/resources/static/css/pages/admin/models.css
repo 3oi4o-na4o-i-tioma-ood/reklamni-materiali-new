@@ -9,3 +9,19 @@
 .add-model-color #create-model-color-button {
     margin-left: auto;
 }
+
+.error-message {
+    color: red;
+}
+
+.admin-page .models-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1em;
+
+    box-sizing: border-box;
+}
+
+.admin-page .models-container img {
+    width: 100%;
+}

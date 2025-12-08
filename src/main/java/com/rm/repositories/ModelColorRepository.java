@@ -37,4 +37,8 @@ public class ModelColorRepository {
             return product.name().toLowerCase() + "_models/" + path;
         }
     }
+
+    public void deleteModelColor(long modelColorId) {
+        database.update("DELETE FROM Model_Colors WHERE id = ?", modelColorId);
+    }
 }

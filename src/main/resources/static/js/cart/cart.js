@@ -29,9 +29,12 @@ const shoppingCart = {
         priceContainer.innerText = pricesCalculation.formatPrice(price)
     },
     async _getItemStandardPrice(item) {
+
+        const printType = item.design.productType === "WORK_CALENDAR" ? null : item.design.printType || "COLORED_NO_BACK"
+
         const price = await pricesCalculation.getCartItemPrice({
             ...item.design,
-            printType: item.design.printType || "COLORED_NO_BACK",
+            printType: printType,
             amount: item.amount
         })
 
@@ -73,9 +76,11 @@ const shoppingCart = {
     },
     async _createAmountSelect(item, saveItem) {
         console.log("_createAmountSelect: ", item)
+        const printType = item.design.productType === "WORK_CALENDAR" ? null : item.design.printType || "COLORED_NO_BACK"
+
         const {
             priceAmounts
-        } = await pricesCalculation.getCartItemAmountsPrices(item.design.productType, item.design.modelColorId, (item.design.printType || "COLORED_NO_BACK"))
+        } = await pricesCalculation.getCartItemAmountsPrices(item.design.productType, item.design.modelColorId, printType)
         
         console.log(priceAmounts)
         const amountSelect = document.createElement("select")

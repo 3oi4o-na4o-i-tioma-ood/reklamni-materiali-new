@@ -34,7 +34,7 @@ const editCategory = {
         imagesContainer.innerText = ""
         imagesContainer.append(...editCategory._createImages(images.images))
     },
-    showSnackbar(){
+    showSnackbar() {
         const snackbar = document.getElementById("files-added-snackbar")
         snackbar.classList.add("visible")
 
@@ -45,6 +45,73 @@ const editCategory = {
     async _uploadImage(file) {
 
     },
+
+    addImageUploadListener() {
+        const uploadElement = document.getElementById("admin-image-upload");
+        console.log(uploadElement);
+        if (!uploadElement) {
+            return; // Skip if element doesn't exist on the page
+        }
+
+        uploadElement.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            console.log(file);
+
+            const categoryPath = new URLSearchParams(window.location.search).get(
+                "categoryPath"
+            );
+            editCategory.addCategoryPicture(
+                editCategory._productType,
+                file.name,
+                categoryPath,
+                file
+            );
+        });
+    },
+    async addCategoryPicture(productType, fileName, pathName, image) {
+        const searchParams = new URLSearchParams();
+
+        const formData = new FormData();
+        searchParams.set("productType", productType);
+        searchParams.set("fileName", fileName || "");
+        searchParams.set("pathName", pathName || "");
+        formData.append("image", image);
+
+        try {
+            const response = await fetch(
+                `${backendUrl}/admin/categories/images?${searchParams.toString()}`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("JWT"),
+                        // "Content-Type": "application/json",
+                        // 'Content-Type': 'multipart/form-data'
+                    },
+                    body: formData,
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Show success notification
+            const snackbar = document.getElementById("snackbar");
+            snackbar.innerHTML = "Изображението е добавено успешно! Презаредете страницата за да видите промяната.";
+            snackbar.classList.add("visible");
+
+            setTimeout(() => {
+                snackbar.classList.remove("visible");
+            }, 3000);
+
+        } catch (error) {
+            console.error("Error adding the category picture:", error);
+
+            // Show error notification
+            //   alert("Error adding Image");
+            throw error;
+        }
+    },
     async init(productType) {
         editCategory._productType = productType
 
@@ -54,6 +121,8 @@ const editCategory = {
         pagination.generateButtons(Math.ceil(editCategory._imagesTotal / editCategory._pageSize), "pagination-container", (page_number) => {
             editCategory.updateImages(page_number, categoryPath)
         })
+
+        editCategory.addImageUploadListener();
 
         // imageUpload.init("image-upload", _uploadImage)
     }
