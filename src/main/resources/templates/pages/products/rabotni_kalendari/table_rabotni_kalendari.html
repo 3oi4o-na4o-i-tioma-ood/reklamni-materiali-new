@@ -25,6 +25,9 @@
               <th>
                 <div>Среден размер</div>
               </th>
+            <th>
+              <div>Нормален размер</div>
+            </th>
               <th>
                 <div>Голям размер</div>
               </th>
@@ -40,6 +43,9 @@
                 <td>
                   <div class="centered" th:insert="components/price :: price(${q['MEDIUM']})"></div>
                 </td>
+              <td>
+                <div class="centered" th:insert="components/price :: price(${q['NORMAL']})"></div>
+              </td>
                 <td>
                   <div class="centered" th:insert="components/price :: price(${q['BIG']})"></div>
                 </td>
