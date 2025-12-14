@@ -2,6 +2,16 @@ const adminModels = {
     _productType: null,
     _models: [],
     _confirmPopupId: "delete-model-confirm-popup",
+    _showSnackbar(message) {
+        const snackbar = document.getElementById("snackbar")
+        if (snackbar) {
+            snackbar.innerHTML = message
+            snackbar.classList.add("visible")
+            setTimeout(() => snackbar.classList.remove("visible"), 3000)
+        } else {
+            alert(message)
+        }
+    },
     _confirmTitleEl: null,
     _confirmMessageEl: null,
     _confirmPreviewEl: null,
@@ -40,7 +50,7 @@ const adminModels = {
 
         const createModelButton = document.querySelector("#create-model-button")
 
-        createModelButton.addEventListener("click", () => {
+        createModelButton.addEventListener("click", async () => {
             const modelNameError = document.querySelector("#model-name-error")
             const modelCatalogueNumberError = document.querySelector("#model-catalogue-number-error")
             const modelPriceError = document.querySelector("#model-price-error")
@@ -69,12 +79,18 @@ const adminModels = {
                 modelPriceError.innerText = ""
             }
 
-            API.createModel({
-                model: modelNameInput.value,
-                catalogueNumber: modelCatalogueNumberInput.value,
-                price: modelPriceInput.value,
-                size: modelSizeSelect.value || null
-            }, adminModels._productType)
+            try {
+                await API.createModel({
+                    model: modelNameInput.value,
+                    catalogueNumber: modelCatalogueNumberInput.value,
+                    price: modelPriceInput.value,
+                    size: modelSizeSelect.value || null
+                }, adminModels._productType)
+                adminModels._showSnackbar("Моделът е добавен успешно! Презаредете страницата, за да видите промяната.")
+            } catch (err) {
+                console.error("Error creating model:", err)
+                adminModels._showSnackbar("Възникна грешка при добавяне на модела.")
+            }
         })
     },
 
@@ -112,7 +128,7 @@ const adminModels = {
             selectedImage.src = URL.createObjectURL(file)
         })
 
-        submitButton.addEventListener("click", () => {
+        submitButton.addEventListener("click", async () => {
             const hexColorRegex = /^(?:[A-Fa-f0-9]{3}){1,2}$/;
 
             if(primaryColorInput.value === "") {
@@ -151,14 +167,20 @@ const adminModels = {
                 modelColorImageError.innerText = ""
             }
 
-            API.createModelColor({
-                primaryColor: primaryColorInput.value,
-                secondaryColor: secondaryColorInput.value,
-                name: colorNameInput.value,
-                modelId: selectedModelSelect.value,
-                product: adminModels._productType,
-                image: modelColorImageInput.files[0]
-            })
+            try {
+                await API.createModelColor({
+                    primaryColor: primaryColorInput.value,
+                    secondaryColor: secondaryColorInput.value,
+                    name: colorNameInput.value,
+                    modelId: selectedModelSelect.value,
+                    product: adminModels._productType,
+                    image: modelColorImageInput.files[0]
+                })
+                adminModels._showSnackbar("Цветът е добавен успешно! Презаредете страницата, за да видите промяната.")
+            } catch (err) {
+                console.error("Error creating model color:", err)
+                adminModels._showSnackbar("Възникна грешка при добавяне на цвета.")
+            }
         })
     },
     _ensureConfirmPopup() {
