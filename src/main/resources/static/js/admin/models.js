@@ -1,6 +1,11 @@
 const adminModels = {
     _productType: null,
     _models: [],
+    _confirmPopupId: "delete-model-confirm-popup",
+    _confirmTitleEl: null,
+    _confirmMessageEl: null,
+    _confirmPreviewEl: null,
+    _confirmActionButton: null,
     async init(productType) {
         adminModels._productType = productType
         await adminModels.fetchModels()
@@ -160,11 +165,89 @@ const adminModels = {
             })
         })
     },
+    _ensureConfirmPopup() {
+        let popupElement = document.getElementById(adminModels._confirmPopupId)
+        if (!popupElement) {
+            popupElement = document.createElement("div")
+            popupElement.id = adminModels._confirmPopupId
+            popupElement.classList.add("popup")
+            popupElement.innerHTML = `
+                <div class="content">
+                    <div class="header">
+                        <span id="delete-confirm-title">Потвърждение</span>
+                        <button type="button" class="icon-button close-button" aria-label="Затвори">&#215;</button>
+                    </div>
+                    <div class="popup-body">
+                        <p id="delete-confirm-message" class="delete-popup-text"></p>
+                        <div id="delete-confirm-preview" class="delete-popup-image-wrapper confirm-preview"></div>
+                        <div class="delete-popup-actions">
+                            <button type="button" class="button primary" id="delete-confirm-button">Да</button>
+                        </div>
+                    </div>
+                </div>
+            `
+            document.body.appendChild(popupElement)
+            popup.init(adminModels._confirmPopupId)
+        }
+
+        adminModels._confirmTitleEl = popupElement.querySelector("#delete-confirm-title")
+        adminModels._confirmMessageEl = popupElement.querySelector("#delete-confirm-message")
+        adminModels._confirmPreviewEl = popupElement.querySelector("#delete-confirm-preview")
+        adminModels._confirmActionButton = popupElement.querySelector("#delete-confirm-button")
+    },
+    _openConfirmPopup({ title, message, previewBuilder, onConfirm }) {
+        adminModels._ensureConfirmPopup()
+
+        if (adminModels._confirmTitleEl) {
+            adminModels._confirmTitleEl.innerText = title
+        }
+        if (adminModels._confirmMessageEl) {
+            adminModels._confirmMessageEl.innerText = message
+        }
+        if (adminModels._confirmPreviewEl) {
+            adminModels._confirmPreviewEl.innerHTML = ""
+            if (typeof previewBuilder === "function") {
+                const previewContent = previewBuilder()
+                if (previewContent) {
+                    if (Array.isArray(previewContent)) {
+                        adminModels._confirmPreviewEl.append(...previewContent)
+                    } else {
+                        adminModels._confirmPreviewEl.append(previewContent)
+                    }
+                }
+            }
+        }
+        if (adminModels._confirmActionButton) {
+            adminModels._confirmActionButton.onclick = async () => {
+                popup.close(adminModels._confirmPopupId)
+                await onConfirm()
+            }
+        }
+
+        popup.open(adminModels._confirmPopupId)
+    },
     _initModelDeleteButton(modelContainer, modelIndex) {
         const deleteModelButton = modelContainer.querySelector("#delete-model-button")
         deleteModelButton.addEventListener("click", () => {
             const model = adminModels._models[modelIndex]
-            API.deleteModel(model.id)
+            adminModels._openConfirmPopup({
+                title: "Изтриване на модел",
+                message: "Сигурни ли сте, че искате да изтриете този модел?",
+                previewBuilder: () => {
+                    const wrapper = document.createElement("div")
+                    wrapper.classList.add("confirm-model-info")
+                    const name = document.createElement("div")
+                    name.innerText = `${model.model} (${model.catalogueNumber || "без каталог"})`
+                    const price = document.createElement("div")
+                    price.classList.add("confirm-model-price")
+                    price.innerText = model.price ? `${model.price} лв.` : ""
+                    wrapper.append(name, price)
+                    return wrapper
+                },
+                onConfirm: async () => {
+                    await API.deleteModel(model.id)
+                }
+            })
         })
     },
     initModelDeleteButtons() {
@@ -183,7 +266,30 @@ const adminModels = {
             selectedColorIndex = colorButtons.findIndex(button => button.classList.contains("selected"))
             const model = adminModels._models[modelIndex]
             const modelColor = model.colors[selectedColorIndex]
-            API.deleteModelColor(modelColor.id)
+            adminModels._openConfirmPopup({
+                title: "Изтриване на цвят",
+                message: "Сигурни ли сте, че искате да изтриете този цвят?",
+                previewBuilder: () => {
+                    const preview = document.createElement("div")
+                    preview.classList.add("confirm-color-preview")
+
+                    const swatch = document.createElement("div")
+                    swatch.classList.add("confirm-color-swatch")
+                    swatch.style.background = modelColor.secondaryColor
+                        ? `linear-gradient(90deg, ${modelColor.primaryColor} 0 50%, ${modelColor.secondaryColor} 50% 100%)`
+                        : modelColor.primaryColor
+
+                    const meta = document.createElement("div")
+                    meta.classList.add("confirm-color-meta")
+                    meta.innerText = modelColor.name || ""
+
+                    preview.append(swatch, meta)
+                    return preview
+                },
+                onConfirm: async () => {
+                    await API.deleteModelColor(modelColor.id)
+                }
+            })
         })
     },
     initModelColorDeleteButtons() {
