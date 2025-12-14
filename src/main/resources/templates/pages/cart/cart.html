@@ -65,7 +65,15 @@
                             <span class="price" id="price-total-after-tax-container"></span>
                         </div>
 
-                        <a class="button to-payment-button" href="/приключване-на-поръчката">Продължи към поръчка</a>
+                        <div class="confirmation-row">
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="cart-data-confirm-checkbox">
+                                <span>Данните са верни</span>
+                            </label>
+                            <span class="error-container" id="cart-data-confirm-error" style="display:none;"></span>
+                        </div>
+
+                        <button class="button to-payment-button" id="cart-continue-button">Продължи към поръчка</button>
                     </div>
 
                 </div>

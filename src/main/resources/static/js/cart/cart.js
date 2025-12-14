@@ -1,6 +1,29 @@
 const shoppingCart = {
     _cartId: null,
     _cart: null,
+    _setConfirmError(message) {
+        const errorEl = document.getElementById("cart-data-confirm-error")
+        if (!errorEl) {
+            return
+        }
+        if (message) {
+            errorEl.innerText = message
+            errorEl.style.display = "block"
+            errorEl.style.color = "red"
+        } else {
+            errorEl.innerText = ""
+            errorEl.style.display = "none"
+        }
+    },
+    _validateConfirmation() {
+        const checkbox = document.getElementById("cart-data-confirm-checkbox")
+        if (!checkbox) {
+            return true
+        }
+        const isChecked = checkbox.checked
+        shoppingCart._setConfirmError(isChecked ? "" : "Моля, потвърдете, че данните са верни")
+        return isChecked
+    },
     _updateCartItemData(id, update) {
         if (!shoppingCart._cart) {
             return
@@ -271,6 +294,14 @@ const shoppingCart = {
         }
 
         shoppingCart.render()
+
+        const continueButton = document.getElementById("cart-continue-button")
+        continueButton?.addEventListener("click", () => {
+            if (!shoppingCart._validateConfirmation()) {
+                return
+            }
+            window.location.href = "/приключване-на-поръчката"
+        })
     }
 }
 

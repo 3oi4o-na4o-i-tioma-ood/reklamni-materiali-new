@@ -119,6 +119,9 @@ const checkoutPage = {
 
         return isValid
     },
+    _validateConfirmation() {
+        return true
+    },
     _validateInvoiceDetails(invoiceData) {
         if (!invoiceData) {
             return true
@@ -137,7 +140,8 @@ const checkoutPage = {
     _validateForms(data) {
         checkoutPage._clearErrors()
         return checkoutPage._validateUserDetails(data.userDetails) &&
-            checkoutPage._validateInvoiceDetails(data.invoiceDetails)
+            checkoutPage._validateInvoiceDetails(data.invoiceDetails) &&
+            checkoutPage._validateConfirmation()
     },
 
     async _makeOrder() {
