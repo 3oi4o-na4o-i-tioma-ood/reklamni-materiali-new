@@ -64,8 +64,14 @@ const checkoutPage = {
     _validateUserDetails(userData) {
         let isValid = true
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const phoneRegex = /^\+?\d{6,15}$/
+
         if (!userData.email) {
             checkoutPage._setError("form-email", "Задължително поле")
+            isValid = false
+        } else if (!emailRegex.test(userData.email.trim())) {
+            checkoutPage._setError("form-email", "Въведете валиден имейл")
             isValid = false
         }
 
@@ -81,6 +87,9 @@ const checkoutPage = {
 
         if (!userData.phone) {
             checkoutPage._setError("form-phone", "Задължително поле")
+            isValid = false
+        } else if (!phoneRegex.test(userData.phone.replace(/\s+/g, ""))) {
+            checkoutPage._setError("form-phone", "Въведете валиден телефон")
             isValid = false
         }
 
