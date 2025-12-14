@@ -122,6 +122,17 @@ public class EditorController implements EditorApi {
     }
 
     @Override
+    public Resource getPocketCalendarBack(String path) {
+        Resource resource = new FileSystemResource(Path.of(categoriesDirectory, "pocket_calendar_backs", path));
+
+        if (resource.exists() && resource.isReadable()) {
+            return resource;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public String uploadImage(MultipartFile file, String selectionJSON) throws IOException {
         UUID imageName = UUID.randomUUID();
         BufferedImage image = ImageIO.read(new ByteArrayInputStream(file.getBytes()));

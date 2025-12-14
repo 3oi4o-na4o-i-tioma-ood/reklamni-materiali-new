@@ -34,57 +34,61 @@ public interface EditorApi {
      @GetMapping("/api/editor/background")
      @ResponseBody
      Resource getBackground(@RequestParam(required = false) String filename,
-             @RequestParam(required = false) ProductType product,
-             @RequestParam(required = false) String path);
+                            @RequestParam(required = false) ProductType product,
+                            @RequestParam(required = false) String path);
 
-    @Operation(summary = "Upload image")
-    @PostMapping("/api/editor/image")
-    @ResponseBody
-    String uploadImage(@RequestParam("file") MultipartFile file,
-                       @RequestParam(value = "selection", required = false) String selectionJSON) throws IOException;
+     @Operation(summary = "Get pocket calendar back image")
+     @GetMapping("/api/editor/pocket-calendar-back")
+     Resource getPocketCalendarBack(@RequestParam String path);
 
-    @Operation(summary = "Update image")
-    @PutMapping("/api/editor/image")
-    @ResponseBody
-    void updateImage(@RequestParam("imageId") String imageId,
-                     @RequestParam(value = "selection", required = false) String selectionJSON) throws IOException;
+     @Operation(summary = "Upload image")
+     @PostMapping("/api/editor/image")
+     @ResponseBody
+     String uploadImage(@RequestParam("file") MultipartFile file,
+                        @RequestParam(value = "selection", required = false) String selectionJSON) throws IOException;
 
-    @Operation(summary = "Get image")
-    @GetMapping("/api/editor/image")
-    @ResponseBody
-    Resource getImage(@RequestParam("name") String name);
+     @Operation(summary = "Update image")
+     @PutMapping("/api/editor/image")
+     @ResponseBody
+     void updateImage(@RequestParam("imageId") String imageId,
+                      @RequestParam(value = "selection", required = false) String selectionJSON) throws IOException;
 
-    @Operation(summary = "Get preview image")
-    @GetMapping(value = "/api/editor/preview", produces = "image/*")
-    @ResponseBody
-    Resource getPreviewImage(@RequestParam("name") String name,
-                             @RequestParam("side") String side);
+     @Operation(summary = "Get image")
+     @GetMapping("/api/editor/image")
+     @ResponseBody
+     Resource getImage(@RequestParam("name") String name);
 
-    @Operation(summary = "Create design")
-    @PostMapping("/api/editor/design")
-    @ResponseBody
-    String createDesign(@RequestBody Design design,
-                        @RequestHeader(name = "Authorization", required = false) String authorization) throws IOException;
+     @Operation(summary = "Get preview image")
+     @GetMapping(value = "/api/editor/preview", produces = "image/*")
+     @ResponseBody
+     Resource getPreviewImage(@RequestParam("name") String name,
+                              @RequestParam("side") String side);
 
-    @Operation(summary = "Update design")
-    @PutMapping("/api/editor/design")
-    @ResponseBody
-    void updateDesign(@RequestBody Design design) throws IOException;
+     @Operation(summary = "Create design")
+     @PostMapping("/api/editor/design")
+     @ResponseBody
+     String createDesign(@RequestBody Design design,
+                         @RequestHeader(name = "Authorization", required = false) String authorization) throws IOException;
 
-    @Operation(summary = "Get design")
-    @GetMapping("/api/editor/design/{id}")
-    @ResponseBody
-    Design.Raw getDesign(@PathVariable String id) throws RuntimeException;
+     @Operation(summary = "Update design")
+     @PutMapping("/api/editor/design")
+     @ResponseBody
+     void updateDesign(@RequestBody Design design) throws IOException;
 
-    @Operation(summary = "Get favourite designs")
-    @GetMapping("/api/editor/design/favorite")
-    @ResponseBody
-    List<Design.Raw> getFavoriteDesigns(@RequestHeader("Authorization") String authorization);
+     @Operation(summary = "Get design")
+     @GetMapping("/api/editor/design/{id}")
+     @ResponseBody
+     Design.Raw getDesign(@PathVariable String id) throws RuntimeException;
 
-    @Operation(summary = "Get design pdf")
-    @GetMapping(value = "/api/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    @ResponseBody
-    Resource getDesignPdf(@RequestParam("productType") ProductType product,
-                          @RequestParam("designId") String designId,
-                          @RequestParam("front") boolean isFront) throws IOException;
+     @Operation(summary = "Get favourite designs")
+     @GetMapping("/api/editor/design/favorite")
+     @ResponseBody
+     List<Design.Raw> getFavoriteDesigns(@RequestHeader("Authorization") String authorization);
+
+     @Operation(summary = "Get design pdf")
+     @GetMapping(value = "/api/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+     @ResponseBody
+     Resource getDesignPdf(@RequestParam("productType") ProductType product,
+                           @RequestParam("designId") String designId,
+                           @RequestParam("front") boolean isFront) throws IOException;
 }

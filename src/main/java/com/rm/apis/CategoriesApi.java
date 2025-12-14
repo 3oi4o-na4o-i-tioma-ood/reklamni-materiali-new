@@ -33,11 +33,19 @@ public interface CategoriesApi {
                                               @RequestParam("page") int page,
                                               @RequestParam("pageSize") int pageSize) throws IOException;
 
+    @Operation(summary = "Get pocket calendar backs")
+    @GetMapping("/api/pocket-calendar-backs")
+    List<String> getPocketCalendarBacksPaths() throws IOException;
+
     @Operation(summary = "Get category image")
     @GetMapping("/api/category-image")
     @ResponseBody
     Resource getImage(@RequestParam("productType") ProductType product,
                       @RequestParam("path") String path) throws IOException;
+
+    @Operation(summary = "Get pocket calendar back")
+    @GetMapping("/api/pocket-calendar-back")
+    Resource getPocketCalendarBack(@RequestParam("path") String path) throws IOException;
 
     @Operation(summary = "Get paginated models")
     @GetMapping("/api/models")

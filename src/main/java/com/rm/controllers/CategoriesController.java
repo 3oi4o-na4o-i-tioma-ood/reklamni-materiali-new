@@ -110,6 +110,13 @@ public class CategoriesController implements CategoriesApi {
         return new PaginatedCategoryImages(newPaths, page, pageSize);
     }
 
+    @Override
+    public List<String> getPocketCalendarBacksPaths() throws IOException {
+        try (Stream<Path> paths = Files.list(Path.of(categoriesDirectory, "pocket_calendar_backs"))) {
+            return paths.map(p -> p.getFileName().toString()).toList();
+        }
+    }
+
     private List<Path> findRepresentatives(Path parent) {
         try (Stream<Path> subpaths = Files.list(parent)) {
             List<Path> subpathList = subpaths.toList();
@@ -138,6 +145,25 @@ public class CategoriesController implements CategoriesApi {
 
         BufferedImage scaledBuffer = new BufferedImage(scaled.getWidth(null), scaled.getHeight(null),
                 BufferedImage.TYPE_INT_RGB);
+        scaledBuffer.createGraphics().drawImage(scaled, 0, 0, null);
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        ImageIO.write(scaledBuffer, "png", bytes);
+        Resource resource = new ByteArrayResource(bytes.toByteArray());
+        if (resource.exists() && resource.isReadable()) {
+            return resource;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Resource getPocketCalendarBack(String path) throws IOException {
+        BufferedImage image = ImageIO.read(Path.of(categoriesDirectory, "pocket_calendar_backs", path).toFile());
+        Image scaled = image.getScaledInstance(300, -1, Image.SCALE_SMOOTH);
+
+        BufferedImage scaledBuffer = new BufferedImage(scaled.getWidth(null), scaled.getHeight(null),
+            BufferedImage.TYPE_INT_RGB);
         scaledBuffer.createGraphics().drawImage(scaled, 0, 0, null);
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
