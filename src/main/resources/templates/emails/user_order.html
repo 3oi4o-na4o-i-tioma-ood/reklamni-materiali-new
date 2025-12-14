@@ -200,42 +200,6 @@
                             </a>
                         </td>
                     </tr>
-
-                    <tr th:if="${authorized}">
-                        <td colspan="2">
-                            <th:block th:switch="${cartItem.design.productType}">
-                                <a th:case="${T(com.rm.models.prices.ProductType).BUSINESS_CARD}"
-                                    th:href="${websiteUrl} + '/визитки/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).WORK_CALENDAR}"
-                                    th:href="${websiteUrl} + '/работни-календари/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).POCKET_CALENDAR}"
-                                    th:href="${websiteUrl} + '/джобни-календарчета/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).FLIER_10x15}"
-                                    th:href="${websiteUrl} + '/флаери-10x15/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).FLIER_10x20}"
-                                    th:href="${websiteUrl} + '/флаери-10x20/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).PEN}"
-                                    th:href="${websiteUrl} + '/химикалки/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                <a th:case="${T(com.rm.models.prices.ProductType).LIGHTER}"
-                                    th:href="${websiteUrl} + '/запалки/дизайн?designId=' + ${cartItem.design.id}">
-                                    Преглед и редакция на дизайн
-                                </a>
-                                
-                            </th:block>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
 
