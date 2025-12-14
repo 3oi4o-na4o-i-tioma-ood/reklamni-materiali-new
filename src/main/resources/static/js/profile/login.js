@@ -52,6 +52,11 @@ const login = {
         return false
       }
 
+      if (!/\d/.test(data.password)) {
+        login.setValidationError("Паролата трябва да съдържа поне една цифра")
+        return false
+      }
+
       if (data.password !== data.confirmPassword) {
         login.setValidationError("Повторете паролата си")
         return false
