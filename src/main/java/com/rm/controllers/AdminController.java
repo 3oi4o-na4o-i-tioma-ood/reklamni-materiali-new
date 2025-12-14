@@ -215,7 +215,12 @@ public class AdminController implements AdminApi {
 
         ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, product.name().toLowerCase() + "_models", fileName).toFile());
 
-        productModelRepository.createModelColor(new Model.Color(0, "#" + primaryColor, "#" + secondaryColor, modelId, name, fileName));
+        String primaryHex = primaryColor.startsWith("#") ? primaryColor : "#" + primaryColor;
+        String secondaryHex = (secondaryColor == null || secondaryColor.isBlank())
+            ? null
+            : (secondaryColor.startsWith("#") ? secondaryColor : "#" + secondaryColor);
+
+        productModelRepository.createModelColor(new Model.Color(0, primaryHex, secondaryHex, modelId, name, fileName));
     }
 
     @Override

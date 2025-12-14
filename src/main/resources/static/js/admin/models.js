@@ -127,11 +127,7 @@ const adminModels = {
                 primaryColorError.innerText = ""
             }
 
-            if(secondaryColorInput.value === "") {
-                secondaryColorError.innerText = "Това поле е задължително"
-                return
-            }
-            else if(!hexColorRegex.test(secondaryColorInput.value.trim())) {
+            if(secondaryColorInput.value && !hexColorRegex.test(secondaryColorInput.value.trim())) {
                 secondaryColorError.innerText = "Въведете валиден HEX цвят (напр. A1B2C3)"
                 return
             }
