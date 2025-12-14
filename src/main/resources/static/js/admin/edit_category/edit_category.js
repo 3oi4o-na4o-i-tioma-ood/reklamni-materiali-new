@@ -5,6 +5,7 @@ const editCategory = {
     _deletePopupId: "delete-category-image-popup",
     _deletePopupImage: null,
     _confirmDeleteButton: null,
+    _pathTargets: ["#category-path-container", "#topbar-category-path"],
     _createImages(images) {
         const productType = editCategory._productType
         return images.map(image => {
@@ -89,6 +90,26 @@ const editCategory = {
         } catch (e) {
             return new URLSearchParams(imageUrl).get("path")
         }
+    },
+    _renderCategoryPath(categoryPath) {
+        if (!categoryPath) {
+            return
+        }
+
+        if (typeof categoryPathBreadcrumb !== "undefined") {
+            console.log("Edit category path:", categoryPath);
+            categoryPathBreadcrumb.render(categoryPath, {
+                targetSelectors: editCategory._pathTargets,
+                clickable: false,
+            })
+            return
+        }
+
+        editCategory._pathTargets
+            .flatMap(selector => Array.from(document.querySelectorAll(selector)))
+            .forEach(target => {
+                target.innerText = categoryPath.split("/").filter(Boolean).join(" / ")
+            })
     },
     async updateImages(page_number, categoryPath) {
         const images = await API.getPictures(editCategory._productType, page_number, editCategory._pageSize, categoryPath);
@@ -175,11 +196,46 @@ const editCategory = {
             throw error;
         }
     },
+    async _fetchCategories() {
+        try {
+            const response = await API.getCategories(editCategory._productType);
+            console.log('Categories response:', response); // Debug log
+
+            // Ensure we have an array to work with
+            editCategory._categories = Array.isArray(response) ? response : [];
+
+            if (!Array.isArray(response)) {
+                console.error('Expected array of categories, got:', typeof response);
+            }
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+            editCategory._categories = [];
+        }
+    },
+    _getCategoryPathSegments(categoryPath) {
+        const urlSegments = categoryPath.split("/").filter(Boolean)
+        const segments = []
+
+        let iteratedCategoriesList = editCategory._categories
+
+        for (const segment of urlSegments) {
+            const category = iteratedCategoriesList.find(category => category.url === segment)
+            if (category) {
+                segments.push(category)
+                iteratedCategoriesList = category.children
+            }
+        }
+
+        return segments
+    },
     async init(productType) {
         editCategory._productType = productType
         editCategory._createDeletePopup()
+        await editCategory._fetchCategories()
 
         const categoryPath = new URLSearchParams(window.location.search).get("categoryPath")
+        const categoryPathSegments = editCategory._getCategoryPathSegments(categoryPath)
+        editCategory._renderCategoryPath(categoryPathSegments)
         await editCategory.updateImages(0, categoryPath)
 
         pagination.generateButtons(Math.ceil(editCategory._imagesTotal / editCategory._pageSize), "pagination-container", (page_number) => {

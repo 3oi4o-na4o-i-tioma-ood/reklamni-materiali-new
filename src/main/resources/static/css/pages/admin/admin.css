@@ -89,8 +89,9 @@
   background-color: #e6ebe9;
   padding: 15px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 button#admin-menu-button {
@@ -109,6 +110,38 @@ button.close-icon {
   color: black;
   font-size: 26px;
   font-weight: 600;
+}
+
+.admin-category-path {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  color: var(--color-primary);
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.admin-category-path .category-path-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.admin-category-path .category-path-button:hover,
+.admin-category-path .category-path-button:focus {
+  text-decoration: underline;
+}
+
+.admin-icon {
+  margin-left: auto;
+}
+
+.category-path {
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 767px) {

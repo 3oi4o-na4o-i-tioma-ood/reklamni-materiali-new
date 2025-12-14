@@ -166,32 +166,72 @@ function createCategoriesList(productType, containerId = null) {
 
             categoriesListElement.innerText = "";
             categoriesListElement.append(...listItems);
+
+            categoriesList._renderPath();
         },
-        async _pushCategory(category) {
-            categoriesList._openedCategoryPath.push(category);
-
-            categoriesList._renderCategoriesList(category.children || []);
-
-            if (!category.children?.length) {
-            }
-
+        _renderPath() {
             const categoryPathContainer = categoriesList._getContainer().querySelector(
                 "#category-path-container"
             );
+            const targets = ["#category-path-container", "#topbar-category-path"];
 
-            const path = categoriesList._openedCategoryPath.flatMap((category, i) => {
+            console.log(categoriesList._openedCategoryPath);
+            const segments = categoriesList._openedCategoryPath.map((category, index) => ({
+                label: category.name,
+                path: categoriesList._openedCategoryPath
+                    .slice(0, index + 1)
+                    .map((cat) => cat.url)
+                    .join("/"),
+            }));
+
+            if (typeof categoryPathBreadcrumb !== "undefined") {
+                console.log("Categories list segments:", segments);
+                categoryPathBreadcrumb.render(segments, {
+                    targetSelectors: targets,
+                    onNavigate: (path) => {
+                        categoriesList._openPath(path);
+                    },
+                });
+                return;
+            }
+
+            if (!categoryPathContainer) {
+                return;
+            }
+
+            const path = segments.flatMap((segment, i) => {
                 const button = document.createElement("button");
-                button.innerText = category.name;
+                button.innerText = segment.label;
                 button.addEventListener("click", () => {
-                    categoriesList._openedCategoryPath.splice(i);
-                    categoriesList._pushCategory(category);
+                    categoriesList._openedCategoryPath.splice(i + 1);
+                    categoriesList._pushCategory(categoriesList._openedCategoryPath[i]);
                 });
                 return [" / ", button];
             });
 
             categoryPathContainer.innerText = "";
-
             categoryPathContainer.append(...path);
+        },
+        _openPath(path) {
+            const parts = (path || "").split("/").filter(Boolean);
+            let currentChildren = categoriesList._categories;
+            categoriesList._openedCategoryPath = [];
+
+            for (const part of parts) {
+                const found = currentChildren.find((c) => c.url === part);
+                if (!found) {
+                    break;
+                }
+                categoriesList._openedCategoryPath.push(found);
+                currentChildren = found.children || [];
+            }
+
+            categoriesList._renderCategoriesList(currentChildren || []);
+        },
+        async _pushCategory(category) {
+            categoriesList._openedCategoryPath.push(category);
+
+            categoriesList._renderCategoriesList(category.children || []);
         },
 
         async createCategory(displayName, pathName, productType) {
