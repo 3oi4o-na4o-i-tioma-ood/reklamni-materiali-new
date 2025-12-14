@@ -101,18 +101,8 @@ const checkoutPage = {
             }
         }
         else {
-            if (!userData.addressCity) {
-                checkoutPage._setError("form-address-city", "Задължително поле")
-                isValid = false
-            }
-
-            if (!userData.addressStreet) {
-                checkoutPage._setError("form-address-street", "Задължително поле")
-                isValid = false
-            }
-
-            if (!userData.addressNumber) {
-                checkoutPage._setError("form-address-number", "Задължително поле")
+            if (!userData.address) {
+                checkoutPage._setError("form-address", "Задължително поле")
                 isValid = false
             }
         }
@@ -177,13 +167,7 @@ const checkoutPage = {
         }
 
         if (details.userDetails.deliveryType !== "office") {
-            details.userDetails.address = [
-                details.userDetails.addressCity,
-                details.userDetails.addressStreet,
-                details.userDetails.addressNumber,
-                details.userDetails.addressEntrance,
-                details.userDetails.addressApartment
-            ].join(" ")
+            details.userDetails.address = details.userDetails.address
         }
 
         const shoppingCartId = editorStorage.getUserCartId()
@@ -232,7 +216,7 @@ const checkoutPage = {
         const surname = document.getElementById("form-surname")
         const email = document.getElementById("form-email")
         const phone = document.getElementById("form-phone")
-        // const address = document.getElementById("form-address")
+        const address = document.getElementById("form-address")
 
         console.log(user)
 
@@ -240,7 +224,7 @@ const checkoutPage = {
         surname.value = user.surname
         email.value = user.email
         phone.value = user.phone
-        // address.value = user.delivery_address
+        address.value = user.delivery_address
     },
     _initUserDetailsForm() {
         const deliveryForm = document.getElementById("delivery-form")
