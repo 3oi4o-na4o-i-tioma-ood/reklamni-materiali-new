@@ -243,7 +243,7 @@ function createCategoriesList(productType, containerId = null) {
             searchParams.set("name", displayName);
 
             searchParams.set("productType", productType);
-            searchParams.set("path", selectedPath);
+            searchParams.set("path", selectedPath || '/');
 
             await fetch(`${backendUrl}/admin/categories?${searchParams.toString()}`, {
                 method: "POST",

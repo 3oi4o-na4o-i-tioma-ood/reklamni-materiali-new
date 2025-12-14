@@ -33,4 +33,8 @@ public class MetadataManager {
     public static boolean isMetadataFile(Path path) {
         return path.getFileName().toString().equals(METADATA_FILENAME);
     }
+    
+    public static boolean isNotMetadataFile(Path path) {
+        return !MetadataManager.isMetadataFile(path);
+    }
 }

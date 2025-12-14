@@ -74,9 +74,7 @@ public class AdminController implements AdminApi {
         }
 
         try (Stream<Path> siblings = Files.list(parentPath)) {
-            boolean hasImages = siblings
-                .filter(MetadataManager::isMetadataFile)
-                .anyMatch(Files::isRegularFile);
+            boolean hasImages = siblings.anyMatch(file -> file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg"));
             if (hasImages) {
                 throw new BadRequestException();
             }
