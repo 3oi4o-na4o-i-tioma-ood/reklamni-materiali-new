@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Objects;
 
 import com.rm.models.carts.CartInfo;
 import com.rm.models.carts.CartItemCreationInfo;
@@ -190,6 +191,18 @@ public class ShoppingCartController implements ShoppingCartApi {
                 userOrderContext);
 
         if (userId != null) {
+            if (cart.items != null && !cart.items.isEmpty()) {
+                List<String> designIds = cart.items.stream()
+                        .map(item -> item.design)
+                        .filter(Objects::nonNull)
+                        .map(design -> design.id)
+                        .filter(Objects::nonNull)
+                        .distinct()
+                        .toList();
+
+                editorRepository.markDesignsAsFavorite(designIds, userId);
+            }
+
             String newCartId = createShoppingCart();
             usersRepository.setCartId(userId, newCartId);
         }
