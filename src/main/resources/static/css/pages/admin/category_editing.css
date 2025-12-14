@@ -53,3 +53,29 @@
     min-height: 300px;
     margin: 2em;
 }
+
+.delete-popup-text {
+    margin-bottom: 1em;
+}
+
+.delete-popup-image-wrapper {
+    width: 100%;
+    max-height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.delete-popup-image-wrapper img {
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+}
+
+.delete-popup-actions {
+    display: flex;
+    gap: 0.75em;
+}
