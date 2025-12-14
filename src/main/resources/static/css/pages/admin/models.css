@@ -60,3 +60,23 @@
 .confirm-color-meta {
     font-weight: 600;
 }
+
+.model-price-editor {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.model-price-editor .text-editing.number {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.model-price-editor .text-editing.number input {
+    width: 120px;
+}
+
+.model-price-editor .price-suffix {
+    font-weight: 600;
+}

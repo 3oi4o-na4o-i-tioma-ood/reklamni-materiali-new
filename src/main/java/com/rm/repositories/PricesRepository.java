@@ -47,7 +47,7 @@ public class PricesRepository {
     }
 
     public void updateModelPrice(long modelId, double newPrice) {
-        database.update("UPDATE Models SET price = ? WHERE id = ?", newPrice, modelId);
+        database.update("UPDATE Product_Models SET price = ? WHERE id = ?", newPrice, modelId);
     }
 
     public Optional<Double> findEffectCartonPrice(long effectCartonId) {

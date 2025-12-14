@@ -263,7 +263,13 @@ const adminModels = {
                     return wrapper
                 },
                 onConfirm: async () => {
-                    await API.deleteModel(model.id)
+                    try {
+                        await API.deleteModel(model.id)
+                        adminModels._showSnackbar("Моделът е изтрит успешно! Презаредете страницата, за да видите промяната.")
+                    } catch (err) {
+                        console.error("Error deleting model:", err)
+                        adminModels._showSnackbar("Възникна грешка при изтриване на модела.")
+                    }
                 }
             })
         })
@@ -305,7 +311,13 @@ const adminModels = {
                     return preview
                 },
                 onConfirm: async () => {
-                    await API.deleteModelColor(modelColor.id)
+                    try {
+                        await API.deleteModelColor(modelColor.id)
+                        adminModels._showSnackbar("Цветът е изтрит успешно! Презаредете страницата, за да видите промяната.")
+                    } catch (err) {
+                        console.error("Error deleting model color:", err)
+                        adminModels._showSnackbar("Възникна грешка при изтриване на цвета.")
+                    }
                 }
             })
         })

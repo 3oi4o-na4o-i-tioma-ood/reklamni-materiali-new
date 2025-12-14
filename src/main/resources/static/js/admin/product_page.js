@@ -1,6 +1,16 @@
 const adminProductPage = {
     _productType: null,
     _columns: null,
+    _showSnackbar(message) {
+        const snackbar = document.getElementById("snackbar")
+        if (snackbar) {
+            snackbar.innerHTML = message
+            snackbar.classList.add("visible")
+            setTimeout(() => snackbar.classList.remove("visible"), 3000)
+        } else {
+            alert(message)
+        }
+    },
     initTextEditingElement(element, onValueChange) {
         const editButton = element.querySelector("#row-edit-button")
         const cancelButton = element.querySelector("#row-cancel-button")
@@ -151,6 +161,19 @@ const adminProductPage = {
     },
     onTextElementValueChange(value, id) {
         console.log(id)
+        if (id?.startsWith("model-price-")) {
+            const modelId = Number(id.replace("model-price-", ""))
+            const numericValue = Number(value)
+            API.updateModelPrice(modelId, numericValue)
+                .then(() => {
+                    adminProductPage._showSnackbar("Цената е обновена успешно! Презаредете страницата, за да видите промяната.")
+                })
+                .catch(() => {
+                    adminProductPage._showSnackbar("Възникна грешка при обновяването на цената.")
+                })
+            return
+        }
+
         if (["FAST_PRODUCTION", "EXPRESS_PRODUCTION", "LAMINATION", "ROUNDED_CORNERS", "EFFECT_CARTON", "FLYER_10x15_LAMINATION_MAT", "FLYER_10x15_LAMINATION_GLOSSY", "FLYER_10x20_LAMINATION_MAT", "FLYER_10x20_LAMINATION_GLOSSY"].includes(id)) {
             let productType = adminProductPage._productType;
             
