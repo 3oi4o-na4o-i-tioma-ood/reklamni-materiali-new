@@ -19,7 +19,6 @@ import com.rm.apis.AdminApi;
 import com.rm.exceptions.BadRequestException;
 import com.rm.exceptions.NotFoundException;
 import com.rm.models.TextPiece;
-import com.rm.models.categories.Category;
 import com.rm.models.categories.Model;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
@@ -136,9 +135,24 @@ public class AdminController implements AdminApi {
                     throw new DirectoryNotEmptyException(null);
                 }
             }
+            Files.delete(categoryPath);
+            return;
         }
 
-        Files.delete(categoryPath);
+        deleteRecursively(categoryPath);
+    }
+
+    private void deleteRecursively(Path path) throws IOException {
+        try (Stream<Path> walk = Files.walk(path)) {
+            walk.sorted(Comparator.reverseOrder())
+                .forEach(p -> {
+                    try {
+                        Files.delete(p);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        }
     }
 
     @Override

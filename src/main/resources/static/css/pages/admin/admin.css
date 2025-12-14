@@ -37,9 +37,6 @@
   padding: 0;
 }
 
-.admin-page .side-menu ul li {
-}
-
 .admin-page .side-menu ul a {
   padding: 1em;
   display: flex;
@@ -234,4 +231,19 @@ button.close-icon {
   .admin-page .dashboard-page-content {
     margin-top: 75px;
   }
+}
+
+.delete-popup-text {
+  margin-bottom: 0.75em;
+}
+
+.delete-popup-actions {
+  display: flex;
+  gap: 0.75em;
+}
+
+.delete-popup-path {
+  font-weight: 600;
+  margin-bottom: 1em;
+  word-break: break-all;
 }
