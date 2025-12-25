@@ -32,9 +32,12 @@
     gap: 5px;
 }
 
+#cart-page-content .cart-item-container .preview-image-link {
+    max-width: 40%;
+}
+
 #cart-page-content .cart-item-container .preview-image {
     width: 200px;
-    max-width: 40%;
     object-fit: contain;
     object-position: top;
     aspect-ratio: 94 / 54;

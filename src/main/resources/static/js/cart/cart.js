@@ -205,9 +205,17 @@ const shoppingCart = {
         container.classList.add("cart-item-container")
         container.id = shoppingCart._getCartItemHtmlId(item.id)
 
+        const imageLink = document.createElement("a")
+        const productDescription = products?.find(product => product.name === item.design.productType)
+
+        imageLink.href = `/${productDescription.url}/дизайн?designId=${item.design.id}`
+        imageLink.classList.add("preview-image-link")
+
         const image = document.createElement("img")
         image.classList.add("preview-image")
         image.src = API.getDesignPreviewImageUrl(item.design?.id, "front")
+
+        imageLink.append(image)
 
         async function deleteItem() {
             const resp = await API.deleteCartItem(item.id)
@@ -234,7 +242,7 @@ const shoppingCart = {
             })
         }, 1000)
 
-        container.append(image)
+        container.append(imageLink)
         container.append(await shoppingCart._createItemMainSection(item, null, saveItem))
         container.append(await shoppingCart._createItemRightSection(item, deleteItem))
 
