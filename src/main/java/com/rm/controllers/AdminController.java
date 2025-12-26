@@ -19,7 +19,6 @@ import com.rm.apis.AdminApi;
 import com.rm.exceptions.BadRequestException;
 import com.rm.exceptions.NotFoundException;
 import com.rm.models.TextPiece;
-import com.rm.models.categories.Category;
 import com.rm.models.categories.Model;
 import com.rm.models.prices.Note;
 import com.rm.models.prices.PriceUpdateInfo;
@@ -74,9 +73,7 @@ public class AdminController implements AdminApi {
         }
 
         try (Stream<Path> siblings = Files.list(parentPath)) {
-            boolean hasImages = siblings
-                .filter(MetadataManager::isMetadataFile)
-                .anyMatch(Files::isRegularFile);
+            boolean hasImages = siblings.anyMatch(file -> file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg"));
             if (hasImages) {
                 throw new BadRequestException();
             }
@@ -138,9 +135,24 @@ public class AdminController implements AdminApi {
                     throw new DirectoryNotEmptyException(null);
                 }
             }
+            Files.delete(categoryPath);
+            return;
         }
 
-        Files.delete(categoryPath);
+        deleteRecursively(categoryPath);
+    }
+
+    private void deleteRecursively(Path path) throws IOException {
+        try (Stream<Path> walk = Files.walk(path)) {
+            walk.sorted(Comparator.reverseOrder())
+                .forEach(p -> {
+                    try {
+                        Files.delete(p);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        }
     }
 
     @Override
@@ -203,7 +215,12 @@ public class AdminController implements AdminApi {
 
         ImageIO.write(imageToSave, "png", Path.of(categoriesDirectory, product.name().toLowerCase() + "_models", fileName).toFile());
 
-        productModelRepository.createModelColor(new Model.Color(0, "#" + primaryColor, "#" + secondaryColor, modelId, name, fileName));
+        String primaryHex = primaryColor.startsWith("#") ? primaryColor : "#" + primaryColor;
+        String secondaryHex = (secondaryColor == null || secondaryColor.isBlank())
+            ? null
+            : (secondaryColor.startsWith("#") ? secondaryColor : "#" + secondaryColor);
+
+        productModelRepository.createModelColor(new Model.Color(0, primaryHex, secondaryHex, modelId, name, fileName));
     }
 
     @Override

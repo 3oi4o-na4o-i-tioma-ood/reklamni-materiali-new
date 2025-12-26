@@ -1,6 +1,29 @@
 const shoppingCart = {
     _cartId: null,
     _cart: null,
+    _setConfirmError(message) {
+        const errorEl = document.getElementById("cart-data-confirm-error")
+        if (!errorEl) {
+            return
+        }
+        if (message) {
+            errorEl.innerText = message
+            errorEl.style.display = "block"
+            errorEl.style.color = "red"
+        } else {
+            errorEl.innerText = ""
+            errorEl.style.display = "none"
+        }
+    },
+    _validateConfirmation() {
+        const checkbox = document.getElementById("cart-data-confirm-checkbox")
+        if (!checkbox) {
+            return true
+        }
+        const isChecked = checkbox.checked
+        shoppingCart._setConfirmError(isChecked ? "" : "Моля, потвърдете, че данните са верни")
+        return isChecked
+    },
     _updateCartItemData(id, update) {
         if (!shoppingCart._cart) {
             return
@@ -182,9 +205,17 @@ const shoppingCart = {
         container.classList.add("cart-item-container")
         container.id = shoppingCart._getCartItemHtmlId(item.id)
 
+        const imageLink = document.createElement("a")
+        const productDescription = products?.find(product => product.name === item.design.productType)
+
+        imageLink.href = `/${productDescription.url}/дизайн?designId=${item.design.id}`
+        imageLink.classList.add("preview-image-link")
+
         const image = document.createElement("img")
         image.classList.add("preview-image")
         image.src = API.getDesignPreviewImageUrl(item.design?.id, "front")
+
+        imageLink.append(image)
 
         async function deleteItem() {
             const resp = await API.deleteCartItem(item.id)
@@ -211,7 +242,7 @@ const shoppingCart = {
             })
         }, 1000)
 
-        container.append(image)
+        container.append(imageLink)
         container.append(await shoppingCart._createItemMainSection(item, null, saveItem))
         container.append(await shoppingCart._createItemRightSection(item, deleteItem))
 
@@ -271,6 +302,14 @@ const shoppingCart = {
         }
 
         shoppingCart.render()
+
+        const continueButton = document.getElementById("cart-continue-button")
+        continueButton?.addEventListener("click", () => {
+            if (!shoppingCart._validateConfirmation()) {
+                return
+            }
+            window.location.href = "/приключване-на-поръчката"
+        })
     }
 }
 

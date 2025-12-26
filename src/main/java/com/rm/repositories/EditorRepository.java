@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -441,6 +440,44 @@ public interface EditorRepository extends JpaRepository<Design.Raw, String> {
             statement.setObject(1, side.bgPath);
             statement.setObject(2, side.bgImageId);
             statement.setLong(3, side.id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    default void markDesignsAsFavorite(List<String> designIds, Long userId) {
+        if (userId == null || designIds == null || designIds.isEmpty()) {
+            return;
+        }
+
+        List<String> uniqueDesignIds = designIds.stream()
+                .filter(Objects::nonNull)
+                .distinct()
+                .toList();
+
+        if (uniqueDesignIds.isEmpty()) {
+            return;
+        }
+
+        try (Connection connection = DriverManager
+                .getConnection("jdbc:postgresql://localhost:5432/reklamni_materiali_db", "postgres", "1111")) {
+            String placeholders = IntStream.range(0, uniqueDesignIds.size())
+                    .mapToObj(i -> "?")
+                    .collect(Collectors.joining(", "));
+
+            PreparedStatement statement = connection.prepareStatement("""
+                    UPDATE Designs SET
+                        is_favorite = true
+                    WHERE user_id = ?
+                        AND id IN (%s)
+                    """.formatted(placeholders));
+
+            statement.setLong(1, userId);
+            for (int i = 0; i < uniqueDesignIds.size(); i++) {
+                statement.setString(i + 2, uniqueDesignIds.get(i));
+            }
+
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

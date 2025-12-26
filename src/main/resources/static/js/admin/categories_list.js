@@ -5,6 +5,10 @@ function createCategoriesList(productType, containerId = null) {
         _productType: null,
         _openedCategoryPath: [],
         _categories: [],
+        _deletePopupId: "delete-category-popup",
+        _deleteMessageEl: null,
+        _deletePathEl: null,
+        _deleteConfirmButton: null,
         async init(productType, containerId = null) {
             this._productType = productType;
             this._containerId = containerId;
@@ -68,6 +72,73 @@ function createCategoriesList(productType, containerId = null) {
         },
         _getCategoryPath() {
             return categoriesList._openedCategoryPath.map(cat => cat.url).join('/');
+        },
+        _ensureDeletePopup() {
+            let popupElement = document.getElementById(categoriesList._deletePopupId);
+            if (!popupElement) {
+                popupElement = document.createElement("div");
+                popupElement.id = categoriesList._deletePopupId;
+                popupElement.classList.add("popup");
+                popupElement.innerHTML = `
+                    <div class="content">
+                        <div class="header">
+                            <span>Изтриване на категория</span>
+                            <button type="button" class="icon-button close-button" aria-label="Затвори">&#215;</button>
+                        </div>
+                        <div class="popup-body">
+                            <p class="delete-popup-text" id="delete-category-message"></p>
+                            <div class="delete-popup-path" id="delete-category-path"></div>
+                            <div class="delete-popup-actions">
+                                <button type="button" class="button primary" id="delete-category-confirm-button">Да</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popupElement);
+                popup.init(categoriesList._deletePopupId);
+            }
+
+            categoriesList._deleteMessageEl = popupElement.querySelector("#delete-category-message");
+            categoriesList._deletePathEl = popupElement.querySelector("#delete-category-path");
+            categoriesList._deleteConfirmButton = popupElement.querySelector("#delete-category-confirm-button");
+        },
+        _openDeletePopup({ message, path, onConfirm }) {
+            categoriesList._ensureDeletePopup();
+
+            if (categoriesList._deleteMessageEl) {
+                categoriesList._deleteMessageEl.innerText = message;
+            }
+            if (categoriesList._deletePathEl) {
+                categoriesList._deletePathEl.innerText = path || "/";
+            }
+            if (categoriesList._deleteConfirmButton) {
+                categoriesList._deleteConfirmButton.onclick = async () => {
+                    popup.close(categoriesList._deletePopupId);
+                    await onConfirm();
+                };
+            }
+
+            popup.open(categoriesList._deletePopupId);
+        },
+        async _deleteCategory(fullPath) {
+            const searchParams = new URLSearchParams();
+            searchParams.set("productType", categoriesList._productType);
+            searchParams.set("path", fullPath || "");
+            searchParams.set("force", "true");
+
+            const response = await fetch(`${backendUrl}/admin/categories?${searchParams.toString()}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("JWT"),
+                },
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text().catch(() => "");
+                const err = new Error(`HTTP error! Status: ${response.status}`);
+                err.responseText = errorText;
+                throw err;
+            }
         },
         _createCategoryItem(category, index) {
             const li = document.createElement("li");
@@ -143,7 +214,44 @@ function createCategoriesList(productType, containerId = null) {
             deleteButton.append(deleteIcon);
 
             deleteButton.addEventListener("click", () => {
-                alert("losho");
+                const parentPath = categoriesList._getCategoryPath();
+                const fullPath = [parentPath, category.url].filter(Boolean).join("/");
+
+                categoriesList._openDeletePopup({
+                    message: "Сигурни ли сте, че искате да изтриете тази категория? Всички подкатегории и изображения в нея ще бъдат изтрити.",
+                    path: fullPath || "/",
+                    onConfirm: async () => {
+                        try {
+                            await categoriesList._deleteCategory(fullPath);
+                            await categoriesList._fetchCategories();
+
+                            // Re-open the parent path after deletion
+                            categoriesList._openPath(parentPath);
+
+                            const snackbar = document.getElementById("snackbar");
+                            if (snackbar) {
+                                snackbar.innerHTML = "Категорията е изтрита успешно!";
+                                snackbar.classList.add("visible");
+                                setTimeout(() => {
+                                    snackbar.classList.remove("visible");
+                                }, 3000);
+                            }
+                        } catch (error) {
+                            console.error("Error deleting category:", error);
+                            const snackbar = document.getElementById("snackbar");
+                            const message = error?.responseText || "Възникна грешка при изтриването.";
+                            if (snackbar) {
+                                snackbar.innerHTML = message;
+                                snackbar.classList.add("visible");
+                                setTimeout(() => {
+                                    snackbar.classList.remove("visible");
+                                }, 4000);
+                            } else {
+                                alert(message);
+                            }
+                        }
+                    }
+                });
             });
 
             li.append(mainButton, deleteButton);
@@ -166,32 +274,72 @@ function createCategoriesList(productType, containerId = null) {
 
             categoriesListElement.innerText = "";
             categoriesListElement.append(...listItems);
+
+            categoriesList._renderPath();
         },
-        async _pushCategory(category) {
-            categoriesList._openedCategoryPath.push(category);
-
-            categoriesList._renderCategoriesList(category.children || []);
-
-            if (!category.children?.length) {
-            }
-
+        _renderPath() {
             const categoryPathContainer = categoriesList._getContainer().querySelector(
                 "#category-path-container"
             );
+            const targets = ["#category-path-container", "#topbar-category-path"];
 
-            const path = categoriesList._openedCategoryPath.flatMap((category, i) => {
+            console.log(categoriesList._openedCategoryPath);
+            const segments = categoriesList._openedCategoryPath.map((category, index) => ({
+                label: category.name,
+                path: categoriesList._openedCategoryPath
+                    .slice(0, index + 1)
+                    .map((cat) => cat.url)
+                    .join("/"),
+            }));
+
+            if (typeof categoryPathBreadcrumb !== "undefined") {
+                console.log("Categories list segments:", segments);
+                categoryPathBreadcrumb.render(segments, {
+                    targetSelectors: targets,
+                    onNavigate: (path) => {
+                        categoriesList._openPath(path);
+                    },
+                });
+                return;
+            }
+
+            if (!categoryPathContainer) {
+                return;
+            }
+
+            const path = segments.flatMap((segment, i) => {
                 const button = document.createElement("button");
-                button.innerText = category.name;
+                button.innerText = segment.label;
                 button.addEventListener("click", () => {
-                    categoriesList._openedCategoryPath.splice(i);
-                    categoriesList._pushCategory(category);
+                    categoriesList._openedCategoryPath.splice(i + 1);
+                    categoriesList._pushCategory(categoriesList._openedCategoryPath[i]);
                 });
                 return [" / ", button];
             });
 
             categoryPathContainer.innerText = "";
-
             categoryPathContainer.append(...path);
+        },
+        _openPath(path) {
+            const parts = (path || "").split("/").filter(Boolean);
+            let currentChildren = categoriesList._categories;
+            categoriesList._openedCategoryPath = [];
+
+            for (const part of parts) {
+                const found = currentChildren.find((c) => c.url === part);
+                if (!found) {
+                    break;
+                }
+                categoriesList._openedCategoryPath.push(found);
+                currentChildren = found.children || [];
+            }
+
+            categoriesList._renderCategoriesList(currentChildren || []);
+        },
+        async _pushCategory(category) {
+            categoriesList._openedCategoryPath.push(category);
+
+            categoriesList._renderCategoriesList(category.children || []);
         },
 
         async createCategory(displayName, pathName, productType) {
@@ -203,7 +351,7 @@ function createCategoriesList(productType, containerId = null) {
             searchParams.set("name", displayName);
 
             searchParams.set("productType", productType);
-            searchParams.set("path", selectedPath);
+            searchParams.set("path", selectedPath || '/');
 
             await fetch(`${backendUrl}/admin/categories?${searchParams.toString()}`, {
                 method: "POST",

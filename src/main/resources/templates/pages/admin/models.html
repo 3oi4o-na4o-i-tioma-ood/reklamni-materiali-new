@@ -99,7 +99,10 @@
             <div class="info-row">
                 <div th:text="${model.model}"></div>
                 <div th:text="${model.catalogueNumber}"></div>
-                <div style="margin-left: auto" th:text="${model.price} + ' лв.'"></div>
+                <div style="margin-left: auto" class="model-price-editor">
+                    <th:block th:replace="components/number_editing :: number-editing(${model.price}, ${'model-price-' + model.id})"></th:block>
+                    <span class="price-suffix">лв.</span>
+                </div>
             </div>
 
             <div class="colors-container">

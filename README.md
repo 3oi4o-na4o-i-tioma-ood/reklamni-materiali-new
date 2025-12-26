@@ -20,3 +20,6 @@ $ mvn spring-boot:run
 2. ssh root@185.80.0.191
 
 2.1 cd reklamni-materiali
+
+
+mseW7(X[F5aE

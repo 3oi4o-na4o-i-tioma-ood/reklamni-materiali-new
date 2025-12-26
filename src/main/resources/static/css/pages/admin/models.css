@@ -25,3 +25,58 @@
 .admin-page .models-container img {
     width: 100%;
 }
+
+.confirm-preview {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75em;
+    flex-wrap: wrap;
+}
+
+.confirm-model-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+.confirm-model-price {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.confirm-color-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.confirm-color-swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--color-primary);
+}
+
+.confirm-color-meta {
+    font-weight: 600;
+}
+
+.model-price-editor {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.model-price-editor .text-editing.number {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.model-price-editor .text-editing.number input {
+    width: 120px;
+}
+
+.model-price-editor .price-suffix {
+    font-weight: 600;
+}

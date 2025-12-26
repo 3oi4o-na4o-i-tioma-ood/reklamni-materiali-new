@@ -406,6 +406,25 @@ const API = {
     })
     return await resp.text()  
   },
+  async updateModelPrice(modelId, newPrice) {
+    const jwt = auth.getToken()
+    const searchParams = new URLSearchParams()
+    searchParams.set("modelId", modelId)
+    searchParams.set("newPrice", newPrice)
+
+    const resp = await fetch(`${backendUrl}/admin/prices/model?${searchParams.toString()}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + jwt
+      }
+    })
+
+    if (!resp.ok) {
+      throw new Error("Failed to update model price")
+    }
+
+    return await resp.text()
+  },
   async updateNotePrice(note) {
     const jwt = auth.getToken()
     const resp = await fetch(`${backendUrl}/admin/notes`, {

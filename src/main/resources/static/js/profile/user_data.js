@@ -19,21 +19,11 @@ const userDataPage = {
     // }
 
     const {
-      addressCity,
-      addressStreet,
-      addressNumber,
-      addressEntrance,
-      addressApartment,
+      address,
       ...updatedFormData
     } = formData;
 
-    updatedFormData.address = [
-      addressCity,
-      addressStreet,
-      addressNumber,
-      addressEntrance,
-      addressApartment,
-    ].join(" ");
+    updatedFormData.address = address
 
     await API.updateUser(updatedFormData);
     await API.refreshJWT();
@@ -73,11 +63,7 @@ const userDataPage = {
     const email = document.getElementById("form-email");
     const phone = document.getElementById("form-phone");
 
-    const addressCity = document.getElementById("form-address-city");
-    const addressStreet = document.getElementById("form-address-street");
-    const addressNumber = document.getElementById("form-address-number");
-    const addressEntrance = document.getElementById("form-address-entrance");
-    const addressApartment = document.getElementById("form-address-apartment");
+    const address = document.getElementById("form-address");
 
     const user = auth.parseToken(auth.getToken());
 
@@ -86,11 +72,7 @@ const userDataPage = {
     email.value = user.email;
     phone.value = user.phone;
 
-    addressCity.value = user.addressCity || "";
-    addressStreet.value = user.addressStreet || "";
-    addressNumber.value = user.addressNumber || "";
-    addressEntrance.value = user.addressEntrance || "";
-    addressApartment.value = user.addressApartment || "";
+    address.value = user.delivery_address || "";
   },
 
   _openSnackbar(text, isWarning) {

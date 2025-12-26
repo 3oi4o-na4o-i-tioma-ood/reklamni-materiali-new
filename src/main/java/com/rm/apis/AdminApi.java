@@ -95,7 +95,12 @@ public interface AdminApi {
     @Operation(summary = "Create model color")
     @PostMapping("/model-colors")
     @ResponseBody
-    void createModelColor(@RequestParam String primaryColor, @RequestParam String secondaryColor, @RequestParam long modelId, @RequestParam String name, @RequestParam ProductType product, @RequestParam MultipartFile image) throws IOException;
+    void createModelColor(@RequestParam String primaryColor,
+                          @RequestParam(required = false) String secondaryColor,
+                          @RequestParam long modelId,
+                          @RequestParam String name,
+                          @RequestParam ProductType product,
+                          @RequestParam MultipartFile image) throws IOException;
 
 
     @Operation(summary = "Delete model color")

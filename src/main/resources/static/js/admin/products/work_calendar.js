@@ -2,6 +2,7 @@ window.addEventListener("load", () => {
     const columns = [
         "SMALL",
         "MEDIUM",
+        "NORMAL",
         "BIG"
     ]
     adminProductPage.init("WORK_CALENDAR", columns)

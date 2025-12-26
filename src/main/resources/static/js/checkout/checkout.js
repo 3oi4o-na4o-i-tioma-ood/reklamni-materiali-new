@@ -64,8 +64,14 @@ const checkoutPage = {
     _validateUserDetails(userData) {
         let isValid = true
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const phoneRegex = /^\+?\d{6,15}$/
+
         if (!userData.email) {
             checkoutPage._setError("form-email", "Задължително поле")
+            isValid = false
+        } else if (!emailRegex.test(userData.email.trim())) {
+            checkoutPage._setError("form-email", "Въведете валиден имейл")
             isValid = false
         }
 
@@ -82,6 +88,9 @@ const checkoutPage = {
         if (!userData.phone) {
             checkoutPage._setError("form-phone", "Задължително поле")
             isValid = false
+        } else if (!phoneRegex.test(userData.phone.replace(/\s+/g, ""))) {
+            checkoutPage._setError("form-phone", "Въведете валиден телефон")
+            isValid = false
         }
 
 
@@ -92,23 +101,16 @@ const checkoutPage = {
             }
         }
         else {
-            if (!userData.addressCity) {
-                checkoutPage._setError("form-address-city", "Задължително поле")
-                isValid = false
-            }
-
-            if (!userData.addressStreet) {
-                checkoutPage._setError("form-address-street", "Задължително поле")
-                isValid = false
-            }
-
-            if (!userData.addressNumber) {
-                checkoutPage._setError("form-address-number", "Задължително поле")
+            if (!userData.address) {
+                checkoutPage._setError("form-address", "Задължително поле")
                 isValid = false
             }
         }
 
         return isValid
+    },
+    _validateConfirmation() {
+        return true
     },
     _validateInvoiceDetails(invoiceData) {
         if (!invoiceData) {
@@ -128,7 +130,8 @@ const checkoutPage = {
     _validateForms(data) {
         checkoutPage._clearErrors()
         return checkoutPage._validateUserDetails(data.userDetails) &&
-            checkoutPage._validateInvoiceDetails(data.invoiceDetails)
+            checkoutPage._validateInvoiceDetails(data.invoiceDetails) &&
+            checkoutPage._validateConfirmation()
     },
 
     async _makeOrder() {
@@ -164,13 +167,7 @@ const checkoutPage = {
         }
 
         if (details.userDetails.deliveryType !== "office") {
-            details.userDetails.address = [
-                details.userDetails.addressCity,
-                details.userDetails.addressStreet,
-                details.userDetails.addressNumber,
-                details.userDetails.addressEntrance,
-                details.userDetails.addressApartment
-            ].join(" ")
+            details.userDetails.address = details.userDetails.address
         }
 
         const shoppingCartId = editorStorage.getUserCartId()
@@ -219,7 +216,7 @@ const checkoutPage = {
         const surname = document.getElementById("form-surname")
         const email = document.getElementById("form-email")
         const phone = document.getElementById("form-phone")
-        // const address = document.getElementById("form-address")
+        const address = document.getElementById("form-address")
 
         console.log(user)
 
@@ -227,7 +224,7 @@ const checkoutPage = {
         surname.value = user.surname
         email.value = user.email
         phone.value = user.phone
-        // address.value = user.delivery_address
+        address.value = user.delivery_address
     },
     _initUserDetailsForm() {
         const deliveryForm = document.getElementById("delivery-form")
