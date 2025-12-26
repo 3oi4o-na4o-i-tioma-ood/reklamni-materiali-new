@@ -31,7 +31,7 @@ public interface EditorApi {
       * {@code product} and {@code path} (for predefined background).
       */
      @Operation(summary = "Get background image")
-     @GetMapping("/api/editor/background")
+     @GetMapping(value = "/api/editor/background", produces = "image/*")
      @ResponseBody
      Resource getBackground(@RequestParam(required = false) String filename,
                             @RequestParam(required = false) ProductType product,
@@ -54,7 +54,7 @@ public interface EditorApi {
                       @RequestParam(value = "selection", required = false) String selectionJSON) throws IOException;
 
      @Operation(summary = "Get image")
-     @GetMapping("/api/editor/image")
+     @GetMapping(value = "/api/editor/image", produces = "image/*")
      @ResponseBody
      Resource getImage(@RequestParam("name") String name);
 

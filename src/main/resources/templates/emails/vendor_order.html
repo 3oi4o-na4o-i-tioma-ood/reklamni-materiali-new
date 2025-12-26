@@ -206,6 +206,26 @@
                             </a>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a th:if="${cartItem.design.front.bgPath != null}" th:href="${websiteUrl} + '/api/editor/background?path=' + ${cartItem.design.front.bgPath}">
+                                Основа лице
+                            </a>
+                            <a th:if="${cartItem.design.front.bgImageId != null}" th:href="${websiteUrl} + '/api/editor/image?name=' + ${cartItem.design.front.bgImageId}">
+                                Основа лице
+                            </a>
+                        </td>
+                    </tr>                    
+                    <tr th:if="${cartItem.design.back != null}">
+                        <td colspan="2">
+                            <a th:if="${cartItem.design.back.bgPath != null}" th:href="${websiteUrl} + '/api/editor/background?path=' + ${cartItem.design.back.bgPath}">
+                                Основа гръб
+                            </a>
+                            <a th:if="${cartItem.design.back.bgImageId != null}" th:href="${websiteUrl} + '/api/editor/image?name=' + ${cartItem.design.back.bgImageId}">
+                                Основа гръб
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
