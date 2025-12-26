@@ -82,6 +82,16 @@ const editor = {
     imgElements.forEach((imgEl) => {
       renderElements.renderImgElement(imgEl);
     });
+
+
+    if(editor.currentProduct === "POCKET_CALENDAR") {
+      if(designRepo.selectedProductSide === 1 && tools.toolActive === "backgrounds") {
+        tools.setActiveTool("calendarium");
+      }
+      if(designRepo.selectedProductSide === 0 && tools.toolActive === "calendarium") {
+        tools.setActiveTool("backgrounds");
+      }
+    }
   },
 
   // scale: 1,

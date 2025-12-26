@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="bg">
   <body>
-    <div class="editor-actions-top" th:fragment="editor_actions_top(hasSides)">
+    <div class="editor-actions-top" th:fragment="editor_actions_top(hasSides, hasCalendarBack)">
       <div
         id="editor-card-side-select"
         class="editor-card-side-select"
@@ -15,7 +15,7 @@
         </button>
       </div>
 
-      <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em; padding: 0 1em;" th:if="${hasSides}">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em; padding: 0 1em;" th:if="${hasSides && !hasCalendarBack}">
         <th:block th:replace="components/toggle :: toggle(id = 'remove-back-toggle')"></th:block>
         <span>Гръб</span>
       </div>

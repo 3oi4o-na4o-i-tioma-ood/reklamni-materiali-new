@@ -1,6 +1,6 @@
-<div class="editor-right-section" th:fragment="right-section(hasSides)">
+<div class="editor-right-section" th:fragment="right-section(hasSides, hasCalendarBack)">
     <div id="editor-overlayed-area">
-        <th:block th:replace="/pages/editor/right_section/actions_top :: editor_actions_top(${hasSides})"></th:block>
+        <th:block th:replace="/pages/editor/right_section/actions_top :: editor_actions_top(${hasSides}, ${hasCalendarBack})"></th:block>
         
         <th:block th:replace="/pages/editor/right_section/canvas :: editor_canvas"></th:block>
     </div>

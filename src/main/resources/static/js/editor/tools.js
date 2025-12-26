@@ -85,6 +85,7 @@ const tools = {
 
   allTools: [
     "backgrounds",
+    "calendarium",
     "lighters",
     "pens",
     "image",
@@ -138,6 +139,9 @@ const tools = {
 
     if(editor.currentProduct === "PEN" || editor.currentProduct === "LIGHTER") {
       this.setActiveTool("text");
+    }
+    else {
+      this.setActiveTool("backgrounds");
     }
   },
 
@@ -216,6 +220,11 @@ const tools = {
     this.toolActive = newActiveTool;
     toolParent.classList.remove("active");
 
+    if(newActiveTool === "calendarium" && editor.currentProduct === "POCKET_CALENDAR") {
+      const calendariumTool = document.getElementById("editor-calendarium-tool");
+      calendariumTool.classList.add("active");
+    }
+
     // Iterate through tools and set or remove the 'active' class
     for (const tool of this.allTools) {
       const button = document.getElementById(`editor-${tool}-tool-button`);
@@ -229,10 +238,27 @@ const tools = {
 
       if (tool === newActiveTool) {
         button.classList.add("active");
-        //toolContainer.classList.remove("slideDown");
-        toolContainer.classList.add("active");
-        //toolContainer.classList.add("slideUp"); // Trigger slideUp animation
-        //setTimeout(() => toolContainer.classList.remove("slideUp"), 1200); // Remove after animation
+        console.log("Tool: ", tool, "Current product: ", editor.currentProduct)
+
+        if(tool === "backgrounds" && editor.currentProduct === "POCKET_CALENDAR") {
+          const calendariumTool = document.getElementById("editor-calendarium-tool");
+          console.log("Calendarium tool: ", calendariumTool)
+          console.log("Selected product side: ", designRepo.selectedProductSide)
+          if(designRepo.selectedProductSide === 1) {
+            toolContainer.classList.remove("active");
+            calendariumTool.classList.add("active");
+          }
+          else {
+            toolContainer.classList.add("active");
+            calendariumTool.classList.remove("active");
+          }
+        }
+        else {
+          //toolContainer.classList.remove("slideDown");
+          toolContainer.classList.add("active");
+          //toolContainer.classList.add("slideUp"); // Trigger slideUp animation
+          //setTimeout(() => toolContainer.classList.remove("slideUp"), 1200); // Remove after animation
+        }
         toolParent.classList.add("active");
       } else if (tool === prevTool) {
         toolContainer.classList.remove("active");

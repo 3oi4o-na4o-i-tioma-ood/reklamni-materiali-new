@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<body>
+    <div th:fragment="calendarium" id="editor-calendarium-tool" class="editor-tool active editor-calendarium-tool">
+        <h4 class="title">Гръбчета</h4>
+
+        <div id="choose-bg-container" class="tab-content choose-bg-container">
+            <h6 class="subtitle">Избран гръб</h6>
+
+            <img id="bg-tool-current-bg" alt="Current bg">
+
+            <h6 class="subtitle">Всички гръбчета</h6>
+
+            <div class="bg-options" id="bg-options"></div>
+        </div>
+
+        <div class="tab-content" id="upload-bg-container">
+            <th:block th:replace="components/image_upload :: image-upload(bg-tool-upload-bg)"></th:block>
+        </div>
+    </div>
+</body>
+
+</html>

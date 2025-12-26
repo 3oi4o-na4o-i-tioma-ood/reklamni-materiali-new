@@ -6,7 +6,12 @@
         <div class="tools-menu" id="editor-tools-menu">
             <button id="editor-backgrounds-tool-button" class="active">
                 <img src="/images/editor/tools/backgrounds.png" alt="фонове">
-                Фонове
+                <th:block th:if="${product == 'pocket_calendar'}">
+                    Фонове / Гръбчета
+                </th:block>
+                <th:block th:if="${product != 'pocket_calendar'}">
+                    Фонове
+                </th:block>
             </button>
             <button id="editor-image-tool-button">
                 <img src="/images/editor/tools/images.svg" alt="картинка">
@@ -15,10 +20,6 @@
             <button id="editor-templates-tool-button">
                 <img src="/images/editor/tools/templates.svg" alt="шаблони">
                 Шаблони
-            </button>
-            <button id="editor-bacls-tool-button">
-                <img src="/images/editor/tools/templates.svg" alt="Гръбчета">
-                Гръбчета <span th:text="${product}"></span>
             </button>
             <!-- <button id="editor-color-tool-button">
                 <img src="/images/editor/tools/color.svg" alt="цвят">
@@ -39,6 +40,10 @@
         </div>
 
         <th:block th:replace="pages/editor/tools/backgrounds :: backgrounds"></th:block>
+
+        <th:block th:if="${product == 'pocket_calendar'}">
+            <th:block th:replace="pages/editor/tools/calendarium :: calendarium"></th:block>
+        </th:block>
 
         <th:block th:replace="pages/editor/tools/image :: image"></th:block>
 

@@ -2,13 +2,13 @@
 <html lang="bg">
 
 <body>
-    <th:block th:replace="/pages/editor/editor_page :: editor-page-base(~{::#editor-page-content-visitki}, ~{::script})">
+    <th:block th:replace="/pages/editor/editor_page :: editor-page-base(~{::#editor-page-content-pocket-calendar}, ~{::script})">
         <script src="/js/editor/pocket_calendars.js"></script>
 
-        <div id="editor-page-content-visitki" class="editor">
-            <th:block th:replace="pages/editor/tools :: editor_tools('visitki')"></th:block>
+        <div id="editor-page-content-pocket-calendar" class="editor">
+            <th:block th:replace="pages/editor/tools :: editor_tools('pocket_calendar')"></th:block>
 
-            <th:block th:replace="pages/editor/right_section/right_section :: right-section(true)"></th:block>
+            <th:block th:replace="pages/editor/right_section/right_section :: right-section(true, true)"></th:block>
         </div>
     </th:block>
 </body>
