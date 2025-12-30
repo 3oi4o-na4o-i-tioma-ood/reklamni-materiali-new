@@ -3,15 +3,17 @@ const mmPerInch = 25.4;
 const editor = {
   isRotated: false,
   getElements() {
-    console.log("getElements. Side:", designRepo.selectedProductSide, "side:", designRepo.productSides[designRepo.selectedProductSide]);
     return designRepo.productSides[designRepo.selectedProductSide].elements;
   },
   setElements(elements) {
-    console.trace("setElements. Side:", designRepo.selectedProductSide, "elements:", elements);
     designRepo.productSides[designRepo.selectedProductSide].elements = elements;
   },
   getImageUrl({ bgPath, bgImageId, modelColorId }) {
     if (bgPath) {
+      if(editor.currentProduct === "POCKET_CALENDAR" && designRepo.selectedProductSide === 1) {
+        return API.getPocketCalendarFullSizeBackUrl(bgPath);
+      }
+
       return API.getImageUrlForEditor(editor.currentProduct, bgPath);
     }
 
@@ -461,8 +463,14 @@ const editor = {
   async init(product_name) {
     editor.currentProduct = product_name;
 
-    if(editor.currentProduct === "POCKET_CALENDAR") {
-      designRepo.productSides[1] = designRepo.productSides[0];
+    if(editor.currentProduct === "POCKET_CALENDAR" && !designRepo.productSides[1]) {
+      designRepo.productSides[1] = {
+        ...designRepo.productSides[0],
+        bgPath: "kalendarcheta_back_01.png",
+        bgUrl: API.getPocketCalendarFullSizeBackUrl("kalendarcheta_back_01.png"),
+      };
+
+      calendariumTool.init();
     }
 
     designRepo.modelColorId =

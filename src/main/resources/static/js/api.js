@@ -18,6 +18,17 @@ const API = {
       images: urls
     }
   },
+
+  async getPocketCalendarBacks() {
+    const resp = await fetch(`${backendUrl}/pocket-calendar-backs`)
+    return resp.json()
+  },
+  getPocketCalendarBackUrl(path) { 
+    return `${backendUrl}/pocket-calendar-back?path=${path}`
+  },
+  getPocketCalendarFullSizeBackUrl(path) {
+    return `${backendUrl}/editor/pocket-calendar-back?path=${path}`
+  },
   async getCategories(product) {
     const queryParams = new URLSearchParams({ product });
 

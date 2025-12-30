@@ -57,7 +57,11 @@
                 '/images/editor/tools/templates/visitki/6.png'
             } })"></th:block>
 
-            
+            <th:block th:case="pocket_calendar" th:replace="pages/editor/tools/templates :: templates(${ {
+                '/images/editor/tools/templates/pocket_calendars/1.png',
+                '/images/editor/tools/templates/pocket_calendars/2.png',
+                '/images/editor/tools/templates/pocket_calendars/3.png'
+            } })"></th:block>
         </th:block>
 
         <th:block th:replace="pages/editor/tools/text :: text"></th:block>

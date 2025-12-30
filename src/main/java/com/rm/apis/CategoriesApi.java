@@ -35,6 +35,7 @@ public interface CategoriesApi {
 
     @Operation(summary = "Get pocket calendar backs")
     @GetMapping("/api/pocket-calendar-backs")
+    @ResponseBody
     List<String> getPocketCalendarBacksPaths() throws IOException;
 
     @Operation(summary = "Get category image")
@@ -45,6 +46,7 @@ public interface CategoriesApi {
 
     @Operation(summary = "Get pocket calendar back")
     @GetMapping("/api/pocket-calendar-back")
+    @ResponseBody
     Resource getPocketCalendarBack(@RequestParam("path") String path) throws IOException;
 
     @Operation(summary = "Get paginated models")

@@ -62,6 +62,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Controller
 public class EditorController implements EditorApi {
+
+    @Value("${maven.basedir}")
+    private String mavenBasedir;
+
     @Value("${paths.images}")
     private String imagesFolderPath;
 
@@ -314,7 +318,12 @@ public class EditorController implements EditorApi {
             throws IOException {
         BufferedImage image;
         if (side.bgPath() != null) {
-            image = ImageIO.read(Path.of(categoriesDirectory, product.name().toLowerCase(), side.bgPath()).toFile());
+            if(product.name().equals("POCKET_CALENDAR") && side.bgPath().startsWith("kalendarcheta_back_")) {
+                System.out.println("Reading bg image from categories directory: " + Path.of(categoriesDirectory, "pocket_calendar_backs", side.bgPath()).toFile());
+                image = ImageIO.read(Path.of(categoriesDirectory, "pocket_calendar_backs", side.bgPath()).toFile());
+            } else {
+                image = ImageIO.read(Path.of(categoriesDirectory, product.name().toLowerCase(), side.bgPath()).toFile());
+            }
         } else if (side.bgImageId() != null) {
             image = ImageIO.read(Path.of(imagesFolderPath, side.bgImageId() + ".png").toFile());
         } else if (modelColorId != null) {

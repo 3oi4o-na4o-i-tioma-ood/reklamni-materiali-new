@@ -39,6 +39,7 @@ public interface EditorApi {
 
      @Operation(summary = "Get pocket calendar back image")
      @GetMapping("/api/editor/pocket-calendar-back")
+     @ResponseBody
      Resource getPocketCalendarBack(@RequestParam String path);
 
      @Operation(summary = "Upload image")
