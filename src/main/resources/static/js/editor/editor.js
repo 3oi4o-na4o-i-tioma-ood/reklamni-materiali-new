@@ -8,9 +8,9 @@ const editor = {
   setElements(elements) {
     designRepo.productSides[designRepo.selectedProductSide].elements = elements;
   },
-  getImageUrl({ bgPath, bgImageId, modelColorId }) {
+  getImageUrl({ bgPath, bgImageId, modelColorId }, isBackSide = false) {
     if (bgPath) {
-      if (editor.currentProduct === "POCKET_CALENDAR" && designRepo.selectedProductSide === 1) {
+      if (editor.currentProduct === "POCKET_CALENDAR" && isBackSide) {
         return API.getPocketCalendarFullSizeBackUrl(bgPath);
       }
 
@@ -28,7 +28,7 @@ const editor = {
     return null;
   },
   setBg({ bgPath, bgImageId, modelColorId }) {
-    const bgUrl = editor.getImageUrl({ bgPath, bgImageId, modelColorId });
+    const bgUrl = editor.getImageUrl({ bgPath, bgImageId, modelColorId }, designRepo.selectedProductSide === 1);
 
     designRepo.productSides[designRepo.selectedProductSide].bgUrl = bgUrl;
     designRepo.productSides[designRepo.selectedProductSide].bgPath = bgPath;

@@ -152,14 +152,16 @@ const designRepo = {
             design.front.bgUrl = editor.getImageUrl({
                 ...design.front,
                 modelColorId: design.modelColorId
-            })
+            },
+                false)
         }
 
         if (design.back) {
             design.back.bgUrl = editor.getImageUrl({
                 ...design.back,
                 modelColorId: design.modelColorId
-            })
+            },
+                true)
         }
 
         designRepo._savedEditorData = design
