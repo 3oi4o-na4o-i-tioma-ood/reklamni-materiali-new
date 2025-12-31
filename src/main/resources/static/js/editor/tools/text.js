@@ -196,7 +196,7 @@ const textTool = {
         textTool.getTextEditor(id).remove()
     },
     onAddElement() {
-        const boundary = editor.getBoundaryInMM()
+        const boundary = editor.getBoundaryInMM(designRepo.selectedProductSide === 1)
 
         const id = "textel-" + crypto.randomUUID()
         const newElement = {

@@ -10,7 +10,7 @@ const editor = {
   },
   getImageUrl({ bgPath, bgImageId, modelColorId }) {
     if (bgPath) {
-      if(editor.currentProduct === "POCKET_CALENDAR" && designRepo.selectedProductSide === 1) {
+      if (editor.currentProduct === "POCKET_CALENDAR" && designRepo.selectedProductSide === 1) {
         return API.getPocketCalendarFullSizeBackUrl(bgPath);
       }
 
@@ -62,6 +62,8 @@ const editor = {
 
     designRepo.selectedProductSide = index;
 
+    renderElements.setBoundary(elementsBoundary.getBoundaryInPx(editor.currentProduct, editor.canvasPxPerProductMM, designRepo.selectedProductSide === 1));
+
     renderElements.clear();
 
     const imgElements = editor
@@ -87,11 +89,11 @@ const editor = {
     });
 
 
-    if(editor.currentProduct === "POCKET_CALENDAR") {
-      if(designRepo.selectedProductSide === 1 && tools.toolActive === "backgrounds") {
+    if (editor.currentProduct === "POCKET_CALENDAR") {
+      if (designRepo.selectedProductSide === 1 && tools.toolActive === "backgrounds") {
         tools.setActiveTool("calendarium");
       }
-      if(designRepo.selectedProductSide === 0 && tools.toolActive === "calendarium") {
+      if (designRepo.selectedProductSide === 0 && tools.toolActive === "calendarium") {
         tools.setActiveTool("backgrounds");
       }
     }
@@ -121,53 +123,6 @@ const editor = {
   getCanvasRect() {
     return editor.getCanvas().getBoundingClientRect();
   },
-  getBoundaryInMM() {
-    switch (editor.currentProduct) {
-      case "BUSINESS_CARD":
-      case "POCKET_CALENDAR": {
-        return {
-          left: 7,
-          right: 7,
-          top: 7,
-          bottom: 7,
-        };
-      }
-      case "PEN": {
-        return {
-          left: 30,
-          right: 20,
-          top: 13,
-          bottom: 13,
-        };
-      }
-      case "LIGHTER": {
-        return {
-          left: 20,
-          right: 35,
-          top: 8,
-          bottom: 8,
-        };
-      }
-      default: {
-        return {
-          left: 7,
-          right: 7,
-          top: 7,
-          bottom: 7,
-        };
-      }
-    }
-  },
-  getBoundaryInPx() {
-    const inMM = editor.getBoundaryInMM();
-
-    return {
-      left: inMM.left * editor.canvasPxPerProductMM,
-      right: inMM.right * editor.canvasPxPerProductMM,
-      top: inMM.top * editor.canvasPxPerProductMM,
-      bottom: inMM.bottom * editor.canvasPxPerProductMM,
-    };
-  },
   onResize(entries) {
     const canvasRect = editor.getCanvasRect();
     const productDescription = editor.getCurrentProductDescription();
@@ -178,7 +133,7 @@ const editor = {
       editor.getElements(),
       editor.canvasPxPerProductMM
     );
-    renderElements.setBoundary(editor.getBoundaryInPx());
+    renderElements.setBoundary(elementsBoundary.getBoundaryInPx(editor.currentProduct, editor.canvasPxPerProductMM, designRepo.selectedProductSide === 1));
 
     const overlayedArea = document.getElementById("editor-overlayed-area");
     const overlayedAreaHeight = overlayedArea.getBoundingClientRect().height;
@@ -319,15 +274,15 @@ const editor = {
       return;
     }
 
-    if(face.classList.contains("disabled")) {
+    if (face.classList.contains("disabled")) {
       return;
     }
 
     face.classList.add("active");
-      face.classList.remove("secondary");
+    face.classList.remove("secondary");
 
-      back.classList.remove("active");
-      back.classList.add("secondary");
+    back.classList.remove("active");
+    back.classList.add("secondary");
     editor.selectSide(0);
   },
   selectBackSide() {
@@ -338,15 +293,15 @@ const editor = {
       return;
     }
 
-    if(back.classList.contains("disabled")) {
+    if (back.classList.contains("disabled")) {
       return;
     }
 
     back.classList.add("active");
-      back.classList.remove("secondary");
+    back.classList.remove("secondary");
 
-      face.classList.remove("active");
-      face.classList.add("secondary");
+    face.classList.remove("active");
+    face.classList.add("secondary");
 
     editor.selectSide(1);
   },
@@ -366,7 +321,7 @@ const editor = {
       editor.selectBackSide();
     });
 
-    if(designRepo.productSides[1] === null) {
+    if (designRepo.productSides[1] === null) {
       back.classList.add("disabled");
     }
   },
@@ -409,18 +364,18 @@ const editor = {
     }
   },
   _getInitialElements(isBackSide = false) {
-    if (["BUSINESS_CARD", "POCKET_CALENDAR"].includes(editor.currentProduct)) {
-      return templatesTool.updateElements(
-        initialTextElements.common,
-        templates[0]
-      );
-    }
+    const backElements = initialBackTextElements[editor.currentProduct]
+    const frontElements = initialTextElements[editor.currentProduct]
+    const elements = (isBackSide && backElements) ? backElements : frontElements;
 
-    if (initialTextElements[editor.currentProduct]) {
-      return initialTextElements[editor.currentProduct];
-    }
+    const backTemplate = backTemplates[editor.currentProduct][0]
+    const frontTemplate = templates[editor.currentProduct][0]
+    const template = (isBackSide && backTemplate) ? backTemplate : frontTemplate;
 
-    return [];
+    return templatesTool.updateElements(
+      elements || [],
+      template || []
+    );
   },
   _getInitialPrintType() {
     if (["PEN", "LIGHTER"].includes(editor.currentProduct)) {
@@ -431,11 +386,11 @@ const editor = {
       return "NORMAL";
     }
 
-    if(["BUSINESS_CARD", "FLIER_10x15", "FLIER_10x20"].includes(editor.currentProduct)) {
+    if (["BUSINESS_CARD", "FLIER_10x15", "FLIER_10x20"].includes(editor.currentProduct)) {
       return "COLORED_NO_BACK";
     }
 
-    if(editor.currentProduct === "POCKET_CALENDAR") {
+    if (editor.currentProduct === "POCKET_CALENDAR") {
       return "COLORED_COLORED";
     }
 
@@ -443,7 +398,7 @@ const editor = {
   },
   initToggleBack() {
     const toggle = document.getElementById("remove-back-toggle");
-    if(!toggle) {
+    if (!toggle) {
       return;
     }
 
@@ -451,7 +406,7 @@ const editor = {
       toggle.classList.toggle("active");
       const backButton = document.getElementById("button-select-product-back");
 
-      if(toggle.classList.contains("active")) {
+      if (toggle.classList.contains("active")) {
         editor.setInitialBackSide();
         backButton.classList.remove("disabled");
       } else {
@@ -464,7 +419,7 @@ const editor = {
   async init(product_name) {
     editor.currentProduct = product_name;
 
-    if(editor.currentProduct === "POCKET_CALENDAR" && !designRepo.productSides[1]) {
+    if (editor.currentProduct === "POCKET_CALENDAR" && !designRepo.productSides[1]) {
       designRepo.productSides[1] = {
         elements: editor._getInitialElements(true),
         bgPath: "kalendarcheta_back_01.png",
@@ -477,10 +432,10 @@ const editor = {
     designRepo.modelColorId =
       new URLSearchParams(window.location.search).get("modelColorId") || null;
     editor.onResize();
-    renderElements.setBoundary(editor.getBoundaryInPx());
+    renderElements.setBoundary(elementsBoundary.getBoundaryInPx(editor.currentProduct, editor.canvasPxPerProductMM, designRepo.selectedProductSide === 1));
 
     editor.setElements(editor._getInitialElements());
-    if(!designRepo.printType) {
+    if (!designRepo.printType) {
       designRepo.printType = editor._getInitialPrintType();
     }
     editor.getBgFromUrl();
@@ -494,30 +449,30 @@ const editor = {
     renderElements.moveListeners.push(editor.onElementMove);
     renderElements.onElementSelected = editor.onElementSelectedFromCanvas;
 
-    
+
     editorPreviewPopups.init();
     designRepo.initAutoSave();
-    
+
     editor.initElementsBlur();
-    
+
     const productDescription = editor.getCurrentProductDescription();
-    
+
     const bgWrapper = document.getElementById("editor-bg-wrapper");
-    
+
     bgWrapper.style.aspectRatio = editor.getRotatedWidth(productDescription) / editor.getRotatedHeight(productDescription);
     productDescription.sizeMM.width / productDescription.sizeMM.height;
-    
+
     editor.resizeObserver = new ResizeObserver(editor.onResize);
     const canvas = document.getElementById("editor-canvas");
     editor.resizeObserver.observe(canvas);
-    
+
     designRepo._savedEditorData = designRepo.getDesignData();
-    
+
     await designRepo.loadSavedDesign();
     saveToFavorite.init();
     effectsTool.update();
     paperTypeTool.update();
-    
+
     editor.initBackFaceButtons();
   },
 };

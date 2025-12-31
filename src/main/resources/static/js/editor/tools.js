@@ -116,7 +116,7 @@ const tools = {
         if (
           ["BUSINESS_CARD", "POCKET_CALENDAR"].includes(editor.currentProduct)
         ) {
-          templatesTool.init();
+          templatesTool.init(editor.currentProduct);
         }
 
         paperTypeTool.init();

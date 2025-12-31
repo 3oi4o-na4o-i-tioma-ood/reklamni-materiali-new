@@ -4,43 +4,19 @@ const flyerElements = [
         bold: true,
         fontSize: 7.06,
         id: "company_name",
-        type: "text",
-        size: {
-            w: 85
-        },
-        position: {
-            x: 8,
-            y: 8
-        },
-        alignment: "CENTER"
+        type: "text"
     },
     {
         text: "Мото",
         fontSize: 7.06,
         id: "moto",
-        type: "text",
-        size: {
-            w: 85
-        },
-        position: {
-            x: 8,
-            y: 23
-        },
-        alignment: "CENTER"
+        type: "text"
     },
     {
         text: "Свободен текст",
         fontSize: 7.06,
         id: "free_text",
-        type: "text",
-        size: {
-            w: 85
-        },
-        position: {
-            x: 8,
-            y: 32
-        },
-        alignment: "CENTER"
+        type: "text"
     }
 ]
 
@@ -51,115 +27,49 @@ const initialTextElements = {
             bold: true,
             fontSize: 14.12,
             id: "company_name",
-            type: "text",
-            size: {
-                w: 318
-            },
-            position: {
-                x: 8,
-                y: 8
-            },
-            alignment: "CENTER"
+            type: "text"
         },
         {
             text: "Мото",
             fontSize: 11.6,
             id: "moto",
-            type: "text",
-            size: {
-                w: 318
-            },
-            position: {
-                x: 8,
-                y: 23
-            },
-            alignment: "CENTER"
+            type: "text"
         },
         {
             text: "Адрес 1",
             fontSize: 7.06,
             id: "address1",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 8,
-                y: 210
-            },
-            alignment: "LEFT"
+            type: "text"
         },
         {
             text: "Адрес 2",
             fontSize: 7.06,
             id: "address2",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 8,
-                y: 217
-            },
-            alignment: "LEFT"
+            type: "text"
         },
-
-
         {
             text: "Телефон 1",
             fontSize: 7.06,
             id: "phone_1",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 175,
-                y: 196
-            },
-            alignment: "RIGHT"
+            type: "text"
         },
         {
             text: "Телефон 2",
             fontSize: 7.06,
             id: "phone_2",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 175,
-                y: 203
-            },
-            alignment: "RIGHT"
+            type: "text"
         },
         {
             text: "Email",
             fontSize: 7.06,
             id: "email",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 175,
-                y: 210
-            },
-            alignment: "RIGHT"
+            type: "text"
         },
         {
             text: "Website",
             fontSize: 7.06,
             id: "web",
-            type: "text",
-            size: {
-                w: 150
-            },
-            position: {
-                x: 175,
-                y: 217
-            },
-            alignment: "RIGHT"
+            type: "text"
         }
     ],
     PEN: [
@@ -168,29 +78,13 @@ const initialTextElements = {
             bold: true,
             fontSize: 3.53,
             id: "company_name",
-            type: "text",
-            size: {
-                w: 89
-            },
-            position: {
-                x: 30,
-                y: 14
-            },
-            alignment: "CENTER"
+            type: "text"
         },
         {
             text: "Контакти",
             fontSize: 2.82,
             id: "contacts",
-            type: "text",
-            size: {
-                w: 89
-            },
-            position: {
-                x: 30,
-                y: 18
-            },
-            alignment: "CENTER"
+            type: "text"
         }
     ],
     FLIER_10x15: flyerElements,
@@ -201,43 +95,19 @@ const initialTextElements = {
             bold: true,
             fontSize: 3.53,
             id: "company_name",
-            type: "text",
-            size: {
-                w: 47
-            },
-            position: {
-                x: 22,
-                y: 10
-            },
-            alignment: "CENTER"
+            type: "text"
         },
         {
             text: "Контакти",
             fontSize: 2.82,
             id: "contacts",
-            type: "text",
-            size: {
-                w: 47
-            },
-            position: {
-                x: 22,
-                y: 14
-            },
-            alignment: "CENTER"
+            type: "text"
         },
         {
             text: "Website",
             fontSize: 2.82,
             id: "web",
-            type: "text",
-            size: {
-                w: 47
-            },
-            position: {
-                x: 22,
-                y: 18
-            },
-            alignment: "CENTER"
+            type: "text"
         }
     ],
     POCKET_CALENDAR: [
@@ -262,12 +132,13 @@ const initialTextElements = {
         },
         {
             text: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 200).getFullYear(),
-            fontSize: 2.5,
+            fontSize: 7,
+            bold: true,
             id: "year",
             type: "text"
         }
     ],
-    common: [
+    BUSINESS_CARD: [
         {
             text: "Име на фирмата",
             bold: true,
@@ -338,38 +209,38 @@ const initialBackTextElements = {
         {
             text: "Име на фирмата",
             bold: true,
-            fontSize: 5,
+            fontSize: 3.5,
             id: "company_name",
             type: "text"
         },
         {
             text: "Мото",
-            fontSize: 3.57,
+            fontSize: 3,
             id: "moto",
             type: "text"
         },
         {
             text: "Адрес 1",
-            fontSize: 2.5,
+            fontSize: 2,
             id: "address1",
             type: "text"
         },
         {
             text: "Адрес 2",
-            fontSize: 2.5,
+            fontSize: 2,
             id: "address2",
             type: "text"
         },
         {
             text: "Телефон",
-            fontSize: 2.5,
+            fontSize: 2,
             id: "phone",
             type: "text"
         },
 
         {
             text: "Email",
-            fontSize: 2.5,
+            fontSize: 2,
             id: "email",
             type: "text"
         }
