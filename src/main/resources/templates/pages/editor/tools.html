@@ -48,6 +48,27 @@
         <th:block th:replace="pages/editor/tools/image :: image"></th:block>
 
         <th:block th:switch="${product}">
+            <th:block th:case="visitki">
+                <th:block th:replace="pages/editor/tools/templates :: templates(${ {
+                    '/images/editor/tools/templates/visitki/1.png',
+                    '/images/editor/tools/templates/visitki/2.png',
+                    '/images/editor/tools/templates/visitki/3.png',
+                    '/images/editor/tools/templates/visitki/4.png',
+                    '/images/editor/tools/templates/visitki/5.png',
+                    '/images/editor/tools/templates/visitki/6.png'
+                } })"></th:block>
+            </th:block>
+
+            <th:block th:case="pocket_calendar">
+                <th:block th:replace="pages/editor/tools/templates :: templates(${ {
+                    '/images/editor/tools/templates/pocket_calendars/1.png',
+                    '/images/editor/tools/templates/pocket_calendars/2.png',
+                    '/images/editor/tools/templates/pocket_calendars/3.png'
+                } })"></th:block>
+            </th:block>
+        </th:block>
+
+        <th:block th:switch="${product}">
             <th:block th:case="visitki" th:replace="pages/editor/tools/templates :: templates(${ {
                 '/images/editor/tools/templates/visitki/1.png',
                 '/images/editor/tools/templates/visitki/2.png',

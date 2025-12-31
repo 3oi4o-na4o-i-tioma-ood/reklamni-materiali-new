@@ -39,6 +39,7 @@ const editor = {
     bgTool.setCurrentBackground(bgUrl);
   },
   setInitialBackSide() {
+    console.log("setInitialBackSide");
     designRepo.productSides[1] = {
       elements: editor._getInitialElements(),
       bgUrl: designRepo.productSides[0].bgUrl,
@@ -407,16 +408,16 @@ const editor = {
       });
     }
   },
-  _getInitialElements() {
+  _getInitialElements(isBackSide = false) {
     if (["BUSINESS_CARD", "POCKET_CALENDAR"].includes(editor.currentProduct)) {
       return templatesTool.updateElements(
-        initialEditorTextElements.common,
+        initialTextElements.common,
         templates[0]
       );
     }
 
-    if (initialEditorTextElements[editor.currentProduct]) {
-      return initialEditorTextElements[editor.currentProduct];
+    if (initialTextElements[editor.currentProduct]) {
+      return initialTextElements[editor.currentProduct];
     }
 
     return [];
@@ -465,7 +466,7 @@ const editor = {
 
     if(editor.currentProduct === "POCKET_CALENDAR" && !designRepo.productSides[1]) {
       designRepo.productSides[1] = {
-        ...designRepo.productSides[0],
+        elements: editor._getInitialElements(true),
         bgPath: "kalendarcheta_back_01.png",
         bgUrl: API.getPocketCalendarFullSizeBackUrl("kalendarcheta_back_01.png"),
       };

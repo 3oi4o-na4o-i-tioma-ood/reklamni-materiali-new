@@ -133,11 +133,15 @@ const tools = {
       const button = document.getElementById("editor-" + tool + "-tool-button");
 
       button?.addEventListener("click", () => {
+        if(tool === "backgrounds" && editor.currentProduct === "POCKET_CALENDAR" && designRepo.selectedProductSide === 1) {
+          this.setActiveTool("calendarium");
+          return;
+        }
         this.setActiveTool(tool);
       });
     }
 
-    if(editor.currentProduct === "PEN" || editor.currentProduct === "LIGHTER") {
+    if (editor.currentProduct === "PEN" || editor.currentProduct === "LIGHTER") {
       this.setActiveTool("text");
     }
     else {
@@ -220,7 +224,7 @@ const tools = {
     this.toolActive = newActiveTool;
     toolParent.classList.remove("active");
 
-    if(newActiveTool === "calendarium" && editor.currentProduct === "POCKET_CALENDAR") {
+    if (newActiveTool === "calendarium" && editor.currentProduct === "POCKET_CALENDAR") {
       const calendariumTool = document.getElementById("editor-calendarium-tool");
       calendariumTool.classList.add("active");
     }
@@ -230,43 +234,43 @@ const tools = {
       const button = document.getElementById(`editor-${tool}-tool-button`);
       const toolContainer = document.getElementById(`editor-${tool}-tool`);
 
-      if (button && button.classList.contains("active")) {
-        button.classList.remove("active");
-      }
-
-      if (!button || !toolContainer) continue;
-
       if (tool === newActiveTool) {
-        button.classList.add("active");
+        if (button) {
+          button.classList.add("active");
+        }
         console.log("Tool: ", tool, "Current product: ", editor.currentProduct)
 
-        if(tool === "backgrounds" && editor.currentProduct === "POCKET_CALENDAR") {
-          const calendariumTool = document.getElementById("editor-calendarium-tool");
-          console.log("Calendarium tool: ", calendariumTool)
-          console.log("Selected product side: ", designRepo.selectedProductSide)
-          if(designRepo.selectedProductSide === 1) {
-            toolContainer.classList.remove("active");
-            calendariumTool.classList.add("active");
-          }
-          else {
-            toolContainer.classList.add("active");
-            calendariumTool.classList.remove("active");
-          }
-        }
-        else {
-          //toolContainer.classList.remove("slideDown");
+        if (toolContainer) {
           toolContainer.classList.add("active");
-          //toolContainer.classList.add("slideUp"); // Trigger slideUp animation
-          //setTimeout(() => toolContainer.classList.remove("slideUp"), 1200); // Remove after animation
         }
         toolParent.classList.add("active");
-      } else if (tool === prevTool) {
-        toolContainer.classList.remove("active");
-        //toolContainer.classList.add("slideDown"); // Trigger slideDown animation
-        //setTimeout(() => toolContainer.classList.remove("slideDown"), 1200); // Remove after animation
-      } else {
+        continue;
+      }
+
+      if(button) {
         button.classList.remove("active");
+      }
+      if(toolContainer) {
         toolContainer.classList.remove("active");
+      }
+    }
+
+
+    if (newActiveTool === "calendarium" && editor.currentProduct === "POCKET_CALENDAR") {
+      const bgToolButton = document.getElementById(`editor-backgrounds-tool-button`);
+      const bgToolContainer = document.getElementById(`editor-backgrounds-tool`);
+
+      const calendariumTool = document.getElementById("editor-calendarium-tool");
+      console.log("Calendarium tool: ", calendariumTool)
+      console.log("Selected product side: ", designRepo.selectedProductSide)
+      bgToolButton.classList.add("active");
+      if (designRepo.selectedProductSide === 1) {
+        bgToolContainer.classList.remove("active");
+        calendariumTool.classList.add("active");
+      }
+      else {
+        bgToolContainer.classList.add("active");
+        calendariumTool.classList.remove("active");
       }
     }
   },

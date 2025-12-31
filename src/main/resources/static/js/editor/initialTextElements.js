@@ -44,7 +44,7 @@ const flyerElements = [
     }
 ]
 
-const initialEditorTextElements = {
+const initialTextElements = {
     WORK_CALENDAR: [
         {
             text: "Име на фирмата",
@@ -240,6 +240,33 @@ const initialEditorTextElements = {
             alignment: "CENTER"
         }
     ],
+    POCKET_CALENDAR: [
+        {
+            text: "Име на фирмата",
+            bold: true,
+            fontSize: 5,
+            id: "company_name",
+            type: "text"
+        },
+        {
+            text: "Мото",
+            fontSize: 3.57,
+            id: "moto",
+            type: "text"
+        },
+        {
+            text: "Website",
+            fontSize: 2.5,
+            id: "web",
+            type: "text"
+        },
+        {
+            text: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 200).getFullYear(),
+            fontSize: 2.5,
+            id: "year",
+            type: "text"
+        }
+    ],
     common: [
         {
             text: "Име на фирмата",
@@ -301,6 +328,49 @@ const initialEditorTextElements = {
             text: "Website",
             fontSize: 2.5,
             id: "web",
+            type: "text"
+        }
+    ]
+}
+
+const initialBackTextElements = {
+    POCKET_CALENDAR: [
+        {
+            text: "Име на фирмата",
+            bold: true,
+            fontSize: 5,
+            id: "company_name",
+            type: "text"
+        },
+        {
+            text: "Мото",
+            fontSize: 3.57,
+            id: "moto",
+            type: "text"
+        },
+        {
+            text: "Адрес 1",
+            fontSize: 2.5,
+            id: "address1",
+            type: "text"
+        },
+        {
+            text: "Адрес 2",
+            fontSize: 2.5,
+            id: "address2",
+            type: "text"
+        },
+        {
+            text: "Телефон",
+            fontSize: 2.5,
+            id: "phone",
+            type: "text"
+        },
+
+        {
+            text: "Email",
+            fontSize: 2.5,
+            id: "email",
             type: "text"
         }
     ]
