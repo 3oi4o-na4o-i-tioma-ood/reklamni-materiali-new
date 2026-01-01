@@ -9,18 +9,6 @@ const calendariumTool = {
 
         console.log("imagesPaths: ", imagesPaths)
 
-        const imagePathPrefix = "/images/dzobni_kalendari/backs/"
-        // const imagesUrls = [
-        //     "kalendarcheta_back_01.png",
-        //     "kalendarcheta_back_02.png",
-        //     "kalendarcheta_back_03.png",
-        //     "kalendarcheta_back_04.png",
-        //     "kalendarcheta_back_05.png",
-        //     "kalendarcheta_back_06.png",
-        //     "kalendarcheta_back_07.png",
-        //     "kalendarcheta_back_08.png"
-        // ].map(imageUrl => imagePathPrefix + imageUrl)
-
         const images = imagesPaths.map((imagePath) => {
             const button = document.createElement("button")
             const img = document.createElement("img")
