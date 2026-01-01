@@ -1083,21 +1083,157 @@ const backTemplates = {
                 },
                 alignment: "RIGHT"
             }
+        ],
+        [
+            {
+                id: "company_name",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 28.5
+                },
+                alignment: "LEFT"
+            },
+            {
+                id: "moto",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 32
+                },
+                alignment: "LEFT"
+            },
+            {
+                id: "address1",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 28.5
+                },
+                alignment: "RIGHT"
+            },
+            {
+                id: "address2",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 30.5
+                },
+                alignment: "RIGHT"
+            },
+            {
+                id: "phone",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 32.5
+                },
+                alignment: "RIGHT"
+            },
+            {
+                id: "email",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 34.5
+                },
+                alignment: "RIGHT"
+            }
+        ],
+        [
+            {
+                id: "company_name",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 28.5
+                },
+                alignment: "RIGHT"
+            },
+            {
+                id: "moto",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 57,
+                    y: 32
+                },
+                alignment: "RIGHT"
+            },
+            {
+                id: "address1",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 28.5
+                },
+                alignment: "LEFT"
+            },
+            {
+                id: "address2",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 30.5
+                },
+                alignment: "LEFT"
+            },
+            {
+                id: "phone",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 32.5
+                },
+                alignment: "LEFT"
+            },
+            {
+                id: "email",
+                size: {
+                    w: 30
+                },
+                position: {
+                    x: 6,
+                    y: 34.5
+                },
+                alignment: "LEFT"
+            }
         ]
     ]
 }
 
 const templatesTool = {
-    getButtons() {
-        const container = document.getElementById("editor-templates-container")
+    getButtons(isBackSide = false) {
+        const container = document.getElementById(isBackSide ? "editor-back-templates-container" : "editor-templates-container")
 
         const buttons = container.getElementsByTagName("button")
 
         return [...buttons]
     },
-    selectActive(index) {
+    selectActive(index, isBackSide = false) {
 
-        const buttons = templatesTool.getButtons()
+        const buttons = templatesTool.getButtons(isBackSide)
 
         for (const i in buttons) {
             const button = buttons[i]
@@ -1124,24 +1260,49 @@ const templatesTool = {
             }
         })
     },
-    init(product) {
-        const buttons = templatesTool.getButtons()
-
+    initButtons(product, isBackSide = false) {
+        const buttons = templatesTool.getButtons(isBackSide)
 
         for (const i in buttons) {
             const index = Number(i)
             const button = buttons[index]
 
             button.addEventListener("click", () => {
-                templatesTool.selectActive(index)
+                templatesTool.selectActive(index, isBackSide)
 
-                const updatedElements = this.updateElements(editor.getElements(), templates[product][index])
+                const template = isBackSide ? backTemplates[product][index] : templates[product][index]
+
+                const updatedElements = this.updateElements(editor.getElements(), template)
 
                 editor.setElements(updatedElements)
 
                 renderElements.rerenderElements(updatedElements, editor.canvasPxPerProductMM)
 
             })
+        }
+    },
+    setSelectedSide(selectedSide) {
+        
+        const container = document.getElementById("editor-templates-container")
+        const backContainer = document.getElementById("editor-back-templates-container")
+
+        if(!backContainer) {
+            return
+        }
+
+        if(selectedSide === 1) {
+            container.style.display = "none"
+            backContainer.style.display = null
+        }
+        else {
+            container.style.display = null
+            backContainer.style.display = "none"
+        }
+    },
+    init(product) {
+        templatesTool.initButtons(product, false)
+        if(backTemplates[product]) {
+            templatesTool.initButtons(product, true)
         }
     }
 }

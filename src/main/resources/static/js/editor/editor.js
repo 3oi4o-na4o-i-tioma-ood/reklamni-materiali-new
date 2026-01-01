@@ -48,6 +48,8 @@ const editor = {
     };
   },
   selectSide(index /* 0 - front; 1 - back */) {
+    // TO DO: instead of invoking functions from tools, create event-based system
+
     console.log("selectSide: ", index);
     if (index !== 0 && index !== 1) {
       console.error("Nah. You can't choose side ", index);
@@ -97,6 +99,8 @@ const editor = {
         tools.setActiveTool("backgrounds");
       }
     }
+
+    templatesTool.setSelectedSide(designRepo.selectedProductSide)
   },
 
   // scale: 1,
@@ -368,8 +372,8 @@ const editor = {
     const frontElements = initialTextElements[editor.currentProduct]
     const elements = (isBackSide && backElements) ? backElements : frontElements;
 
-    const backTemplate = backTemplates[editor.currentProduct][0]
-    const frontTemplate = templates[editor.currentProduct][0]
+    const backTemplate = backTemplates[editor.currentProduct]?.[0]
+    const frontTemplate = templates[editor.currentProduct]?.[0]
     const template = (isBackSide && backTemplate) ? backTemplate : frontTemplate;
 
     return templatesTool.updateElements(

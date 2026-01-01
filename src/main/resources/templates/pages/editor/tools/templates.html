@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="bg">
 <body>
+    <!-- Single parameter version (front only) -->
     <div th:fragment="templates(img_urls)" id="editor-templates-tool" class="editor-tool">
         <h4 class="title">Шаблони</h4>
 
         <div class="templates-container" id="editor-templates-container">
             <button class="template-button" th:each="img_url, stat : ${img_urls}">
+                <img th:src="${img_url}" th:alt="|template-${stat.index}">
+            </button>
+        </div>
+    </div>
+
+    <!-- Two parameter version (front and back) -->
+    <div th:fragment="templatesWithBack(img_urls, back_templates_img_urls)" id="editor-templates-tool" class="editor-tool">
+        <h4 class="title">Шаблони</h4>
+
+        <div class="templates-container" id="editor-templates-container">
+            <button class="template-button" th:each="img_url, stat : ${img_urls}">
+                <img th:src="${img_url}" th:alt="|template-${stat.index}">
+            </button>
+        </div>
+
+        <div th:if="${back_templates_img_urls != null and !back_templates_img_urls.isEmpty()}" class="templates-container" id="editor-back-templates-container">
+            <button class="template-button" th:each="img_url, stat : ${back_templates_img_urls}">
                 <img th:src="${img_url}" th:alt="|template-${stat.index}">
             </button>
         </div>
